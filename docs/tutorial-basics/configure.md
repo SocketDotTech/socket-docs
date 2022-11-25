@@ -1,3 +1,6 @@
+---
+sidebar_position: 2
+---
 # Configure Plug
 
 Your plug should have a function that can call `setPlugConfig` on Socket to register itself. Worry not you can call this function as many times as you want.
@@ -15,3 +18,7 @@ Your plug should have a function that can call `setPlugConfig` on Socket to regi
         string memory integrationType_
     ) external;
 ```
+
+Remember to do this for all chains your plugs are deployed on to make sure you have plugged everything in correctly. You need to do once per connection.
+
+
