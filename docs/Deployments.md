@@ -4,12 +4,23 @@ sidebar_position: 3
 
 # Deployments
 
-| Chain Name               | Slug/UniqueId | Status | Version | Socket                                                                                                                                |
-| ------------------------ | ------------- | ------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Mumbai Testnet(Polygon)  | 80001         | ACTIVE | Basil   | [0xEa0814C572cDD329380ddf345463E3fb7E342a93](https://mumbai.polygonscan.com/address/0xEa0814C572cDD329380ddf345463E3fb7E342a93)       |
-| Optimism Testnet(Goerli) | 420           | ACTIVE | Basil   | [0xEa0814C572cDD329380ddf345463E3fb7E342a93](https://goerli-optimism.etherscan.io/address/0x6F1912DC9631E8aFC89e7D95Afd7e467845FF6F2) |
-| Arbitrum Testnet(Goerli) | 421613        | ACTIVE | Basil   | [0xCA9Ea302739796C223a2D6B95efB9c0Cf9E9D468](https://goerli.arbiscan.io/address/0xCA9Ea302739796C223a2D6B95efB9c0Cf9E9D468)           |
-| Polygon Mainnet          | 137           | ACTIVE | Basil   | [0x38e55351Dc02320A555b137e559D71f213694c15](https://polygonscan.com/address/0x38e55351Dc02320A555b137e559D71f213694c15)              |
-| BSC Mainnet              | 56            | ACTIVE | Basil   | [0x38e55351Dc02320A555b137e559D71f213694c15](https://bscscan.com/address/0x38e55351Dc02320A555b137e559D71f213694c15)                  |
+## Socket
 
-We will be deploying the next devnet in the upcoming days, codenamed "cinnamon"
+| Chain Name               | Slug/UniqueId | Status | Version | Contract Address                                                                                                                                |
+| ------------------------ | ------------- | ------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Polygon Mainnet          | 137           | ACTIVE | Elaichi   | [0x166953654e3b38C53A7e79B3813104AfABE63582](https://polygonscan.com/address/0x38e55351Dc02320A555b137e559D71f213694c15)              |
+| BSC Mainnet              | 56            | ACTIVE | Elaichi   | [0x0EA425AeB75F5B2027Cbe8c70b821E3D3490da8e](https://bscscan.com/address/0x38e55351Dc02320A555b137e559D71f213694c15)                  |
+
+## Switchboards
+
+#### Fast Switchboards
+| Source Chain             | Destination Chain |  Contract Address                                                                                                            |
+| ------------------------ | ----------------- |  --------------------------------------------------------------------------------------------------------------------------- |
+| Polygon Mainnet          |  BSC Mainnet      | [0x6fc8c27bAC62399478C974134D9e88EA71Ba162C](https://polygonscan.com/address/0x38e55351Dc02320A555b137e559D71f213694c15)     |
+| BSC Mainnet              |  Polygon Mainnet  | [0xF4b503a883C6E63dF1DCbCC560a6FBd28a2e9Ac5](https://bscscan.com/address/0x38e55351Dc02320A555b137e559D71f213694c15)         |
+
+#### Optimistic Switchboards
+| Source Chain             | Destination Chain |  Contract Address                                                                                                            |
+| ------------------------ | ----------------- |  --------------------------------------------------------------------------------------------------------------------------- |
+| Polygon Mainnet          |  BSC Mainnet      | [0x91C27Cad374246314E756f8Aa2f62F433d6F102C](https://polygonscan.com/address/0x38e55351Dc02320A555b137e559D71f213694c15)     |
+| BSC Mainnet              |  Polygon Mainnet  | [0xf70180727AcdcE9Dd93A9cfb9b85aCF15aF3275A](https://bscscan.com/address/0x38e55351Dc02320A555b137e559D71f213694c15)         |

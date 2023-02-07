@@ -3,19 +3,21 @@ sidebar_position: 2
 ---
 # Configure Plug
 
-Your plug should have a function that can call `setPlugConfig` on Socket to register itself. Worry not you can call this function as many times as you want.
+Your plug should have a function that can call `connect` on Socket to register itself. Worry not you can call this function as many times as you want.
 
 ```javascript
-/**
+    /**
      * @notice sets the config specific to the plug
-     * @param remoteChainSlug_ the remote chain id
-     * @param remotePlug_ address of plug present at remote chain to call inbound
-     * @param integrationType_ the name of accum to be used
+     * @param siblingChainSlug_ the sibling chain slug
+     * @param siblingPlug_ address of plug present at sibling chain to call inbound
+     * @param inboundSwitchboard_ the address of switchboard to use for receiving messages
+     * @param outboundSwitchboard_ the address of switchboard to use for sending messages
      */
-    function setPlugConfig(
-        uint256 remoteChainSlug_,
-        address remotePlug_,
-        string memory integrationType_
+    function connect(
+        uint256 siblingChainSlug_,
+        address siblingPlug_,
+        address inboundSwitchboard_,
+        address outboundSwitchboard_
     ) external;
 ```
 
