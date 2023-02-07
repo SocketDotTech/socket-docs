@@ -27,10 +27,6 @@ Here is an example API call to estimate fees for a message with gasLimit=100000 
 1. [IPlug.sol](https://github.com/SocketDotTech/socketDL-examples/tree/main/src/interfaces/IPlug.sol)
 2. [ISocket.sol](https://github.com/SocketDotTech/socketDL-examples/tree/main/src/interfaces/ISocket.sol)
 
-### MockContract
-
-[Mock Socket](https://github.com/SocketDotTech/socketDL-examples/blob/main/src/mocks/MockSocket.sol)
-
 ### Example Plugs
 
 1. [Cross-Chain Counter](https://github.com/SocketDotTech/socketDL-examples/blob/main/src/Counter.sol)
