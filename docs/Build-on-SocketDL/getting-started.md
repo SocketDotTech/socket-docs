@@ -1,6 +1,7 @@
 ---
 id: build-on-dl-getting-started
 title: Getting Started
+position : 1
 ---
 
 ### Introducing Plugs
