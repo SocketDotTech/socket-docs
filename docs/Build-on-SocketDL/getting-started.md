@@ -6,7 +6,7 @@ position : 1
 
 ### Introducing Plugs
 
-Plugs are smart contract applications that connect with Socket to send and receive cross-chain messages.
+Plugs are smart contract applications that connect with Socket to send and receive cross-chain messages. By following the below spec, you can make your smart contract application a Plug and start sending and receiving crosschain messages with Socket.
 
 Every cross-chain message has a source chain and destination chain. Likewise, every source chain Plug sends a message that is received by their "sibling plug" on the destination chain. The message or payload is executed by this sibling plug.
 
