@@ -1,0 +1,8 @@
+{
+  "label": "SocketDL Resources",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Resources for building on SocketDL"
+  }
+}
