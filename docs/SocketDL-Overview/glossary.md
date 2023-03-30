@@ -21,3 +21,5 @@ Socket is the core contract that Plugs interact with to send and receive message
 ### Switchboard
 Switchboards contain the logic for checking the validity of packets and verifying . Socket has 3 types of switchboards by default, FAST, OPTIMISTIC and NATIVE. You can learn more about those here (!! WIP LINK !!)
 
+### Path
+Paths refer to the approach taken by a switchboard. Some default paths introduced in SocketDL are Native, Fast, Optimistic.
