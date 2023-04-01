@@ -1,6 +1,7 @@
 ---
 id: lifecycle
 title: Lifecycle
+sidebar_position: 4
 ---
 
 In this section, we dive deeper into the 3 main interactions between Plugs and Socket.

@@ -1,6 +1,7 @@
 ---
 id: security
 title: Security
+sidebar_position: 6
 ---
 
 ### Contract Security 
