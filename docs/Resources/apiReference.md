@@ -1,6 +1,7 @@
 ---
 id: api-reference
 title: API Reference
+sidebar_position: 2
 ---
 
 SocketDL has 2 helper APIs for estimating fees and tracking status of messages

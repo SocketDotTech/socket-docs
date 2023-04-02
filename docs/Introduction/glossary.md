@@ -1,6 +1,7 @@
 ---
 id: glossary
 title: Glossary
+sidebar_position: 5
 ---
 
 ### Plug
@@ -23,3 +24,5 @@ Switchboards contain the logic for checking the validity of packets and verifyin
 
 ### Path
 Paths refer to the approach taken by a switchboard. Some default paths introduced in SocketDL are Native, Fast, Optimistic.
+
+### Sibling Chain
