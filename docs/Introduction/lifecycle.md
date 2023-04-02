@@ -29,7 +29,7 @@ Plugs build on top of Socket to initiate state changes on Plugs deployed on othe
 
 To pass a message, Plugs call the `outbound` method on Socket with `fees`, `remoteChainSlug`, `msgGasLimit`, `payload`. Socket checks the stored configuration of the plug and verifies a connection with the remote chain was previously instantiated. Socket deducts the fee sent from the plug and pays to various off-chain actors.
 
-Plugs need to pay a fee to off-chain actors to get messages included in a packet to be executed on the destination chain. You can learn more about these [fees here](../Build-on-SocketDL/Fees.md).
+Plugs need to pay a fee to off-chain actors to get messages included in a packet to be executed on the destination chain. You can learn more about these [fees here](../Getting-Started/Fees.md).
 
 <!-- WIP : Link key parameters && link capacitor -->
 <!-- WIP : Highlight capacitors are modular and different types of capacitors can exist which can be configured on switchboard -->

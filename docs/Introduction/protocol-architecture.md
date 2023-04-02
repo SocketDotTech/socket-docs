@@ -12,7 +12,7 @@ sidebar_position: 3
 ### Plug 
 Plugs are smart contract applications that connect with Socket to send and receive cross-chain messages.
 
-Plugs are required to follow a contract specification to interface with Socket contracts. Learn more about the [specs here](../Build-on-SocketDL/getting-started.md).
+Plugs are required to follow a contract specification to interface with Socket contracts. Learn more about the [specs here](../Getting-Started/introducing-plugs.md).
 
 
 ### Socket 
