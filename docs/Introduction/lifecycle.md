@@ -4,7 +4,12 @@ title: Lifecycle
 sidebar_position: 4
 ---
 
-In this section, we dive deeper into the 3 main interactions between Plugs and Socket.
+In this section, we dive deeper into the main interactions between Plugs and Socket
+1. [Connecting to Socket](#connecting-to-socket)
+2. [Sending a message](#sending-a-message)
+3. [Receiving a message](#receiving-a-message)
+4. [Switchboards 101](#switchboards-101)
+
 
 ### Connecting to Socket 
 
@@ -57,11 +62,3 @@ If these are verified, then the message can be executed. Socket calls the destin
 In case the message cannot be executed due to insufficient gas limit or other errors, Socket will re-try execution periodically upto X.
 
 ### Switchboards 101
-
-
-### Global View
-
-
-
-
-
