@@ -19,7 +19,7 @@ Plugs are required to follow a contract specification to interface with Socket. 
 
 Socket is the core contract that Plugs and off-chain actors interact with
 - Socket stores the configuration of a Plug upon `connection`. Plugs call Socket to send `outbound` messages on source chain. Likewise, they receive `inbound` messages from Socket on destination chain.
-- Off-chain actors (Transmitters, Executors) interact with Socket to seal packets, propose new packets and execute messages.
+- Off-chain actors (Transmitters, Executors) interact with Socket to seal packets, propose new packets, verify packets and execute messages.
 
 Socket is designed to be modular and manages these core modules
 - `Switchboard`
@@ -32,7 +32,7 @@ Socket is designed to be modular and manages these core modules
 
 Switchboards are the packet verification module of Socket. Switchboards contain the logic that checks for validity of packets and when to execute them.
 
-Plugs decide which switchboard to use based on their security requirements. Plugs can use different switchboards for each network they want to send messages to. However, Switchboard used for `outbound` transfer on source chain must also be used for `inbound` transfer on destination chain.
+Plugs decide which switchboard to use based on their security requirements and can use different switchboards for each network they want to send messages to. Switchboards used for `outbound` transfer on source chain must also be used for `inbound` transfer on destination chain.
 
 Building your own Switchboards and registering them on Socket is permissionless. Switchboards require two methods to interface with Socket : 
 1. **allowPacket()** : Called by Socket to check for the validity of the packet and if it can be executed on the destination chain. The packet verification logic is complementary to this function, driven by on-chain/off-chain actors. This function returns the final `boolean` value which Socket checks.
@@ -44,10 +44,10 @@ More on Switchboard specs here.
 
 #### There are 3 default Switchboards live on Socket :
 1. **Native Switchboard** : Uses Native bridges for routing messages between chains where native bridges are available (E.g roll-ups, sidechains etc.)
-2. **Optimistic Switchboard** : Uses an optimistic approach for proving the validity of a packet. Once a packet is proposed if it's uncontested in a fixed time interval, then it's assumed to be valid and marked verified. This method requires one honest actor to flag a fraudulent packet and stop it from being verified. Hence this follows a 1 / n honest minority assumption.
-3. **Fast Switchboard** : Uses majority consensus to verify the validity of a packet. Majority of watchers in the system must attest to the validity of the message, only then is the packet marked verified.
+2. **Optimistic Switchboard** : Uses an optimistic approach for verifying the validity of a packet. Once a packet is proposed if it's uncontested in a fixed time interval, then it's assumed to be valid and marked verified. This method requires one honest actor to flag a fraudulent packet and stop it from being verified. Hence this follows a 1 / n honest minority assumption.
+3. **Fast Switchboard** : Uses majority consensus to verify the validity of a packet. Majority of watchers in the system must attest to the validity of the packet, only then is the packet marked verified.
 
-Since deploying Switchboards is permissionless, Plugs can build their own switchboards tailored to their needs. Some potential switchboards include zk-proof based, economic staking-slashing etc. 
+Socket will eventually add support for more switchoards. However, since deploying Switchboards is permissionless, Plugs can build their own switchboards tailored to their needs. Some potential switchboards include zk-proof based, economic staking-slashing etc.
 
 ### Transmit Manager 
 <!-- WIP : See if there's a better way to explain what sealing and proposing packets is -->
