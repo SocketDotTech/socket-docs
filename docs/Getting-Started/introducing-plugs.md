@@ -4,32 +4,25 @@ title: Introducing Plugs
 sidebar_position: 1
 ---
 
+Socket is a smart contract on each chain that exposes 3 simple APIs that applications i.e Plugs can utilise to build anything and everything. These APIs are simply:
+- **connect**: This method is present in the source Socket. It is used to connect your Plug on chainA to your Plug on ChainB with all the configration parameters. This just needs to be done once to establish connection with your sibling Plug on another chain.
+- **outbound**: This method is present in the source Socket. Used to send a payload to your sibling Plug from the source Plug. You send this function the payload along with the destination and it makes it happen.
+- **inbound**: Your plug on the destination needs to have this method, destination Socket will forward the payload from source Socket to this function to be executed. 
 
-Plugs are smart contract applications that connect with Socket to send and receive cross-chain messages. By following the below spec, you can make your smart contract application a Plug and start sending and receiving crosschain messages with Socket.
+That's it. 3 things, connect, send, receive. 
 
-Every cross-chain message has a source chain and destination chain. Likewise, every source chain Plug sends a message that is received by their "sibling plug" on the destination chain. The message or payload is executed by this sibling plug.
+Goal of Socket protocol is to allow Plugs to communicate with each other. By default connections are pairwise i.e PlugA on ChainA it connected to PlugB on ChainB. You can however quickly use this simple primitive to connect your PlugA on ChainA to Plugs on 100s of other chains.
 
-Every plug requires 3 methods that interact with Socket to send/receive messages : 
+Let's look into each API into detail now and outline how to use them. You can add these functions to your Plugs and start using them, or use the template [here](https://github.com/SocketDotTech/socketDL-examples/blob/main/src/templates/PlugBase.sol) we have built for faster bootstrapping. 
 
-1. `connect`
-    -  Calls the connect method on Socket to register the sibling plug and switchboard configuration
+<!-- // TODO: link to the right places -->
+Read more about:
+- Configuring Plugs via the connect method
+- Sending Messages via outbound method
+- Received messages via inbound method
 
-        ```javascript
-        function connectToSocket(
-                uint256 siblingChainSlug_,
-                address siblingPlug_,
-                address inboundSwitchboard_,
-                address outboundSwitchboard_
-            ) external onlyOwner {
-                socket.connect(
-                    siblingChainSlug_,
-                    siblingPlug_,
-                    inboundSwitchboard_,
-                    outboundSwitchboard_
-                );
-          }
-        ```
-        
+
+<!--         
 
 2. `outbound`
     - Calls `outbound` method on Socket which sends the designated message(`payload`) to be executed on sibling Plug
@@ -61,10 +54,4 @@ Every plug requires 3 methods that interact with Socket to send/receive messages
         		performArbitraryAction(payload_)
          }
         ```
-        
-
-:::note Congrats!
-
-You have supercharged your smart contract application into a Plug!
-
-:::
+         -->
