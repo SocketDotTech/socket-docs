@@ -10,6 +10,8 @@ Your plug can send a message to the configured sibling Plug on the destination c
 
 The function is really simple, it just needs the following details
 
+## Parameters
+
 | Parameters | Description |
 | --- | --- |
 | remoteChainSlug | Chain Slug of the network where you want to send your messsage |
@@ -18,26 +20,25 @@ The function is really simple, it just needs the following details
 
 In order to pay for cross-chain execution, you call the outbound function with the msg.value representing the amount of fees you want to pay. You can estimate the minimum amount of fees via the methods outlined here.
 
-```javascript
+<!-- TODO: ADD fee linkage here -->
 
+## Send it! 
+
+Equipped with the payload we want to send, we can now call the outbound on Socket. 
+
+```javascript
     ISocket socket = ISocket(_address);
 
     function outbound(
         uint256 remoteChainSlug,
         uint256 msgGasLimit,
-        bytes memory payload
     ) external payable {
+        bytes memory payload = abi.encode("Hello World");
         socket.outbound{value: msg.value}(remoteChainSlug, msgGasLimit, payload);
     }
 ```
 
-
-
-#### Flow for sending a message
-- The plug on `remoteChainSlug` first must be connected to Socket as specified in the last section. Socket directly maps the `remoteChainSlug to the address of the plug
-
-- Once the `payload` to be sent is generated, the gas needed for executing it on the destination Plug must be estimated. This gasLimit estimated is to be passed in `msgGasLimit` and also used for estimating fees.
-!! WIP : Add an example here !!
+Once this tx 
 
 - The fee for sending the message can be estimated using the [Fee Estimate API](../Resources/apiReference.md). Learn more about fees here (!! WIP : This will link to fees page !!)
 
