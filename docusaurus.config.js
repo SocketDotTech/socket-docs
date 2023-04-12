@@ -60,11 +60,10 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'QuickStart',
+            docId: 'Introduction/basics',
             position: 'left',
             label: 'Docs',
           },
-          // {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/socketdottech',
             label: 'GitHub',

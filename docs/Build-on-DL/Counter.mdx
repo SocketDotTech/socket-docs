@@ -1,0 +1,57 @@
+---
+id: example-counter
+title: Counter Example 
+sidebar_position: 1
+---
+
+In this tutorial, we'll explore how to build and deploy a cross-chain counter. Users can change the value of the counter on the destination chain from the source chain.
+
+The Counter example is pre-deployed on a few chains. You can try it out via block explorers on the following chains : 
+
+// LINK COUNTER EXAMPLE ADDRESSES
+
+### Code Walkthrough
+
+You can find the code for this tutorial in the [`SocketDL-examples` GitHub](https://github.com/SocketDotTech/socketDL-examples). 
+
+
+This example inherits the PlugBase contract, which is a boilerplate contract that has the key functions/specs needed to interact with Socket. Learn more about this in the Getting Started section.
+
+The cross-chain counter has 2 key functions 
+1. `setNumber` 
+setNumber accepts toChainSlug_, which is the destination chain ID and newNumber_ which will be set as the new count on the destination chain. 
+
+setNumber calls the outbound function on Socket which initiates the message passing
+
+```javascript
+    function setNumber(
+        uint256 newNumber_,
+        uint256 toChainSlug_
+    ) external payable {
+        _outbound(toChainSlug_, destGasLimit, msg.value, abi.encode(newNumber_));
+    }
+
+```
+
+2. `_receiveInbound`
+
+- Called by the inbound function which is in PlugBase 
+
+### Deploying contracts 
+
+
+
+### Configuring Plugs 
+
+-  Connect Plug to Socket with sibling plug config 
+- Do the same with sibling plug 
+- Highlight switchboards. Link to switchboard life cycle 
+
+### Sending message 
+
+### Tracking status of message 
+
+### Destination chain 
+
+- Link example transaction 
+
