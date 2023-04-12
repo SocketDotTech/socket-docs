@@ -38,10 +38,10 @@ For sending a message to a sibling Plug on the destination chain, the `outbound`
 - Once the `payload` to be sent is generated, the gas needed for executing it on the destination Plug must be estimated. This gasLimit estimated is to be passed in `msgGasLimit` and also used for estimating fees.
 !! WIP : Add an example here !!
 
-- The fee for sending the message can be estimated using the [Fee Estimate API](../Resources/apiReference.md). Learn more about fees here (!! WIP : This will link to fees page !!)
+- The fee for sending the message can be estimated using the [Fee Estimate API](../Build-on-DL/apiReference.md). Learn more about fees here (!! WIP : This will link to fees page !!)
 
 - The `outbound` call to Socket upon completion returns a unique ID for the message (`msgId`)
-- The status of the message can be tracked using the [Transaction Status API](../Resources/apiReference.md).
+- The status of the message can be tracked using the [Transaction Status API](../Build-on-DL/apiReference.md).
 - Depending on the type of switchboard used, there will be different verification flows and estimated time until the payload is executed. You can learn more about these in the lifecycle section.(!! WIP : Add link !!)
 
 ### Receiving Messages

@@ -24,7 +24,3 @@ Socket is the core contract that Plugs interact with to send and receive message
 
 ### Switchboard
 Switchboards are the security module of Socket and contain the logic for verifying the validity of packets on the destination chain. Socket has 3 types of switchboards by default, FAST, OPTIMISTIC and NATIVE. Learn more about those [here](./protocol-architecture#there-are-3-default-switchboards-live-on-socket-).
-
-### Message ID 
-
-### Packet ID

@@ -17,4 +17,4 @@ position: 2,
 
 - In case gas price on dest plug shoots up when executing, your message execution will get delayed. In such cases, users can pay an extra fee to ensure their message gets relayed and executed.
 
-- The fees can be calculated using the [Fee Estimate API](../Resources/apiReference.md)
+- The fees can be calculated using the [Fee Estimate API](../Build-on-DL/apiReference.md)
