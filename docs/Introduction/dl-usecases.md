@@ -1,7 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 id: dl-usecases
 title: SocketDL Use cases
+slug: /
 ---
 As the number of layer 1 and layer 2 blockchains continues to proliferate and the demand for a smooth UX regardless of chain becoming more important, dapp developers are faced with the challenge of building seamless experiences across a fragmented chain landscape. 
 

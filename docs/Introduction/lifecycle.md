@@ -5,10 +5,11 @@ sidebar_position: 4
 ---
 
 In this section, we dive deeper into the main interactions between Plugs and Socket
-1. [Connecting to Socket](#connecting-to-socket)
-2. [Sending a message](#sending-a-message)
-3. [Receiving a message](#receiving-a-message)
-4. [Switchboards 101](#switchboards-101)
+- [Connecting to Socket](#connecting-to-socket)
+  - [General Notes :](#general-notes-)
+- [Sending a message](#sending-a-message)
+- [Receiving a message](#receiving-a-message)
+- [Switchboards 101](#switchboards-101)
 
 
 ### Connecting to Socket 

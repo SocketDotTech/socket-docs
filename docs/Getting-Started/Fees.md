@@ -1,7 +1,7 @@
 ---
 id: fees
 title: Fees
-position: 2,
+position: 5
 ---
 
 - Socket charges a fee for sending messages, to be paid in the native token of the source chain.
