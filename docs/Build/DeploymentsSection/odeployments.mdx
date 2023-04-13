@@ -1,0 +1,18 @@
+import { useState, useEffect } from "react";
+
+export const fetchAddresses = async () => {
+  const response = await fetch("");
+  setAddresses(response.data);
+};
+
+export const FetchDeploymentAddresses = () => {
+  const [addresses, setAddresses] = useState();
+  useEffect(() => {
+    fetchAddresses();
+  }, []);
+  useEffect(() => {
+    console.log("address", addresses);
+  }, [addresses]);
+};
+
+<FetchDeploymentAddresses />
