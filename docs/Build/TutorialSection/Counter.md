@@ -1,6 +1,6 @@
 ---
 id: example-counter
-title: Counter Example
+title: Counter Tutorial
 sidebar_position: 1
 ---
 
@@ -108,24 +108,30 @@ For Optimism, the values are :
   | inboundSwitchboard | 0x8654cB74011C9972dd63Ed691d310e1BAA85Fe9E |
   | outboundSwitchboard | 0x8654cB74011C9972dd63Ed691d310e1BAA85Fe9E |
 
-- This has to be repeated for other counter 
-- Likewise this has to be repeated for all counters if > 2
-- Connect Plug to Socket with sibling plug config
-- Do the same with sibling plug
-- Highlight switchboards. Link to switchboard life cycle
 
-### Sending message
+  This [connection](../../Learn/lifecycle.md#connecting-to-socket) is required on each respective chain a Plug receives/sends messages between. Once the connection step is complete, you can verify the connection was successful by calling the `getPlugConfig` method on [Socket](../DeploymentsSection/Deployments.md). This is a view function that returns the config of the plug.
 
-- What function is involved, what its doing
-- point to life cycle
--
+### Setting Counter value on remote chain
+
+In this tutorial, we'll be setting `Counter` value on Polygon to 55 from Optimism. To do this, we call the `setRemoteNumber()` function on Polygon. The script for making this transaction can be found here.
+
+The parameter values when calling this function on Optimism are : 
+
+  | Parameter | Value |
+  | --- | --- |
+  | newNumber_ | 55 |
+  | toChainSlug_ | 137 |
+
+This sends a payload from Optimism to Polygon with the number 55 encoded. This number is decoded from the payload on the destination `Counter` and set as the Counter value.
 
 ### Tracking status of message
 
--
+To track the status of any outbound message, you can use the status API. Learn more in the [Status API](../APIReference/apiReference.md) documentation.
 
-### Destination chain
+### Message delivery to set Counter value
 
-- what function is involved, what its doing
-- point to lifecycle
-- link example tx
+Socket executes the message to the remote `Counter` on Polygon once the [message is verified](../../Learn/lifecycle.md#switchboards-101). Find a detailed explanation of this in the [Receiving message lifecycle](../../Learn/lifecycle.md#receiving-a-message).
+
+Socket calls the `inbound` function on the remote `Counter`, which must verify the address calling the function is [`Socket`](../../Learn/protocol-architecture.md#socket) address. This calls the `_receiveInbound` function which decodes the newNumber from the payload and sets it. Here's an example transaction.
+
+Once the payload is sent to the remote `Counter`, message execution is marked complete. In case the message cannot be executed, then the `Counter` needs to handle the catch the error and handle it gracefully. 

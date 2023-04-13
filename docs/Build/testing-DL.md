@@ -1,10 +1,10 @@
 ---
 id: testing-dl
-title: Testing SocketDL
+title: Testing integration
 sidebar_position: 3
 ---
 
-Plugs can test their smart contract integration with Socket using MockSocket. MockSocket is a contract that simulates the functionality of Socket 
+Plugs can test their integration with Socket using MockSocket, which is a contract that simulates the functionality of Socket without actually passing a message on-chain.
 
 - What is MockSocket? 
 - How does it work? 
@@ -16,3 +16,4 @@ Plugs can test their smart contract integration with Socket using MockSocket. Mo
     - Once MockSocket test is done, try deploying on a testnet 
 
 
+- add link about verifying plug
