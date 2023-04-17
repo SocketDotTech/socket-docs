@@ -4,23 +4,22 @@ title: Glossary
 sidebar_position: 6
 ---
 
-### Plug
-Plugs are smart contract applications that connect with Socket to send and receive cross-chain messages via the IPlug interface. Plug's are generally adapter contracts that connect your main Smart contract to the messaging infrastructure.
+We have introduced alot of new terms and that is by design. We think for something as critical as AMB's nothing should be assumed or taken for-granted, we think these new terms are accurate and will encourage people to look into the docs/code and discourage assumptions.
 
-### Sibling plug
-Plugs deployed on two different chains and configured to send/receive messages between one another are called sibling plugs.
+<!-- TODO link the below:
+- IPLug 
+- Transmitter Component
+- Capacitor Component
+  -->
 
-### Sibling Chain
-Chain on which sibling plug is deployed is called a Sibling Chain
+Here is a quick run-down of some of the terms/words that you will come across the entire documentation:
+- **Plug/Plugs**: Plugs are smart contract applications that connect with Socket to send and receive cross-chain messages via the IPlug interface. Plug's are generally adapter contracts that connect your main Smart contract to the messaging infrastructure.
+- **Message**: Message is the payload you want to transmit along with relavent meta-data like destination chainSlug etc. 
+- **Packet**: Packets are a collection of messages sent from one chain to another. The validity of messages in a packet is verified on the destination chain based on the logic prescribed in the configured switchboard. Read more about Packet's and what it contains here.
+- **Socket**:
+- **SealedPacket**: As soon as the transmitter seals the packet on the source-chain with his signature its called "SealedPacket". Read more about how transmitters work here. 
+- **Capacitor**: Capacitor is responsibile for storing paylods in the form of a Packet, the packet is releases when the transmitter pokes the capacitor to seal the packet. Capacitors allow for native batching of payloads for better gas-performance. Read more about the capacitor here.
+- **Switchboard**: Switchboards are the authenticaion/verification modules that allow developers to have custom verification for their payloads/mesages. They can be permissionlessly built and deployed by the community. Read more about them here.
+- **Transmitter**: Transmitter's are the entities responsible for transmission of Packet across layers, their activity is completely on-chain and managed by TransmitManager. Read more about them here. 
+- **ChainSlug**
 
-### Message 
-Message encapsulates the payload sent from one plug to another plug along with metadata such as plug address, source/destination chain IDs, message ID, gas limit etc.
-
-### Packet
-Packets are a collection of messages sent from one chain to another. The validity of messages in a packet is verified on the destination chain based on the logic prescribed in the configured switchboard.
-
-### Socket
-Socket is the core contract that Plugs interact with to send and receive messages. Packets are "sealed" or ready to be transmitted on Socket on the source chain. Transmitters then relay this packet to the Socket contract on destination chain, where switchboards verify its authenticity and execute it.
-
-### Switchboard
-Switchboards are the security module of Socket and contain the logic for verifying the validity of packets on the destination chain. Socket has 3 types of switchboards by default, FAST, OPTIMISTIC and NATIVE. Learn more about those [here](./protocol-architecture#there-are-3-default-switchboards-live-on-socket-).
