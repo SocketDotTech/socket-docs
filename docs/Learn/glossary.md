@@ -21,5 +21,5 @@ Here is a quick run-down of some of the terms/words that you will come across th
 - **Capacitor**: Capacitor is responsibile for storing paylods in the form of a Packet, the packet is releases when the transmitter pokes the capacitor to seal the packet. Capacitors allow for native batching of payloads for better gas-performance. Read more about the capacitor here.
 - **Switchboard**: Switchboards are the authenticaion/verification modules that allow developers to have custom verification for their payloads/mesages. They can be permissionlessly built and deployed by the community. Read more about them here.
 - **Transmitter**: Transmitter's are the entities responsible for transmission of Packet across layers, their activity is completely on-chain and managed by TransmitManager. Read more about them here. 
-- **ChainSlug**
+- **ChainSlug**: ChainSlug is a unique identifier for that particular network or Socket deployment. It's different than chain-id or network-id used on EVM networks. You can find the assigned ChainSlug's in the deployments section.
 
