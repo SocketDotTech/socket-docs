@@ -9,7 +9,7 @@ In order to connect your smart-contracts(i.e Plugs) across chains first step is 
 A few pointers to keep in mind:
 - Socket allows only Plugs to update this configration/connection request at any point.
 - Connection should be permissioned at the Plug level by either owner_keys, governance or if you dont want to update this connection ever you can simply block re-connection forever.
-- Malicious configration while connecting to Socket could cause unintended actions.
+- Malicious configuration while connecting to Socket could cause unintended actions.
 - Connections are made pair-wise i.e you connect PlugA on ChainA to PlugB on ChainB, you can simply extend this primitive to connect to multiple chains.
 
 <!-- // TODO: link it -->
