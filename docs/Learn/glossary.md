@@ -1,11 +1,11 @@
 ---
 id: glossary
 title: Glossary
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 ### Plug
-Plugs are smart contract applications that connect with Socket to send and receive cross-chain messages.
+Plugs are smart contract applications that connect with Socket to send and receive cross-chain messages via the IPlug interface. Plug's are generally adapter contracts that connect your main Smart contract to the messaging infrastructure.
 
 ### Sibling plug
 Plugs deployed on two different chains and configured to send/receive messages between one another are called sibling plugs.

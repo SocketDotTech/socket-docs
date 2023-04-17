@@ -1,7 +1,7 @@
 ---
 id: protocol-architecture
 title: Protocol Architecture
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 <!-- PAGE STATUS : MOSTLY DONE. NEEDS FEW CHANGES BEFORE REVIEW -->
