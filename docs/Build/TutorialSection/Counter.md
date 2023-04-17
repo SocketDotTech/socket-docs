@@ -8,7 +8,7 @@ In this tutorial, we'll explore how to build and deploy a cross-chain counter. T
 
 ### Code Walkthrough
 
-You can find the code for this tutorial in the [`SocketDL-examples`](https://github.com/SocketDotTech/socketDL-examples) GitHub repo. This example inherits the `PlugBase` contract, which is a boilerplate contract with [key functions](../Getting-Started//introducing-plugs.md) needed to interact with Socket. Plugs may use PlugBase to abstract these functions, or directly define them in their contract.
+You can find the code for this tutorial in the [`SocketDL-examples`](https://github.com/SocketDotTech/socketDL-examples) GitHub repo. This example inherits the `PlugBase` contract, which is a boilerplate contract with key functions {WIP: Link it} needed to interact with Socket. Plugs may use PlugBase to abstract these functions, or directly define them in their contract.
 
 The Cross-chain Counter has 2 key functions : 
 

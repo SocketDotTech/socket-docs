@@ -1,47 +1,52 @@
 ---
 id: sending
 title: Sending messages
-sidebar_position: 3
+sidebar_position: 2
 ---
+<!-- // TODO: read more -->
 
-### Sending Messages
-
-Your plug can send a message to the configured sibling Plug on the destination chain via the `outbound` function on Socket.
-
-The function is really simple, it just needs the following details
+Outbound method on the Socket contract deployed on all networks allows Plugs to send messages to other Plugs across chains. Checkout the below section to understand how to use it. If you want to read more on how sending messages in Socket works, read more here.
 
 ## Parameters
 
 | Parameters | Description |
 | --- | --- |
-| remoteChainSlug | Chain Slug of the network where you want to send your messsage |
-| payload | The message you want to send to the sibling plug on remoteChainSlug |
+| remoteChainSlug | ChainSlug of the network where you want to send your messsage to |
+| payload | The message you want to send to the plug on remoteChainSlug |
 | msgGasLimit | gasLimit required to execute the `payload` on remoteChainSlug |
 
+<!-- // TODO: link here -->
 In order to pay for cross-chain execution, you call the outbound function with the msg.value representing the amount of fees you want to pay. You can estimate the minimum amount of fees via the methods outlined here.
 
-<!-- TODO: ADD fee linkage here -->
 
 ## Send it! 
 
-Equipped with the payload we want to send, we can now call the outbound on Socket. 
+Make sure you have connected your Plugs on both chains to each other before you call the outbound method
+Equipped with the payload we want to send, we can now call the outbound on Socket, below is a quick example
 
 ```javascript
+    // Get Socket address from the deployments page for your network
     ISocket socket = ISocket(_address);
 
-    function outbound(
-        uint256 remoteChainSlug,
-        uint256 msgGasLimit,
+    // THIS IS NOT AN ACTUAL SLUG, please get the right slug from the deployments page
+    uint256 remoteChainSlug = 1333;
+    uint256 defaultGasLimit = 1000000;
+
+    // send hello world to the sibling Plug we configured on chainSlug:1333
+    function SendHelloWorld(
     ) external payable {
         bytes memory payload = abi.encode("Hello World");
-        socket.outbound{value: msg.value}(remoteChainSlug, msgGasLimit, payload);
+        // msg.value should be equal to the minFees
+        socket.outbound{value: msg.value}(remoteChainSlug, defaultGasLimit, payload);
     }
 ```
+<!-- // TODO: add API link -->
 
-Once this tx 
+Once the tx is finalised:
+- An event 'MessageTransmitted' is emitted by Socket containing all relavent details.
+- Your message will be allocated a unique ID called (`msgId`) you can look it up in the 'MessageTransmitted' log
+ 
+You can use the tx-hash to track the delivery and execution on the destination chain via this API.  
 
-- The fee for sending the message can be estimated using the Fee Estimate API. Learn more about fees here (!! WIP : This will link to fees page !!)
-
-- The `outbound` call to Socket upon completion returns a unique ID for the message (`msgId`)
-- The status of the message can be tracked using the Transaction Status API (WIP: LINK ME)
-- Depending on the type of switchboard used, there will be different verification flows and estimated time until the payload is executed. You can learn more about these in the lifecycle section.(!! WIP : Add link !!)
+<!-- // TODO: LINK -->
+You can checkout some examples we built out here:
