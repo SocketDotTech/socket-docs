@@ -19,7 +19,7 @@ It's recommended to keep this action permissioned, malicious configration while 
 | inboundSwitchboard_ | Switchboard used for processing messages from Sibling Plug |
 | outboundSwitchboard_ | Switchboard used to process messages to Sibling Plug |
 
-Find all chain slugs, Socket and switchboard deployed addresses [here](../Deployments.md)
+Find all chain slugs, Socket and switchboard deployed addresses here. {WIP: Link}
 
 ## GetPlugged
 
