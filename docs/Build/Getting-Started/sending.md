@@ -40,8 +40,8 @@ Equipped with the payload we want to send, we can now call the outbound on Socke
 
 Once this tx 
 
-- The fee for sending the message can be estimated using the [Fee Estimate API](../Resources/apiReference.md). Learn more about fees here (!! WIP : This will link to fees page !!)
+- The fee for sending the message can be estimated using the Fee Estimate API. Learn more about fees here (!! WIP : This will link to fees page !!)
 
 - The `outbound` call to Socket upon completion returns a unique ID for the message (`msgId`)
-- The status of the message can be tracked using the [Transaction Status API](../Resources/apiReference.md).
+- The status of the message can be tracked using the Transaction Status API (WIP: LINK ME)
 - Depending on the type of switchboard used, there will be different verification flows and estimated time until the payload is executed. You can learn more about these in the lifecycle section.(!! WIP : Add link !!)

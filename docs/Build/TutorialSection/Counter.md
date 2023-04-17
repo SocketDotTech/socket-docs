@@ -4,17 +4,17 @@ title: Counter Tutorial
 sidebar_position: 1
 ---
 
-In this tutorial, we'll explore how to build and deploy a cross-chain counter. Users can change the value of the counter on one chain from another chain.
+In this tutorial, we'll explore how to build and deploy a cross-chain counter. The cross-chain counter lets users update the value of the counter on one chain from another.
 
 ### Code Walkthrough
 
 You can find the code for this tutorial in the [`SocketDL-examples`](https://github.com/SocketDotTech/socketDL-examples) GitHub repo. This example inherits the `PlugBase` contract, which is a boilerplate contract with [key functions](../Getting-Started//introducing-plugs.md) needed to interact with Socket. Plugs may use PlugBase to abstract these functions, or directly define them in their contract.
 
-The Cross-chain counter has 2 key functions : 
+The Cross-chain Counter has 2 key functions : 
 
 1. `setRemoteNumber`
 
-   - setRemoteNumber takes `newNumber` and `toChainSlug` parameters. This function calls `outbound` method on Socket which initiates the cross-chain message to update counter value on the destination chain
+   - setRemoteNumber takes `newNumber` and `toChainSlug` parameters. This function calls `outbound` method on Socket which initiates the cross-chain message to update the counter value on the destination chain
 
    ```javascript
       /* 
@@ -73,9 +73,9 @@ The Cross-chain counter has 2 key functions :
 
 #### Constructor Arguments
 
-- The counter example takes [`Socket`](../../Learn/protocol-architecture.md#socket) address as an argument and addresses for [`Socket`](../../Learn/protocol-architecture.md#socket) can be found in [`deployments`](../DeploymentsSection/Deployments.md)
+- The counter example takes [`Socket`](../../Learn/protocol-architecture.md#socket) address as an argument, which can be found in [`deployments`](../DeploymentsSection/Deployments.md)
 
-  This example can be deployed on all [supported testnets or mainnets]((../DeploymentsSection/Deployments.md)). In this tutorial, we'll be deploying the Counters on the following two chains, Polygon and Optimism :
+  This example can be deployed on any [supported testnets or mainnets](../DeploymentsSection/Deployments.md). In this tutorial, we'll be deploying the Counters on the following two chains, Polygon and Optimism :
 
   | Chain | Socket address |
   | --- | --- |
@@ -87,7 +87,7 @@ The Cross-chain counter has 2 key functions :
 
 As described in the Getting Started section, Plugs must connect to Socket before they can send/receive messages between one another. After deploying the `Counter` contract on Polygon and Optimism, we need to initiate a `connect()` transaction on respective chains.
 
-The script for making this transaction can be found here. This step calls the `connect` method on Socket with the [following parameters](../Getting-Started/introducing-plugs.md).
+The script for making this transaction can be found here. This step calls the `connect` method on Socket with the following parameters. {WIP: Link it}
 
 For Polygon, the values are :
 
@@ -113,7 +113,9 @@ For Optimism, the values are :
 
 ### Setting Counter value on remote chain
 
-In this tutorial, we'll be setting `Counter` value on Polygon to 55 from Optimism. To do this, we call the `setRemoteNumber()` function on Polygon. The script for making this transaction can be found here.
+For this tutorial, we'll be setting `Counter` value on Polygon to 55 from Optimism. To do this, we call the `setRemoteNumber()` function on our Counter deployed on Polygon. The script for making this transaction can be found here.
+
+// Script will be here as well
 
 The parameter values when calling this function on Optimism are : 
 
@@ -122,16 +124,24 @@ The parameter values when calling this function on Optimism are :
   | newNumber_ | 55 |
   | toChainSlug_ | 137 |
 
-This sends a payload from Optimism to Polygon with the number 55 encoded. This number is decoded from the payload on the destination `Counter` and set as the Counter value.
+This sends a message payload from Optimism to Polygon with the number 55 encoded in payload. This number is decoded from the payload on the destination `Counter` and set as the new Counter value.
 
 ### Tracking status of message
 
-To track the status of any outbound message, you can use the status API. Learn more in the [Status API](../APIReference/apiReference.md) documentation.
+To track the status of any outbound message can be tracked with the status API. Learn more in the Status API {WIP : link it}
 
 ### Message delivery to set Counter value
 
-Socket executes the message to the remote `Counter` on Polygon once the [message is verified](../../Learn/lifecycle.md#switchboards-101). Find a detailed explanation of this in the [Receiving message lifecycle](../../Learn/lifecycle.md#receiving-a-message).
+Once the [packet is verified](../../Learn/lifecycle.md#switchboards-101), Socket sends the message payload to the remote `Counter` on Polygon. It calls the `inbound` function on the remote `Counter`, which decodes the newNumber from the payload and sets it on the local chain. Find a detailed explanation of this in the [Receiving message lifecycle](../../Learn/lifecycle.md#receiving-a-message).
 
-Socket calls the `inbound` function on the remote `Counter`, which must verify the address calling the function is [`Socket`](../../Learn/protocol-architecture.md#socket) address. This calls the `_receiveInbound` function which decodes the newNumber from the payload and sets it. Here's an example transaction.
+The value of `Counter` on Polygon can be checked using this script
+// Add script to check the new counter value
 
-Once the payload is sent to the remote `Counter`, message execution is marked complete. In case the message cannot be executed, then the `Counter` needs to handle the catch the error and handle it gracefully. 
+Once the payload is sent to the remote `Counter`, message execution is marked complete.
+
+
+:::note You're Plugged!
+
+You've successfully built and deployed a Plug! Explore more examples & participate in Surge!
+
+:::

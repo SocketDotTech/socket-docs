@@ -1,0 +1,8 @@
+{
+  "label": "Interfaces",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "Interfaces used by Plugs to interface with Socket"
+  }
+}
