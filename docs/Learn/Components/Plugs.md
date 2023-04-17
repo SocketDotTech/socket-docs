@@ -1,0 +1,3 @@
+Smart contracts that connect to Socket to send messages to each other across chains are called Plugs. Before your Plugs can communicate to each other directly, you need to connect to Socket and inform Socket about your sibling Plugs. Plugs must “connect” or get “plugged into” Socket for each unique sibling network for sending/receiving messages.  
+
+It's recommended to keep this action permissioned, malicious configration while connecting to Socket will cause unintended actions. In case a connection between two plugs already exists on a chain, re-connecting will override the previous configuration, Socket by default doesnt block this behaviour. However you are free to block this behaviour from your Plug.
