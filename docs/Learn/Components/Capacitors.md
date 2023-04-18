@@ -25,6 +25,6 @@ Once your capacitor is set into the switchboard it can only be upgraded if the s
 
 CapacitorFactory is an upgradable contract that lists different kinds of Capacitors available. Note that this component being upgradable has no impact on message security, your capacitor once selected is embedded into the switchboard, CapacitorFactory being upgradable will have no effect on already deployed capacitors. The factory is like a capacitor menu item.
 
-CapacitorFactory assigns each type of Capacitor a "type" which is a unique identifier(uint32) used to refer to a specific capacitor. While registering a switchboard to Socket like defined here, you specify a capacitor_type, the registration function deploys the switchboard specific capacitor and decapacitor.  
+CapacitorFactory assigns each type of Capacitor a "type" which is a unique identifier(uint32) used to refer to a specific capacitor. While registering a switchboard to Socket like defined here, you specify a capacitor_type, the registration function deploys the switchboard specific capacitor and decapacitor. Developers have the ability to define the level of batching they want while they register the switchboard. 
 
 More details around access-control and ownership of CapacitorFactory contract here.
