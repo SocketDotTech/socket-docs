@@ -1,6 +1,6 @@
-Packet is a cryptographic representation of PackedMessages. Capacitor produces Packet's as soon as PackedMessages are added to it. 
+Packet is a cryptographic representation of PackedMessages. Capacitor produces Packets as soon as PackedMessages are added to it. 
 
-PackedMessages created whenever a new message is sent via the Outbound methond and are compressed representation of the following:
+PackedMessages created whenever a new message is sent via the Outbound method and are compressed representation of the following:
 - LocalChainSlug: ChainSlug of the local network
 - msg.sender: Src Plug for the LocalChainSlug
 - RemoteChainSlug: ChainSlug for the remote network
