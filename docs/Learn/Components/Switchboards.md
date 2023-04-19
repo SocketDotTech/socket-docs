@@ -1,4 +1,4 @@
-Plugs connect to Socket via SwitchBoards, just like in real life. SwitchBoards are like open-source permissionless configration bundles that plugs can opt into OR build their own configration bundles.
+Plugs connect to Socket via Switchboards, just like in real life. Switchboards are like open-source permissionless configration bundles that plugs can opt into OR build their own configration bundles.
 
 Switchboards contain the following things:
 - Packet authenticaion via allowPacket method
@@ -10,4 +10,4 @@ Switchboards allow developers to permissionlessly authenticate Packets before th
 - FastVeto: Allow 1/N trust minimised validation by having all N parties attest on-chain
 - Native: Allow rollup-bridges to validate Packets providing trustless communication
 
-Anyone can build a switchboard that satisfies the ISwitchboard interface mentioned here. It needs to be registered to Socket before Plugs can use it via the `registerSwitchboard()` method on Socket. Registering a Switchboard is completely permissionless. 
+Anyone can build a switchboard that satisfies the [ISwitchboard interface](../../Build/Interfaces/ISwitchboard.md). It needs to be registered to Socket before Plugs can use it via the `registerSwitchboard()` method on Socket. Registering a Switchboard is completely permissionless. 

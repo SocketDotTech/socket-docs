@@ -6,7 +6,6 @@ sidebar_position: 5
 
 In this section, we dive deeper into the main interactions between Plugs and Socket
 - [Connecting to Socket](#connecting-to-socket)
-  - [General Notes :](#general-notes-)
 - [Sending a message](#sending-a-message)
 - [Receiving a message](#receiving-a-message)
 - [Switchboards 101](#switchboards-101)
@@ -18,8 +17,7 @@ In this section, we dive deeper into the main interactions between Plugs and Soc
 
 Before Plugs can start sending and receiving messages, they need to connect or get "plugged" into Socket. Plugs connect to sibling plugs deployed on other chains by sending configuration details such as sibling chainId, sibling plug address and switchboard configuration.
 
-Upon connection, Socket generates a unique identifier for the configuration and stores it. It then emits an event `PlugConnected` with the config data. Here's an example transaction.
-<!-- WIP : Attach an example transaction -->
+Upon connection, Socket generates a unique identifier for the configuration and stores it. It then emits an event `PlugConnected` with the config data. Here's an [example transaction](https://polygonscan.com/tx/0x58231336368ff437883ada95d30897679f64257c981ee19dab8147c0b3828d0a#eventlog).
 
 #### General Notes :
 
@@ -33,7 +31,7 @@ Plugs build on top of Socket to initiate state changes on Plugs deployed on othe
 
  <img src="/img/SendMessageOutbound.png" />
 
-To pass a message, Plugs call the `outbound` method on Socket with `fees`, `remoteChainSlug`, `msgGasLimit`, `payload`. Socket checks the stored configuration of the plug and verifies a connection with the remote chain was previously instantiated. Socket deducts the fee sent from the plug and pays to various off-chain actors.
+To pass a message, Plugs call the `outbound` method on Socket with `fees`, `remoteChainSlug`, `msgGasLimit`, `payload`. Socket checks the stored configuration of the plug and verifies a connection with the remote chain was previously instantiated. It then deducts the fee sent from the plug and pays to various off-chain actors.
 
 Plugs need to pay a fee to off-chain actors to get messages included in a packet to be executed on the destination chain. You can learn more about these fees here. {WIP: link it}
 
@@ -67,7 +65,3 @@ If these are verified, then the message can be executed. `Executors` call the ex
 
 <!-- WIP : Mention X -->
 In case the message cannot be executed due to insufficient gas limit or other errors, Socket will re-try execution periodically. More on Execution Failure here.
-
-### Switchboards 101
-
-Coming soon ™️
