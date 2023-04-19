@@ -8,9 +8,7 @@ As mentioned before, Socket is a modular on-chain protocol with several modular 
 
 There are several components in the Socket protocol that work together to make this happen.
 
-<img src="/img/BroadArchitecture.png" />
-
-<!-- PAGE STATUS : MOSTLY DONE. NEEDS FEW CHANGES BEFORE REVIEW -->
+<img src="/img/BroadArchitecture.png" width="500px"/>
 
 <!-- // TODO: add mechanism paragraph here -->
 
