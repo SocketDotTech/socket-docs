@@ -1,7 +1,7 @@
 ---
 id: retry-execute
 title: Message Failure & Retry
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 Message execution may fail on the destination chain for the following reasons :
