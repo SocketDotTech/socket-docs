@@ -1,7 +1,7 @@
 ---
 id: example-counter
 title: Counter Tutorial
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 In this tutorial, we'll explore how to build and deploy a cross-chain counter. The cross-chain counter lets users update the value of the counter on one chain from another.
