@@ -19,7 +19,7 @@ Outbound method on the Socket contract deployed on all networks allows Plugs to 
 In order to pay for cross-chain execution, you call the outbound function with the msg.value representing the amount of fees you want to pay. You can estimate the minimum amount of fees via the methods outlined here.
 
 
-## Send it! 
+## Sending your message
 
 Make sure you have connected your Plugs on both chains to each other before you call the outbound method
 Equipped with the payload we want to send, we can now call the outbound on Socket, below is a quick example
@@ -43,10 +43,10 @@ Equipped with the payload we want to send, we can now call the outbound on Socke
 <!-- // TODO: add API link -->
 
 Once the tx is finalised:
-- An event 'MessageTransmitted' is emitted by Socket containing all relavent details.
-- Your message will be allocated a unique ID called (`msgId`) you can look it up in the 'MessageTransmitted' log
+- An event `MessageTransmitted` is emitted by Socket containing all relavent details.
+- Your message will be allocated a unique ID called (`msgId`) you can look it up in the `MessageTransmitted` log
  
 You can use the tx-hash to track the delivery and execution on the destination chain via this API.  
 
 <!-- // TODO: LINK -->
-You can checkout some examples we built out here:
+You can check out some examples we built out here:

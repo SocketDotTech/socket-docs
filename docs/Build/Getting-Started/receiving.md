@@ -5,7 +5,7 @@ sidebar_position: 3
 ---
 Plugs on destination network need to implement `inbound()` to handle incoming messages.
 <!-- // TODO link interface -->
-Socket calls the `inbound` function on the destination Plug when sending the payload. The inbound() should follow the interface mentioned in the interface mentioned here. 
+Socket calls the `inbound` function on the destination Plug when sending the payload. The `inbound()` should follow the interface mentioned in the interface mentioned here. 
 
 ```javascript
 interface IPlug {
@@ -22,7 +22,7 @@ interface IPlug {
 }
 ```
 
-Your Plug on the destination network can look something like below, in the below snippet we assume the payload is a integer.
+Your Plug on the destination network can look something like below. In the below snippet we assume the payload is an integer.
 
 ```javascript
     uint256 number;
