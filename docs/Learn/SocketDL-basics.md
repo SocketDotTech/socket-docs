@@ -2,7 +2,6 @@
 sidebar_position: 1
 id: basics
 title: Overview
-slug: /
 ---
 
 SocketDL is a modular, extensible cross-chain communication protocol that enables developers to build seamless and secure interactions between smart contracts and decentralized applications (dApps) across multiple blockchain networks. SocketDL can be considered an Arbitrary Messaging Bridge. 
