@@ -25,6 +25,8 @@ const config = {
         },
       };
     },
+
+    require.resolve('docusaurus-lunr-search')
   ],
 
   // GitHub pages deployment config.
