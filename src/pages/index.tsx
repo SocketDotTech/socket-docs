@@ -8,6 +8,29 @@ import { Tabs } from "../components/HomepageFeatures/Tabs";
 
 import styles from "./index.module.css";
 
+const SectionList = [
+  {
+    title: "Learn",
+    Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
+    description: <>Learn about SocketDL</>,
+  },
+  {
+    title: "Build",
+    Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
+    description: <></>,
+  },
+  {
+    title: "Earn",
+    Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
+    description: (
+      <>
+        Participate in Socket Surge, Socket's incentivised testnet program. Find
+        bugs in the system, crack lootboxes and become a Socket Sentinel!
+      </>
+    ),
+  },
+];
+
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
@@ -36,10 +59,16 @@ export default function Home(): JSX.Element {
       description="Description will go into a meta tag in <head />"
     >
       <HomepageHeader />
-      <main>
+      <main className="w-full">
         {/* <HomepageFeatures /> */}
 
-        <div className="flex flex-row w-full p-1"></div>
+        <div className="lg:flex flex-row lg:w-full my-8 justify-center">
+          {SectionList.map((section) => {
+            return (
+              <Tabs title={section.title} description={section.description} />
+            );
+          })}
+        </div>
       </main>
     </Layout>
   );
