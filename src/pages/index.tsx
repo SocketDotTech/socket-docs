@@ -37,9 +37,9 @@ export default function Home(): JSX.Element {
     >
       <HomepageHeader />
       <main>
-        <HomepageFeatures />
+        {/* <HomepageFeatures /> */}
 
-        <Tabs />
+        <div className="flex flex-row w-full p-1"></div>
       </main>
     </Layout>
   );
