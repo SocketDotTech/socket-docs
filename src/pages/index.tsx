@@ -12,12 +12,17 @@ const SectionList = [
   {
     title: "Learn",
     Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
-    description: <>Learn about SocketDL</>,
+    description: (
+      <>
+        Learn about Socket's architecture, messaging lifecycle, security, fees &
+        more!
+      </>
+    ),
   },
   {
     title: "Build",
     Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
-    description: <></>,
+    description: <>Send your first cross-chain message in less than 5 mins.</>,
   },
   {
     title: "Earn",
@@ -34,16 +39,19 @@ const SectionList = [
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
+    <header
+      className={`${clsx("hero", styles.heroBanner)} text-white`}
+      style={{ backgroundImage: 'url("./img/header-bg.png")' }}
+    >
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <h1 className="md:text-5xl sm:text-xl">{siteConfig.title}</h1>
+        <p className="md:text-xl sm:text-lg">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
             to="/Learn/basics"
           >
-            Get Started
+            Get started
           </Link>
         </div>
       </div>
@@ -65,7 +73,12 @@ export default function Home(): JSX.Element {
         <div className="lg:flex flex-row lg:w-full my-8 justify-center">
           {SectionList.map((section) => {
             return (
-              <Tabs title={section.title} description={section.description} />
+              <Tabs
+                title={section.title}
+                description={section.description}
+                buttonTitle="→"
+                buttonLink={"/Learn/Basics"}
+              />
             );
           })}
         </div>

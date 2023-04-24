@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Socket Data Layer',
-  tagline: 'Modular Interop Protocol',
+  tagline: 'The future of modular interoperability',
   url: 'https://socket.tech',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -66,7 +66,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'DataLayer',
+        title: 'SocketDL',
         logo: {
           alt: 'My Site Logo',
           src: 'img/socketOC.png',
@@ -76,12 +76,19 @@ const config = {
             type: 'doc',
             docId: 'Learn/basics',
             position: 'left',
-            label: 'Docs',
+            label: 'Learn',
           },
           {
-            href: 'https://github.com/socketdottech',
-            label: 'GitHub',
-            position: 'right',
+            type: 'doc',
+            docId: 'Build/TutorialSection/hello-world',
+            position: 'left',
+            label: 'Build',
+          },
+          {
+            type: 'doc',
+            docId: 'Earn/Contribute',
+            position: 'left',
+            label: 'Earn',
           },
         ],
       },
