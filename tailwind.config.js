@@ -11,7 +11,8 @@ module.exports = {
       },
       backgroundColor: {
         'light-purple': 'var(--bg-primary)',
-        'global': 'var(--bg-global)'
+        'global': 'var(--bg-global)',
+        'update': 'var(--bg-update-button)'
       },
       stroke: {
         'primary': 'var(--stroke-primary)'
