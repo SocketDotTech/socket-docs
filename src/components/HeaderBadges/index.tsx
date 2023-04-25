@@ -6,20 +6,18 @@ export const HeaderBadges = () => {
     <BrowserOnly>
       {() => (
         <div className="flex justify-end">
-          <div className="bg-update cursor-pointer text-sm p-2 rounded-full">
-            <a
-              className="header-badge"
-              href={`https://github.com/SocketDotTech/datalayer-docs/issues/new?title=Docs update request: ${
-                new URL(window.location.href).pathname
-              }&body=Source: ${
-                window.location.href
-              }%0A%0ARequest: (how can we help?)%0A%0AUse this issue to add suggestions for how we can improve this documentation page.`}
-              style={{ textDecoration: "none" }}
-            >
-              <span className="badge-avatar emoji-avatar mx-1">✏️</span>
-              <span className="badge-label">Request an update</span>
-            </a>
-          </div>
+          <a
+            href={`https://github.com/SocketDotTech/datalayer-docs/issues/new?title=Docs update request: ${
+              new URL(window.location.href).pathname
+            }&body=Source: ${
+              window.location.href
+            }%0A%0ARequest: (how can we help?)%0A%0AUse this issue to add suggestions for how we can improve this documentation page.`}
+            style={{ textDecoration: "none" }}
+            className="bg-update cursor-pointer text-sm p-2 rounded-full"
+          >
+            <span className="badge-avatar emoji-avatar mx-1">✏️</span>
+            <span className="badge-label">Request an update</span>
+          </a>
         </div>
       )}
     </BrowserOnly>
