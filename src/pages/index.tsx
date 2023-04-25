@@ -18,21 +18,24 @@ const SectionList = [
         more!
       </>
     ),
+    buttonLink: "/Learn/Basics",
   },
   {
     title: "Build",
     Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
     description: <>Send your first cross-chain message in less than 5 mins.</>,
+    buttonLink: "/Build/TutorialSection/hello-world",
   },
   {
     title: "Earn",
     Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
     description: (
       <>
-        Participate in Socket Surge, Socket's incentivised testnet program. Find
-        bugs in the system, crack lootboxes and become a Socket Sentinel!
+        Participate in Socket Surge. Find bugs in the system, earn rewards and
+        become a Socket Sentinel!
       </>
     ),
+    buttonLink: "/Earn/Contribute",
   },
 ];
 
@@ -47,10 +50,7 @@ function HomepageHeader() {
         <h1 className="md:text-5xl sm:text-xl">{siteConfig.title}</h1>
         <p className="md:text-xl sm:text-lg">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/Learn/basics"
-          >
+          <Link className="button button--secondary button--lg" to="">
             Get started
           </Link>
         </div>
@@ -76,8 +76,7 @@ export default function Home(): JSX.Element {
               <Tabs
                 title={section.title}
                 description={section.description}
-                buttonTitle="→"
-                buttonLink={"/Learn/Basics"}
+                buttonLink={section.buttonLink}
               />
             );
           })}

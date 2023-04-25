@@ -5,7 +5,11 @@ module.exports = {
   },
   content: ["./src/**/*.{js,jsx,ts,tsx}", "../docs/**/*.mdx"], // my markdown stuff is in ../docs, not /src
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: {
+        'light-purple': 'rgba(134, 51, 242, 0.1)'
+      }
+    },
   },
   plugins: [],
 }
