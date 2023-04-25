@@ -3,8 +3,11 @@ import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import HomepageFeatures from "@site/src/components/HomepageFeatures";
+// import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import { Tabs } from "../components/HomepageFeatures/Tabs";
+import Learn from "../../static/svg/learn.svg";
+import Build from "../../static/svg/build.svg";
+import Earn from "../../static/svg/earn.svg";
 
 import styles from "./index.module.css";
 
@@ -15,24 +18,27 @@ const SectionList = [
     description: (
       <>
         Learn about Socket's architecture, messaging lifecycle, security, fees &
-        more!
+        more
       </>
     ),
+    buttonLink: "/Learn/Basics",
+    buttonIcon: Learn,
   },
   {
     title: "Build",
     Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
-    description: <>Send your first cross-chain message in less than 5 mins.</>,
+    description: <> Send your first cross-chain message in less than 5 mins</>,
+    buttonLink: "/Build/TutorialSection/hello-world",
+    buttonIcon: Build,
   },
   {
     title: "Earn",
     Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
     description: (
-      <>
-        Participate in Socket Surge, Socket's incentivised testnet program. Find
-        bugs in the system, crack lootboxes and become a Socket Sentinel!
-      </>
+      <>Participate in Socket's incentivised testnet & become a Sentinel</>
     ),
+    buttonLink: "/Earn/Contribute",
+    buttonIcon: Earn,
   },
 ];
 
@@ -49,7 +55,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/Learn/basics"
+            to="/category/learn"
           >
             Get started
           </Link>
@@ -62,27 +68,29 @@ function HomepageHeader() {
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
-    >
-      <HomepageHeader />
-      <main className="w-full">
-        {/* <HomepageFeatures /> */}
+    <div className="bg-global">
+      <Layout
+        title={`Hello from ${siteConfig.title}`}
+        description="Description will go into a meta tag in <head />"
+      >
+        <HomepageHeader />
+        <main className="w-full">
+          {/* <HomepageFeatures /> */}
 
-        <div className="lg:flex flex-row lg:w-full my-8 justify-center">
-          {SectionList.map((section) => {
-            return (
-              <Tabs
-                title={section.title}
-                description={section.description}
-                buttonTitle="→"
-                buttonLink={"/Learn/Basics"}
-              />
-            );
-          })}
-        </div>
-      </main>
-    </Layout>
+          <div className="flex flex-col lg:flex-row lg:w-full my-8 justify-center items-center">
+            {SectionList.map((section) => {
+              return (
+                <Tabs
+                  title={section.title}
+                  description={section.description}
+                  buttonLink={section.buttonLink}
+                  tabIcon={section}
+                />
+              );
+            })}
+          </div>
+        </main>
+      </Layout>
+    </div>
   );
 }
