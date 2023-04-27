@@ -6,7 +6,7 @@ sidebar_position: 1
 
 In this speed run tutorial, we'll be writing a contract to send/receive messages between chains. This is a code along tutorial, you can copy the code snippets into Remix or the dev environment of your choice. In case you are stuck, you can take peak at the [entire code on GitHub](https://github.com/SocketDotTech/socketDL-examples/blob/main/src/SpeedRunDL/SocketSpeedRunGoerli.sol). We'll be highlighting key functions and what they do throughout the tutorial. Some configuration variables have been hardcoded in the example.
 
-We'll be deploying the same copy of the contract on Goerli and Mumbai testnet and sending the message "Hello World" from Goerli to Mumbai. You can also deploy it on any [supported networks](../DeploymentsSection/Deployments.md). Let's get started!
+We'll be deploying the same copy of the contract on Goerli and Mumbai testnet and sending the message "Hello World" from Goerli to Mumbai. You can also deploy it on any [supported networks](./DeploymentsSection/Deployments.mdx). Let's get started!
 
 
 ### Step 1 : Boilerplate code 
@@ -88,7 +88,7 @@ You can learn more about the other variables in [Configuring Plugs](./Getting-St
 
 ### Step 3 : Config Functions
 
-`connectPlug` function connects our Hello World [Plug](../../Learn/glossary.md) to its sibling Plug on another chain
+`connectPlug` function connects our Hello World [Plug](../Learn/glossary.md) to its sibling Plug on another chain
 
 ```javascript 
 
@@ -109,7 +109,7 @@ You can learn more about the other variables in [Configuring Plugs](./Getting-St
 
 `sendMessage` sends the "Hello World" message to the remote chain. This function calls Socket and initiates the `outbound` cross-chain message
 
-`_getMinimumFees` fetches the fees for including messages in [Packets](../Learn/Components/Packet.md) & executing them. You can learn more about this in [Fees](../../Learn/Concepts/Fees.md).
+`_getMinimumFees` fetches the fees for including messages in [Packets](../Learn/Components/Packet.md) & executing them. You can learn more about this in [Fees](../Learn/Concepts/Fees.md).
 
 ```javascript
     function sendMessage() external payable {
@@ -190,7 +190,7 @@ For instance, on Goerli you would call `connectPlug` with the address of the con
 
 ### Step 8 : Hello World
 
-To send your first message, call the `sendMessage` function on Goerli. You need to send a fee in ETH as `value` when calling `sendMessage`. This fee can be calculated using the [Fee Estimate API](../APIReference/EstimateFee.md) 
+To send your first message, call the `sendMessage` function on Goerli. You need to send a fee in ETH as `value` when calling `sendMessage`. This fee can be calculated using the [Fee Estimate API](./APIReference/EstimateFee.md) 
 
 https://surge.dlapi.socket.tech/estimate-fees?srcChainSlug=5&dstChainSlug=80001&integrationType=FAST&msgGasLimit=100000
 
@@ -200,7 +200,7 @@ You can enter the `totalFee` returned by this API as `value` when sending the tr
 
 <br/><br/>
 
-That's it! You can now track the status of your message using the [Status Tracking API](../APIReference/Track.md). Once your transaction is successful, you'll be able to see the `message` value set to "Hello World" on Goerli.
+That's it! You can now track the status of your message using the [Status Tracking API](./APIReference/Track.md). Once your transaction is successful, you'll be able to see the `message` value set to "Hello World" on Goerli.
 
 <img src="/img/success-hello-world.png" width="400px"/>
 
