@@ -82,7 +82,7 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'Build/TutorialSection/hello-world',
+            docId: 'Build/hello-world',
             position: 'left',
             label: 'Build',
           },
