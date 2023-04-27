@@ -7,7 +7,7 @@ sidebar_position: 1
 
 Estimates the fees to be sent when calling `outbound` method on the contract. The fees to be paid are in the native token of the source chain
 
-**`GET`** [https://dl-api.dev.socket.tech/estimate-fees](https://dl-api.dev.socket.tech/estimate-fees)
+**`GET`** [https://surge.dlapi.socket.tech/](https://surge.dlapi.socket.tech)
 
 | Query Param | Description |
 | --- | --- |
@@ -20,7 +20,7 @@ Estimates the fees to be sent when calling `outbound` method on the contract. Th
 
 Estimating fees for sending a message from Polygon to Optimism via “Fast” switchboard 
 
-[https://dl-api.dev.socket.tech/estimate-fees?srcChainId=137&dstChainId=10&integrationType=FAST&msgGasLimit=100000](https://dl-api.dev.socket.tech/estimate-fees?srcChainId=137&dstChainId=10&integrationType=FAST&msgGasLimit=100000)
+[https://surge.dlapi.socket.tech/estimate-fees?srcChainId=137&dstChainId=10&integrationType=FAST&msgGasLimit=100000](https://dl-api.dev.socket.tech/estimate-fees?srcChainId=137&dstChainId=10&integrationType=FAST&msgGasLimit=100000)
 
 #### Response Parameters
 

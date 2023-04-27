@@ -6,7 +6,7 @@ sidebar_position: 2
 
 Tracks the status of a message 
 
-**`GET`** [https://dl-api.dev.socket.tech/messages-from-tx](https://dl-api.dev.socket.tech/messages-from-tx)
+**`GET`** [https://surge.dlapi.socket.tech/messages-from-tx](https://surge.dlapi.socket.tech/messages-from-tx)
 
 #### Query Parameters
 | Query param | Description |
@@ -16,7 +16,7 @@ Tracks the status of a message
 
 #### Example Request
 
-[https://dl-api.dev.socket.tech/messages-from-tx?srcChainId=137&srcTxHash=0x4b9eec6b44e5154f22554f4cfd00d3c6f83b61b92cfe7fd60056c0d5e9fa824f](https://dl-api.dev.socket.tech/messages-from-tx?srcChainId=137&srcTxHash=0x4b9eec6b44e5154f22554f4cfd00d3c6f83b61b92cfe7fd60056c0d5e9fa824f)
+[https://surge.dlapi.socket.tech//messages-from-tx?srcChainId=137&srcTxHash=0x4b9eec6b44e5154f22554f4cfd00d3c6f83b61b92cfe7fd60056c0d5e9fa824f](https://surge.dlapi.socket.tech/messages-from-tx?srcChainId=137&srcTxHash=0x4b9eec6b44e5154f22554f4cfd00d3c6f83b61b92cfe7fd60056c0d5e9fa824f)
 
 #### Response Parameters
 
