@@ -1,8 +1,4 @@
 {
   "label": "Build",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Build on SocketDL"
-  }
+  "position": 2
 }

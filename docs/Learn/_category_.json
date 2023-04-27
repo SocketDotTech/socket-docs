@@ -1,8 +1,4 @@
 {
   "label": "Learn",
-  "position": 1,
-  "link": {
-    "type": "generated-index",
-    "description": "Introduction to SocketDL"
-  }
+  "position": 1
 }

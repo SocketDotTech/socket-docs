@@ -28,7 +28,7 @@ const SectionList = [
     title: "Build",
     Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
     description: <> Send your first cross-chain message in less than 5 mins</>,
-    buttonLink: "/Build/TutorialSection/hello-world",
+    buttonLink: "/Build/hello-world",
     buttonIcon: Build,
   },
   {

@@ -1,8 +1,4 @@
 {
   "label": "Deployments",
-  "position": 6,
-  "link": {
-    "type": "generated-index",
-    "description": "SocketDL chain support and contract addresses"
-  }
+  "position": 6
 }
