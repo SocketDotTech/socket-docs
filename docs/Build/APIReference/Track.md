@@ -1,7 +1,7 @@
 ---
 id: track-status
 title: Track Message Status
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 Tracks the status of a message 
@@ -11,19 +11,19 @@ Tracks the status of a message
 #### Query Parameters
 | Query param | Description |
 | --- | --- |
-| srcChainId | ID of source chain |
+| srcChainSlug | Slug of source chain |
 | srcTxHash | Transaction hash where outbound method was called |
 
 #### Example Request
 
-[https://surge.dlapi.socket.tech//messages-from-tx?srcChainId=137&srcTxHash=0x4b9eec6b44e5154f22554f4cfd00d3c6f83b61b92cfe7fd60056c0d5e9fa824f](https://surge.dlapi.socket.tech/messages-from-tx?srcChainId=137&srcTxHash=0x4b9eec6b44e5154f22554f4cfd00d3c6f83b61b92cfe7fd60056c0d5e9fa824f)
+[https://surge.dlapi.socket.tech/messages-from-tx?srcChainSlug=5&srcTxHash=0x6cd4a68b9136490dd1ecc8a1e6e45c92b9057aa2c335af5177f53478f5472cc4](https://surge.dlapi.socket.tech/messages-from-tx?srcChainSlug=5&srcTxHash=0x6cd4a68b9136490dd1ecc8a1e6e45c92b9057aa2c335af5177f53478f5472cc4)
 
 #### Response Parameters
 
 | Parameter | Description |
 | --- | --- |
-| srcChainId | ID of source chain where message is initiated |
-| destChainId | ID of destination chain where message is executed |
+| srcChainSlug | Slug of source chain where message is initiated |
+| dstChainSlug | Slug of destination chain where message is executed |
 | srcPlug | Address of message sender plug |
 | destPlug | Address of message receiver plug |
 | messageId | Unique ID of message |
@@ -39,4 +39,6 @@ Tracks the status of a message
 | executor | Address of transmitter executing the `calldata` on the destination chain|
 | executeTxHash | Destination chain transaction hash where `payload` was executed  |
 | outboundTxHash | Source chain transaction hash where `outbound` method was called |
+| firstSimulationTimestamp | Timestamp of when the `execute` tx was last simulated  |
+| retry | Boolean value indicating if the execution of this transaction was retried |
 | messageStatus | Status of message (`EXECUTION_SUCCESS`) |

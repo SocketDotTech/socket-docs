@@ -5,7 +5,7 @@ sidebar_position: 2
 ---
 <!-- // TODO: read more -->
 
-Outbound method on the Socket contract deployed on all networks allows Plugs to send messages to other Plugs across chains. Checkout the below section to understand how to use it. If you want to read more on how sending messages in Socket works, read more here.
+`Outbound` method on the Socket contract deployed on all networks allows Plugs to send messages to other Plugs across chains. Checkout the below section to understand how to use it. If you want to read more on how sending messages in Socket works, [read more here](../../Learn/lifecycle.md#sending-a-message).
 
 ## Parameters
 
