@@ -1,5 +1,42 @@
 ---
 id: deployment-addresses
-title: Deployments
+title: Contract Addresses
 sidebar_position: 1
 ---
+
+The contract address for `Socket`, `Inbound` and `Outbound` switchboard can be found in the [SocketDL repo](https://github.com/SocketDotTech/socket-DL/blob/deployment-scripts/deployments/surge_addresses.json).
+
+`FAST`, `NATIVE` and `OPTIMISTIC` switchboard addresses can be found in `integrations`.
+
+|     |     |
+| --- | --- |
+|     |     |
+|     |     |
+
+#### EXAMPLE
+
+```json
+  "5": {
+    "SignatureVerifier": "0x805Dc5ac616bCB1A59a446eb1777C0Cc3Aa0c3Fe",
+    "Hasher": "0x8456C9F6b202eceBf4f7925603AD930ecF32342b",
+    "CapacitorFactory": "0x3504C46095dBB85C01571E8Fa9DE5C07501D4c02",
+    "GasPriceOracle": "0x4fD5e06E33e3d602DA1B5F8FE19a02Be2f1f0Dd2",
+    "ExecutionManager": "0x88618fD449836578a6FA6d19a256E21b7cac792b",
+    "TransmitManager": "0xb72ef406330853C86e2Dbb003e422CaEe27E0Fcd",
+    "Socket": "0xA78426325b5e32Affd5f4Bc8ab6575B24DCB1762",
+    "integrations": {
+      "97": {
+        "FAST": {
+          "capacitor": "0xeA1166b60196Cd3335880A4173517881CE0294B1",
+          "decapacitor": "0xA44206EEA8bCDfB6b63C19963d87CF8d36A2BE5a",
+          "switchboard": "0x483D7e9dDBbbE0d376986168Ac4d94E35c485C69"
+        },
+        "OPTIMISTIC": {
+          "capacitor": "0x11021c07BE05BDe3245B0178f64b36F3b2913abb",
+          "decapacitor": "0x67C7B4684A139E7914bd4c2f269745c9dFaF398C",
+          "switchboard": "0xD664eF6159562190ea6D1AFa3f0Ea1C0D77D14E3"
+        }
+    }
+    }
+  }
+```
