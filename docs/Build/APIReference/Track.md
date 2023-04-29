@@ -41,4 +41,16 @@ Tracks the status of a message
 | outboundTxHash | Source chain transaction hash where `outbound` method was called |
 | firstSimulationTimestamp | Timestamp of when the `execute` tx was last simulated  |
 | retry | Boolean value indicating if the execution of this transaction was retried |
-| messageStatus | Status of message (`EXECUTION_SUCCESS`) |
+| messageStatus | [Status of message](#types-of-messagestatus) |
+
+
+#### Types of messageStatus
+
+| Type | Description |
+| --- | --- |
+| `RECEIVED` | Message added to capacitor queue for destination chain delivery  |
+| `SEALED` | Packet which includes the message has been sealed on source chain |
+| `PROPOSED` | Packet which includes the message has been proposed on destination chain |
+| `CONFIRMED` | Packet has been verified and message included in packet can be executed |
+| `EXECUTION_FAILURE` | Message execution failed |
+| `EXECUTION_SUCCESS` | Message is successfully develiered to destination Plug |

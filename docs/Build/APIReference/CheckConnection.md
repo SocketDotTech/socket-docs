@@ -6,6 +6,13 @@ sidebar_position: 1
 
 Checks if there's an active connection between PlugA on ChainA and PlugB on ChainB, and returns the type of switchboard used.
 
+## On-chain
+
+The connection can be verified on-chain by calling the `getPlugConfig()` method on Socket. More on this [here](../testing-DL.md#testing-plug-connection).
+
+## Off-chain
+
+
 **`GET`** [https://surge.dlapi.socket.tech/check-connection](https://surge.dlapi.socket.tech/check-connection)
 
 | Query Param | Description |

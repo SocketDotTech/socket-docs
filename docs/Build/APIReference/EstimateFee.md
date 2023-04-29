@@ -4,7 +4,6 @@ title: Estimate Fees
 sidebar_position: 2
 ---
 
-
 Estimates the fees to be sent when calling `outbound` method on the contract. The fees to be paid are in the native token of the source chain
 
 **`GET`** [https://surge.dlapi.socket.tech/estimate-fees](https://surge.dlapi.socket.tech/estimate-fees)
