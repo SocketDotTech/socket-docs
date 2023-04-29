@@ -1,4 +1,4 @@
-Capacitors are Socket Protocol defined Accumulators that accumulate or batch messages together for better gas efficiency. They are inspired by Capacitors in electrical circuits that store electrical-charges. Capacitors allows for network effects to be built at the protocol level, more people using it means higher saving per user. 
+Capacitors are Socket Protocol defined Accumulators that accumulate or batch messages together for better gas efficiency. They are inspired by Capacitors in electrical circuits that store electrical-charges. Capacitors allows for in-protocol batching per switchboard, more people using it means higher saving per user. 
 
 Capacitors are embedded into switchboards, switchboards have the freedom to choose any capacitor available at the CapacitorFactory. Capacitors can be anything, a few examples can be:
 - EVM BlockHeaders 
@@ -19,7 +19,7 @@ Usually, since a capacitor batches messages together but messages on destination
 bytes msg1 = Decapacitor(capacitor_root, proof) 
 ```
 
-Once your capacitor is set into the switchboard it can only be upgraded if the switchboard allows it to be. Capacitors are just swappable components that can be plugged into your switchboards.
+Once your capacitor is set into the switchboard it can only be upgraded if the switchboard allows it to be. Capacitors are just on-chain components that can be plugged into your switchboards.
 
 ## CapacitorFactory
 

@@ -1,26 +1,32 @@
 ---
-id: protocol-architecture
-title: Protocol Architecture
-sidebar_position: 4
+id: protocol-design
+title: Protocol Design
+sidebar_position: 1
 ---
+## Introduction
 
-As mentioned before, Socket is a modular on-chain protocol with several modular layers working with each other, clean interfaces/APIs allowing for optimisation and security at each layer. 
+Socket is an on-chain contract that transmits payloads between chains. When a payload is sent by a contract to Socket deployed locally on that chain, Socket compresses it into a Packet - a cryptographic hash representing 1000s of payloads that want to be sent to another chain.
 
-There are several components in the Socket protocol that work together to make this happen.
+Packet delivery is carried out by off-chain participants called "Transmitters". Much like a sequencer in an L2, the sequencer is responsible for delivery a bunch of payloads from one-chain to another. However, an important difference is, Transmitter first sign and commmit to a packet on the source side and then submits/commmits the packet on the destination side. The packet, along with the transmitter’s signature, is now available on Socket on both chains 
 
-<img src="/img/BroadArchitecture.png" width="500px"/>
+On the destination chain, contracts called ‘switchboards’ allow protocols to select context around how & when a delivered payload should be processed. Socket appoints executors to processes the payload only if it meets conditions on the protocol selected switchboard eg: accept payload after timeout of 2hrs, accept payload if native bridge confirms etc.
 
-<!-- // TODO: add mechanism paragraph here -->
+There are several components in the Socket protocol that work together to make the above happen.
 
-<!-- // TODO: Link the components section below -->
+<img src="/img/BroadArchitecture.png" width="700px"/>
 
 
-Socket is an on-chain contract that transmits payloads between chains. When a payload is sent by an app, Socket compresses it into a Packet- a cryptographic hash representing 1000s of payloads across apps.
+## Architecture
 
-Packet delivery is carried out by off-chain participants called "Transmitters". The transmitters compete with each other & the one offering the most efficient packet delivery wins the right to deliver the packet.
+Socket is built in a modular fashion with various layers with defined APIs/Interfaces between them which allows developers the ability to leverage the software-stack in different and/or more efficent ways depending on their application context. 
 
-The winning transmitter signs the packet on source chain & delivers the signed packet to Socket on destination chain. The packet, along with the transmitter’s signature, is now available on Socket on both chains
+The protocol consists of four key layers:
+1. **Application Layer**: This layer consists of “Plugs,” which are smart contract applications built to interact with Socket. Plugs follow a specified API and communicate through deployed Socket instances between any two supported chains. The core Socket contract functions as an on-chain endpoint that sends and receives payloads between chains. As applications send payloads through Plugs, Socket compresses them into cryptographic hashes called Packets, which represent thousands of payloads across apps.
+2. **Delivery Layer**: The delivery layer handles message batching and packet delivery between chains. Capacitor contracts in Socket store packets until they are ready to be sealed. Transmitters, off-chain actors deliver packets between chains by committing with their signatures on both source and destination chains. This ensures transparency and accountability. The verification layer can use this to build trustless verification schemes. Permissionless and transparent message delivery  allows for an efficient marketplace for message delivery.
+3. **Verification Layer**: The layer for packet and message verification through Switchboards. These customizable verification modules allow developers to define custom conditions for packet acceptance or rejection, offering flexibility in terms of security and performance. On the destination chain, contracts called Switchboards enable apps to choose the context in which a delivered payload is processed. Socket processes the payload only if it meets the conditions specified by the app-selected Switchboard, such as accepting payloads after a 2-hour timeout or confirming payloads through a native rollup bridge. Permissionlessness and modularity at the verification layer is a core advantage and design principle for Socket. 
+4. **Execution Layer**: This layer handles message execution on the destination chain after verification, allowing third-party relayers like Gelato to handle execution, or for applications or users to execute their own messages with various re-try mechanisms etc.
 
-On the destination chain, contracts called ‘switchboards’ allow apps to select context around how & when a delivered payload should be processed. Socket processes the payload only if it meets conditions on the app selected switchboard eg: accept payload after timeout of 2hrs, accept payload if native bridge confirms etc.
+
+<img src="/img/dl-layers.png"/>
 
 To learn more about individual components, checkout this section here for on-chain components and here for off-chain agents.
