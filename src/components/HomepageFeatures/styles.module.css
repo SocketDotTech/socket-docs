@@ -9,3 +9,8 @@
   height: 200px;
   width: 200px;
 }
+
+.noLink {
+  color: inherit;
+  text-decoration: none;
+}

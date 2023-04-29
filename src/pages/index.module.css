@@ -3,11 +3,17 @@
  * and scoped locally.
  */
 
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-size: cover;
+  height: 400px;
 }
 
 @media screen and (max-width: 996px) {

@@ -7,12 +7,27 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Socket Data Layer',
-  tagline: 'Modular Interop Protocol',
+  tagline: 'The future of modular interoperability',
   url: 'https://socket.tech',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
+  plugins: [
+    async function myPlugin(context, options) {
+      return {
+        name: "docusaurus-tailwindcss",
+        configurePostCss(postcssOptions) {
+          // Appends TailwindCSS and AutoPrefixer.
+          postcssOptions.plugins.push(require("tailwindcss"));
+          postcssOptions.plugins.push(require("autoprefixer"));
+          return postcssOptions;
+        },
+      };
+    },
+
+    require.resolve('docusaurus-lunr-search')
+  ],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -47,12 +62,13 @@ const config = {
       }),
     ],
   ],
+  // themes: ['@docusaurus/theme-search-algolia'],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'DataLayer',
+        title: 'SocketDL',
         logo: {
           alt: 'My Site Logo',
           src: 'img/socketOC.png',
@@ -60,15 +76,15 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'QuickStart',
+            docId: 'Learn/protocol-design',
             position: 'left',
-            label: 'Docs',
+            label: 'Learn',
           },
-          // {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/socketdottech',
-            label: 'GitHub',
-            position: 'right',
+            type: 'doc',
+            docId: 'Build/hello-world',
+            position: 'left',
+            label: 'Build',
           },
         ],
       },
@@ -80,6 +96,35 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      // algolia: {
+      //   // The application ID provided by Algolia
+      //   appId: '',
+
+      //   // Public API key: it is safe to commit it
+      //   apiKey: '',
+
+      //   indexName: 'socketDL-docs',
+
+      //   // Optional: see doc section below
+      //   contextualSearch: true,
+
+      //   // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+      //   externalUrlRegex: 'external\\.com|domain\\.com',
+
+      //   // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+      //   replaceSearchResultPathname: {
+      //     from: '/docs/', // or as RegExp: /\/docs\//
+      //     to: '/',
+      //   },
+
+      //   // Optional: Algolia search parameters
+      //   searchParameters: {},
+
+      //   // Optional: path for search page that enabled by default (`false` to disable it)
+      //   searchPagePath: 'search',
+
+      //   //... other Algolia params
+      // },
     }),
 };
 
