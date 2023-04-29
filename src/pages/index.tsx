@@ -21,7 +21,7 @@ const SectionList = [
         more
       </>
     ),
-    buttonLink: "/Learn/Basics",
+    buttonLink: "/Learn/protocol-design",
     buttonIcon: Learn,
   },
   {
@@ -37,7 +37,7 @@ const SectionList = [
     description: (
       <>Participate in Socket's incentivised testnet & become a Sentinel</>
     ),
-    buttonLink: "/Earn/Contribute",
+    buttonLink: "https://surge.socket.tech",
     buttonIcon: Earn,
   },
 ];

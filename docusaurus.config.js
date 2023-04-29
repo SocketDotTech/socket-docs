@@ -76,7 +76,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'Learn/basics',
+            docId: 'Learn/protocol-design',
             position: 'left',
             label: 'Learn',
           },
@@ -85,12 +85,6 @@ const config = {
             docId: 'Build/hello-world',
             position: 'left',
             label: 'Build',
-          },
-          {
-            type: 'doc',
-            docId: 'Earn/Contribute',
-            position: 'left',
-            label: 'Earn',
           },
         ],
       },

@@ -1,7 +1,7 @@
 ---
 id: glossary
 title: Glossary
-sidebar_position: 6
+sidebar_position: 1
 ---
 
 We have introduced a lot of new terms and that is by design. We think for something as critical as AMB's nothing should be assumed or taken for-granted, we think these new terms are accurate and will encourage people to look into the docs/code and discourage assumptions.
