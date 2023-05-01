@@ -6,12 +6,7 @@ sidebar_position: 1
 
 The contract address for `Socket`, `Inbound` and `Outbound` switchboard can be found in the [SocketDL repo](https://github.com/SocketDotTech/socket-DL/blob/master/deployments/surge_addresses.json).
 
-`FAST`, `NATIVE` and `OPTIMISTIC` switchboard addresses can be found in `integrations`.
-
-|     |     |
-| --- | --- |
-|     |     |
-|     |     |
+`FAST`, `NATIVE` and `OPTIMISTIC` switchboard addresses can be found in `integrations`
 
 #### EXAMPLE
 

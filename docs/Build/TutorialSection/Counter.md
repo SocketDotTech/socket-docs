@@ -75,7 +75,7 @@ The Cross-chain Counter has 2 key functions :
 
 - The counter example takes [`Socket`](../../Learn/protocol-architecture.md#socket) address as an argument, which can be found in [`deployments`](../DeploymentsSection/Deployments.md)
 
-  This example can be deployed on any [supported testnets or mainnets](../DeploymentsSection/Deployments.md). In this tutorial, we'll be deploying the Counters on the following two chains, Polygon and Optimism :
+  This example can be deployed on any [supported testnets or mainnets](../../Build/DeploymentsSection/Deployments.md). In this tutorial, we'll be deploying the Counters on the following two chains, Polygon and Optimism :
 
   | Chain | Socket address |
   | --- | --- |
