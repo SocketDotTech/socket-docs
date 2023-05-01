@@ -5,20 +5,16 @@ sidebar_position: 2
 ---
 
 ### Mainnet
-| Chain | Latency |
-| --- | --- |
-| Ethereum |  |
-| Polygon |  |
-| Optimism |  |
-| Arbitrum |  |
-| BSC |  |
+| Path | L1 -> L2 | L2 -> L1 |
+| --- | --- | --- |
+| Polygon | ~30 mins | ~3 hours |
+| Optimism | 30 mins - 3 hours | ~7 days |
+| Arbitrum | 30 mins - 3 hours | ~7 days | 
 
 ### Testnet
 
-| Chain | Latency |
-| --- | --- |
-| Goerli |  |
-| Mumbai |  |
-| Optimism Testnet |  |
-| Arbitrum Testnet |  |
-| BSC Testnet |  |
+| Path | L1 -> L2 | L2 -> L1 |
+| --- | --- | --- |
+| Polygon | ~30 mins | ~3 hours |
+| Optimism | 30 mins - 3 hours | ~7 days |
+| Arbitrum | 30 mins - 3 hours | ~7 days | 
