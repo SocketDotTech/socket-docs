@@ -10,6 +10,14 @@ The contract address for `Socket`, `Inbound` and `Outbound` switchboard can be f
 
 #### EXAMPLE
 
+Example for connecting Goerli Plug with BSC Testnet Plug
+
+| Param | Value |
+| --- | --- |
+| `Socket` | `0xA78426325b5e32Affd5f4Bc8ab6575B24DCB1762` |
+| Outbound FAST switchboard for BSC Testnet | `0x483D7e9dDBbbE0d376986168Ac4d94E35c485C69` |
+| Inbound OPTIMISTIC switchboard for BSC Testnet | `0xD664eF6159562190ea6D1AFa3f0Ea1C0D77D14E3` |
+
 ```json
   "5": {
     "SignatureVerifier": "0x805Dc5ac616bCB1A59a446eb1777C0Cc3Aa0c3Fe",
