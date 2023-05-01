@@ -96,6 +96,8 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      image: 'img/header-bg.png',
+      metadata: [{ name: 'keywords', content: 'messaging, datalayer, socket, socket.tech, DL, interoperability, Bungee, SocketDL, SocketSurge, Surge' }],
       // algolia: {
       //   // The application ID provided by Algolia
       //   appId: '',

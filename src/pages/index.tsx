@@ -32,10 +32,12 @@ const SectionList = [
     buttonIcon: Build,
   },
   {
-    title: "Earn",
+    title: "Surge",
     Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
     description: (
-      <>Participate in Socket's incentivised testnet & become a Sentinel</>
+      <>
+        Participate in Surge, Socket's incentivised testnet & become a Sentinel
+      </>
     ),
     buttonLink: "https://surge.socket.tech",
     buttonIcon: Earn,
