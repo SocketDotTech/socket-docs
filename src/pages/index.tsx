@@ -70,8 +70,8 @@ export default function Home(): JSX.Element {
   return (
     <div className="bg-global">
       <Layout
-        title={`Hello from ${siteConfig.title}`}
-        description="Description will go into a meta tag in <head />"
+        title={`It's time to get Plugged into ${siteConfig.title}`}
+        description="SocketDL allows you to build protocols that are chain-agnostic via a cross-chain messaging infrastructure <head />"
       >
         <HomepageHeader />
         <main className="w-full">
