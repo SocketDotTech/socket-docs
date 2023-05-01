@@ -4,16 +4,19 @@ title: Contract Addresses
 sidebar_position: 1
 ---
 
-The contract address for `Socket`, `Inbound` and `Outbound` switchboard can be found in the [SocketDL repo](https://github.com/SocketDotTech/socket-DL/blob/deployment-scripts/deployments/surge_addresses.json).
+The contract address for `Socket`, `Inbound` and `Outbound` switchboard can be found in the [SocketDL repo](https://github.com/SocketDotTech/socket-DL/blob/master/deployments/surge_addresses.json).
 
-`FAST`, `NATIVE` and `OPTIMISTIC` switchboard addresses can be found in `integrations`.
-
-|     |     |
-| --- | --- |
-|     |     |
-|     |     |
+`FAST`, `NATIVE` and `OPTIMISTIC` switchboard addresses can be found in `integrations`
 
 #### EXAMPLE
+
+Example for connecting Goerli Plug with BSC Testnet Plug
+
+| Param | Value |
+| --- | --- |
+| `Socket` | `0xA78426325b5e32Affd5f4Bc8ab6575B24DCB1762` |
+| Outbound FAST switchboard for BSC Testnet | `0x483D7e9dDBbbE0d376986168Ac4d94E35c485C69` |
+| Inbound OPTIMISTIC switchboard for BSC Testnet | `0xD664eF6159562190ea6D1AFa3f0Ea1C0D77D14E3` |
 
 ```json
   "5": {
