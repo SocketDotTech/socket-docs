@@ -4,21 +4,34 @@ title: Fast
 sidebar_position: 1
 ---
 
+<!-- 
+  GOERLI = 75 secs 1 min
+  MUMBAI = 45 secs 1 min
+  ARBITRUM_TESTNET = 2 secs
+  OPTIMISM_TESTNET = 2 secs
+  BSC_TESTNET = 3 secs
+  MAINNET = 216 secs 3.6 mins
+  POLYGON = 128 secs 2 mins
+  ARBITRUM = 2 secs
+  OPTIMISM = 2 secs
+  BSC = 3 secs
+ -->
+
 ### Mainnet
 | Chain | Latency |
 | --- | --- |
-| Ethereum | ~5 mins |
-| Polygon | ~5 mins |
-| Optimism | ~5 mins |
-| Arbitrum | ~5 mins |
-| BSC | ~5 mins |
+| Ethereum | 10 mins |
+| Polygon | 8 mins |
+| Optimism | 6 mins |
+| Arbitrum | 6 mins |
+| BSC | 6 mins |
 
 ### Testnet
 
 | Chain | Latency |
 | --- | --- |
-| Goerli | ~5 mins |
-| Mumbai | ~5 mins |
-| Optimism Testnet | ~5 mins |
-| Arbitrum Testnet | ~5 mins |
-| BSC Testnet | ~5 mins |
+| Goerli | 6 mins |
+| Mumbai | 6 mins |
+| Optimism Testnet | 6 mins |
+| Arbitrum Testnet | 6 mins |
+| BSC Testnet | 6 mins |
