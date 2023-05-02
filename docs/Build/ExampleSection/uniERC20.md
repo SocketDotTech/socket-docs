@@ -6,7 +6,7 @@ sidebar_position: 1
 
 Universal ERC-20 is an extension of ERC-20 token standard with cross-chain transfer capabilities, built on top of SocketDL. Universal ERC-20 has cross-chain transfers built-in. When sending the token between chains, it gets burnt on the sending chain and minted on the destination chain.
 
-You can find the example on [GitHub](https://github.com/SocketDotTech/socketDL-examples/tree/feat/universal-token/src/universalTokens/uniERC20).
+You can find the example on [GitHub](https://github.com/SocketDotTech/socketDL-examples/blob/main/src/universalTokens/uniERC20/uniERC20.sol).
 
 ```javascript
     /* Burns user tokens on source chain and sends mint message on destination chain */

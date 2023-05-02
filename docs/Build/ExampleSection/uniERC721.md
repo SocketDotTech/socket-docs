@@ -6,7 +6,7 @@ sidebar_position: 2
 
 Universal ERC-721 is an extension of ERC-721 token standard with cross-chain transfer capabilities, built on top of SocketDL.
 
-You can find the example on [GitHub](https://github.com/SocketDotTech/socketDL-examples/tree/feat/universal-token/src/universalTokens/uniERC721).
+You can find the example on [GitHub](https://github.com/SocketDotTech/socketDL-examples/blob/main/src/universalTokens/uniERC721/uniERC721.sol).
 
 ```javascript
 
