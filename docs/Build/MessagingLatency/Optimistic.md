@@ -5,7 +5,7 @@ sidebar_position: 2
 ---
 
 ### Mainnet
-| Chain | Latency |
+| Sending Chain | Latency |
 | --- | --- |
 | Ethereum | 2 hours |
 | Polygon | 2 hours |
@@ -15,7 +15,7 @@ sidebar_position: 2
 
 ### Testnet
 
-| Chain | Latency |
+| Sending Chain | Latency |
 | --- | --- |
 | Goerli | 2 hours |
 | Mumbai | 2 hours |
