@@ -48,26 +48,23 @@ The fees for relaying messages can be calculated on-chain by calling the `getMin
 
 ## Off-chain API
 
-**`GET`** [https://surge.dlapi.socket.tech/estimate-fees](https://surge.dlapi.socket.tech/estimate-fees)
+**`GET`** [https://surge.dlapi.socket.tech/estimate-min-fees](https://surge.dlapi.socket.tech/estimate-min-fees)
 
 | Query Param | Description |
 | --- | --- |
-| srcChainSlug | Slug of source chain |
-| dstChainSlug | Slug of destination chain |
-| integrationType | Type of switchboard used in Plug (`FAST`, `SLOW`, `NATIVE`) |
-| msgGasLimit | Gas limit required for executing the destination payload |
+| `srcPlug` | Address of source Plug |
+| `srcChainSlug` | Slug of source chain |
+| `dstChainSlug` | Slug of destination chain |
+| `msgGasLimit`| Gas limit required for executing the destination payload |
 
 #### Example Request
 
-Estimating fees for sending a message from Polygon to Optimism via “Fast” switchboard 
+Estimating fees for sending a message from Polygon to Optimism 
 
-[https://surge.dlapi.socket.tech/estimate-fees?srcChainSlug=137&dstChainSlug=10&integrationType=FAST&msgGasLimit=100000](https://surge.dlapi.socket.tech/estimate-fees?srcChainSlug=137&dstChainSlug=10&integrationType=FAST&msgGasLimit=100000)
+[https://surge.dlapi.socket.tech/estimate-min-fees?srcPlug=0xB5c4E167B4BE4bE65052043D4cC0FfB7A73A7B7E&srcChainSlug=137&dstChainSlug=10&msgGasLimit=100000](https://surge.dlapi.socket.tech/estimate-min-fees?srcPlug=0xB5c4E167B4BE4bE65052043D4cC0FfB7A73A7B7E&srcChainSlug=137&dstChainSlug=10&msgGasLimit=100000)
 
 #### Response Parameters
 
 | Parameter | Description |
 | --- | --- |
-| transmissionFees | Fees for transmitting the message from one network to another  |
-| verificationFees  | Fees for checking validity of message on destination chain |
-| executionFees | Fees for executing the transaction on the sibling Plug |
-| totalFees | Total fees to be paid in the native token of the source chain |
+| `result` | Total fees to be paid in the native token of the source chain |
