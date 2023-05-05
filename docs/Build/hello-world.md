@@ -119,7 +119,7 @@ You can learn more about the other variables in [Configuring Plugs](./Getting-St
         
         bytes memory payload = abi.encode("Hello World");
 
-        ISocket(socket).outbound(
+        ISocket(socket).outbound{value: msg.value}(
             remoteChainSlug, 
             destGasLimit,
             payload
