@@ -7,7 +7,7 @@ sidebar_position: 1
 
 Socket is an on-chain contract that transmits payloads between chains. When a payload is sent by a contract to Socket deployed locally on that chain, Socket compresses it into a Packet - a cryptographic hash representing 1000s of payloads that want to be sent to another chain.
 
-Packet delivery is carried out by off-chain participants called "Transmitters". Much like a sequencer in an L2, the sequencer is responsible for delivery a bunch of payloads from one-chain to another. However, an important difference is, Transmitter first sign and commmit to a packet on the source side and then submits/commmits the packet on the destination side. The packet, along with the transmitter’s signature, is now available on Socket on both chains 
+Packet delivery is carried out by off-chain participants called "Transmitters". Much like a sequencer in an L2, the sequencer is responsible for delivering a bunch of payloads from one-chain to another. However, an important difference is, Transmitter first sign and commmit to a packet on the source side and then submits/commmits the packet on the destination side. The packet, along with the transmitter’s signature, is now available on Socket on both chains 
 
 On the destination chain, contracts called ‘switchboards’ allow protocols to select context around how & when a delivered payload should be processed. Socket appoints executors to processes the payload only if it meets conditions on the protocol selected switchboard eg: accept payload after timeout of 2hrs, accept payload if native bridge confirms etc.
 
