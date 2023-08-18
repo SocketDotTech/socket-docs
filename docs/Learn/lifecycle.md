@@ -15,7 +15,7 @@ In this section, we dive deeper into the main interactions between Plugs and Soc
 
 <img src="/img/ConnectToDL.png" />
 
-Before Plugs can start sending and receiving messages, they need to connect or get "plugged" into Socket. Plugs connect to sibling plugs deployed on other chains by sending configuration details such as sibling chainId, sibling plug address and switchboard configuration.
+Before Plugs can start sending and receiving messages, they need to connect or get "plugged" into Socket. Plugs connect to sibling plugs deployed on other chains by sending configuration details such as sibling chain ID, sibling plug address and switchboard configuration.
 
 Upon connection, Socket generates a unique identifier for the configuration and stores it. It then emits an event `PlugConnected` with the config data. Here's an [example transaction](https://polygonscan.com/tx/0x58231336368ff437883ada95d30897679f64257c981ee19dab8147c0b3828d0a#eventlog).
 
@@ -31,17 +31,17 @@ Plugs build on top of Socket to initiate state changes on Plugs deployed on othe
 
  <img src="/img/SendMessageOutbound.png" />
 
-To pass a message, Plugs call the `outbound` method on Socket with `fees`, `remoteChainSlug`, `msgGasLimit`, `payload`. Socket checks the stored configuration of the plug and verifies a connection with the remote chain was previously instantiated. It then deducts the fee sent from the plug and pays to various off-chain actors.
+To pass a message, Plugs call the `outbound` method on Socket with `fees`, `siblingChainSlug`, `msgGasLimit`, `payload`, `transmitterParams`, `executorParams`. Socket checks the stored configuration of the plug and verifies a connection with the sibling chain was previously instantiated. It then deducts the fee sent from the plug and pays to various off-chain actors.
 
-Plugs need to pay a fee to off-chain actors to get messages included in a packet to be executed on the destination chain. You can learn more about these fees here. {WIP: link it}
+Plugs need to pay a fee to off-chain actors to get messages included in a packet to be executed on the destination chain. More on [Fees here](./Concepts/Fees.md).
 
 <!-- WIP : Link key parameters && link capacitor -->
 <!-- WIP : Highlight capacitors are modular and different types of capacitors can exist which can be configured on switchboard -->
 Socket encodes key parameters into a message and hashes the encoded data. It then calls the capacitor and stores the hashed message in the capacitor. This emits a `MessageAdded` event. The message is stored in the capacitor until it can be emitted. Capacitors are chain specific and all messages to be sent to respective destination chains get aggregated in a given capacitor.
 
-Periodically, Off-chain transmitters will call `seal()` method on the capacitor which seals all stored messages into a packet and emits a `PacketComplete` event for the packet.
+Periodically, Off-chain transmitters will call `seal()` method on the capacitor which seals all stored messages into a packet and emits a `Sealed` event for the packet.
 
-This event is then picked up by transmitters that propose this packet on the destination chain. More on this in the next section.
+This event is then picked up by transmitters that propose this packet on the destination chain. More on this below
 
 ### Receiving a message
 
