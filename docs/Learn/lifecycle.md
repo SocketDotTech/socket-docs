@@ -45,14 +45,12 @@ This event is then picked up by transmitters that propose this packet on the des
 
 ### Receiving a message
 
-<!-- WIP : Link Protocol Architecture. Explain the events there -->
-Once the packet is sealed on the source chain, the transmitter proposes this sealed packet to Socket on the destination chain. This includes the `packetId`, `root` & `signature`. Sending the `signature` separately allows the transmitter to sign messages from an authorized address, but be relayed by anyone.
+Once the packet is sealed on the source chain, the transmitter proposes this sealed packet to Socket on the destination chain. This includes the `packetId`, `root`, `switchboard` & `signature`. Sending the `signature` separately allows the transmitter to sign messages from an authorized address, but be relayed by anyone.
 
-If the address proposing the packet is a valid transmitter, the packet proposal is successful. The packet is stored as a `remoteRoot` and a `PacketProposed` event is emitted.
+The transmitter proposes the packet for specified Switchboard and a `packetCount` is assigned to this proposal. If the address proposing the packet is a valid transmitter, the packet proposal is successful. The packet is stored in a mapping `packetIdRoots` and a `PacketProposed` event is emitted.
 
 <img src="/img/propose-packet.png" width="600px"/>
 
-<!-- WIP : Watcher checking packets flow, link Switchboards 101 -->
 Once a packet is proposed, depending on the Switchboard used, the packet's validity is verified by watchers. More on [this here](#switchboards-101).
 
 Once the packet is verified, executors then call `execute` on a message. During the execution of the message, the following is checked : 
@@ -63,5 +61,4 @@ Once the packet is verified, executors then call `execute` on a message. During 
 
 If these are verified, then the message can be executed. `Executors` call the execute() method on Socket which checks if the above cases are verified and calls the `inbound` method on the destination plug. It passes the designated payload to the Plug, which can be arbitrarily executed.
 
-<!-- WIP : Mention X -->
-In case the message cannot be executed due to insufficient gas limit or other errors, Socket will re-try execution periodically. More on Execution Failure here.
+In case the message cannot be executed due to insufficient gas limit or other errors, Socket will re-try execution periodically. More in [Execution Failure](../Build/TutorialSection/retry-execute).
