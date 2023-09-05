@@ -13,6 +13,13 @@ import styles from "./index.module.css";
 
 const SectionList = [
   {
+    title: "Build",
+    Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
+    description: <> Send your first cross-chain message in less than 5 mins</>,
+    buttonLink: "/Build/hello-world",
+    buttonIcon: Build,
+  },
+  {
     title: "Learn",
     Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
     description: (
@@ -24,24 +31,18 @@ const SectionList = [
     buttonLink: "/Learn/protocol-design",
     buttonIcon: Learn,
   },
-  {
-    title: "Build",
-    Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
-    description: <> Send your first cross-chain message in less than 5 mins</>,
-    buttonLink: "/Build/hello-world",
-    buttonIcon: Build,
-  },
-  {
-    title: "Surge",
-    Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
-    description: (
-      <>
-        Participate in Surge, Socket's incentivised testnet & become a Sentinel
-      </>
-    ),
-    buttonLink: "https://surge.socket.tech",
-    buttonIcon: Earn,
-  },
+
+  // {
+  //   title: "Surge",
+  //   Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
+  //   description: (
+  //     <>
+  //       Participate in Surge, Socket's incentivised testnet & become a Sentinel
+  //     </>
+  //   ),
+  //   buttonLink: "https://surge.socket.tech",
+  //   buttonIcon: Earn,
+  // },
 ];
 
 function HomepageHeader() {
@@ -57,7 +58,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/category/learn"
+            to="category/learn-about-dl"
           >
             Get started
           </Link>
