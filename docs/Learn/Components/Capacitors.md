@@ -1,6 +1,6 @@
-Capacitors are Socket Protocol defined Accumulators that accumulate or batch messages together for better gas efficiency. They are inspired by Capacitors in electrical circuits that store electrical-charges. Capacitors allows for in-protocol batching per switchboard, more people using it means higher saving per user. 
+Capacitors are Socket Protocol defined Accumulators that accumulate or batch messages together for better gas efficiency. They are inspired by Capacitors in electrical circuits that store electrical-charges. Capacitors allow for in-protocol batching per switchboard, more messages queued equals more savings per message
 
-Capacitors are embedded into switchboards, switchboards have the freedom to choose any capacitor available at the CapacitorFactory. Capacitors can be anything, a few examples can be:
+Capacitors are embedded into switchboards, `Switchboards` have the freedom to choose any capacitor available at the CapacitorFactory. Capacitors can store messages in any format, a few examples can be:
 - EVM BlockHeaders 
 - MerkleTrees
 - VerkleTrees
@@ -23,8 +23,8 @@ Once your capacitor is set into the switchboard it can only be upgraded if the s
 
 ## CapacitorFactory
 
-CapacitorFactory is an upgradable contract that lists different kinds of Capacitors available. Note that this component being upgradable has no impact on message security, your capacitor once selected is embedded into the switchboard, CapacitorFactory being upgradable will have no effect on already deployed capacitors. The factory is like a capacitor menu item.
+CapacitorFactory is an upgradable contract that lists different kinds of Capacitors available. Note that this component being upgradable has no impact on message security, your capacitor once selected is embedded into the switchboard. CapacitorFactory being upgradable will have no effect on already deployed capacitors and configuration. The factory is like a capacitor menu item.
 
 CapacitorFactory assigns each type of Capacitor a "type" which is a unique identifier(uint32) used to refer to a specific capacitor. While registering a switchboard to Socket like defined here, you specify a capacitor_type, the registration function deploys the switchboard specific capacitor and decapacitor. Developers have the ability to define the level of batching they want while they register the switchboard. 
 
-More details around access-control and ownership of CapacitorFactory contract here.
+More details around access control and ownership of CapacitorFactory [contract here](../Ownership.md).
