@@ -75,12 +75,12 @@ const config = {
           src: 'img/socketOC.png',
         },
         items: [
-          {
-            type: 'doc',
-            docId: 'Learn/protocol-design',
-            position: 'left',
-            label: 'Learn',
-          },
+          // {
+          //   type: 'doc',
+          //   docId: 'Learn/protocol-design',
+          //   position: 'left',
+          //   label: 'Learn',
+          // },
           // {
           //   type: 'doc',
           //   docId: '',
