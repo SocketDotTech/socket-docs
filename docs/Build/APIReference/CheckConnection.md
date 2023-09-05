@@ -13,7 +13,7 @@ The connection can be verified on-chain by calling the `getPlugConfig()` method 
 ## Off-chain
 
 
-**`GET`** [https://surge.dlapi.socket.tech/check-connection](https://surge.dlapi.socket.tech/check-connection)
+**`GET`** [https://prod.dlapi.socket.tech/check-connection](https://prod.dlapi.socket.tech/check-connection)
 
 | Query Param | Description |
 | --- | --- |
@@ -26,7 +26,7 @@ The connection can be verified on-chain by calling the `getPlugConfig()` method 
 
 Verifying a connection between Plugs deployed on Goerli and Mumbai testnet
 
-[https://surge.dlapi.socket.tech/check-connection?slugA=5&slugB=80001&plugA=0x876B15bc0963C3c1AcA50Adfc0685A458449E41d&plugB=0x93Aea8359197E3E90d99811FA80AeA1A849373de](https://surge.dlapi.socket.tech/check-connection?slugA=5&slugB=80001&plugA=0x876B15bc0963C3c1AcA50Adfc0685A458449E41d&plugB=0x93Aea8359197E3E90d99811FA80AeA1A849373de)
+[https://prod.dlapi.socket.tech/check-connection?slugA=10&slugB=42161&plugA=0x876B15bc0963C3c1AcA50Adfc0685A458449E41d&plugB=0x93Aea8359197E3E90d99811FA80AeA1A849373de](https://prod.dlapi.socket.tech/check-connection?slugA=10&slugB=42161&plugA=0x876B15bc0963C3c1AcA50Adfc0685A458449E41d&plugB=0x93Aea8359197E3E90d99811FA80AeA1A849373de)
 
 #### Response Parameters
 

@@ -13,7 +13,10 @@ The fees for relaying messages can be calculated on-chain by calling the `getMin
 ```javascript
     interface ISocket {
         function getMinFees(
-            uint256 msgGasLimit_,
+            uint256 minMsgGasLimit_,
+            uint256 payloadSize_,
+            bytes32 executionParams_,
+            bytes32 transmissionParams_,
             uint32 remoteChainSlug_,
             address plug_
         ) external view returns (uint256 totalFees);
@@ -21,7 +24,7 @@ The fees for relaying messages can be calculated on-chain by calling the `getMin
 ```
 
 #### Example
-[The SpeedRunDL example contract](https://github.com/SocketDotTech/socketDL-examples/blob/8f424f44e96088ceb3d22de89aca2b2896168cd0/src/SpeedRunDL/SocketSpeedRunGoerli.sol#L115) fetches the fee on-chain and checks if the fee sent from the user is correct.
+[The SpeedRunDL example contract](https://github.com/SocketDotTech/socketDL-examples/blob/main/src/SpeedRunDL/SocketSpeedRunGoerli.sol) fetches the fee on-chain and checks if the fee sent from the user is correct.
 
 ```javascript
     function _getMinimumFees(
@@ -48,7 +51,7 @@ The fees for relaying messages can be calculated on-chain by calling the `getMin
 
 ## Off-chain API
 
-**`GET`** [https://surge.dlapi.socket.tech/estimate-min-fees](https://surge.dlapi.socket.tech/estimate-min-fees)
+**`GET`** [https://prod.dlapi.socket.tech/estimate-min-fees](https://prod.dlapi.socket.tech/estimate-min-fees)
 
 | Query Param | Description |
 | --- | --- |
@@ -61,7 +64,7 @@ The fees for relaying messages can be calculated on-chain by calling the `getMin
 
 Estimating fees for sending a message from Polygon to Optimism 
 
-[https://surge.dlapi.socket.tech/estimate-min-fees?srcPlug=0xB5c4E167B4BE4bE65052043D4cC0FfB7A73A7B7E&srcChainSlug=137&dstChainSlug=10&msgGasLimit=100000](https://surge.dlapi.socket.tech/estimate-min-fees?srcPlug=0xB5c4E167B4BE4bE65052043D4cC0FfB7A73A7B7E&srcChainSlug=137&dstChainSlug=10&msgGasLimit=100000)
+[https://prod.dlapi.socket.tech/estimate-min-fees?srcPlug=0xB5c4E167B4BE4bE65052043D4cC0FfB7A73A7B7E&srcChainSlug=137&dstChainSlug=10&msgGasLimit=100000](https://prod.dlapi.socket.tech/estimate-min-fees?srcPlug=0xB5c4E167B4BE4bE65052043D4cC0FfB7A73A7B7E&srcChainSlug=137&dstChainSlug=10&msgGasLimit=100000)
 
 #### Response Parameters
 
