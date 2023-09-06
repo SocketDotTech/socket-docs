@@ -64,3 +64,12 @@
 .docusaurus-highlight-code-line {
   background-color: rgb(168, 24, 103);
 }
+
+.info-card {
+  padding: 1rem;
+  border: 1px solid rgb(229, 231, 235);
+  border-radius: 0.75rem;
+  justify-content: space-between;
+  flex-direction: column;
+  display: flex;
+}
