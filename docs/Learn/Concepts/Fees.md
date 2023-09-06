@@ -25,14 +25,14 @@ Plugs need to pay a fee for getting messages included in packets, verified on th
 | Execution Fee | Fees paid to Executors for executing the message payload on the destination chain |
 
 ### Estimating Fees 
-Fees can be estimated off-chain using the [Fee Estimation API](../../Build/APIReference/EstimateFee.md). The API calculates the total fee to be sent while sending a message and also returns a breakdown of each fee component.
+Fees can be estimated off-chain using the [Fee Estimation API](../../Dev%20Resources/APIReference/EstimateFee.md). The API calculates the total fee to be sent while sending a message and also returns a breakdown of each fee component.
 
 ### Estimating Fees on-chain 
 
 Sending a cross-chain message requires the message to be verified and executed on the destination chain and the fees for this need to be calculated with the destination chain `gasPrice`. But the gasPrice of the destination chain is not known on the source chain. To enable this calculation, Socket maintains an siblingChain gas fee mapping on the ExecutionManager, TransmitManager and Switchboards. These fees are updated periodically by off-chain agents with the `FEES_UPDATER_ROLE`
 
 #### How to fetch fee estimate
-Plugs can use [ISocket](../../Build/Interfaces/ISocket.md) to call `getMinFees` method on Socket. This method takes the payload execution gasLimit, destination chain ID, payload size and plug address as input and calculates the total fee. This enables Plugs to be completely on-chain and not rely on any off-chain services for fee calculation or to interact with Socket. 
+Plugs can use [ISocket](../../Dev%20Resources/Interfaces/ISocket.md) to call `getMinFees` method on Socket. This method takes the payload execution gasLimit, destination chain ID, payload size and plug address as input and calculates the total fee. This enables Plugs to be completely on-chain and not rely on any off-chain services for fee calculation or to interact with Socket. 
 
 `getMinFees` returns the totalFee, which is to be sent in the native token of the chain when calling `outbound` on Socket. 
 

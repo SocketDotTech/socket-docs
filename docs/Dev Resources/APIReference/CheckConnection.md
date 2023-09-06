@@ -8,7 +8,7 @@ Checks if there's an active connection between PlugA on ChainA and PlugB on Chai
 
 ## On-chain
 
-The connection can be verified on-chain by calling the `getPlugConfig()` method on Socket. More on this [here](../testing-DL.md#testing-plug-connection).
+The connection can be verified on-chain by calling the `getPlugConfig()` method on Socket. More on this [here](../../Build/testing-DL.md).
 
 ## Off-chain
 

@@ -21,12 +21,12 @@ Plugs should be deployed first so you can then point them to each other and "con
 
 | Parameters | Description |
 | --- | --- |
-| siblingChainSlug | ChainSlug of the network the sibling plug is deployed on, you can find all [chainSlugs here](../../Build/DeploymentsSection/Deployments.md) |
+| siblingChainSlug | ChainSlug of the network the sibling plug is deployed on, you can find all [chainSlugs here](../../Dev%20Resources/Deployments.md) |
 | siblingPlug | Address of your plug on the destination network |
 | inboundSwitchboard | Switchboard address used for receiving messages from siblingPlug |
 | outboundSwitchboard | Switchboard address used for sending messages to siblingPlug |
 
-You can find addresses for all verified Switchboards and Socket contracts in [Deployments](../../Build/DeploymentsSection/Deployments.md)
+You can find addresses for all verified Switchboards and Socket contracts in [Deployments](../../Dev%20Resources/Deployments.md)
 
 ## Connecting your Plugs
 
@@ -64,6 +64,6 @@ For reference, checkout [this example tx](https://goerli.etherscan.io/tx/0x37040
 
 Furthermore, you can do the following to check the connection is successful :
 - Call the `getPlugConfig` function on the Socket contract that returns the config for your Plug for a given destination ChainSlug
-- Use the [Check Connection API](../APIReference/CheckConnection.md) that reads the configs and aids you to make sure your connection is correct
+- Use the [Check Connection API](../../Dev%20Resources/APIReference/CheckConnection.md) that reads the configs and aids you to make sure your connection is correct
 
 <!-- // TODO: ADD GIF; ITs time to send it -->

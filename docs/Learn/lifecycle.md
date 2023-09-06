@@ -61,4 +61,4 @@ Once the packet is verified, executors then call `execute` on a message. During 
 
 If these are verified, then the message can be executed. `Executors` call the execute() method on Socket which checks if the above cases are verified and calls the `inbound` method on the destination plug. It passes the designated payload to the Plug, which can be arbitrarily executed.
 
-In case the message cannot be executed due to insufficient gas limit or other errors, Socket will re-try execution periodically. More in [Execution Failure](../Build/TutorialSection/retry-execute).
+In case the message cannot be executed due to insufficient gas limit or other errors, Socket will re-try execution periodically. More in [Execution Failure](../Dev%20Resources/TutorialSection/RetryMessageExecution.md).

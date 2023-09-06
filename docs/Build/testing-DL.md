@@ -9,12 +9,12 @@ MockSocket is a test tool that Plugs can use to test their integration with Sock
 
 Plugs can use MockSocket to test their SC integration with Socket. Find example tests that utilise MockSocket in [`SocketDL-examples`](https://github.com/SocketDotTech/socketDL-examples/tree/main/test). Plugs can assert the intended state changes on the destination chain and verify successful execution of the message.
 
-MockSocket is not an E2E testing solution for message delivery on Plugs. It does not account for validity of message, gasPrice hikes on blockchains etc. For E2E testing, Plugs can be deployed on any [supported testnets](../Build/DeploymentsSection/Deployments.md).
+MockSocket is not an E2E testing solution for message delivery on Plugs. It does not account for validity of message, gasPrice hikes on blockchains etc. For E2E testing, Plugs can be deployed on any [supported testnets](../Dev%20Resources/Deployments.md).
 
 ### Testing Plug connection
 
 #### API
-The [Check Connection helper API](./APIReference/CheckConnection.md) can be used to verify a connection is successfully established between two Plugs.
+The [Check Connection helper API](../Dev%20Resources/APIReference/CheckConnection.md) can be used to verify a connection is successfully established between two Plugs.
 
 
 #### On-chain

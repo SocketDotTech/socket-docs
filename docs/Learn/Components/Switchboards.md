@@ -8,7 +8,7 @@ Switchboards contain the following things:
 
 Switchboards allow developers to permissionlessly authenticate Packets before they get executed on their Plugs, we think there are various authenticaion models that people can leverage to manage tradeoffs for their applications. 
 
-Anyone can build a switchboard that satisfies the [ISwitchboard interface](../../Build/Interfaces/ISwitchboard.md). It needs to be registered to Socket before Plugs can use it via the `registerSwitchboard()` method on Socket. Registering a Switchboard is completely permissionless. 
+Anyone can build a switchboard that satisfies the [ISwitchboard interface](../../Dev%20Resources/Interfaces/ISwitchboard.md). It needs to be registered to Socket before Plugs can use it via the `registerSwitchboard()` method on Socket. Registering a Switchboard is completely permissionless. 
 
 Socket Labs has bootstrapped some switchboards with different tradeoffs for end developers, we encourage developers to feel free to leverage these switchboards if they are suitable for their usecase.
 - Optimistic Switchboard: Allow 1/N trust-minimised and cheap validation by introducing a challenge mechanism pre-execution where N parties can stop the packet from getting executed. This Switchboard will be extremely cheap to leverage but will have a latency of the challenge period. 
