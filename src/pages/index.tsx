@@ -8,7 +8,6 @@ import { Tabs } from "../components/HomepageFeatures/Tabs";
 import Learn from "../../static/svg/learn.svg";
 import Build from "../../static/svg/build.svg";
 import Earn from "../../static/svg/earn.svg";
-import { ChainConfig } from "../components/Contracts/chainConfig";
 
 import styles from "./index.module.css";
 
@@ -93,8 +92,6 @@ export default function Home(): JSX.Element {
               );
             })}
           </div>
-
-          <ChainConfig />
         </main>
       </Layout>
     </div>

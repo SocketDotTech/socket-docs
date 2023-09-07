@@ -21,12 +21,12 @@ Plugs should be deployed first so you can then point them to each other and "con
 
 | Parameters | Description |
 | --- | --- |
-| siblingChainSlug | ChainSlug of the network the sibling plug is deployed on, you can find all [chainSlugs here](../../Dev%20Resources/Deployments.md) |
+| siblingChainSlug | ChainSlug of the network the sibling plug is deployed on, you can find all [chainSlugs here](../../Dev%20Resources/Deployments.mdx) |
 | siblingPlug | Address of your plug on the destination network |
 | inboundSwitchboard | Switchboard address used for receiving messages from siblingPlug |
 | outboundSwitchboard | Switchboard address used for sending messages to siblingPlug |
 
-You can find addresses for all verified Switchboards and Socket contracts in [Deployments](../../Dev%20Resources/Deployments.md)
+You can find addresses for all verified Switchboards and Socket contracts in [Deployments](../../Dev%20Resources/Deployments.mdx)
 
 ## Connecting your Plugs
 

@@ -6,7 +6,7 @@ sidebar_position: 1
 
 In this speed run tutorial, we'll be writing a contract to send/receive messages between chains. This is a code along tutorial, you can copy the code snippets into Remix or the dev environment of your choice. In case you are stuck, you can take peak at the [entire code on GitHub](https://github.com/SocketDotTech/socketDL-examples/blob/main/src/SpeedRunDL/SocketSpeedRunGoerli.sol). We'll be highlighting key functions and what they do throughout the tutorial. Some configuration variables have been hardcoded in the example.
 
-We'll be deploying the same copy of the contract on Goerli and Mumbai testnet and sending the message "Hello World" from Goerli to Mumbai. You can also deploy it on any [supported networks](../Dev%20Resources/Deployments.md). Let's get started!
+We'll be deploying the same copy of the contract on Goerli and Mumbai testnet and sending the message "Hello World" from Goerli to Mumbai. You can also deploy it on any [supported networks](../Dev%20Resources/Deployments.mdx). Let's get started!
 
 
 ### Step 1 : Boilerplate code 
