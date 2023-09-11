@@ -23,7 +23,7 @@ function ChainConfig() {
             <div className="pl-1 mt-2">
               {" "}
               <div className="">
-                <span className="font-semibold"> Chain ID : </span>{" "}
+                <span className="font-semibold"> Chain Slug : </span>{" "}
                 {config[Object.keys(deployments)[index]].chainId}{" "}
               </div>
               <div>

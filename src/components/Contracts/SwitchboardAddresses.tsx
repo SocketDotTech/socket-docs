@@ -21,8 +21,8 @@ function Table({ selectedChainId }) {
   return (
     <table>
       <tr>
-        <th>Chain</th>
-        <th>Type</th>
+        <th>Chain Slug</th>
+        <th>Switchboard</th>
         <th>Contract Address</th>
       </tr>
       {Object.values(deployments[selectedChainId].integrations).map(
