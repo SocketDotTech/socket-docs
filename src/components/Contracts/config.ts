@@ -1,10 +1,10 @@
 export const config = {
-  1: {
-    chainId: 1,
-    chainName: "Ethereum",
-    blockExplorerUrl: "https://etherscan.io",
-    logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/Ether.svg",
-  },
+  // 1: {
+  //   chainId: 1,
+  //   chainName: "Ethereum",
+  //   blockExplorerUrl: "https://etherscan.io",
+  //   logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/Ether.svg",
+  // },
   10: {
     chainId: 10,
     chainName: "Optimism",
