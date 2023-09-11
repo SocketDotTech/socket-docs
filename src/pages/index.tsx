@@ -71,29 +71,27 @@ function HomepageHeader() {
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <div className="bg-global">
-      <Layout
-        title={`It's time to get Plugged into ${siteConfig.title}`}
-        description="SocketDL allows you to build protocols that are chain-agnostic via a cross-chain messaging infrastructure <head />"
-      >
-        <HomepageHeader />
-        <main className="w-full">
-          {/* <HomepageFeatures /> */}
+    <Layout
+      title={`It's time to get Plugged into ${siteConfig.title}`}
+      description="SocketDL allows you to build protocols that are chain-agnostic via a cross-chain messaging infrastructure <head />"
+    >
+      <HomepageHeader />
+      <main className="w-full">
+        {/* <HomepageFeatures /> */}
 
-          <div className="flex flex-col lg:flex-row lg:w-full my-8 justify-center items-center">
-            {SectionList.map((section) => {
-              return (
-                <Tabs
-                  title={section.title}
-                  description={section.description}
-                  buttonLink={section.buttonLink}
-                  tabIcon={section}
-                />
-              );
-            })}
-          </div>
-        </main>
-      </Layout>
-    </div>
+        <div className="flex flex-col lg:flex-row lg:w-full my-8 justify-center items-center">
+          {SectionList.map((section) => {
+            return (
+              <Tabs
+                title={section.title}
+                description={section.description}
+                buttonLink={section.buttonLink}
+                tabIcon={section}
+              />
+            );
+          })}
+        </div>
+      </main>
+    </Layout>
   );
 }
