@@ -16,7 +16,7 @@ Tracks the status of a message
 
 #### Example Request
 
-[https://prod.dlapi.socket.tech/messages-from-tx?srcChainSlug=5&srcTxHash=0x6cd4a68b9136490dd1ecc8a1e6e45c92b9057aa2c335af5177f53478f5472cc4](https://prod.dlapi.socket.tech/messages-from-tx?srcChainSlug=5&srcTxHash=0x6cd4a68b9136490dd1ecc8a1e6e45c92b9057aa2c335af5177f53478f5472cc4)
+[https://prod.dlapi.socket.tech/messages-from-tx?srcChainSlug=10&srcTxHash=0xc3243233916c25f0455a9440fcd2183d49858149ad103c6ff8d6167d812bc0dc](https://prod.dlapi.socket.tech/messages-from-tx?srcChainSlug=10&srcTxHash=0xc3243233916c25f0455a9440fcd2183d49858149ad103c6ff8d6167d812bc0dc)
 
 #### Response Parameters
 

@@ -26,7 +26,7 @@ The connection can be verified on-chain by calling the `getPlugConfig()` method 
 
 Verifying a connection between Plugs deployed on Goerli and Mumbai testnet
 
-[https://prod.dlapi.socket.tech/check-connection?slugA=10&slugB=42161&plugA=0x876B15bc0963C3c1AcA50Adfc0685A458449E41d&plugB=0x93Aea8359197E3E90d99811FA80AeA1A849373de](https://prod.dlapi.socket.tech/check-connection?slugA=10&slugB=42161&plugA=0x876B15bc0963C3c1AcA50Adfc0685A458449E41d&plugB=0x93Aea8359197E3E90d99811FA80AeA1A849373de)
+[https://prod.dlapi.socket.tech/check-connection?slugA=2999&slugB=10&plugA=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&plugB=0x1812ff6bd726934f18159164e2927B34949B16a8](https://prod.dlapi.socket.tech/check-connection?slugA=2999&slugB=10&plugA=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&plugB=0x1812ff6bd726934f18159164e2927B34949B16a8)
 
 #### Response Parameters
 
