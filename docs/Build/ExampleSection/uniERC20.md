@@ -19,9 +19,11 @@ You can find the example on [GitHub](https://github.com/SocketDotTech/socketDL-e
 
         bytes memory payload = abi.encode(msg.sender, _destReceiver, _amount);
 
-        ISocket(socket).outbound(
+        ISocket(socket).outbound{value: msg.value}(
             _destChainSlug,
             destGasLimits[_destChainSlug],
+            bytes32(0),
+            bytes32(0),
             payload
         );
 
@@ -33,7 +35,7 @@ You can find the example on [GitHub](https://github.com/SocketDotTech/socketDL-e
         uint256 siblingChainSlug_,
         bytes calldata payload_
     ) internal {
-        (address _sender, address _receiver, uint256 _amount) = abi.decode(
+       (address _sender, address _receiver, uint256 _amount) = abi.decode(
             payload_,
             (address, address, uint256)
         );
