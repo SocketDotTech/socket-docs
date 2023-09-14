@@ -20,9 +20,11 @@ You can find the example on [GitHub](https://github.com/SocketDotTech/socketDL-e
 
         bytes memory payload = abi.encode(msg.sender, _destReceiver, tokenId);
 
-        ISocket(socket).outbound(
+        ISocket(socket).outbound{value: msg.value}(
             _destChainSlug,
             destGasLimits[_destChainSlug],
+            bytes32(0),
+            bytes32(0),
             payload
         );
 

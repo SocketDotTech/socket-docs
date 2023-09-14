@@ -73,9 +73,9 @@ The Cross-chain Counter has 2 key functions :
 
 #### Constructor Arguments
 
-- The counter example takes [`Socket`](../../Learn/protocol-architecture.md#socket) address as an argument, which can be found in [`deployments`](../DeploymentsSection/Deployments.md)
+- The counter example takes [`Socket`](../../Learn/protocol-architecture.md#socket) address as an argument, which can be found in [`deployments`](../Deployments.mdx)
 
-  This example can be deployed on any [supported testnets or mainnets](../../Build/DeploymentsSection/Deployments.md). In this tutorial, we'll be deploying the Counters on the following two chains, Polygon and Optimism :
+  This example can be deployed on any [supported testnets or mainnets](../Deployments.mdx). In this tutorial, we'll be deploying the Counters on the following two chains, Polygon and Optimism :
 
   | Chain | Socket address |
   | --- | --- |
@@ -109,7 +109,7 @@ For Optimism, the values are :
   | outboundSwitchboard | 0x8654cB74011C9972dd63Ed691d310e1BAA85Fe9E |
 
 
-  This [connection](../../Learn/lifecycle.md#connecting-to-socket) is required on each respective chain a Plug receives/sends messages between. Once the connection step is complete, you can verify the connection was successful by calling the `getPlugConfig` method on [Socket](../DeploymentsSection/Deployments.md). This is a view function that returns the config of the plug.
+  This [connection](../../Learn/lifecycle.md#connecting-to-socket) is required on each respective chain a Plug receives/sends messages between. Once the connection step is complete, you can verify the connection was successful by calling the `getPlugConfig` method on [Socket](../Deployments.mdx). This is a view function that returns the config of the plug.
 
 ### Setting Counter value on remote chain
 

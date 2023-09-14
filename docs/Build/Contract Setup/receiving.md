@@ -16,19 +16,27 @@ interface IPlug {
      * @param payload_ the data which is needed by plug at inbound call on destination
      */
     function inbound(
-        uint256 siblingChainSlug_,
+        uint32 siblingChainSlug_,
         bytes calldata payload_
     ) external;
 }
 ```
 
-Your Plug on the destination network can look something like below. In the below snippet we assume the payload is an integer.
+:::note
+
+Only [`Socket`](../../Dev%20Resources/Deployments.mdx) on a given chain should be allowed to call the `inbound` method on a Plug as seen in the example below.
+
+:::
+
+<br />
+
+Your Plug on the destination network can look something like below. In the below snippet we assume the payload is a `uint256`.
 
 ```javascript
     uint256 number;
 
     function inbound(
-        uint256 siblingChainSlug_,
+        uint32 siblingChainSlug_,
         bytes calldata payload_
         ) external payable {
             // Make sure the caller is Socket contract only

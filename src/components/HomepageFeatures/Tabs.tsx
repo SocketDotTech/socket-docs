@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "@docusaurus/Link";
+import { Tab } from "../Tab";
 
 export const Tabs = ({ title, description, buttonLink, tabIcon }: any) => {
   return (

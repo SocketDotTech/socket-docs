@@ -49,6 +49,7 @@ const config = {
       ({
         docs: {
           routeBasePath: '/',
+
           // sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -74,18 +75,18 @@ const config = {
           src: 'img/socketOC.png',
         },
         items: [
-          {
-            type: 'doc',
-            docId: 'Learn/protocol-design',
-            position: 'left',
-            label: 'Learn',
-          },
-          {
-            type: 'doc',
-            docId: 'Build/hello-world',
-            position: 'left',
-            label: 'Build',
-          },
+          // {
+          //   type: 'doc',
+          //   docId: 'Learn/protocol-design',
+          //   position: 'left',
+          //   label: 'Learn',
+          // },
+          // {
+          //   type: 'doc',
+          //   docId: '',
+          //   position: 'left',
+          //   label: 'Build',
+          // },
         ],
       },
       footer: {
