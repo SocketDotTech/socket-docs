@@ -21,12 +21,12 @@ Plugs should be deployed on respective chains before they can be connected to th
 
 | Parameters | Description |
 | --- | --- |
-| siblingChainSlug | ChainSlug of the network the sibling plug is deployed on, you can find all [chainSlugs here](../../Dev%20Resources/Deployments.mdx) |
+| siblingChainSlug | ChainSlug of the network the sibling plug is deployed on, you can find all [chainSlugs here](../../dev-resources/Deployments.mdx) |
 | siblingPlug | Address of the plug deployed on the sibling chain |
 | inboundSwitchboard | Switchboard address used for receiving messages from siblingPlug |
 | outboundSwitchboard | Switchboard address used for sending messages to siblingPlug |
 
-You can find addresses for all verified Switchboards and Socket contracts in [Deployments](../../Dev%20Resources/Deployments.mdx)
+You can find addresses for all verified Switchboards and Socket contracts in [Deployments](../../dev-resources/Deployments.mdx)
 
 ## Connecting your Plugs
 
@@ -64,6 +64,6 @@ For reference, checkout [this example tx](https://goerli.etherscan.io/tx/0x37040
 
 Furthermore, you can do the following to check the connection is successful :
 - Call the `getPlugConfig` function on the Socket contract that returns the config for your Plug for a given destination ChainSlug
-- Use the [Check Connection API](../../Dev%20Resources/APIReference/CheckConnection.md) that reads the configs and aids you to make sure your connection is correct
+- Use the [Check Connection API](../../dev-resources/APIReference/CheckConnection.md) that reads the configs and aids you to make sure your connection is correct
 
 <!-- // TODO: ADD GIF; ITs time to send it -->

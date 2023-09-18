@@ -6,7 +6,7 @@ sidebar_position: 1
 
 In this speed run tutorial, we'll be writing a contract to send/receive messages between chains. This is a code along tutorial, you can copy the code snippets into Remix or the dev environment of your choice. In case you are stuck, you can take peak at the [entire code on GitHub](https://github.com/SocketDotTech/socketDL-examples/blob/main/src/SpeedRunDL/SocketSpeedRunGoerli.sol). We'll be highlighting key functions and what they do throughout the tutorial. Some configuration variables have been hardcoded in the example.
 
-We'll be deploying the same copy of the contract on Goerli and Mumbai testnet and sending the message "Hello World" from Goerli to Mumbai. You can also deploy it on any [supported networks](../Dev%20Resources/Deployments.mdx). Let's get started!
+We'll be deploying the same copy of the contract on Goerli and Mumbai testnet and sending the message "Hello World" from Goerli to Mumbai. You can also deploy it on any [supported networks](../dev-resources/Deployments.mdx). Let's get started!
 
 
 ### Step 1 : Boilerplate code 
@@ -219,7 +219,7 @@ For instance, on Goerli you would call `connectPlug` with the address of the con
 
 ### Step 8 : Hello World
 
-To send your first message, call the `sendMessage` function on Goerli. You need to send a fee in ETH as `value` when calling `sendMessage`. This fee can be calculated using the [Fee Estimate API](../Dev%20Resources/APIReference/EstimateFee.md) 
+To send your first message, call the `sendMessage` function on Goerli. You need to send a fee in ETH as `value` when calling `sendMessage`. This fee can be calculated using the [Fee Estimate API](../dev-resources/APIReference/EstimateFee.md) 
 
 https://surge.dlapi.socket.tech/estimate-fees?srcChainSlug=5&dstChainSlug=80001&integrationType=FAST&msgGasLimit=100000
 
@@ -229,7 +229,7 @@ You can enter the `totalFee` returned by this API as `value` when sending the tr
 
 <br/><br/>
 
-That's it! You can now track the status of your message using the [Status Tracking API](../Dev%20Resources/APIReference/Track.md). Once your message is executed on Mumbai, you'll be able to see the `message` value set to "Hello World" on Mumbai.
+That's it! You can now track the status of your message using the [Status Tracking API](../dev-resources/APIReference/Track.md). Once your message is executed on Mumbai, you'll be able to see the `message` value set to "Hello World" on Mumbai.
 
 <img src="/img/success-hello-world.png" width="400px"/>
 
@@ -238,6 +238,6 @@ That's it! You can now track the status of your message using the [Status Tracki
 
 :::note You're Plugged!
 
-You've successfully sent your first message via SocketDL. Explore more in [Tutorials](../Dev%20Resources/TutorialSection/Counter.md) and [Examples](./ExampleSection/examples.md).
+You've successfully sent your first message via SocketDL. Explore more in [Tutorials](../dev-resources/TutorialSection/Counter.md) and [Examples](./ExampleSection/examples.md).
 
 :::
