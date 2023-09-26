@@ -17,7 +17,7 @@ Together, these enable building robust cross-chain applications
 1. **Arbitrary Message Passing** : Arbitrary Message Passing allows a contract on Chain A to send a message (`bytes` encoded) to a contract on Chain B. This allows contracts on different chains to read and write to each other's state.
 2. **Modular Architecture** : SocketDL has a modular architecture which allows dApps to choose parts of the Socket stack they'd like to use. For instance, dApps can use Socket for message verification and validation, but can build their own off-chain agents for message delivery and execution.
 3. **Security w/ Configurability** : Socket allows [Plugs](./Learn/Components/Plugs.md) to configure [Switchboards](./Learn/Components/Switchboards.md) used for message passing w/ other plugs. dApps can configure different levels of security using switchboards. For example, using native bridge for critical messaging, but n/n validator consensus for faster relatively less secure communication.
-4. **Easy spec to build** : Smart contracts simply need to inherit [PlugBase](https://github.com/SocketDotTech/socketDL-examples/blob/main/src/base/PlugBase.sol) and support a simple [interface](./Dev%20Resources/Interfaces/IPlug.md) to add cross-chain capabilities to its functions
+4. **Easy spec to build** : Smart contracts simply need to inherit [PlugBase](https://github.com/SocketDotTech/socketDL-examples/blob/main/src/base/PlugBase.sol) and support a simple [interface](./dev-resources/Interfaces/IPlug.md) to add cross-chain capabilities to its functions
 
 Learn more about SocketDL [architecture](./Learn/protocol-architecture.md), [message lifecycle](./Learn/lifecycle.md) & [components](./Learn/Components/_category_.json).
 

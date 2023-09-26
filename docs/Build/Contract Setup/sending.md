@@ -44,4 +44,4 @@ Once the tx is finalised:
 - An event `MessageOutbound` is emitted by Socket containing all relavent details.
 - Your message will be allocated a unique ID called (`msgId`) you can look it up in the `MessageOutbound` log
  
-You can use the tx-hash to track the delivery and execution on the destination chain via [this API](../../Dev%20Resources/APIReference/Track.md).  
+You can use the tx-hash to track the delivery and execution on the destination chain via [this API](../../dev-resources/APIReference/Track.md).  

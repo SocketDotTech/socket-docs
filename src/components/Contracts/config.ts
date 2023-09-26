@@ -23,4 +23,16 @@ export const config = {
     blockExplorerUrl: "https://arbiscan.io",
     logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/Arbitrum.svg",
   },
+  56: {
+    chainId: 56,
+    chainName: "BNB Chain",
+    blockExplorerUrl: "https://bscscan.com",
+    logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/BSC.svg",
+  },
+  2999: {
+    chainId: 2999,
+    chainName: "Aevo",
+    blockExplorerUrl: "https://explorer.aevo.xyz",
+    logoURI: "/img/aevo-logo.png",
+  },
 };

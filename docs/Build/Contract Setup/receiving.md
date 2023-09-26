@@ -24,7 +24,7 @@ interface IPlug {
 
 :::note
 
-Only [`Socket`](../../Dev%20Resources/Deployments.mdx) on a given chain should be allowed to call the `inbound` method on a Plug as seen in the example below.
+Only [`Socket`](../../dev-resources/Deployments.mdx) on a given chain should be allowed to call the `inbound` method on a Plug as seen in the example below.
 
 :::
 
