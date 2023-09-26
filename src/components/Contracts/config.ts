@@ -33,6 +33,6 @@ export const config = {
     chainId: 2999,
     chainName: "Aevo",
     blockExplorerUrl: "https://explorer.aevo.xyz",
-    logoURI: "https://storage.googleapis.com/conduit-public-dls/aevo.svg",
+    logoURI: "/img/aevo-logo.png",
   },
 };
