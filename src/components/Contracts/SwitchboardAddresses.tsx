@@ -28,9 +28,13 @@ function SwitchboardAddresses() {
 
   return (
     <div>
+      <span>
+        FAST is the standard integration type, choose FAST unless you're
+        building a custom usecase
+      </span>
       <div className="flex space-x-6 my-4">
         <div className="flex items-center space-x-1">
-          <span className="font-semibold text-base"> From : </span>
+          <span className="font-semibold text-base"> Local : </span>
           <Dropdown
             onChangeAction={setSelectedChainId}
             selectedChainId={selectedChainId}
@@ -38,7 +42,7 @@ function SwitchboardAddresses() {
         </div>
 
         <div className="flex items-center space-x-1">
-          <span className="font-semibold text-base"> To : </span>
+          <span className="font-semibold text-base"> Sibling : </span>
           <Dropdown
             excludeChainId={selectedChainId}
             selectedChainId={selectedDestinationChain}
@@ -79,9 +83,9 @@ function Table({ selectedChainId, selectedDestinationChain, selectedPath }) {
       <thead>
         <tr>
           <th>LocalSlug</th>
-          <th>RemoteSlug</th>
-          <th>Switchboard</th>
-          <th>Contract Address</th>
+          <th>SiblingSlug</th>
+          <th>Type</th>
+          <th>Switchboard Address</th>
         </tr>
       </thead>
 
