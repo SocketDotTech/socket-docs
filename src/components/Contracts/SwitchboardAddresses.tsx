@@ -2,44 +2,105 @@ import React, { useEffect, useState } from "react";
 import Dropdown from "./Dropdown";
 import deployments from "./deployments.json";
 import { config } from "./config";
+import { PathDropdown } from "./Dropdown";
+
+enum PATH {
+  FAST = "FAST",
+  NATIVE_BRIDGE = "NATIVE_BRIDGE",
+  OPTIMISTIC = "OPTIMISTIC",
+}
 
 function SwitchboardAddresses() {
-  const [selectedChainId, setSelectedChainId] = useState(10);
+  const [selectedChainId, setSelectedChainId] = useState("10");
+  const [selectedDestinationChain, setSelectedDestinationChain] = useState(
+    "10"
+  );
+  const [selectedPath, setSelectedPath] = useState(PATH.FAST);
+
+  useEffect(() => {
+    const k = Object.keys(config).filter(
+      (id) => id !== selectedChainId.toString()
+    );
+
+    selectedChainId === selectedDestinationChain &&
+      setSelectedDestinationChain(k[0]);
+  }, [selectedChainId]);
 
   return (
     <div>
-      <div className="my-4">
-        <Dropdown setSelectedChainId={setSelectedChainId} />
+      <span>
+        FAST is the standard integration type, choose FAST unless you're
+        building a custom usecase
+      </span>
+      <div className="flex space-x-6 my-4">
+        <div className="flex items-center space-x-1">
+          <span className="font-semibold text-base"> Local : </span>
+          <Dropdown
+            onChangeAction={setSelectedChainId}
+            selectedChainId={selectedChainId}
+          />
+        </div>
+
+        <div className="flex items-center space-x-1">
+          <span className="font-semibold text-base"> Sibling : </span>
+          <Dropdown
+            excludeChainId={selectedChainId}
+            selectedChainId={selectedDestinationChain}
+            onChangeAction={setSelectedDestinationChain}
+          />
+        </div>
+
+        <div className="flex items-center space-x-1">
+          <span className="font-semibold text-base"> Type : </span>
+          <PathDropdown
+            onChangeAction={setSelectedPath}
+            paths={[
+              {
+                name: PATH.FAST,
+              },
+              {
+                name: PATH.OPTIMISTIC,
+              },
+              {
+                name: PATH.NATIVE_BRIDGE,
+              },
+            ]}
+          />
+        </div>
       </div>
-      <Table selectedChainId={selectedChainId} />
+      <Table
+        selectedChainId={selectedChainId}
+        selectedDestinationChain={selectedDestinationChain}
+        selectedPath={selectedPath}
+      />
     </div>
   );
 }
 
-function Table({ selectedChainId }) {
-  console.log(selectedChainId);
+function Table({ selectedChainId, selectedDestinationChain, selectedPath }) {
   return (
     <table>
-      <tr>
-        <th>Chain Slug</th>
-        <th>Switchboard</th>
-        <th>Contract Address</th>
-      </tr>
-      {Object.values(deployments[selectedChainId].integrations).map(
-        (item, index) =>
-          Object.values(item).map((switchboardInfo, index2) => (
-            <tr>
-              <td>
-                {" "}
-                {
-                  Object.keys(deployments[selectedChainId].integrations)[index]
-                }{" "}
-              </td>
-              <td> {Object.keys(item)[index2]}</td>
-              <td> {switchboardInfo.switchboard}</td>
-            </tr>
-          ))
-      )}
+      <thead>
+        <tr>
+          <th>LocalSlug</th>
+          <th>SiblingSlug</th>
+          <th>Type</th>
+          <th>Switchboard Address</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>{selectedChainId}</td>
+          <td>{selectedDestinationChain}</td>
+          <td>{selectedPath}</td>
+          <td>
+            {deployments[selectedChainId].integrations?.[
+              selectedDestinationChain
+            ]?.[selectedPath]?.["switchboard"] || "Not Supported"}
+          </td>
+        </tr>
+      </tbody>
     </table>
   );
 }

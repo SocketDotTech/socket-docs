@@ -57,7 +57,7 @@ contract HelloWorld {
 
 `destGasLimit` is the gas limit of setting the message on the destination chain, this value varies depending on the chain.
 
-You can learn more about the other variables in [Configuring Plugs](./Contract%20Setup/configuring-plugs.md)
+You can learn more about the other variables in [Configuring Plugs](./contract-setup/configuring-plugs.md)
 
 #### Events
 `MessageSent` is emitted when a message is sent from the source plug and `MessageReceived` is emitted when the message is received on the destination plug.
