@@ -15,7 +15,7 @@ You can read more about Plugs [here](../../Learn/Components/Plugs.md). Once conn
 
 ## Configuring Plug Parameters
 
-Plugs should be deployed on respective chains before they can be connected to their sibling Plugs deployed on other chains. Once you are ready with Plugs deployed on the networks you want to work with, its time to get Plugged!
+Plugs should be deployed on respective chains before they can be connected to their sibling Plugs deployed on other chains. Once you are ready with Plugs deployed on the networks you want to work with, it's time to get Plugged!
 
 **Here's the parameters required for connection**
 
@@ -30,7 +30,7 @@ You can find addresses for all verified Switchboards and Socket contracts in [De
 
 ## Connecting your Plugs
 
-Once you have the Socket address you are connecting to, you just need call the `connect` method on it to configure your Plug on that chain. Remember, you need to call `connect` on both the chains you want to work with.
+Once you have the Socket address you are connecting to, you just need to call the `connect` method on it to configure your Plug on that chain. Remember, you need to call `connect` on both the chains you want to work with.
 
 Below is a quick example for how your Plug can call the `connect` method on Socket
 
