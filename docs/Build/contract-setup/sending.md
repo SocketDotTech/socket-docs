@@ -10,7 +10,7 @@ sidebar_position: 2
 
 | Parameters | Description |
 | --- | --- |
-| remoteChainSlug | ChainSlug of the network where you want to send your messsage to |
+| remoteChainSlug | ChainSlug of the network where you want to send your message to |
 | payload | The message you want to send to the plug on remoteChainSlug |
 | msgGasLimit | gasLimit required to execute the `payload` on remoteChainSlug |
 
@@ -41,7 +41,7 @@ Equipped with the payload we want to send, we can now call the outbound on Socke
 <!-- // TODO: add API link -->
 
 Once the tx is finalised:
-- An event `MessageOutbound` is emitted by Socket containing all relavent details.
+- An event `MessageOutbound` is emitted by Socket containing all relevant details.
 - Your message will be allocated a unique ID called (`msgId`) you can look it up in the `MessageOutbound` log
  
 You can use the tx-hash to track the delivery and execution on the destination chain via [this API](../../dev-resources/APIReference/Track.md).  
