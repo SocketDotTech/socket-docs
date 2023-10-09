@@ -65,7 +65,7 @@ Tracks the status of a message
 | `VERIFIED` | The message has been verified  |
 | `EXECUTING` | The message is being executed |
 | `EXECUTION_FAILURE` | Message execution failed |
-| `EXECUTION_SUCCESS` | Message is successfully develiered to destination Plug |
+| `EXECUTION_SUCCESS` | Message is successfully delivered to destination Plug |
 | `INBOUND_REVERTING` | The `inbound` method on the destination chain plug is reverting |
 
 #### Inbound status 
