@@ -94,6 +94,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Socket Technology`,
       },
       prism: {
+        additionalLanguages: ["solidity"],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
