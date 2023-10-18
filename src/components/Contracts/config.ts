@@ -35,4 +35,16 @@ export const config = {
     blockExplorerUrl: "https://explorer.aevo.xyz",
     logoURI: "/img/aevo-logo.png",
   },
+  1399904803: {
+    chainId: 1399904803,
+    chainName: "XAI Testnet",
+    blockExplorerUrl: "https://testnet-explorer.xai-chain.net/",
+    logoURI: "/img/xai-logo.png",
+  },
+  421613: {
+    chainId: 421613,
+    chainName: "Arbitrum Goerli",
+    blockExplorerUrl: "https://goerli.arbiscan.io",
+    logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/Arbitrum.svg",
+  },
 };
