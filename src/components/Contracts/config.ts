@@ -39,7 +39,7 @@ export const config = {
     chainId: 1399904803,
     chainName: "XAI Testnet",
     blockExplorerUrl: "https://testnet-explorer.xai-chain.net/",
-    logoURI: "",
+    logoURI: "/img/xai-logo.png",
   },
   421613: {
     chainId: 421613,
