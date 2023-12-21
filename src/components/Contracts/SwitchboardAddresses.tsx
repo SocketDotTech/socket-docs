@@ -11,7 +11,7 @@ enum PATH {
 }
 
 function SwitchboardAddresses() {
-  const [selectedChainId, setSelectedChainId] = useState("10");
+  const [selectedChainSlug, setSelectedChainSlug] = useState("10");
   const [selectedDestinationChain, setSelectedDestinationChain] = useState(
     "10"
   );
@@ -19,12 +19,12 @@ function SwitchboardAddresses() {
 
   useEffect(() => {
     const k = Object.keys(chainDetails).filter(
-      (id) => id !== selectedChainId.toString()
+      (id) => id !== selectedChainSlug.toString()
     );
 
-    selectedChainId === selectedDestinationChain &&
+    selectedChainSlug === selectedDestinationChain &&
       setSelectedDestinationChain(k[0]);
-  }, [selectedChainId]);
+  }, [selectedChainSlug]);
 
   return (
     <div>
@@ -36,16 +36,16 @@ function SwitchboardAddresses() {
         <div className="flex items-center space-x-1">
           <span className="font-semibold text-base"> Local : </span>
           <Dropdown
-            onChangeAction={setSelectedChainId}
-            selectedChainId={selectedChainId}
+            onChangeAction={setSelectedChainSlug}
+            selectedChainSlug={selectedChainSlug}
           />
         </div>
 
         <div className="flex items-center space-x-1">
           <span className="font-semibold text-base"> Sibling : </span>
           <Dropdown
-            excludeChainId={selectedChainId}
-            selectedChainId={selectedDestinationChain}
+            excludeChainSlug={selectedChainSlug}
+            selectedChainSlug={selectedDestinationChain}
             onChangeAction={setSelectedDestinationChain}
           />
         </div>
@@ -69,7 +69,7 @@ function SwitchboardAddresses() {
         </div>
       </div>
       <Table
-        selectedChainId={selectedChainId}
+        selectedChainSlug={selectedChainSlug}
         selectedDestinationChain={selectedDestinationChain}
         selectedPath={selectedPath}
       />
@@ -77,7 +77,7 @@ function SwitchboardAddresses() {
   );
 }
 
-function Table({ selectedChainId, selectedDestinationChain, selectedPath }) {
+function Table({ selectedChainSlug, selectedDestinationChain, selectedPath }) {
   return (
     <table>
       <thead>
@@ -91,11 +91,11 @@ function Table({ selectedChainId, selectedDestinationChain, selectedPath }) {
 
       <tbody>
         <tr>
-          <td>{selectedChainId}</td>
+          <td>{selectedChainSlug}</td>
           <td>{selectedDestinationChain}</td>
           <td>{selectedPath}</td>
           <td>
-            {deployments[selectedChainId].integrations?.[
+            {deployments[selectedChainSlug].integrations?.[
               selectedDestinationChain
             ]?.[selectedPath]?.["switchboard"] || "Not Supported"}
           </td>

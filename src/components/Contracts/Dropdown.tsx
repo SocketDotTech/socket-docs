@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { chainDetails } from "./chainDetails";
 
 function DropdownComponent({
-  selectedChainId,
+  selectedChainSlug,
   onChangeAction,
-  excludeChainId = "0",
+  excludeChainSlug = "0",
 }) {
   return (
     <div>
@@ -13,13 +13,13 @@ function DropdownComponent({
         onChange={(e) => onChangeAction(e.target.value)}
       >
         {Object.values(chainDetails).map((item) => {
-          if (item.chainId.toString() != excludeChainId) {
-            return item.chainId == selectedChainId ? (
-              <option selected value={item.chainId}>
+          if (item.chainSlug.toString() != excludeChainSlug) {
+            return item.chainSlug == selectedChainSlug ? (
+              <option selected value={item.chainSlug}>
                 {item.chainName}
               </option>
             ) : (
-              <option value={item.chainId}>{item.chainName}</option>
+              <option value={item.chainSlug}>{item.chainName}</option>
             );
           }
         })}
