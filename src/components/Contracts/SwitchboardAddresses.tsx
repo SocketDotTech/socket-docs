@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Dropdown from "./Dropdown";
 import deployments from "./deployments.json";
-import { config } from "./config";
+import { chainDetails } from "./chainDetails";
 import { PathDropdown } from "./Dropdown";
 
 enum PATH {
@@ -18,7 +18,7 @@ function SwitchboardAddresses() {
   const [selectedPath, setSelectedPath] = useState(PATH.FAST);
 
   useEffect(() => {
-    const k = Object.keys(config).filter(
+    const k = Object.keys(chainDetails).filter(
       (id) => id !== selectedChainId.toString()
     );
 

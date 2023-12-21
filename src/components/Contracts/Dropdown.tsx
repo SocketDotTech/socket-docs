@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { config } from "./config";
+import { chainDetails } from "./chainDetails";
 
 function DropdownComponent({
   selectedChainId,
@@ -12,7 +12,7 @@ function DropdownComponent({
         className="h-10 px-2 rounded text-sm border-gray-300"
         onChange={(e) => onChangeAction(e.target.value)}
       >
-        {Object.values(config).map((item) => {
+        {Object.values(chainDetails).map((item) => {
           if (item.chainId.toString() != excludeChainId) {
             return item.chainId == selectedChainId ? (
               <option selected value={item.chainId}>
