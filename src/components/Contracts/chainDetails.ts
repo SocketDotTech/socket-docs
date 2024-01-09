@@ -125,11 +125,23 @@ export const chainDetails = {
     blockExplorerUrl: "https://sepolia-optimism.etherscan.io",
     logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/Optimism.svg",
   },
+  46658378: {
+    chainSlug: 46658378,
+    chainName: "Hook testnet",
+    blockExplorerUrl: "https://hook-stylus-testnet.explorer.caldera.xyz",
+    logoURI: "",
+  },
   686669576: {
     chainSlug: 686669576,
     chainName: "SX Network Testnet",
     blockExplorerUrl: "https://explorer.toronto.sx.technology",
     logoURI: "/img/sx-logo.png",
+  },
+  2863311531: {
+    chainSlug: 2863311531,
+    chainName: "Ancient8 testnet",
+    blockExplorerUrl: "https://testnet.a8scan.io",
+    logoURI: "",
   },
   1399904803: {
     chainSlug: 1399904803,
