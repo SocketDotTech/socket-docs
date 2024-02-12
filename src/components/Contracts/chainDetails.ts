@@ -65,11 +65,31 @@ export const chainDetails = {
     blockExplorerUrl: "https://explorer.lyra.finance",
     logoURI: "/img/lyra-logo.png",
   },
+  1024: {
+    chainSlug: 1024,
+    chainName: "Parallel",
+    blockExplorerUrl: "https://explorer.parallel.fi",
+  },
+  1729: {
+    chainSlug: 1729,
+    chainName: "Reya Cronos Testnet",
+    blockExplorerUrl: "https://reya-cronos.blockscout.com",
+  },
   2999: {
     chainSlug: 2999,
     chainName: "Aevo",
     blockExplorerUrl: "https://explorer.aevo.xyz",
     logoURI: "/img/aevo-logo.png",
+  },
+  4665: {
+    chainSlug: 4665,
+    chainName: "Hook",
+    blockExplorerUrl: "https://hook.calderaexplorer.xyz",
+  },
+  5000: {
+    chainSlug: 5000,
+    chainName: "Mantle",
+    blockExplorerUrl: "https://explorer.mantle.xyz",
   },
   8453: {
     chainSlug: 8453,
@@ -137,10 +157,10 @@ export const chainDetails = {
     blockExplorerUrl: "https://explorer.toronto.sx.technology",
     logoURI: "/img/sx-logo.png",
   },
-  2863311531: {
-    chainSlug: 2863311531,
-    chainName: "Ancient8 testnet",
-    blockExplorerUrl: "https://testnet.a8scan.io",
+  28122024: {
+    chainSlug: 28122024,
+    chainName: "Ancient8 testnet2",
+    blockExplorerUrl: "https://scanv2-testnet.ancient8.gg",
     logoURI: "",
   },
   1399904803: {
