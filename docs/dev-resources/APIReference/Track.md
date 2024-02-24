@@ -6,7 +6,10 @@ sidebar_position: 3
 
 Tracks the status of a message 
 
-**`GET`** [https://prod.dlapi.socket.tech/messages-from-tx](https://prod.dlapi.socket.tech/messages-from-tx)
+**`GET`** [https://prod.dlapi.socket.tech/v1/messages-from-tx](https://prod.dlapi.socket.tech/messages-from-tx)
+
+**Header**:  x-api-key : 2Va1n3HzAS5XfXB8ELhX1aATJwzA1A72sNnJE1a0
+
 
 #### Query Parameters
 | Query param | Description |
@@ -16,7 +19,9 @@ Tracks the status of a message
 
 #### Example Request
 
-[https://prod.dlapi.socket.tech/messages-from-tx?srcChainSlug=10&srcTxHash=0xc3243233916c25f0455a9440fcd2183d49858149ad103c6ff8d6167d812bc0dc](https://prod.dlapi.socket.tech/messages-from-tx?srcChainSlug=10&srcTxHash=0xc3243233916c25f0455a9440fcd2183d49858149ad103c6ff8d6167d812bc0dc)
+[https://prod.dlapi.socket.tech/v1/messages-from-tx?srcChainSlug=10&srcTxHash=0xc3243233916c25f0455a9440fcd2183d49858149ad103c6ff8d6167d812bc0dc](https://prod.dlapi.socket.tech/messages-from-tx?srcChainSlug=10&srcTxHash=0xc3243233916c25f0455a9440fcd2183d49858149ad103c6ff8d6167d812bc0dc)
+
+Note : Add the *x-api-key* header mentioned above in the request for authentication. 
 
 #### Response Parameters
 

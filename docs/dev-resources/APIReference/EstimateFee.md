@@ -51,7 +51,10 @@ The fees for relaying messages can be calculated on-chain by calling the `getMin
 
 ## Off-chain API
 
-**`GET`** [https://prod.dlapi.socket.tech/estimate-min-fees](https://prod.dlapi.socket.tech/estimate-min-fees)
+**`GET`** [https://prod.dlapi.socket.tech/v1/estimate-min-fees](https://prod.dlapi.socket.tech/estimate-min-fees)
+
+**Header**:  x-api-key : 2Va1n3HzAS5XfXB8ELhX1aATJwzA1A72sNnJE1a0
+
 
 | Query Param | Description |
 | --- | --- |
@@ -64,7 +67,9 @@ The fees for relaying messages can be calculated on-chain by calling the `getMin
 
 Estimating fees for sending a message from Polygon to Optimism 
 
-[https://prod.dlapi.socket.tech/estimate-min-fees?srcPlug=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&srcChainSlug=2999&dstChainSlug=10&msgGasLimit=100000](https://prod.dlapi.socket.tech/estimate-min-fees?srcPlug=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&srcChainSlug=2999&dstChainSlug=10&msgGasLimit=100000)
+[https://prod.dlapi.socket.tech/v1/estimate-min-fees?srcPlug=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&srcChainSlug=2999&dstChainSlug=10&msgGasLimit=100000](https://prod.dlapi.socket.tech/estimate-min-fees?srcPlug=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&srcChainSlug=2999&dstChainSlug=10&msgGasLimit=100000)
+
+Note : Add the *x-api-key* header mentioned above in the request for authentication. 
 
 #### Response Parameters
 
