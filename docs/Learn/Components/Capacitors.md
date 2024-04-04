@@ -12,10 +12,10 @@ Anything can become a capacitor, it should be able to compress messages lossless
 // capacitor compresses multiple messages into a bytes32 variable
 bytes32 capacitor_hat root = Capacitor(msg1, msg2, msg3...)
 ```
-Usually, since a capacitor batches messages together but messages on destination are executed individually, capacitors are paired with decapcitors automatically. 
+Usually, since a capacitor batches messages together but messages on destination are executed individually, capacitors are paired with decapacitors automatically. 
 
 ```javascript
-// a decapacitor should be able to retrive the messsage from the root via a proof
+// a decapacitor should be able to retrieve the message from the root via a proof
 bytes msg1 = Decapacitor(capacitor_root, proof) 
 ```
 

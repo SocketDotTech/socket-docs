@@ -18,7 +18,7 @@ There are several components in the Socket protocol that work together to make t
 
 ## Architecture
 
-Socket is built in a modular fashion with various layers with defined APIs/Interfaces between them which allows developers the ability to leverage the software-stack in different and more efficent ways depending on their application context. 
+Socket is built in a modular fashion with various layers with defined APIs/Interfaces between them which allows developers the ability to leverage the software-stack in different and more efficient ways depending on their application context. 
 
 The protocol consists of four key layers:
 1. **Application Layer**: This layer consists of `Plugs`, which are smart contract applications built to interact with Socket. Plugs follow a specified API and communicate through deployed Socket instances between any two supported chains. The core Socket contract functions as an on-chain endpoint that sends and receives payloads between chains. As applications send payloads through Plugs, Socket compresses them into cryptographic hashes called `Packets`, which represent thousands of payloads across apps.
@@ -29,4 +29,4 @@ The protocol consists of four key layers:
 
 <img src="/img/dl-layers.png"/>
 
-Learn more about individual compoenents in [Components](./Components/Capacitors.md) and [Offchain Agents](./OffChain-Agents.md).
+Learn more about individual components in [Components](./Components/Capacitors.md) and [Offchain Agents](./OffChain-Agents.md).
