@@ -13,7 +13,9 @@ The connection can be verified on-chain by calling the `getPlugConfig()` method 
 ## Off-chain
 
 
-**`GET`** [https://prod.dlapi.socket.tech/check-connection](https://prod.dlapi.socket.tech/check-connection)
+**`GET`** [https://prod.dlapi.socket.tech/v1/check-connection](https://prod.dlapi.socket.tech/check-connection)
+
+**Header**:  x-api-key : 2Va1n3HzAS5XfXB8ELhX1aATJwzA1A72sNnJE1a0
 
 | Query Param | Description |
 | --- | --- |
@@ -26,7 +28,9 @@ The connection can be verified on-chain by calling the `getPlugConfig()` method 
 
 Verifying a connection between Plugs deployed on Goerli and Mumbai testnet
 
-[https://prod.dlapi.socket.tech/check-connection?slugA=2999&slugB=10&plugA=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&plugB=0x1812ff6bd726934f18159164e2927B34949B16a8](https://prod.dlapi.socket.tech/check-connection?slugA=2999&slugB=10&plugA=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&plugB=0x1812ff6bd726934f18159164e2927B34949B16a8)
+[https://prod.dlapi.socket.tech/v1/check-connection?slugA=2999&slugB=10&plugA=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&plugB=0x1812ff6bd726934f18159164e2927B34949B16a8](https://prod.dlapi.socket.tech/check-connection?slugA=2999&slugB=10&plugA=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&plugB=0x1812ff6bd726934f18159164e2927B34949B16a8)
+
+Note : Add the *x-api-key* header mentioned above in the request for authentication. 
 
 #### Response Parameters
 
