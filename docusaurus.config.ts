@@ -1,9 +1,7 @@
 // import { themes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
-
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+import { themes } from "prism-react-renderer";
 
 const config: Config = {
   title: "Socket Docs",
@@ -57,18 +55,17 @@ const config: Config = {
         src: "img/socketOC.png",
       },
       items: [
-        // {
-        //   type: 'doc',
-        //   docId: 'Learn/protocol-design',
-        //   position: 'left',
-        //   label: 'Learn',
-        // },
-        // {
-        //   type: 'doc',
-        //   docId: '',
-        //   position: 'left',
-        //   label: 'Build',
-        // },
+        {
+          type: "doc",
+          position: "left",
+          label: "Get Started",
+          docId: "introduction",
+        },
+        {
+          href: "https://github.com/SocketDotTech",
+          label: "GitHub",
+          position: "right",
+        },
       ],
     },
     footer: {
@@ -76,8 +73,8 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Socket Technology`,
     },
     prism: {
-      theme: lightCodeTheme,
-      darkTheme: darkCodeTheme,
+      theme: themes.vsLight,
+      darkTheme: themes.vsDark,
     },
     image: "img/header-bg.png",
     metadata: [

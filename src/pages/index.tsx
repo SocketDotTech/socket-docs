@@ -3,8 +3,7 @@ import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-// import HomepageFeatures from "@site/src/components/HomepageFeatures";
-import { Tabs } from "../components/HomepageFeatures/Tabs";
+import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Learn from "../../static/svg/learn.svg";
 import Build from "../../static/svg/build.svg";
 import Earn from "../../static/svg/earn.svg";
@@ -76,21 +75,8 @@ export default function Home(): JSX.Element {
       description="SocketDL allows you to build protocols that are chain-agnostic via a cross-chain messaging infrastructure <head />"
     >
       <HomepageHeader />
-      <main className="w-full">
-        {/* <HomepageFeatures /> */}
-
-        <div className="flex flex-col lg:flex-row lg:w-full my-8 justify-center items-center">
-          {SectionList.map((section) => {
-            return (
-              <Tabs
-                title={section.title}
-                description={section.description}
-                buttonLink={section.buttonLink}
-                tabIcon={section}
-              />
-            );
-          })}
-        </div>
+      <main>
+        <HomepageFeatures />
       </main>
     </Layout>
   );
