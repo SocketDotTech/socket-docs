@@ -1,28 +1,30 @@
-# Website
+# Socket Docs
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+Official documentation for Socket, hosted at [docs.socket.tech](https://docs.socket.tech).
+
+## Getting Started
+
+These docs are built using [Docusaurus](https://docusaurus.io/), with plugin for [Docusaurus Lunr Search](https://github.com/daldridge/docusaurus-plugin-lunr).
 
 ### Installation
 
-```
-$ yarn
+```bash
+git clone https://github.com/SocketDotTech/socket-docs.git
+cd bungee-docs
+yarn install
 ```
 
 ### Local Development
 
+```bash
+yarn start
 ```
-$ yarn start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
 ### Build
 
+```bash
+yarn build
 ```
-$ yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
 ### Deployment
 

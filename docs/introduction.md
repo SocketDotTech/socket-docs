@@ -4,8 +4,6 @@ title: What is SocketDL?
 sidebar_position: 1
 ---
 
-import Tab from "../src/components/Tab";
-
 Socket Data Layer (SocketDL) is an arbitrary message passing protocol part of Socket's Interoperability stack.
 
 Socket Interoperability stack includes [SocketLL](https://docs.socket.tech/socket-overview/what-is-socket) & SocketDL. SocketLL enables seamless bridging of assets across chains, while SocketDL enables secure and trust-less message passing.
@@ -44,18 +42,3 @@ Learn more about SocketDL [architecture](./Learn/protocol-architecture.md), [mes
    Chain Abstracted Wallets, Governance, Data Availability,
 
 _& much more!_
-
-### What's Next
-
-<Tab
-  heading="Send & Receive Messages"
-  linkUrl="./Build/contract-setup/configuring-plugs"
-/>
-
-<br />
-
-<Tab
-  heading="Learn SocketDL"
-  description="Testing"
-  linkUrl="./Learn/glossary"
-/>
