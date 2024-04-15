@@ -36,7 +36,7 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
-  --ifm-navbar-background-color: #0a0d17;
+  --ifm-navbar-background-color: #14171f;
 
   --ifm-color-primary: #45a2ff;
   --ifm-color-primary-dark: #21af90;
@@ -61,11 +61,11 @@
 }
 
 .footer {
-  --ifm-footer-background-color: #0a0d17;
+  --ifm-footer-background-color: #14171f;
 }
 
 .hero {
-  --ifm-hero-background-color: #0a0d17;
+  --ifm-hero-background-color: #14171f;
 }
 
 html[data-theme="dark"] {
@@ -77,5 +77,14 @@ html[data-theme="dark"] {
     linear-gradient(to right, #45a2ff, #2fd07b) border-box;
   border-radius: 2rem;
   border: 3px solid transparent;
-  color: #ffffff;
+  color: #d0d5dd;
+}
+
+.button.button--secondary:hover {
+  background: linear-gradient(#0a0d17, #0a0d17) padding-box,
+    linear-gradient(to left, #45a2ff, #2fd07b) border-box;
+  border-radius: 2rem;
+  border: 3px solid transparent;
+  color: #d0d5dd;
+  background-color: #14171f;
 }
