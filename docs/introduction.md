@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: What is SocketDL?
+title: What is Socket 2.0?
 sidebar_position: 1
 ---
 

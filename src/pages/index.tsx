@@ -47,10 +47,7 @@ const SectionList = [
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header
-      className={`${clsx("hero", styles.heroBanner)} text-white`}
-      style={{ backgroundImage: 'url("./img/header-bg.png")' }}
-    >
+    <header className={`${clsx("hero", styles.heroBanner)} text-white`}>
       <div className="container">
         <h1 className="md:text-5xl sm:text-xl">{siteConfig.title}</h1>
         <p className="md:text-xl sm:text-lg">{siteConfig.tagline}</p>

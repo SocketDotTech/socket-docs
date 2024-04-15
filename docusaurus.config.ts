@@ -48,6 +48,12 @@ const config: Config = {
   ],
 
   themeConfig: {
+    announcementBar: {
+      id: "Bungee_Announcement",
+      content: "<b>ℹ️ Socket 2.0 is now live. Docs are being updated. 🚧</b>",
+      backgroundColor: "#fff8e6",
+      isCloseable: true,
+    },
     navbar: {
       title: "Socket",
       logo: {
@@ -70,13 +76,18 @@ const config: Config = {
     },
     footer: {
       style: "dark",
-      copyright: `Copyright © ${new Date().getFullYear()} Socket Technology`,
+      copyright: `Copyright © ${new Date().getFullYear()} Socket`,
+    },
+    colorMode: {
+      defaultMode: "dark",
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
     },
     prism: {
       theme: themes.vsLight,
       darkTheme: themes.vsDark,
     },
-    image: "img/header-bg.png",
+    // image: "img/header-bg.png",
     metadata: [
       {
         name: "keywords",
