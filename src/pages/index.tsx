@@ -55,10 +55,7 @@ function HomepageHeader() {
         <h1 className="md:text-5xl sm:text-xl">{siteConfig.title}</h1>
         <p className="md:text-xl sm:text-lg">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="category/learn-about-dl"
-          >
+          <Link className="button button--secondary button--lg" to="/">
             Get started
           </Link>
         </div>
