@@ -12,11 +12,11 @@ Searching for documentation on **Socket Liquidity Layer**, **Socket API**, or **
 
 ## Cross-Chain vs. Chain Abstraction
 
-Socket is focused on **Chain Abstraction** rather than **Cross-Chain**. While these terms are often used interchangeably, they are not the same thing:
+Socket is focused on **Chain Abstraction** rather than **Cross Chain**. While these terms are often used interchangeably, they are not the same thing:
 
-- **Cross-Chain** protocols are designed to facilitate communication between different blockchains. They are typically used to transfer assets between chains, such as wrapped tokens or to synchronize state between chains by sending messages back and forth.
+- **Cross Chain** protocols are designed to facilitate communication between different blockchains. They are typically used to transfer assets between chains, such as wrapped tokens or to synchronize state between chains by sending messages back and forth.
 
-- **Chain-Abstraction** is a higher-level concept that abstracts away the underlying chain, allowing developers to build applications that are chain-agnostic.
+- **Chain Abstraction** is a higher-level concept that abstracts away the underlying chain, allowing developers to build applications that are chain-agnostic.
 
 > _For example, a cross-chain protocol might allow you to transfer an asset from Optimism to Arbitrum One. Chain abstraction, on the other hand, would allow you to build an application that works on both Optimism and Arbitrum One without having to worry about the differences between the two chains._
 
