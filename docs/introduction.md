@@ -12,15 +12,17 @@ Searching for documentation on **Socket Liquidity Layer**, **Socket API**, or **
 
 ## Cross-Chain vs. Chain Abstraction
 
-**Cross-Chain** protocols are designed to facilitate communication between different blockchains. They are typically used to transfer assets between chains, such as wrapped tokens or to synchronize state between chains by sending messages back and forth.
+Socket is focused on **Chain Abstraction** rather than **Cross-Chain**. While these terms are often used interchangeably, they are not the same thing:
 
-**Chain-Abstraction** is a higher-level concept that abstracts away the underlying chain, allowing developers to build applications that are chain-agnostic.
+- **Cross-Chain** protocols are designed to facilitate communication between different blockchains. They are typically used to transfer assets between chains, such as wrapped tokens or to synchronize state between chains by sending messages back and forth.
 
-> _For example, a cross-chain protocol might allow you to transfer an asset from Ethereum to Binance Smart Chain. Chain abstraction, on the other hand, would allow you to build an application that works on both Ethereum and Binance Smart Chain without having to worry about the differences between the two chains._
+- **Chain-Abstraction** is a higher-level concept that abstracts away the underlying chain, allowing developers to build applications that are chain-agnostic.
+
+> _For example, a cross-chain protocol might allow you to transfer an asset from Optimism to Arbitrum One. Chain abstraction, on the other hand, would allow you to build an application that works on both Optimism and Arbitrum One without having to worry about the differences between the two chains._
 
 ## Modular Order Flow Auction
 
-A key feature of Socket is the Modular Order Flow Auction (MOFA). MOFA essentially creates an open marketplace for execution agents (transmitters) and user-requests (signed authorizations or user-intents), where transmitters compete to settle user requests on-chain.
+A key feature of Socket is the Modular Order Flow Auction (MOFA). MOFA essentially creates an open marketplace for execution agents (transmitters) and off-chain user-requests (signed authorizations of user-intents), where transmitters compete to settle user requests on-chain.
 
 This process enables users to seamlessly interact across any supported network without concern for the inherent complexities. Users will be able to interact with applications on any chain without having to worry about the underlying chain and get the best possible execution.
 
