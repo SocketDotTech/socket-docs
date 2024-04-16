@@ -4,45 +4,8 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
-import Learn from "../../static/svg/learn.svg";
-import Build from "../../static/svg/build.svg";
-import Earn from "../../static/svg/earn.svg";
 
 import styles from "./index.module.css";
-
-const SectionList = [
-  {
-    title: "Build",
-    Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
-    description: <> Send your first cross-chain message in less than 5 mins</>,
-    buttonLink: "/Build/hello-world",
-    buttonIcon: Build,
-  },
-  {
-    title: "Learn",
-    Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
-    description: (
-      <>
-        Learn about Socket's architecture, messaging lifecycle, security, fees &
-        more
-      </>
-    ),
-    buttonLink: "/Learn/protocol-design",
-    buttonIcon: Learn,
-  },
-
-  // {
-  //   title: "Surge",
-  //   Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
-  //   description: (
-  //     <>
-  //       Participate in Surge, Socket's incentivised testnet & become a Sentinel
-  //     </>
-  //   ),
-  //   buttonLink: "https://surge.socket.tech",
-  //   buttonIcon: Earn,
-  // },
-];
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
