@@ -51,7 +51,7 @@ const config: Config = {
   themeConfig: {
     announcementBar: {
       id: "Bungee_Announcement",
-      content: "<b>ℹ️ Socket 2.0 is now live. Docs are being updated. 🚧</b>",
+      content: "<b>ℹ️ Socket New Docs are live. Docs are being updated. 🚧</b>",
       backgroundColor: "#fff8e6",
       isCloseable: true,
     },
@@ -59,7 +59,7 @@ const config: Config = {
       title: "Socket",
       logo: {
         alt: "Socket Logo",
-        src: "img/socketOC.png",
+        src: "img/socketLogo.png",
       },
       items: [
         {
