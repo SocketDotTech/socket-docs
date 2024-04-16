@@ -5,7 +5,8 @@ import { themes } from "prism-react-renderer";
 
 const config: Config = {
   title: "Socket Docs",
-  tagline: "The future of modular interoperability",
+  tagline:
+    "Chain Abstraction Layer - Build Apps that are chain-agnostic via Socket",
   url: "https://socket.tech",
   baseUrl: "/",
   onBrokenLinks: "throw",
