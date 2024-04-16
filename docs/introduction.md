@@ -6,6 +6,10 @@ sidebar_position: 1
 
 Socket is the first chain abstraction layer for Web3. It is a modular, extensible, and composable protocol that enables chain-agnostic applications. Socket abstracts away the underlying complexity of chains, allowing users to interact with applications without having to worry about the underlying chain.
 
+:::tip
+Searching for documentation on **Socket Liquidity Layer**, **Socket API**, or **Socket Widget**? These resources are now integrated into **Bungee Docs**. Discover more detailed information and guides by visiting [Bungee Docs](https://docs.bungee.exchange/).
+:::
+
 ## Cross-Chain vs. Chain Abstraction
 
 **Cross-Chain** protocols are designed to facilitate communication between different blockchains. They are typically used to transfer assets between chains, such as wrapped tokens or to synchronize state between chains by sending messages back and forth.
