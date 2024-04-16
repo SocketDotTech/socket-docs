@@ -10,7 +10,7 @@ Socket 2.0 is the first chain abstraction layer for Web3. It is a modular, exten
 Searching for documentation on **Socket Liquidity Layer**, **Socket API**, or **Socket Widget**? These resources are part of Bungee and can be found in the [Bungee Docs](https://docs.bungee.exchange/).
 :::
 
-## Cross-Chain vs. Chain Abstraction
+## Chain Abstraction vs. Cross Chain
 
 Socket 2.0 is focused on **Chain Abstraction** rather than **Cross Chain**. While these terms are often used interchangeably, they are not the same thing:
 
