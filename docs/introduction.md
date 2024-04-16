@@ -4,41 +4,24 @@ title: What is Socket 2.0?
 sidebar_position: 1
 ---
 
-Socket Data Layer (SocketDL) is an arbitrary message passing protocol part of Socket's Interoperability stack.
+Socket is the first chain abstraction layer for Web3. It is a modular, extensible, and composable protocol that enables chain-agnostic applications. Socket abstracts away the underlying complexity of chains, allowing users to interact with applications without having to worry about the underlying chain.
 
-Socket Interoperability stack includes SocketLL & SocketDL. SocketLL enables seamless bridging of assets across chains, while SocketDL enables secure and trust-less message passing.
+## Cross-Chain vs. Chain Abstraction
 
-Together, these enable building robust cross-chain applications
+**Cross-Chain** protocols are designed to facilitate communication between different blockchains. They are typically used to transfer assets between chains, such as wrapped tokens or to synchronize state between chains by sending messages back and forth.
 
-### Features of Socket DL
+**Chain-Abstraction** is a higher-level concept that abstracts away the underlying chain, allowing developers to build applications that are chain-agnostic.
 
-1. **Arbitrary Message Passing** : Arbitrary Message Passing allows a contract on Chain A to send a message (`bytes` encoded) to a contract on Chain B. This allows contracts on different chains to read and write to each other's state.
-2. **Modular Architecture** : SocketDL has a modular architecture which allows dApps to choose parts of the Socket stack they'd like to use. For instance, dApps can use Socket for message verification and validation, but can build their own off-chain agents for message delivery and execution.
-3. **Security w/ Configurability** : Socket allows Plugs to configure Switchboards used for message passing w/ other plugs. dApps can configure different levels of security using switchboards. For example, using native bridge for critical messaging, but n/n validator consensus for faster relatively less secure communication.
-4. **Easy spec to build** : Smart contracts simply need to inherit PlugBase and support a simple interface to add cross-chain capabilities to its functions
+> _For example, a cross-chain protocol might allow you to transfer an asset from Ethereum to Binance Smart Chain. Chain abstraction, on the other hand, would allow you to build an application that works on both Ethereum and Binance Smart Chain without having to worry about the differences between the two chains._
 
-Learn more about SocketDL architecture, message lifecycle & components.
+## Modular Order Flow Auction
 
-### Use Cases
+A key feature of Socket is the Modular Order Flow Auction (MOFA). MOFA essentially creates an open marketplace for execution agents (transmitters) and user-requests (signed authorizations or user-intents), where transmitters compete to settle user requests on-chain.
 
-1. **App Chain Tokens**
+This process enables users to seamlessly interact across any supported network without concern for the inherent complexities. Users will be able to interact with applications on any chain without having to worry about the underlying chain and get the best possible execution.
 
-   ERC-20 that can be bridged b/w chains through a Lock-n-Mint or Burn-n-Mint mechanism, secured by SocketDL. They don't require protocols to bootstrap liquidity for the token across chains.
+![Modular Order Flow Auction (MOFA)](../static/img/mofa.png)
 
-   Live in production powering USDC bridging on Aevo's Optimistic App-Chain. Learn more here.
+## More coming soon...
 
-2. **DeFi Composability**
-
-   - Cross-chain lending and borrowing
-   - Multi-chain Yield aggregators
-   - Cross-chain Deposits (Zaps)
-
-3. **Gaming and NFTs**
-
-   Chain agnostic NFTs that can be bridged/minted between chains. This also enables unique usecases for on-chain gaming
-
-4. **New usecases**
-
-   Chain Abstracted Wallets, Governance, Data Availability,
-
-_& much more!_
+This is just the beginning. We are working on a lot of exciting features and improvements to Socket. Stay tuned for more updates!
