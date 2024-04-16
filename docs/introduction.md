@@ -22,7 +22,7 @@ Socket 2.0 is focused on **Chain Abstraction** rather than **Cross Chain**. Whil
 
 ## Modular Order Flow Auction
 
-A key feature of Socket is the Modular Order Flow Auction (MOFA). MOFA essentially creates an open marketplace for execution agents (transmitters) and off-chain user-requests (signed authorizations of user-intents), where transmitters compete to settle user requests on-chain.
+A key mechanism of Socket 2.0 is the Modular Order Flow Auction (MOFA). MOFA essentially creates an open marketplace for execution agents (transmitters) and off-chain user-requests (signed authorizations of user-intents), where transmitters compete to settle user requests on-chain.
 
 This process enables users to seamlessly interact across any supported network without concern for the inherent complexities. Users will be able to interact with applications on any chain without having to worry about the underlying chain and get the best possible execution.
 
