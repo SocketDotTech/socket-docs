@@ -26,7 +26,7 @@ A key mechanism of Socket 2.0 is the Modular Order Flow Auction (MOFA). MOFA ess
 
 This process enables users to seamlessly interact across any supported network without concern for the inherent complexities. Users will be able to interact with applications on any chain without having to worry about the underlying chain and get the best possible execution.
 
-![Modular Order Flow Auction (MOFA)](../static/img/mofa.jpg)
+![Modular Order Flow Auction (MOFA)](../static/img/mofa.png)
 
 ## More coming soon...
 
