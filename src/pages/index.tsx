@@ -3,7 +3,6 @@ import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import HomepageFeatures from "@site/src/components/HomepageFeatures";
 
 import styles from "./index.module.css";
 
@@ -15,7 +14,10 @@ function HomepageHeader() {
         <h1 className="md:text-5xl sm:text-xl">{siteConfig.title}</h1>
         <p className="md:text-xl sm:text-lg">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/">
+          <Link
+            className="button button--secondary button--lg"
+            to="/introduction"
+          >
             Get started
           </Link>
         </div>
