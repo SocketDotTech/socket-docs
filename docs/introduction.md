@@ -4,7 +4,7 @@ title: What is Socket 2.0?
 sidebar_position: 1
 ---
 
-Socket 2.0 is the first chain abstraction protocol for Web3. It is a modular, extensible, and composable protocol that enables chain-agnostic applications. Socket abstracts away the underlying complexity of chains, allowing users to interact with applications without having to worry about the underlying chain.
+Socket 2.0 is the first Chain Abstraction Protocol for Web3. It is a modular, extensible, and composable protocol that enables chain-agnostic applications. Socket abstracts away the underlying complexity of chains, allowing users to interact with applications without having to worry about the underlying chain.
 
 :::tip
 Searching for documentation on **Socket Liquidity Layer**, **Socket API**, or **Socket Widget**? These resources are part of Bungee and can be found in the [Bungee Docs](https://docs.bungee.exchange/).
