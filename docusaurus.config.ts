@@ -93,7 +93,7 @@ const config: Config = {
       {
         name: "keywords",
         content:
-          "messaging, datalayer, socket, socket.tech, DL, interoperability, Bungee, SocketDL, SocketSurge, Surge",
+          "messaging, datalayer, socket, socket.tech, DL, interoperability, Bungee, chain abstraction, chain-agnostic, cross-chain, messaging infrastructure",
       },
     ],
   },

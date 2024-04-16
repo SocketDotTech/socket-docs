@@ -29,12 +29,10 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title={`It's time to get Plugged into ${siteConfig.title}`}
-      description="SocketDL allows you to build protocols that are chain-agnostic via a cross-chain messaging infrastructure <head />"
+      description="Socket powers chain abstracted applications."
     >
       <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
+      <main>{/* <HomepageFeatures /> */}</main>
     </Layout>
   );
 }
