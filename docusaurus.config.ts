@@ -51,7 +51,8 @@ const config: Config = {
   themeConfig: {
     announcementBar: {
       id: "Bungee_Announcement",
-      content: "<b>ℹ️ Socket New Docs are live. Docs are being updated. 🚧</b>",
+      content:
+        "<b>ℹ️ Socket New Docs are live. API, Widget and Luquidity Layer Docs moved to <a href='https://docs.bungee.exchange'>Bungee Docs</a>. 🚧</b>",
       backgroundColor: "#fff8e6",
       isCloseable: true,
     },
@@ -67,6 +68,11 @@ const config: Config = {
           position: "left",
           label: "Get Started",
           docId: "introduction",
+        },
+        {
+          position: "left",
+          label: "Bungee Docs",
+          href: "https://docs.bungee.exchange",
         },
         {
           href: "https://github.com/SocketDotTech",
