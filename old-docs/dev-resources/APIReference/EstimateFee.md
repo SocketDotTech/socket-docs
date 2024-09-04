@@ -62,12 +62,13 @@ The fees for relaying messages can be calculated on-chain by calling the `getMin
 | `srcChainSlug` | Slug of source chain |
 | `dstChainSlug` | Slug of destination chain |
 | `msgGasLimit`| Gas limit required for executing the destination payload |
+| `payloadLength`| Length of payload to be executed on destination plug |
 
 #### Example Request
 
 Estimating fees for sending a message from Polygon to Optimism 
 
-[https://prod.dlapi.socket.tech/v1/estimate-min-fees?srcPlug=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&srcChainSlug=2999&dstChainSlug=10&msgGasLimit=100000](https://prod.dlapi.socket.tech/estimate-min-fees?srcPlug=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&srcChainSlug=2999&dstChainSlug=10&msgGasLimit=100000)
+[https://prod.dlapi.socket.tech/v1/estimate-min-fees?srcPlug=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&srcChainSlug=2999&dstChainSlug=10&msgGasLimit=100000&payloadLength=100](https://prod.dlapi.socket.tech/estimate-min-fees?srcPlug=0x7b9ed5C43E87DAFB03211651d4FA41fEa1Eb9b3D&srcChainSlug=2999&dstChainSlug=10&msgGasLimit=100000&payloadLength=100)
 
 Note : Add the *x-api-key* header mentioned above in the request for authentication. 
 
