@@ -1,33 +1,42 @@
 ---
 id: introduction
-title: What is Socket 2.0?
+title: What is Socket Protocol?
 sidebar_position: 1
 ---
 
-Socket 2.0 is the first Chain Abstraction Protocol for Web3. It is a modular, extensible, and composable protocol that enables chain-agnostic applications. Socket abstracts away the underlying complexity of chains, allowing users to interact with applications without having to worry about the underlying chain.
+## What is Socket Protocol?
+
+Socket Protocol is the first Chain Abstraction Protocol, offering a modular, extensible, and composable stack that enables chain-abstracted applications.
 
 :::tip
 Searching for documentation on **Socket Liquidity Layer**, **Socket API**, or **Socket Widget**? These resources are part of Bungee and can be found in the [Bungee Docs](https://docs.bungee.exchange/).
 :::
 
-## Chain Abstraction vs. Cross Chain
+### The Problem
 
-Socket 2.0 is focused on **Chain Abstraction** rather than **Cross Chain**. While these terms are often used interchangeably, they are not the same thing:
+Protocols and users face significant challenges in the current multi-chain ecosystem:
 
-- **Cross Chain** protocols are designed to facilitate communication between different blockchains. They are typically used to transfer assets between chains, such as wrapped tokens or to synchronize state between chains by sending messages back and forth.
+For Protocols:
 
-- **Chain Abstraction** is a higher-level concept that abstracts away the underlying chain, allowing developers to build applications that are chain-agnostic.
+- Fragmentation of user experience, liquidity, and ecosystems across multiple blockchains.
+- Difficult choice between broad multi-chain presence (increasing operational overhead) or limited chain focus (potentially missing users).
 
-> _For example, a cross-chain protocol might allow you to transfer an asset from Optimism to Arbitrum One. Chain abstraction, on the other hand, would allow you to build an application that works on both Optimism and Arbitrum One without having to worry about the differences between the two chains._
+For Users:
 
-## Modular Order Flow Auction
+- Complex manual navigation across multiple chains.
+- Overwhelming number of intermediaries and steps required for cross-chain interactions.
 
-A key mechanism of Socket 2.0 is the Modular Order Flow Auction (MOFA). MOFA essentially creates an open marketplace for execution agents (transmitters) and off-chain user-requests (signed authorizations of user-intents), where transmitters compete to settle user requests on-chain.
+The effect of having unaligned intermediaries in between the target application and the user leads to fragmentation of users, assets, and liquidity and breaks the composability we use blockchains for.
 
-This process enables users to seamlessly interact across any supported network without concern for the inherent complexities. Users will be able to interact with applications on any chain without having to worry about the underlying chain and get the best possible execution.
+### The Solution
 
-![Modular Order Flow Auction (MOFA)](../static/img/mofa.png)
+Socket Protocol addresses these challenges with chain abstraction enabling an application-centric design. Socket protocol helps developers to create chain-abstracted packets that execute and settle on multiple chains, positioning applications as the primary touchpoint between users and blockchain networks.
 
-## More coming soon...
+![Socket Protocol](../static/img/socketprotocol.png)
 
-This is just the beginning. We are working on a lot of exciting features and improvements to Socket. Stay tuned for more updates!
+## Explore Socket Protocol
+
+Want to dive deeper into Socket Protocol? We've got you covered:
+
+- Read our comprehensive litepaper for an in-depth understanding of Socket Protocol.
+- Ready to build? [Join our waitlist](https://forms.gle/8hgm4miEyEcaBc8x5) to become one of the first developers to build with Socket.
