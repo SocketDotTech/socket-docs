@@ -38,5 +38,5 @@ Socket Protocol addresses these challenges with chain abstraction enabling an ap
 
 Want to dive deeper into Socket Protocol? We've got you covered:
 
-- Read our comprehensive litepaper for an in-depth understanding of Socket Protocol.
+- Read our comprehensive [litepaper](https://media.socket.tech/SocketProtocol_v1.pdf) for an in-depth understanding of Socket Protocol.
 - Ready to build? [Join our waitlist](https://forms.gle/8hgm4miEyEcaBc8x5) to become one of the first developers to build with Socket.
