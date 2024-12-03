@@ -1,7 +1,7 @@
 ---
 id: brand-assets
 title: Brand Assets
-sidebar_position: 2
+sidebar_position: 99
 ---
 
 Link to the brand assets folder on Google Drive:
