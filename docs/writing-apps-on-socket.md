@@ -27,11 +27,11 @@ The System consists of 3 main components.
 
 ### **Deployment Flow**
 
-![Screenshot 2024-12-02 at 10.12.53 PM.png](../static/img/Screenshot_2024-12-02_at_10.12.53_PM.png)
+![deployment_flow.png](../static/img/deployment_flow.png)
 
 ### Mint flow
 
-![Screenshot 2024-12-02 at 11.06.21 PM.png](../static/img/Screenshot_2024-12-02_at_11.06.21_PM.png)
+![mint_flow.png](../static/img/mint_flow.png)
 
 # 3. Step-by-Step Implementation
 

@@ -16,7 +16,7 @@ The huge surge and ease of deploying new chains recently has come with its own b
 
 There is a need for asynchronous atomic composability that can scale to immense number of chains.
 
-![Screenshot 2024-11-30 at 9.02.54 PM.png](../static/img/Screenshot_2024-11-30_at_9.02.54_PM.png)
+![composability.png](../static/img/composability.png)
 
 # Stage 1: Single Chain Composability
 
