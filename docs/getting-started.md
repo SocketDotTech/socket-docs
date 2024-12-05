@@ -40,7 +40,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    Copy the provided `.env.sample` file and set proper values for private key and rpc.
 
-   You can get the rpc and other details [here](https://www.notion.so/Composer-Chain-Details-14d818fd28588034a897f442a0da3860?pvs=21).
+   You can get the rpc and other details [here](/chain-information).
 
    ```bash
    cp .env.sample .env
@@ -61,7 +61,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 6. **Set up fees.**
 
-   To pay for the transactions socket makes for you on chain, you can pay using any token on a chain of your choice. You can deposit them to a `PayloadDelivery` on any chain by calling the deposit function. Find more about fees [here](https://www.notion.so/Fees-yeah-14d818fd2858801daec8fc60fa4631b5?pvs=21) and about all `PayloadDelivery` addresses [here](https://www.notion.so/Composer-Chain-Details-14d818fd28588034a897f442a0da3860?pvs=21).
+   To pay for the transactions socket makes for you on chain, you can pay using any token on a chain of your choice. You can deposit them to a `PayloadDelivery` on any chain by calling the deposit function. Find more about fees [here](https://www.notion.so/Fees-yeah-14d818fd2858801daec8fc60fa4631b5?pvs=21) and about all `PayloadDelivery` addresses [here](/chain-information).
 
    In this example we will be paying fees on Arbitrum Sepolia as you can see configured on the `Deploy.s.sol` script.
 
