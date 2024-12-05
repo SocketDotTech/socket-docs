@@ -5,7 +5,7 @@ title: Watchers
 
 # Watchers
 
-If you have read the broad architecture, first do that by reading this section
+If you have read the broad architecture, first do that by reading [this section](/architecture).
 
 ## Introduction
 
