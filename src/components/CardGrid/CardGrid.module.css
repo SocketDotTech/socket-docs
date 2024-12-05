@@ -1,0 +1,45 @@
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.cardLink {
+  text-decoration: none;
+}
+.card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  height: 120px;
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--ifm-color-primary);
+}
+.cardIcon {
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+  color: var(--ifm-color-primary);
+}
+.cardContent {
+  flex-grow: 1;
+}
+.cardTitle {
+  margin: 0 0 8px 0;
+  color: var(--ifm-color-primary);
+  font-size: 1.2rem;
+}
+.cardDescription {
+  margin: 0;
+  color: var(--ifm-color-gray-200);
+  font-size: 0.9rem;
+}

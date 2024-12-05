@@ -88,3 +88,13 @@ html[data-theme="dark"] {
   color: #d0d5dd;
   background-color: #14171f;
 }
+
+@media screen and (min-width: 1400px) {
+  article {
+    padding-right: 15%;
+  }
+}
+
+code {
+  color: #0eb0c1;
+}

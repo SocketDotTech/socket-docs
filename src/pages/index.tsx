@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-
+import { useHistory } from "@docusaurus/router";
 import styles from "./index.module.css";
 
 function HomepageHeader() {
@@ -28,12 +28,18 @@ function HomepageHeader() {
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
+  const history = useHistory();
+
+  useEffect(() => {
+    history.replace("/introduction");
+  }, [history]);
+
   return (
     <Layout
       title={`It's time to get Plugged into ${siteConfig.title}`}
       description="Socket powers chain abstracted applications."
     >
-      <HomepageHeader />
+      {/*<HomepageHeader />*/}
       <main>{/* <HomepageFeatures /> */}</main>
     </Layout>
   );

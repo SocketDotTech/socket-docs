@@ -50,10 +50,10 @@ const config: Config = {
 
   themeConfig: {
     announcementBar: {
-      id: "Bungee_Announcement",
+      id: "alpha-release",
       content:
-        "<b>ℹ️ Socket New Docs are live. API, Widget and Liquidity Layer Docs moved to <a href='https://docs.bungee.exchange'>Bungee Docs</a>. 🚧</b>",
-      backgroundColor: "#fff8e6",
+        "<b>🚧 Socket dev release is live. It is under active development and has known vulnerabilities. 🚧</b>",
+      backgroundColor: "rgb(69, 219, 156)",
       isCloseable: true,
     },
     navbar: {
@@ -71,8 +71,8 @@ const config: Config = {
         },
         {
           position: "left",
-          label: "Bungee Docs",
-          href: "https://docs.bungee.exchange",
+          label: "Dev Support",
+          href: "https://discord.gg/KMHEEMw3xU",
         },
         {
           href: "https://github.com/SocketDotTech",
@@ -93,6 +93,8 @@ const config: Config = {
     prism: {
       theme: themes.vsLight,
       darkTheme: themes.vsDark,
+      defaultLanguage: "solidity",
+      additionalLanguages: ["solidity"],
     },
     // image: "img/header-bg.png",
     metadata: [
