@@ -5,8 +5,6 @@ title: Composability
 
 # Types of Composability
 
-Status: Not started
-
 # Introduction
 
 The ability of applications and protocols to interact and build upon each other seamlessly is at the core of blockchain applications. Composition started with the context of single chain where contracts could interact with each other atomically and synchronously. With multiple chains coming onto the scene, cross-chain composability emerged. unlike single chain this is asynchronous and non-atomic.

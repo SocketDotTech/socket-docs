@@ -5,8 +5,6 @@ title: Architecture
 
 # Architecture
 
-Status: Not started
-
 ## Introduction
 
 SOCKET is a protocol and not a chain, using a combination of offchain agents(watchers, transmitters) and onchain contracts(switchboards) it enables application-builders to build truly chain-abstracted protocols. Developers can now write application-gateway contracts that can function as composers, auctions or anything else you can think about for the onchain contracts.
