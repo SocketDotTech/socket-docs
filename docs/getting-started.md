@@ -59,7 +59,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge script script/Deploy.s.sol --broadcast --gas-limit 100000000
    ```
 
-   You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`, and `Counter`.
+   You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`.
 
    Add the deployed addresses in env for using in rest of the tutorial
 
@@ -92,7 +92,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    To increment the various counters deployed on all different chains by different values we will run,
    ```bash
-   forge script script/incrementCounters.s.sol
+   forge script script/incrementCounters.s.sol --broadcast
    ```
 
    Read [here](/call-contracts#2-call-forwarders) to learn more about how forwarder addresses are assigned on the offchainVM to represent onchain contracts.
@@ -100,7 +100,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 8. **Check that the counters on chain have incremented**
 
    ```bash
-   forge script script/checkCounters.s.sol
+   forge script script/checkCounters.s.sol --broadcast
    ```
 
 # 3. Understanding the Components
