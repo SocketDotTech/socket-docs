@@ -75,10 +75,9 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 7. **Increment multiple counters**
 
-   This script makes a transaction to `CounterAppGateway` contract. This would internally call each `Counter` instance on specified chains.
-
+   To increment the various counters deployed on all different chains by different values we will call `incrementCounters`,
    ```solidity
-   forge run script/incrementCounters.s.sol
+   cast call [CounterAppGateway_ADDRESS] "incrementCounters(address[] memory, uint256)" [INSTANCES_ARRAY] [1,2,3,4] --rpc-url $SOCKET_RPC
    ```
 
 8. **Check that the counters on chain have incremented**
