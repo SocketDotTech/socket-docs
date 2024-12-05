@@ -73,11 +73,6 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "composability",
-          label: "Composability",
-        },
-        {
-          type: "doc",
           id: "switchboards",
           label: "Switchboards",
         },
