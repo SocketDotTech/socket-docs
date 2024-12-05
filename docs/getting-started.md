@@ -157,7 +157,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 ## **CounterDeployer**
 
-   The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy-contracts).
+   The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy).
 
    ```solidity
     contract CounterDeployer is AppDeployerBase {

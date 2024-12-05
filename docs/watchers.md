@@ -23,9 +23,6 @@ Watchers are extremely flexible, they sit between the user and the onchain world
 
 If watchers are offchain operators then switchboards are their counterpart, switchboards help application developers select and work with watchers. Anyone can be a watcher and anyone can create a switchboard for their watcher, allow app-developers to have full control and ability to customise. Read more about switchboards here
 
-<aside>
-💡
-
+:::info
 Watchers are offchain proof creators, switchboards onchain are proof-consumers.
-
-</aside>
+:::
