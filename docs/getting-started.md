@@ -15,13 +15,13 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 - Set up the environment with pre-configured contracts.
 - Extend a simple `Counter` contract into a **chain-abstracted** version.
-- Walk through a `CounterComposer` contract to orchestrate updates on multiple counter instances.
+- Walk through a `CounterAppGateway` contract to orchestrate updates on multiple counter instances.
 
 # 2. Setting Up Your Environment
 
 1. **Clone the Starter Kit**
 
-   The repository includes pre-built examples of `Counter` and `CounterComposer` contracts.
+   The repository includes pre-built examples of `Counter` and `CounterAppGateway` contracts.
 
    ```bash
    git clone https://github.com/SocketDotTech/socket-starter-kit
@@ -53,7 +53,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 5. **Deploy the all contracts on the offchainVM and on chain instances**
 
-   This command deploys all contracts on offchainVM. It includes the `Counter`, `CounterDeployer`, `CounterComposer`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
+   This command deploys all contracts on offchainVM. It includes the `Counter`, `CounterDeployer`, `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
    ```bash
    forge run script/Deploy.s.sol
@@ -75,7 +75,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 7. **Increment multiple counters**
 
-   This script makes a transaction to `CounterComposer` contract. This would internally call each `Counter` instance on specified chains.
+   This script makes a transaction to `CounterAppGateway` contract. This would internally call each `Counter` instance on specified chains.
 
    ```solidity
    forge run script/incrementCounters.s.sol
@@ -117,13 +117,13 @@ This example highlights how to abstract away blockchain-specific details, enabli
     }
    ```
 
-2. **CounterComposer**
+2. **CounterAppGateway**
 
-   `CounterComposer` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
+   `CounterAppGateway` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
 
    ```solidity
-   // CounterComposer is an AppGateway, this is the entry point for your app.
-    contract CounterComposer is AppGatewayBase {
+   // CounterAppGateway is an AppGateway, this is the entry point for your app.
+    contract CounterAppGateway is AppGatewayBase {
         constructor(
             address _addressResolver,
             address deployerContract_,
