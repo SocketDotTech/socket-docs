@@ -46,6 +46,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "usecases",
+          label: "Usecases",
+        },
+        {
+          type: "doc",
           id: "chain-information",
           label: "Chain Information",
         },
