@@ -56,7 +56,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    This command deploys all contracts on offchainVM. It includes the `Counter`, `CounterDeployer`, `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
    ```bash
-   forge run script/Deploy.s.sol
+   forge script script/Deploy.s.sol
    ```
 
    You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`, and `Counter`.
@@ -93,7 +93,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    To increment the various counters deployed on all different chains by different values we will run,
    ```bash
-   forge run script/incrementCounters.s.sol --rpc-url $SOCKET_RPC
+   forge script script/incrementCounters.s.sol
    ```
 
    Read [here](/call-contracts#2-call-forwarders) to learn more about how forwarder addresses are assigned on the offchainVM to represent onchain contracts.
@@ -101,7 +101,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 8. **Check that the counters on chain have incremented**
 
    ```bash
-   forge run script/checkCounters.s.sol --rpc-url $SOCKET_RPC
+   forge script script/checkCounters.s.sol
    ```
 
 # 3. Understanding the Components
