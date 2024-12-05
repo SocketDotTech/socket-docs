@@ -5,21 +5,17 @@ title: API
 
 # API usage
 
-The Socket Protocol API provides developers with a comprehensive set of tools to build chain-abstracted applications. This guide covers the essential endpoints and authentication methods needed to get started.
+We include a few helper APIs to help developers build effectively, while all data is available publicly these are to help developers build applications seamlessly.
 
 ## API Documentation
 
 Base URL - [https://apiv2.dev.socket.tech](https://apiv2.dev.socket.tech/)
 
-### 1. `getDeployedAddresses`
+### `getAddresses`
 
 **Description:**
 
 Retrieves deployed addresses for a specified deployer contract. It returns on-chain deployed addresses, along with their corresponding forwarderAddresses.
-
-contract name is the variable name you used in your App Deployer contract.
-Once you call `deployContracts()` function on your app deployer, it will take some time to deploy the on-chain contract and off-chain forwarder contract.
-If some of the addresses return as Address(0), wait for some time, as deployment might be in progress. If you get Address(0) after 5 minutes of the initial call, contact the team.
 
 **Endpoint:**
 
@@ -27,11 +23,11 @@ GET /getAddresses
 
 **Query Parameters:**
 
-| Parameter          | Type   | Description                             |
-| ------------------ | ------ | --------------------------------------- |
-| appDeployerAddress | string | The address of the app deployer.        |
-| contractName       | string | The name of the contract to query.      |
-| chainSlug          | number | The chain id to specify the blockchain. |
+| Parameter | Type | Description |
+| --- | --- | --- |
+| appDeployerAddress | string | offchain address of appdeployer contract |
+| contractId | string | The contract identifier used in deployer contract |
+| chainSlug | number | The chain id to specify the blockchain. |
 
 **Returns:**
 
@@ -45,30 +41,26 @@ A JSON object with these fields:
 	},
 	"offchain": {
 		"forwarder": "0x31828eb15fc1F18901b75329AB1d06f4C5dda43D",
-		"referenceContract": "0x72298A2135626db89D26db639c151C3fa64889aF"
+		"contractId": "0xbeca3ec2d1dd91b46d9eccba1f77d96f5e4fe32fc344efb846bbf5cbad45e19e"
 	}
 }
 ```
 
-**Errors:**
-
-Throws an error if the reference contract address is undefined or zero.
-
-- Check if the `contractName` matches the variable name in deployerContract
-
 **Example Request:**
 
 ```json
-GET /getAddresses?appDeployerAddress=0x1234567890abcdef&contractName=counter&chainSlug=421614
+GET /getAddresses?appDeployerAddress=0xD6E4aA932147A3FE5311dA1b67D9e73da06F9cEf&contractId=0xbeca3ec2d1dd91b46d9eccba1f77d96f5e4fe32fc344efb846bbf5cbad45e19e&chainSlug=421614
 ```
 
-### 2. `getForwarderAddress`
+Note: Once you call `deployContracts()` function on your app deployer, it will take some time to deploy the on-chain contract and off-chain forwarder contract.
+
+If some of the addresses return as Address(0), wait for some time, as deployment might be in progress. If you get Address(0) after 5 minutes of the initial call, contact the team.
+
+### `getForwarderAddress`
 
 **Description:**
 
 Retrieves the forwarder address for a given on-chain address. This address is predicted using create2.
-
-If the on-chain contracts are deployed using an app deployer, they will already have a forwarder contract. However, suppose you wish to use a contract already deployed on-chain, for example, UniswapFactory. In that case, you will get `isDeployed` as false, and you can deploy it using the [forwarder address documentation](/call-contracts#2-call-forwarders) and then start using it.
 
 **Endpoint:**
 
@@ -76,10 +68,10 @@ GET /getForwarderAddress
 
 **Query Parameters:**
 
-| Parameter      | Type   | Description                            |
-| -------------- | ------ | -------------------------------------- |
-| onChainAddress | string | The on-chain address                   |
-| chainSlug      | number | The chain id to specify the blockchain |
+| Parameter | Type | Description |
+| --- | --- | --- |
+| onChainAddress | string | The on-chain address |
+| chainSlug | number | The chain id to specify the blockchain |
 
 **Returns:**
 
@@ -97,7 +89,7 @@ A JSON object with these fields:
 **Example Request:**
 
 ```json
-GET /getForwarderAddress?onChainAddress=0x3e3d9f517De1CA6d41f5A79ED1D9340d8fF3FC7F&chainSlug=421614
+GET /getForwarderAddress?onChainAddress=0x7Fe1141202de13F6884d2A50612DC7685eC68640&chainSlug=421614"
 ```
 
 **Example Response:**
@@ -111,9 +103,11 @@ GET /getForwarderAddress?onChainAddress=0x3e3d9f517De1CA6d41f5A79ED1D9340d8fF3FC
 }
 ```
 
-### 3. `Tx Details`
+Note: If the on-chain contracts are deployed using an app deployer, they will already have a forwarder contract. However, suppose you wish to use a contract already deployed on-chain, for example, UniswapFactory. In that case, you will get `isDeployed` as false, and you can deploy it using \<insert forwarder deployment doc link here\> and then start using it.
 
-/detailsByTx
+### `Tx Details`
+
+/getDetailsByTxHash
 
 **Description**
 
@@ -167,31 +161,31 @@ The response is a JSON object containing the following fields:
 
 **Response Fields Explanation**
 
-| Field                                      | Type           | Description                                                          |
-| ------------------------------------------ | -------------- | -------------------------------------------------------------------- |
-| apiStatus                                  | string         | Status of the API call (e.g., "SUCCESS")                             |
-| status                                     | string         | Current transaction status (e.g., IN_PROGRESS, REVERTING, COMPLETED) |
-| Payloads                                   | array          | Array of payload objects for the transaction                         |
-| payloadId                                  | string         | Unique identifier for the payload                                    |
-| chainSlug                                  | number         | Blockchain identifier                                                |
-| target                                     | string         | Target address for the payload                                       |
-| payload                                    | string         | Payload data                                                         |
-| callType                                   | string         | Type of call (e.g., “READ”, "WRITE", "DISTRIBUTE_FEE", “WITHDRAW”)   |
-| executeDetails                             | object         | Execution details of the payload                                     |
-| executeDetails.executeTxHash               | string or null | Execution transaction hash                                           |
-| executeDetails.executionStatus             | string         | Execution status (e.g., "PROMISE_RESOLVED", etc)                     |
-| executeDetails.returnData                  | string         | Data returned from execution                                         |
-| executeDetails.callbackTxHash              | string or null | Callback transaction hash                                            |
-| simulationDetails                          | object         | Payload simulation details                                           |
-| simulationDetails.executeSimulationStatus  | string         | Simulation status (e.g., "SIMULATION_SUCCESS")                       |
-| simulationDetails.executeRevertString      | string         | Error message if simulation failed                                   |
-| simulationDetails.callbackSimulationStatus | string         | Callback simulation status                                           |
-| simulationDetails.callbackRevertString     | string         | Callback simulation error message                                    |
-| .feesInfo                                  | object         | Transaction fee information                                          |
-| .feesInfo.feePoolChain                     | number         | Fee pool chain id                                                    |
-| .feesInfo.feePoolToken                     | string         | Fee token Address                                                    |
-| .feesInfo.maxFees                          | string         | Maximum allowed fees for payloads                                    |
-| .feesInfo.fee                              | string         | Actual fee charged by transmitter                                    |
+| Field | Type | Description |
+| --- | --- | --- |
+| apiStatus | string | Status of the API call (e.g., "SUCCESS") |
+| status | string | Current transaction status (e.g., IN_PROGRESS, REVERTING, COMPLETED) |
+| Payloads | array | Array of payload objects for the transaction |
+| payloadId | string | Unique identifier for the payload |
+| chainSlug | number | Blockchain identifier |
+| target | string | Target address for the payload |
+| payload | string | Payload data |
+| callType | string | Type of call (e.g., “READ”, "WRITE", "DISTRIBUTE_FEE", “WITHDRAW”) |
+| executeDetails | object | Execution details of the payload |
+| executeDetails.executeTxHash | string or null | Execution transaction hash |
+| executeDetails.executionStatus | string | Execution status (e.g., "PROMISE_RESOLVED", etc) |
+| executeDetails.returnData | string | Data returned from execution |
+| executeDetails.callbackTxHash | string or null | Callback transaction hash |
+| simulationDetails | object | Payload simulation details |
+| simulationDetails.executeSimulationStatus | string | Simulation status (e.g., "SIMULATION_SUCCESS") |
+| simulationDetails.executeRevertString | string | Error message if simulation failed |
+| simulationDetails.callbackSimulationStatus | string | Callback simulation status |
+| simulationDetails.callbackRevertString | string | Callback simulation error message |
+| .feesInfo | object | Transaction fee information |
+| .feesInfo.feePoolChain | number | Fee pool chain id |
+| .feesInfo.feePoolToken | string | Fee token Address |
+| .feesInfo.maxFees | string | Maximum allowed fees for payloads |
+| .feesInfo.fee | string | Actual fee charged by transmitter |
 
 **ExecutionStatus Values**
 
@@ -212,7 +206,7 @@ The response is a JSON object containing the following fields:
 **Example Request**
 
 ```json
-GET /detailsByTx?txHash=0x1c1eddc12771a9f9a9d9b2882c0d7012fcf9b8ee2bb85a76fcb77ce4226340b8
+GET /getDetailsByTxHash?txHash=0x1c1eddc12771a9f9a9d9b2882c0d7012fcf9b8ee2bb85a76fcb77ce4226340b8
 ```
 
 **Example Response**
@@ -254,3 +248,16 @@ GET /detailsByTx?txHash=0x1c1eddc12771a9f9a9d9b2882c0d7012fcf9b8ee2bb85a76fcb77
   ]
 }
 ```
+
+If the callType is `DEPLOY` , you will see an extra object in payload details as follows -
+
+```json
+deployerDetails":
+  {
+    "onChainAddress": "0x120C7763B29c39d6A2A354B73A868Cc19abDcbf0",
+    "forwarderAddress": "0xFfc8F5a446647515afd168F9F38772b38e2d0837",
+    "isForwarderDeployed": false
+  }
+```
+
+As soon as on-chain deployment is done, we will get the onChainAddress and forwarderAddress. ForwarderAddress is derived from chainSlug and onChainAddress. In the callback, forwarderAddress is deployed and the `isForwarderDeployed` variable will become `true`.  Now you can start using your forwarderAddress.
