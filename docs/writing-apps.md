@@ -97,7 +97,7 @@ import "./MyToken.sol";
 import "socket-poc/contracts/base/AppDeployerBase.sol";
 
 contract MyTokenDeployer is AppDeployerBase {
-    address public myToken;
+    bytes32 public myToken = _createContractId("myToken");
 
     constructor(
         address addressResolver_,
@@ -106,7 +106,6 @@ contract MyTokenDeployer is AppDeployerBase {
         string calldata symbol_,
         uint8 decimals_
     ) AppDeployerBase(addressResolver_, feesData_) {
-        myToken = address(new MyToken(name_, symbol_, decimals_));
         creationCodeWithArgs[myToken] = abi.encodePacked(
             type(MyToken).creationCode,
             abi.encode(name_, symbol_, decimals_)

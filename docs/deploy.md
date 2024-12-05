@@ -13,7 +13,7 @@ Deployments of onchain contracts from Offchain VM is done using a Deployer contr
 
 ```solidity
 contract MyTokenDeployer is AppDeployerBase {
-    address public myToken;
+    bytes32 public myToken = _createContractId("myToken");
 
     constructor(
         address addressResolver_,
@@ -22,7 +22,6 @@ contract MyTokenDeployer is AppDeployerBase {
         string calldata symbol_,
         uint8 decimals_
     ) AppDeployerBase(addressResolver_, feesData_) {
-        myToken = address(new MyToken(name_, symbol_, decimals_));
         creationCodeWithArgs[myToken] = abi.encodePacked(
             type(MyToken).creationCode,
             abi.encode(name_, symbol_, decimals_)
@@ -140,8 +139,8 @@ This contract needs to be on chain, therefore lets change `MyTokenDeployer` to i
 
 ```solidity
 contract MyTokenDeployer is AppDeployerBase {
-    address public myToken;
-    address public myTokenVault;
+    bytes32 public myToken = _createContractId("myToken");
+    bytes32 public myTokenVault = _createContractId("myTokenVault");
 
     constructor(
         address addressResolver_,
@@ -150,13 +149,11 @@ contract MyTokenDeployer is AppDeployerBase {
         string calldata symbol_,
         uint8 decimals_
     ) AppDeployerBase(addressResolver_, feesData_) {
-        myToken = address(new MyToken(name_, symbol_, decimals_));
         creationCodeWithArgs[myToken] = abi.encodePacked(
             type(MyToken).creationCode,
             abi.encode(name_, symbol_, decimals_)
         );
 
-        myTokenVault = address(new MyTokenVault());
         creationCodeWithArgs[myTokenVault] = type(MyTokenVault).creationCode;
     }
 

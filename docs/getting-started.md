@@ -149,7 +149,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
             addressResolver.setContractsToGateways(deployerContract_);
         }
 
-        function incrementCounter(address _instance) public async(abi.encode(_instance)) {
+        function incrementCounter(address _instance) public async {
             Counter(_instance).increase();
         }
     }
@@ -161,23 +161,22 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    ```solidity
     contract CounterDeployer is AppDeployerBase {
-        address public counter;
+        bytes32 public counter = _createContractId("counter");
 
         constructor(
             address addressResolver_,
             FeesData memory feesData_
         ) AppDeployerBase(addressResolver_, feesData_) Ownable(msg.sender) {
-            counter = address(new Counter());
             creationCodeWithArgs[counter] = type(Counter).creationCode;
         }
 
         function deployContracts(
             uint32 chainSlug
-        ) external async(abi.encode(chainSlug)) {
+        ) external async {
             _deploy(counter, chainSlug);
         }
 
-        function initialize(uint32 chainSlug) public override async(abi.encode(chainSlug)) {
+        function initialize(uint32 chainSlug) public override async{
             address socket = getSocketAddress(chainSlug);
             address counterForwarder = forwarderAddresses[counter][chainSlug];
             Counter(counterForwarder).setSocket(socket);

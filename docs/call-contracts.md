@@ -39,8 +39,9 @@ Similarly this is how you call a contract that is on chain from Socket’s offch
 ```solidity
 // this contract is on chain
 contract Note {
-        string pulic note;
-        modifier onlySOCKET() {
+    string public note;
+
+    modifier onlySOCKET() {
         require(msg.sender == socket, "not socket");
         _;
     }
@@ -104,7 +105,7 @@ Lets extend the `MyTokenAppGateway` to add a `transfer` function that burns toke
 
 ```solidity
 contract MyTokenAppGateway is AppGatewayBase {
-        ...
+    ...
 
     function transfer(
         uint256 amount,
@@ -147,15 +148,15 @@ contract MyTokenAppGateway is AppGatewayBase {
 
         function transferAll(
                 address srcForwarder,
-                address dstForwarder
+                address dstForwarder    
         ) external async {
-                isReadCall = false;
-                MyToken(srcForwarder).burnAll(msg.sender);
-                address asyncPromise = IPromise(srcForwarder).then(
-            this.transferAllCallback.selector,
-            abi.encode(msg.sender, dstForwarder) // passed to callback
-        );
-        isValidPromise[asyncPromise] = true;
+            _readCallOn();
+            MyToken(srcForwarder).burnAll(msg.sender);
+            IPromise(srcForwarder).then(
+                this.transferAllCallback.selector,
+                abi.encode(msg.sender, dstForwarder) // passed to callback
+            );
+            _readCallOff();
         }
 
         function transferAllCallback(

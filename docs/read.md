@@ -23,21 +23,20 @@ contract MyTokenAppGateway is AppGatewayBase {
     mapping(address => uint256) public fetchedSupply;
 
     function fetchSupply(address forwarder) async {
-        isReadCall = true;
+        _readCallOn();
 
         IMyTokenReader(forwarder).totalSupply();
-
-        address asyncPromise = IPromise(forwarder).then(
+        IPromise(forwarder).then(
             this.fetchSupplyCallback.selector,
             abi.encode(forwarder) // passed to callback
         );
 
-				isValidPromise[asyncPromise] = true;
+        _readCallOff();
     }
 
     function fetchSupplyCallback(
         bytes calldata data,
-				bytes calldata returnData
+        bytes calldata returnData
     ) external onlyPromises {
         uint256 forwarder = abi.decode(data, (address));
         uint256 supply = abi.decode(returnData, (uint256));
