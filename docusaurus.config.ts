@@ -71,8 +71,8 @@ const config: Config = {
         },
         {
           position: "left",
-          label: "Bungee Docs",
-          href: "https://docs.bungee.exchange",
+          label: "Dev Support",
+          href: "https://discord.gg/KMHEEMw3xU",
         },
         {
           href: "https://github.com/SocketDotTech",
