@@ -94,24 +94,27 @@ This example highlights how to abstract away blockchain-specific details, enabli
    This is the instance of the app that is deployed on chain. Unlike a normal counter, the `increase` function of this counter is called via SOCKET.
 
    ```solidity
-   contract Counter {
-       address public socket;
-       uint256 public counter;
+    contract Counter is Ownable(msg.sender) {
+        address public socket;
+        uint256 public counter;
 
-       modifier onlySOCKET() {
-           require(msg.sender == socket, "not SOCKET");
-           _;
-       }
+        modifier onlySocket() {
+            require(msg.sender == socket, "not socket");
+            _;
+        }
 
-       function setSocket(address _socket) external {
-           socket = _socket;
-       }
+        function setSocket(address _socket) external onlyOwner {
+            socket = _socket;
+        }
 
-       // Called by SOCKET protocol
-       function increase() external onlySOCKET {
-           counter++;
-       }
-   }
+        function getSocket() external view returns (address) {
+            return socket;
+        }
+
+        function increase() external onlySocket {
+            counter++;
+        }
+    }
    ```
 
 2. **CounterComposer**
@@ -120,25 +123,19 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    ```solidity
    // CounterComposer is an AppGateway, this is the entry point for your app.
-   contract CounterComposer is AppGatewayBase {
-       constructor(
-           address _addressResolver,
-           address deployerContract_,
-           FeesData memory feesData_
-       ) AppGatewayBase(_addressResolver, feesData_) Ownable(msg.sender) {
-           addressResolver.setContractsToGateways(deployerContract_);
-       }
+    contract CounterComposer is AppGatewayBase {
+        constructor(
+            address _addressResolver,
+            address deployerContract_,
+            FeesData memory feesData_
+        ) AppGatewayBase(_addressResolver, feesData_) Ownable(msg.sender) {
+            addressResolver.setContractsToGateways(deployerContract_);
+        }
 
-       function incrementCounters(
-           address[] memory instances
-       ) public async(abi.encode(_instance)) {
-           // the increase function is called on given list of instances
-           // this
-           for (uint256 i = 0; i < instances.length; i++) {
-               Counter(instances[i]).increase();
-           }
-       }
-   }
+        function incrementCounter(address _instance) public async(abi.encode(_instance)) {
+            Counter(_instance).increase();
+        }
+    }
    ```
 
 3. **CounterDeployer**
@@ -146,27 +143,27 @@ This example highlights how to abstract away blockchain-specific details, enabli
    The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](https://www.notion.so/How-to-deploy-17695b777dcd43dc98a39585d25aeea3?pvs=21).
 
    ```solidity
-   contract CounterDeployer is AppDeployerBase {
-       address public counter;
+    contract CounterDeployer is AppDeployerBase {
+        address public counter;
 
-       constructor(
-           address addressResolver_,
-           FeesData memory feesData_
-       ) AppDeployerBase(addressResolver_, feesData_) Ownable(msg.sender) {
-           counter = address(new Counter());
-           creationCodeWithArgs[counter] = type(Counter).creationCode;
-       }
+        constructor(
+            address addressResolver_,
+            FeesData memory feesData_
+        ) AppDeployerBase(addressResolver_, feesData_) Ownable(msg.sender) {
+            counter = address(new Counter());
+            creationCodeWithArgs[counter] = type(Counter).creationCode;
+        }
 
-       function deployContracts(
-           uint32 chainSlug
-       ) external async(abi.encode(chainSlug)) {
-           _deploy(counter, chainSlug);
-       }
+        function deployContracts(
+            uint32 chainSlug
+        ) external async(abi.encode(chainSlug)) {
+            _deploy(counter, chainSlug);
+        }
 
-       function initialize(uint32 chainSlug) public override async(abi.encode(chainSlug)) {
-           address socket = getSocketAddress(chainSlug);
-           address counterForwarder = forwarderAddresses[counter][chainSlug];
-           Counter(counterForwarder).setSocket(socket);
-       }
-   }
+        function initialize(uint32 chainSlug) public override async(abi.encode(chainSlug)) {
+            address socket = getSocketAddress(chainSlug);
+            address counterForwarder = forwarderAddresses[counter][chainSlug];
+            Counter(counterForwarder).setSocket(socket);
+        }
+    }
    ```
