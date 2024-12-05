@@ -86,6 +86,11 @@ const sidebars: SidebarsConfig = {
           id: "watchers",
           label: "Watchers",
         },
+        {
+          type: "link",
+          href: "https://media.socket.tech/SocketProtocol_v1.pdf",
+          label: "v1 Whitepaper",
+        },
       ],
     },
     {

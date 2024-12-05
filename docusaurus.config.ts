@@ -49,6 +49,13 @@ const config: Config = {
   ],
 
   themeConfig: {
+    announcementBar: {
+      id: "alpha-release",
+      content:
+        "<b>🚧 Socket dev release is live. It is under active development and has known vulnerabilities. 🚧</b>",
+      backgroundColor: "rgb(69, 219, 156)",
+      isCloseable: true,
+    },
     navbar: {
       title: "Socket",
       logo: {
