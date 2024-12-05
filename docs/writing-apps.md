@@ -196,11 +196,17 @@ contract SetupMyToken is Script {
     function setUp() public {}
 
     function run() public {
-        vm.startBroadcast();
+        address addressResolver = vm.envAddress("ADDRESS_RESOLVER");
+
+        string memory rpc = vm.envString("SOCKET_RPC");
+        vm.createSelectFork(rpc);
+
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
 
         MyTokenDeployer myTokenDeployer = new MyTokenDeployer(
             addressResolver,
-            feesData, // move to setter
+            feesData,
             "MyToken",
             "MTK",
             18
@@ -208,7 +214,7 @@ contract SetupMyToken is Script {
 
         MyTokenDistributor myTokenDistributor = new MyTokenDistributor(
             addressResolver,
-            address(myTokenDeployer), // move to setter
+            address(myTokenDeployer),
             feesData
         );
 
@@ -229,7 +235,7 @@ contract SetupMyToken is Script {
 Run the script using cast, providing rpc and private key.
 
 ```bash
-forge script ./script/SetupMyToken.s.sol --rpc-url <RPC_URL> --private-key <PRIVATE_KEY>
+forge script ./script/SetupMyToken.s.sol
 ```
 
 ### Fund your App
@@ -251,7 +257,11 @@ contract DeployMyToken is Script {
     function setUp() public {}
 
     function run() public {
-        vm.startBroadcast();
+        string memory rpc = vm.envString("SOCKET_RPC");
+        vm.createSelectFork(rpc);
+
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
 
         MyTokenDeployer myTokenDeployer = MyTokenDeployer(<deployerAddress>);
         myTokenDeployer.deployContracts(<chainSlug1>);
@@ -268,7 +278,7 @@ Set proper values for `deployerAddress` and `chainSlugs` before running this scr
 `deployerAddress` should have been logged in by previous script.
 
 ```bash
-forge script ./script/DeployMyToken.s.sol --rpc-url <RPC_URL> --private-key <PRIVATE_KEY>
+forge script ./script/DeployMyToken.s.sol
 ```
 
 Deployment of on chain contracts should take couple minutes. You can track the status of this request and also check the deployed addresses using our [apis](/api).
