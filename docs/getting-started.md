@@ -56,7 +56,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    This command deploys all contracts on offchainVM. It includes the `Counter`, `CounterDeployer`, `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
    ```bash
-   forge script script/Deploy.s.sol
+   forge script script/Deploy.s.sol --broadcast --gas-limit 100000000
    ```
 
    You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`, and `Counter`.
@@ -64,7 +64,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    Add the deployed addresses in env for using in rest of the tutorial
 
    ```bash
-   export COUNTER_APPGATEWAY=<Counter App Address>;
+   export COUNTER_APP_GATEWAY=<Counter App Address>;
    export COUNTER_DEPLOYER=<Counter Deployer Address>;
    ```
 
@@ -75,10 +75,10 @@ This example highlights how to abstract away blockchain-specific details, enabli
    To pay for this increment counter transaction, deposit `sepoliaETH` to the contract address of the `PayloadDeliveryPlug` by running:
 
    ```bash
-   cast send 0x82dc804B1A84474266d59e1ccD51FAE43B4df19B "deposit(address,uint256,address)" \
+   cast send 0x9EDfb162b725CF6d628D68af200cAe8b624111e "deposit(address,uint256,address)" \
        0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
        <AMOUNT> \
-       $COUNTER_APPGATEWAY \
+       $COUNTER_APP_GATEWAY \
        --value <AMOUNT> \
        --rpc-url $SEPOLIA_RPC \
        --private-key $PRIVATE_KEY
