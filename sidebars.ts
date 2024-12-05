@@ -49,6 +49,11 @@ const sidebars: SidebarsConfig = {
           id: "chain-information",
           label: "Chain Information",
         },
+        {
+          type: "doc",
+          id: "fees",
+          label: "offchainVM Fees",
+        },
       ],
     },
     {

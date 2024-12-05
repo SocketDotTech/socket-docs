@@ -233,7 +233,7 @@ forge script ./script/SetupMyToken.s.sol --rpc-url <RPC_URL> --private-key <PRIV
 
 ### Fund your App
 
-Next, go on to setup fees so that offchainVM can send transactions and deploy contracts on your app’s behalf. On any supported chain, deposit fees against `MyTokenDistributor`’s address. Read more about setting up fees and generating `feesData` [here](https://www.notion.so/Fees-yeah-14d818fd2858801daec8fc60fa4631b5?pvs=21).
+Next, go on to setup fees so that offchainVM can send transactions and deploy contracts on your app’s behalf. On any supported chain, deposit fees against `MyTokenDistributor`’s address. Read more about setting up fees and generating `feesData` [here](/fees).
 
 ### Deploy Token to chains: DeployMyToken.s.sol
 
