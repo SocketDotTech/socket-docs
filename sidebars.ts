@@ -73,6 +73,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "switchboards",
+          label: "Switchboards",
+        },
+        {
+          type: "doc",
           id: "transmitters",
           label: "Transmitters",
         },
