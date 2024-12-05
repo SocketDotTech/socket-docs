@@ -7,7 +7,7 @@ title: Writting Apps on SOCKET
 
 # 1. Introduction
 
-In this guide, we’ll build a **Airdrop application** using the Socket Protocol. Make sure your environment is set up with [socket-starter-kit](https://www.notion.so/Getting-Started-c1862371ea7b40aabc83a20b065785a1?pvs=21) before proceeding.
+In this guide, we’ll build a **Airdrop application** using the Socket Protocol. Make sure your environment is set up with [socket-starter-kit](/getting-started) before proceeding.
 
 You’ll learn how to:
 
@@ -123,11 +123,11 @@ contract MyTokenDeployer is AppDeployerBase {
 }
 ```
 
-In the `constructor`, a copy of `MyToken` is deployed to the offchainVM, and its `creationCode` along with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains. While this example handles a single contract, you can extend it to manage multiple contracts by storing their creation codes. The constructor also takes in `addressResolver` and `feesData`, we will talk more on these at a later stage. Or you can read more about them [here](https://www.notion.so/How-to-call-smart-contracts-14d818fd2858808281cce0ca530b2e66?pvs=21).
+In the `constructor`, a copy of `MyToken` is deployed to the offchainVM, and its `creationCode` along with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains. While this example handles a single contract, you can extend it to manage multiple contracts by storing their creation codes. The constructor also takes in `addressResolver` and `feesData`, we will talk more on these at a later stage. Or you can read more about them [here](/call-contracts).
 
 The `deployContracts` function takes a `chainSlug` as an argument, specifying the chain where the contract should be deployed. It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains.
 
-The `initialize` function is empty in this example. Use it for setting chain-specific or dynamic variables after deployment if needed. More details [here](https://www.notion.so/How-to-deploy-17695b777dcd43dc98a39585d25aeea3?pvs=21).
+The `initialize` function is empty in this example. Use it for setting chain-specific or dynamic variables after deployment if needed. More details [here](/deploy).
 
 ### AppGateway Contract implementation: MyTokenDistributor.sol
 
@@ -171,7 +171,7 @@ contract MyTokenDistributor is AppGatewayBase {
 
 In constructor we set the `deployerContract` as a contract that belongs to this Gateway. This is how you indicate which contracts are allowed to call your onchain contracts and SOCKET protocol knows where to charge fees from when a contract on offchainVM calls a contract on chain.
 
-The `claimAirdrop` function again has an async modifier, similar to `deployContracts` and `initialize` function of the deployer. This modifier should be used whenever read or write calls are made to the underlying contracts. You can read more about [writes](https://www.notion.so/How-to-call-smart-contracts-14d818fd2858808281cce0ca530b2e66?pvs=21) and [reads](https://www.notion.so/How-to-read-onchain-state-5029cd58e81f45a092228673bf395bf3?pvs=21).
+The `claimAirdrop` function again has an async modifier, similar to `deployContracts` and `initialize` function of the deployer. This modifier should be used whenever read or write calls are made to the underlying contracts. You can read more about [writes](/call-contracts) and [reads](/read).
 
 # 4. Deployment and Fee setup
 
@@ -181,7 +181,7 @@ With the contracts ready, we can go on to deploy things. In true Chain Abstracte
 
 You need to deploy the `MyTokenDeployer` and `MyTokenDistrbutor` to the offchainVM.
 
-You can get the `addressResolver` from [here](https://www.notion.so/Composer-Chain-Details-14d818fd28588034a897f442a0da3860?pvs=21).
+You can get the `addressResolver` from [here](/chain-information).
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -270,7 +270,7 @@ Set proper values for `deployerAddress` and `chainSlugs` before running this scr
 forge script ./script/DeployMyToken.s.sol --rpc-url <RPC_URL> --private-key <PRIVATE_KEY>
 ```
 
-Deployment of on chain contracts should take couple minutes. You can track the status of this request and also check the deployed addresses using our [apis](https://www.notion.so/API-usage-150818fd2858803e8f46e6e45542258c?pvs=21).
+Deployment of on chain contracts should take couple minutes. You can track the status of this request and also check the deployed addresses using our [apis](/api).
 
 # 5. Testing
 
@@ -312,9 +312,9 @@ contract AddReceivers is Script {
 
 ### Claim Airdrop: ClaimAirdrop.s.sol
 
-For each receiver that was added in previous step, they can call claimAirdrop with their desired instance address to mint tokens on the desired chain. Use our [apis](https://www.notion.so/API-usage-150818fd2858803e8f46e6e45542258c?pvs=21) to get instance addresses.
+For each receiver that was added in previous step, they can call claimAirdrop with their desired instance address to mint tokens on the desired chain. Use our [apis](/api) to get instance addresses.
 
-Note that the instance addresses are not the same as where token contracts are deployed on chain. The instance here is a forwarder address, read more about it [here](https://www.notion.so/How-to-call-smart-contracts-14d818fd2858808281cce0ca530b2e66?pvs=21).
+Note that the instance addresses are not the same as where token contracts are deployed on chain. The instance here is a forwarder address, read more about it [here](/call-contracts).
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED

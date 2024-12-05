@@ -45,7 +45,7 @@ It extends the `AppDeployerBase` to manage the deployment process.
 
 In the `constructor`, a copy of `MyToken` is deployed to the offchainVM, and its `creationCode` along with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains. The constructor also takes in `addressResolver` and `feesData`, we will talk more on these at a later stage. Or you can read more about them [here](/call-contracts).
 
-The `deployContracts` function takes a `chainSlug` as an argument, specifying the chain where the contract should be deployed. It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains. When you call \_deploy, both the onchain contract and its [forwarder](https://www.notion.so/How-to-call-smart-contracts-14d818fd2858808281cce0ca530b2e66?pvs=21) are deployed.
+The `deployContracts` function takes a `chainSlug` as an argument, specifying the chain where the contract should be deployed. It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains. When you call \_deploy, both the onchain contract and its [forwarder](/call-contracts) are deployed.
 
 The `initialize` function is empty in this example, lets see when that can be used next.
 

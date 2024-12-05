@@ -68,7 +68,7 @@ GET /getAddresses?appDeployerAddress=0x1234567890abcdef&contractName=counter&cha
 
 Retrieves the forwarder address for a given on-chain address. This address is predicted using create2.
 
-If the on-chain contracts are deployed using an app deployer, they will already have a forwarder contract. However, suppose you wish to use a contract already deployed on-chain, for example, UniswapFactory. In that case, you will get `isDeployed` as false, and you can deploy it using the [forwarder address documentation](https://www.example.com) and then start using it.
+If the on-chain contracts are deployed using an app deployer, they will already have a forwarder contract. However, suppose you wish to use a contract already deployed on-chain, for example, UniswapFactory. In that case, you will get `isDeployed` as false, and you can deploy it using the [forwarder address documentation](/call-contracts#2-call-forwarders) and then start using it.
 
 **Endpoint:**
 
