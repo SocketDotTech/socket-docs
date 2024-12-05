@@ -140,7 +140,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 3. **CounterDeployer**
 
-   The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](https://www.notion.so/How-to-deploy-17695b777dcd43dc98a39585d25aeea3?pvs=21).
+   The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy-contracts).
 
    ```solidity
     contract CounterDeployer is AppDeployerBase {
