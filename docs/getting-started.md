@@ -87,8 +87,21 @@ This example highlights how to abstract away blockchain-specific details, enabli
    Replace `<AMOUNT>` in wei with more than 0.01 ETH. Please ensure the wallet you are using has at least 0.01 Arbitrum Sepolia ETH. Feel free to use any of the supported chains and run the command accordingly.
    You can pay using any token on a chain of your choice that has a `PayloadDelivery` contract. You can deposit them to a `PayloadDelivery` on any chain by calling the `deposit` function. Find all about the available `PayloadDelivery` addresses [here](/chain-information) and about fees [here](/fees)
 
+7. **Deploy onchain contracts**
 
-7. **Increment multiple counters**
+   ```bash
+   forge script script/deployOnchain.s.sol --broadcast
+   ```
+
+   Let's ensure that the funds have been spent to pay for the transaction by running,
+
+   ```bash
+   https://apiv2.dev.socket.tech/getDetailsByTxHash?txHash=<TX_HASH>
+   ```
+
+   Replace `<TX_HASH>` with the last transaction executed and ensure status is `COMPLETED`.
+
+8. **Increment multiple counters**
 
    To increment the various counters deployed on all different chains by different values we will run,
    ```bash
@@ -97,7 +110,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    Read [here](/call-contracts#2-call-forwarders) to learn more about how forwarder addresses are assigned on the offchainVM to represent onchain contracts.
 
-8. **Check that the counters on chain have incremented**
+9. **Check that the counters on chain have incremented**
 
    ```bash
    forge script script/checkCounters.s.sol --broadcast
