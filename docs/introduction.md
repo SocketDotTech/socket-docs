@@ -3,35 +3,26 @@ id: introduction
 title: What is Socket Protocol?
 ---
 
-## What is Socket Protocol?
+## What is SOCKET Protocol?
 
-Socket Protocol is the first Chain Abstraction Protocol, offering a modular, extensible, and composable stack that enables chain-abstracted applications.
+SOCKET Protocol is the first chain-abstraction protocol, enabling developers to build chain-abstracted applications to compose users, accounts and applications across 300+ rollups and chains. Chain-Abstraction is a new computing paradigm for developers, enabling developers to leverage chains as servers/databases, enabling them to reach all users and applications spread across networks while providing a consistent monolithic experience to end users and applications. 
 
-### The Problem
+SOCKET is a chain-abstraction protocol, not a network(chain/rollup). Using a combination of offchain agents(watchers, transmitters) and onchain contracts(switchboards) it enables application-builders to build truly chain-abstracted protocols. 
 
-Protocols and users face significant challenges in the current multi-chain ecosystem:
+![image.png](../static/img/architecture.png)
 
-For Protocols:
+Leveraging SOCKET protocol, application developers have the ability to not just control the onchain elements of their application but also define additional offchain logic that can assist users, help with composing smart contracts or execute some pre-execution logic like auctions or resource-locks, security checks etc while being in full control of their application and its properties at all times. SOCKET is fully modular and extremely flexible to enable application developers to mold the infrastructure according to their requirements. 
 
-- Fragmentation of user experience, liquidity, and ecosystems across multiple blockchains.
-- Difficult choice between broad multi-chain presence (increasing operational overhead) or limited chain focus (potentially missing users).
+Start reading more about the protocol in this section
 
-For Users:
+## Top Features
 
-- Complex manual navigation across multiple chains.
-- Overwhelming number of intermediaries and steps required for cross-chain interactions.
+SOCKET is extremely flexible and generic, to allow developers to create and innovate permissionlessly while being in full control of the underlying infrastructure and its properties. The protocol can be leveraged to enable unique usecases here we highlight the top 2 properties or features:
+- **ChainAbstracted Composability**: Ability to call any function on any contract on any chain via plain solidity, no cross-chain messaging, async solidity helps massively in terms of improving the developer experience. 
+- **Pre-Execution**: Ability for developers to execute additional logic in the user-flow before the onchain contracts are executed is super powerful enabling various features like auctions, intents or really anything else. 
 
-The effect of having unaligned intermediaries in between the target application and the user leads to fragmentation of users, assets, and liquidity and breaks the composability we use blockchains for.
+Read more about the usecases SOCKET enables in this section
 
-### The Solution
+## Top Links!
 
-Socket Protocol addresses these challenges with chain abstraction enabling an application-centric design. Socket protocol helps developers to create chain-abstracted packets that execute and settle on multiple chains, positioning applications as the primary touchpoint between users and blockchain networks.
 
-![Socket Protocol](../static/img/socketprotocol.png)
-
-## Explore Socket Protocol
-
-Want to dive deeper into Socket Protocol? We've got you covered:
-
-- Read our comprehensive [Whitepaper](https://media.socket.tech/SocketProtocol_v1.pdf) for an in-depth understanding of Socket Protocol.
-- Ready to build? [Join our waitlist](https://forms.gle/8hgm4miEyEcaBc8x5) to become one of the first developers to build with Socket.
