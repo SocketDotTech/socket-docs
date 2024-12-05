@@ -17,9 +17,9 @@ Start reading more about the protocol in this section
 
 ## Top Features
 
-SOCKET is extremely flexible and generic, to allow them to create and innovate permissionlessly while being in full control of the underlying infrastructure and its properties. The protocol can be leveraged to enable alot of unique usecases here we highlight the top 2 properties or features:
-- ChainAbstracted Composability: Ability to call any function on any contract on any chain via plain solidity, no cross-chain messaging, async solidity helps massively in terms of improving the developer experience. 
-- Per-Execution: Ability for developers to execute additional logic in the user-flow before the onchain contracts are executed is super powerful enabling various features like auctions, intents or really anything else. 
+SOCKET is extremely flexible and generic, to allow developers to create and innovate permissionlessly while being in full control of the underlying infrastructure and its properties. The protocol can be leveraged to enable unique usecases here we highlight the top 2 properties or features:
+- **ChainAbstracted Composability**: Ability to call any function on any contract on any chain via plain solidity, no cross-chain messaging, async solidity helps massively in terms of improving the developer experience. 
+- **Pre-Execution**: Ability for developers to execute additional logic in the user-flow before the onchain contracts are executed is super powerful enabling various features like auctions, intents or really anything else. 
 
 Read more about the usecases SOCKET enables in this section
 
