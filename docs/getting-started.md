@@ -119,7 +119,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 2. **CounterComposer**
 
-   `CounterComposer` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](https://www.notion.so/How-to-call-smart-contracts-14d818fd2858808281cce0ca530b2e66?pvs=21) triggered from AppGateway. You can also [make read calls](https://www.notion.so/How-to-read-onchain-state-5029cd58e81f45a092228673bf395bf3?pvs=21) to the chains to use their state.
+   `CounterComposer` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
 
    ```solidity
    // CounterComposer is an AppGateway, this is the entry point for your app.
