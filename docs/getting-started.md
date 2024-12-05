@@ -70,9 +70,9 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 6. **Set up fees.**
 
-   In this example we will be paying fees on Arbitrum Sepolia as configured in `script/Deploy.s.sol`.
+   In this example we will be paying fees on Ethereum Sepolia as configured in `script/Deploy.s.sol`.
 
-   To pay for this increment counter transaction, deposit Abitrum Sepolia `ETH` to the contract address of the `PayloadDeliveryPlug` by running:
+   To pay for this increment counter transaction, deposit `sepoliaETH` to the contract address of the `PayloadDeliveryPlug` by running:
 
    ```bash
    cast send 0x82dc804B1A84474266d59e1ccD51FAE43B4df19B "deposit(address,uint256,address)" \
@@ -80,7 +80,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
        <AMOUNT> \
        $COUNTER_APPGATEWAY \
        --value <AMOUNT> \
-       --rpc-url $ARBITRUM_SEPOLIA_RPC \
+       --rpc-url $SEPOLIA_RPC \
        --private-key $PRIVATE_KEY
    ```
 
