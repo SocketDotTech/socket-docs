@@ -59,31 +59,41 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge run script/Deploy.s.sol
    ```
 
+   You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`, and `Counter`.
+
+   Add the deployed addresses in env for using in rest of the tutorial
+
+   ```bash
+   export COUNTER_APPGATEWAY=<Counter App Address>;
+   export COUNTER_DEPLOYER=<Counter Deployer Address>;
+   export COUNTER=<Counter plug Address>;
+   ```
+
 6. **Set up fees.**
 
-   To pay for the transactions socket makes for you on chain, you can pay using any token on a chain of your choice. You can deposit them to a `PayloadDelivery` on any chain by calling the deposit function. Find more about fees [here](https://www.notion.so/Fees-yeah-14d818fd2858801daec8fc60fa4631b5?pvs=21) and about all `PayloadDelivery` addresses [here](/chain-information).
+   To pay for the transactions socket makes for you on chain, you can pay using any token on a chain of your choice that has a PayloadDelivery contract. You can deposit them to a `PayloadDelivery` on any chain by calling the `deposit` function. Find more about  all `PayloadDelivery` addresses [here](/chain-information).
 
-   In this example we will be paying fees on Arbitrum Sepolia as you can see configured on the `Deploy.s.sol` script.
+   In this example we will be paying fees on Arbitrum Sepolia as you can see below:
 
-   ```solidity
-   function deposit(
-       address token, // the token address
-       uint256 amount, // amount of tokens to deposit
-       address appGateway_ // address of your app gateway on offchainVM
-   ) external payable {}
+   ```bash
+   export CHAIN_SLUG=421614 ; forge run script/setPaymentFees.s.sol --rpc-url $SOCKET_RPC
    ```
+
+   Please ensure the wallet you are using has at least 0.01 Arbitrum Sepolia ETH. Feel free to use any of the supported chains and run the command accordingly.
 
 7. **Increment multiple counters**
 
-   To increment the various counters deployed on all different chains by different values we will call `incrementCounters`,
-   ```solidity
-   cast call [CounterAppGateway_ADDRESS] "incrementCounters(address[] memory, uint256)" [INSTANCES_ARRAY] [1,2,3,4] --rpc-url $SOCKET_RPC
+   To increment the various counters deployed on all different chains by different values we will run,
+   ```bash
+   forge run script/incrementCounters.s.sol --rpc-url $SOCKET_RPC
    ```
+
+   To learn more about how content
 
 8. **Check that the counters on chain have incremented**
 
-   ```solidity
-   forge run script/checkCounters.s.sol
+   ```bash
+   forge run script/checkCounters.s.sol --rpc-url $SOCKET_RPC
    ```
 
 # 3. Understanding the Components
