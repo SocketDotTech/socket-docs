@@ -1,6 +1,6 @@
 ---
 id: usecases
-title: Architecture
+title: Usecases
 ---
 
 - OEV
