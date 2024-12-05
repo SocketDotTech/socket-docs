@@ -49,13 +49,6 @@ const config: Config = {
   ],
 
   themeConfig: {
-    announcementBar: {
-      id: "Bungee_Announcement",
-      content:
-        "<b>ℹ️ Socket New Docs are live. API, Widget and Liquidity Layer Docs moved to <a href='https://docs.bungee.exchange'>Bungee Docs</a>. 🚧</b>",
-      backgroundColor: "#fff8e6",
-      isCloseable: true,
-    },
     navbar: {
       title: "Socket",
       logo: {

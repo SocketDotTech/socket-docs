@@ -7,10 +7,6 @@ title: What is Socket Protocol?
 
 Socket Protocol is the first Chain Abstraction Protocol, offering a modular, extensible, and composable stack that enables chain-abstracted applications.
 
-:::tip
-Searching for documentation on **Socket Liquidity Layer**, **Socket API**, or **Socket Widget**? These resources are part of Bungee and can be found in the [Bungee Docs](https://docs.bungee.exchange/).
-:::
-
 ### The Problem
 
 Protocols and users face significant challenges in the current multi-chain ecosystem:
