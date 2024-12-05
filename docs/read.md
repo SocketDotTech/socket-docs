@@ -7,7 +7,7 @@ title: Reading onchain state
 
 ## 1. Read Example
 
-SOCKET supports reading public variables and functions from the underlying chains. To understand how this is done, lets extend our MyToken example that was introduced in our [guide](https://www.notion.so/Writing-Apps-on-SOCKET-e36d5b863f4a407cb5e6f7649b21a6d5?pvs=21).
+SOCKET supports reading public variables and functions from the underlying chains. To understand how this is done, lets extend our MyToken example that was introduced in our [guide](/writing-apps).
 
 On `MyTokenAppGateway`, we will create a `fetchSupply` function. This function will read the `totalSupply` of a given instance and store it on the `AppGateway`.
 

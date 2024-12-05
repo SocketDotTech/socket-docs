@@ -73,13 +73,13 @@ Let us look at how this is executed to better understand what is going on.
 
 ![image.png](../static/img/write1.png)
 
-SOCKET works with special `forwarder` contracts that are deployed automatically when you [deploy](https://www.notion.so/How-to-deploy-17695b777dcd43dc98a39585d25aeea3?pvs=21) your on chain contracts. Each forwarder contract is immutable and points to a specific `(chain,address)`. This is how it knows which chain and which address to forward calls to when it is called. The `AppGatewayBase` contract has utilities like `async` modifier to make it easier to work with SOCKET primitives. The final call to `Note` contract is done by SOCKET and therefore it needs `onlySOCKET` modifier.
+SOCKET works with special `forwarder` contracts that are deployed automatically when you [deploy](/deploy) your on chain contracts. Each forwarder contract is immutable and points to a specific `(chain,address)`. This is how it knows which chain and which address to forward calls to when it is called. The `AppGatewayBase` contract has utilities like `async` modifier to make it easier to work with SOCKET primitives. The final call to `Note` contract is done by SOCKET and therefore it needs `onlySOCKET` modifier.
 
 ## 3. Batch calling
 
 The `async` modifier works on a queue of transactions, and therefore you can make a batch of onchain calls in single function and they are delivered to chains in order.
 
-To understand this let us go back to `MyTokenAppGateway` example from our [guide](https://www.notion.so/Writing-Apps-on-SOCKET-e36d5b863f4a407cb5e6f7649b21a6d5?pvs=21).
+To understand this let us go back to `MyTokenAppGateway` example from our [guide](/writing-apps).
 
 ```solidity
 contract MyToken is ERC20 {
@@ -121,7 +121,7 @@ This simple function enables burning of tokens on source chain and minting them 
 
 ## 4. Reading the return data
 
-Reading the return data of a contract call is similar to how you [read on chain state](https://www.notion.so/How-to-read-onchain-state-5029cd58e81f45a092228673bf395bf3?pvs=21). With the difference being that `isReadCall` flag is set to false. Which is also its default state.
+Reading the return data of a contract call is similar to how you [read on chain state](/read). With the difference being that `isReadCall` flag is set to false. Which is also its default state.
 
 Lets extend the `MyToken` example by adding a `burnAll` function that burns all user tokens and returns the amount.
 
