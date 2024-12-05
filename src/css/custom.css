@@ -94,3 +94,7 @@ html[data-theme="dark"] {
     padding-right: 15%;
   }
 }
+
+code {
+  color: #0eb0c1;
+}
