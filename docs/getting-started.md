@@ -88,7 +88,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge run script/incrementCounters.s.sol --rpc-url $SOCKET_RPC
    ```
 
-   To learn more about how content
+   Read [here](/call-contracts#2-call-forwarders) to learn more about how forwarder addresses are assigned on the offchainVM to represent onchain contracts.
 
 8. **Check that the counters on chain have incremented**
 
@@ -98,7 +98,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 # 3. Understanding the Components
 
-1. **Counter**
+## **Counter**
 
    This is the instance of the app that is deployed on chain. Unlike a normal counter, the `increase` function of this counter is called via SOCKET.
 
@@ -126,7 +126,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
     }
    ```
 
-2. **CounterAppGateway**
+## **CounterAppGateway**
 
    `CounterAppGateway` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
 
@@ -147,7 +147,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
     }
    ```
 
-3. **CounterDeployer**
+## **CounterDeployer**
 
    The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy-contracts).
 
