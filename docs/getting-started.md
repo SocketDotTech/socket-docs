@@ -113,7 +113,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 9. **Check that the counters on chain have incremented**
 
    ```bash
-   forge script script/checkCounters.s.sol --broadcast
+   forge script script/checkCounters.s.sol
    ```
 
 # 3. Understanding the Components
