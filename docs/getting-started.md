@@ -71,15 +71,23 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 6. **Set up fees.**
 
-   To pay for the transactions socket makes for you on chain, you can pay using any token on a chain of your choice that has a PayloadDelivery contract. You can deposit them to a `PayloadDelivery` on any chain by calling the `deposit` function. Find more about  all `PayloadDelivery` addresses [here](/chain-information).
+   In this example we will be paying fees on Arbitrum Sepolia as configured in `script/Deploy.s.sol`.
 
-   In this example we will be paying fees on Arbitrum Sepolia as you can see below:
+   To pay for this increment counter transaction, deposit Abitrum Sepolia `ETH` to the contract address of the `PayloadDeliveryPlug` by running:
 
    ```bash
-   export CHAIN_SLUG=421614 ; forge run script/setPaymentFees.s.sol --rpc-url $SOCKET_RPC
+   cast send 0x82dc804B1A84474266d59e1ccD51FAE43B4df19B "deposit(address,uint256,address)" \
+       0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
+       <AMOUNT> \
+       $COUNTER_APPGATEWAY \
+       --value <AMOUNT> \
+       --rpc-url $ARBITRUM_SEPOLIA_RPC \
+       --private-key $PRIVATE_KEY
    ```
 
-   Please ensure the wallet you are using has at least 0.01 Arbitrum Sepolia ETH. Feel free to use any of the supported chains and run the command accordingly.
+   Replace `<AMOUNT>` in wei with more than 0.01 ETH. Please ensure the wallet you are using has at least 0.01 Arbitrum Sepolia ETH. Feel free to use any of the supported chains and run the command accordingly.
+   You can pay using any token on a chain of your choice that has a `PayloadDelivery` contract. You can deposit them to a `PayloadDelivery` on any chain by calling the `deposit` function. Find more about  all the available `PayloadDelivery` addresses [here](/chain-information).
+
 
 7. **Increment multiple counters**
 
