@@ -34,14 +34,14 @@ The System consists of 3 main components.
 
 # 3. Step-by-Step Implementation
 
-To begin, we’ll implement a token contract for our application. The token will be an ERC20 token with mint and burn capabilities, specifically designed to interact with the Socket Protocol. We'll use **Solmate**, a lightweight library for ERC20 implementation.
+To begin, we’ll implement a token contract for our application. The token will be an ERC20 token with mint and burn capabilities, specifically designed to interact with the Socket Protocol. We'll use **Solady**, a lightweight library for ERC20 implementation.
 
 ### Install Solmate
 
-Install Solmate as a dependency using Forge:
+Install Solady as a dependency using Forge:
 
 ```bash
-forge install transmissions11/solmate
+forge install vectorized/solady
 ```
 
 ### Token Contract Implementation: MyToken.sol
@@ -52,7 +52,7 @@ Here’s the implementation of the `MyToken` contract that uses Solmate's ERC20 
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
-import "solmate/tokens/ERC20.sol";
+import "solady/tokens/ERC20.sol";
 
 contract MyToken is ERC20 {
     address public _SOCKET;
