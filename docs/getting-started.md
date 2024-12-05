@@ -86,7 +86,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    ```
 
    Replace `<AMOUNT>` in wei with more than 0.01 ETH. Please ensure the wallet you are using has at least 0.01 Arbitrum Sepolia ETH. Feel free to use any of the supported chains and run the command accordingly.
-   You can pay using any token on a chain of your choice that has a `PayloadDelivery` contract. You can deposit them to a `PayloadDelivery` on any chain by calling the `deposit` function. Find more about  all the available `PayloadDelivery` addresses [here](/chain-information).
+   You can pay using any token on a chain of your choice that has a `PayloadDelivery` contract. You can deposit them to a `PayloadDelivery` on any chain by calling the `deposit` function. Find all about the available `PayloadDelivery` addresses [here](/chain-information) and about fees [here](https://www.notion.so/Fees-yeah-14d818fd2858801daec8fc60fa4631b5?pvs=21)
 
 
 7. **Increment multiple counters**
