@@ -36,7 +36,7 @@ contract MyTokenAppGateway is AppGatewayBase {
 
     function fetchSupplyCallback(
         bytes calldata data,
-        bytes calldata returnData
+		bytes calldata returnData
     ) external onlyPromises {
         uint256 forwarder = abi.decode(data, (address));
         uint256 supply = abi.decode(returnData, (uint256));
@@ -48,11 +48,10 @@ contract MyTokenAppGateway is AppGatewayBase {
 Notice following things in above contract -
 
 - `fetchSupply` function uses the `async` modifier. This modifier needs to be used for both write and read calls to underlying chains.
-- `isReadCall` flag is set to `true`. This flag indicates to SOCKET that the call doesnt need to be sent on chain and just the return data needs to be read.
+- if `_readCallOn()` is called, it indicates to SOCKET that the call doesn't need to be sent on chain and just the return data needs to be read.
 - The `totalSupply` call uses `IMyTokenReader` interface. The `totalSupply` function signature is similar to a standard token contract but its visibility is not restricted to `view` and it doesnt have a return value. This needs to be followed for all read calls. The interface needs to be changed in this way to be compatible with the `async` `forwarder` system on Offchain VM.
 - Also, unlike a read on single chain, the return data here is not returned synchronously. Instead it has to be read asynchronously via a `promise` and a `callback` function.
   The `forwarder` address is interfaced as `IPromise` and `then` function is called on it. In this function we pass the callback function signature as first parameter and data for callback as second parameter.
-- `asyncPromise` address is returned by `then` function call and it is marked in `isValidPromise` mapping. This is done to validate callers of the callback.
 - `fetchSupplyCallback` uses `onlyPromises` modifier and has 2 params. First param is the `data` passed from original function and second param is the `returnData` from chain.
 
 ## 2. Promises
@@ -61,4 +60,4 @@ Let us look at how this is executed to better understand what is going on.
 
 ![deployment_flow.png](../static/img/read.png)
 
-To support asynchronous composability, SOCKET works with special `promise` contracts that are deployed when you call `then` function. Each promise contract is immutable and specific to a read request. It can be used only once and holds context about what needs to be called on callback. The `AppGatewayBase` contract has utilities like `isReadCall`, `isValidPromise`, `onlyPromises` to make it easier to work with SOCKET primitives.
+To support asynchronous composability, SOCKET works with special `promise` contracts that are deployed when you call `then` function. Each promise contract is immutable and specific to a read request. It can be used only once and holds context about what needs to be called on callback. The `AppGatewayBase` contract has utilities like `_readCallOn()`, `_readCallOff()`, `onlyPromises` to make it easier to work with SOCKET primitives.

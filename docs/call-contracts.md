@@ -122,7 +122,7 @@ This simple function enables burning of tokens on source chain and minting them 
 
 ## 4. Reading the return data
 
-Reading the return data of a contract call is similar to how you [read on chain state](/read). With the difference being that `isReadCall` flag is set to false. Which is also its default state.
+Reading the return data of a contract call is similar to how you [read on chain state](/read). With the difference being that, you need to turn the read mode on by calling `_readCallOn()` and off by calling `_readCallOff()`.
 
 Lets extend the `MyToken` example by adding a `burnAll` function that burns all user tokens and returns the amount.
 

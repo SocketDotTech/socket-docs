@@ -42,7 +42,9 @@ Key things to note here are -
 
 It extends the `AppDeployerBase` to manage the deployment process.
 
-In the `constructor`, a copy of `MyToken` is deployed to the offchainVM, and its `creationCode` along with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains. The constructor also takes in `addressResolver` and `feesData`, we will talk more on these at a later stage. Or you can read more about them [here](/call-contracts).
+To identify the contract, we use a `bytes32` variable. This is a unique identifier for the contract and is used to fetch the `creationCode`, `on-chain addresses` and `forwarder addresses` from maps in `AppGatewayBase`. This identifier can be created using `_createContractId` function.
+
+In the `constructor`, `MyToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains. The constructor also takes in `addressResolver` and `feesData`, we will talk more on these at a later stage. Or you can read more about them [here](/call-contracts).
 
 The `deployContracts` function takes a `chainSlug` as an argument, specifying the chain where the contract should be deployed. It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains. When you call \_deploy, both the onchain contract and its [forwarder](/call-contracts) are deployed.
 
@@ -186,6 +188,6 @@ contract MyTokenDeployer is AppDeployerBase {
 
 This `MyTokenDeployer` deploys both contracts, sets limit on `MyToken` and sets `MyToken’`s onchain address on `MyTokenVault`. Key things to note in this contract -
 
-- `MyTokenVault` doesnt have any constructor arguments. Therefore we can directly store its `creationCode` without encoding anything along with it.
+- `MyTokenVault` doesn't have any constructor arguments. Therefore we can directly store its `creationCode` without encoding anything along with it.
 - We can get the forwarder addresses of both these from `forwarderAddresses` mapping.
 - Since `MyTokenVault` locks `MyToken`, its needs the token’s on chain address. This address can be fetched using `getOnChainAddress` function.
