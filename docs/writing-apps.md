@@ -1,7 +1,6 @@
 ---
-id: writing-apps-on-socket
+id: writing-apps
 title: Writting Apps on SOCKET
-sidebar_position: 3
 ---
 
 # Writing Apps on SOCKET
@@ -337,5 +336,3 @@ contract ClaimAirdrop is Script {
     }
 }
 ```
-
-# 6. Next Steps

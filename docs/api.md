@@ -1,7 +1,6 @@
 ---
 id: api
 title: API
-sidebar_position: 10
 ---
 
 # API usage
@@ -28,11 +27,11 @@ GET /getAddresses
 
 **Query Parameters:**
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| appDeployerAddress | string | The address of the app deployer. |
-| contractName | string | The name of the contract to query. |
-| chainSlug | number | The chain id to specify the blockchain. |
+| Parameter          | Type   | Description                             |
+| ------------------ | ------ | --------------------------------------- |
+| appDeployerAddress | string | The address of the app deployer.        |
+| contractName       | string | The name of the contract to query.      |
+| chainSlug          | number | The chain id to specify the blockchain. |
 
 **Returns:**
 
@@ -71,18 +70,16 @@ Retrieves the forwarder address for a given on-chain address. This address is pr
 
 If the on-chain contracts are deployed using an app deployer, they will already have a forwarder contract. However, suppose you wish to use a contract already deployed on-chain, for example, UniswapFactory. In that case, you will get `isDeployed` as false, and you can deploy it using the [forwarder address documentation](https://www.example.com) and then start using it.
 
-
-
 **Endpoint:**
 
 GET /getForwarderAddress
 
 **Query Parameters:**
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| onChainAddress | string | The on-chain address |
-| chainSlug | number | The chain id to specify the blockchain |
+| Parameter      | Type   | Description                            |
+| -------------- | ------ | -------------------------------------- |
+| onChainAddress | string | The on-chain address                   |
+| chainSlug      | number | The chain id to specify the blockchain |
 
 **Returns:**
 
@@ -120,7 +117,7 @@ GET /getForwarderAddress?onChainAddress=0x3e3d9f517De1CA6d41f5A79ED1D9340d8fF3FC
 
 **Description**
 
-This API retrieves transaction details based on the provided transaction hash (txHash). It returns the status of the transaction and any associated payloads, including execution and simulation details.  The txHash is of `OffchainVM`.
+This API retrieves transaction details based on the provided transaction hash (txHash). It returns the status of the transaction and any associated payloads, including execution and simulation details. The txHash is of `OffchainVM`.
 
 **Request Parameters**
 
@@ -170,31 +167,31 @@ The response is a JSON object containing the following fields:
 
 **Response Fields Explanation**
 
-| Field | Type | Description |
-| --- | --- | --- |
-| apiStatus | string | Status of the API call (e.g., "SUCCESS") |
-| status | string | Current transaction status (e.g., IN_PROGRESS, REVERTING, COMPLETED) |
-| Payloads | array | Array of payload objects for the transaction |
-| payloadId | string | Unique identifier for the payload |
-| chainSlug | number | Blockchain identifier |
-| target | string | Target address for the payload |
-| payload | string | Payload data |
-| callType | string | Type of call (e.g., “READ”, "WRITE", "DISTRIBUTE_FEE", “WITHDRAW”) |
-| executeDetails | object | Execution details of the payload |
-| executeDetails.executeTxHash | string or null | Execution transaction hash |
-| executeDetails.executionStatus | string | Execution status (e.g., "PROMISE_RESOLVED", etc) |
-| executeDetails.returnData | string | Data returned from execution |
-| executeDetails.callbackTxHash | string or null | Callback transaction hash |
-| simulationDetails | object | Payload simulation details |
-| simulationDetails.executeSimulationStatus | string | Simulation status (e.g., "SIMULATION_SUCCESS") |
-| simulationDetails.executeRevertString | string | Error message if simulation failed |
-| simulationDetails.callbackSimulationStatus | string | Callback simulation status |
-| simulationDetails.callbackRevertString | string | Callback simulation error message |
-| .feesInfo | object | Transaction fee information |
-| .feesInfo.feePoolChain | number | Fee pool chain id |
-| .feesInfo.feePoolToken | string | Fee token Address |
-| .feesInfo.maxFees | string | Maximum allowed fees for payloads |
-| .feesInfo.fee | string | Actual fee charged by transmitter |
+| Field                                      | Type           | Description                                                          |
+| ------------------------------------------ | -------------- | -------------------------------------------------------------------- |
+| apiStatus                                  | string         | Status of the API call (e.g., "SUCCESS")                             |
+| status                                     | string         | Current transaction status (e.g., IN_PROGRESS, REVERTING, COMPLETED) |
+| Payloads                                   | array          | Array of payload objects for the transaction                         |
+| payloadId                                  | string         | Unique identifier for the payload                                    |
+| chainSlug                                  | number         | Blockchain identifier                                                |
+| target                                     | string         | Target address for the payload                                       |
+| payload                                    | string         | Payload data                                                         |
+| callType                                   | string         | Type of call (e.g., “READ”, "WRITE", "DISTRIBUTE_FEE", “WITHDRAW”)   |
+| executeDetails                             | object         | Execution details of the payload                                     |
+| executeDetails.executeTxHash               | string or null | Execution transaction hash                                           |
+| executeDetails.executionStatus             | string         | Execution status (e.g., "PROMISE_RESOLVED", etc)                     |
+| executeDetails.returnData                  | string         | Data returned from execution                                         |
+| executeDetails.callbackTxHash              | string or null | Callback transaction hash                                            |
+| simulationDetails                          | object         | Payload simulation details                                           |
+| simulationDetails.executeSimulationStatus  | string         | Simulation status (e.g., "SIMULATION_SUCCESS")                       |
+| simulationDetails.executeRevertString      | string         | Error message if simulation failed                                   |
+| simulationDetails.callbackSimulationStatus | string         | Callback simulation status                                           |
+| simulationDetails.callbackRevertString     | string         | Callback simulation error message                                    |
+| .feesInfo                                  | object         | Transaction fee information                                          |
+| .feesInfo.feePoolChain                     | number         | Fee pool chain id                                                    |
+| .feesInfo.feePoolToken                     | string         | Fee token Address                                                    |
+| .feesInfo.maxFees                          | string         | Maximum allowed fees for payloads                                    |
+| .feesInfo.fee                              | string         | Actual fee charged by transmitter                                    |
 
 **ExecutionStatus Values**
 

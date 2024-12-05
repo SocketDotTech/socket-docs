@@ -1,7 +1,6 @@
 ---
 id: introduction
 title: What is Socket Protocol?
-sidebar_position: 1
 ---
 
 ## What is Socket Protocol?

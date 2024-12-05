@@ -1,7 +1,6 @@
 ---
 id: watchers
 title: Watchers
-sidebar_position: 8
 ---
 
 # Watchers
@@ -11,7 +10,6 @@ If you have read the broad architecture, first do that by reading this section
 ## Introduction
 
 > Watchers are offchain operators that sit and watch chains while also hosting a VM to help application developers write logic there, logic that sits and operates globally, logic that is executed before your applications onchain contracts are executed.
->
 
 Today when users try to use your application, they need to access the application via the chain, more chains, more gas, more bridging and all the known issues. Going forward, applications or rather app-devs can help users execute their actions better onchain.
 

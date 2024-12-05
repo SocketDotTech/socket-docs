@@ -93,6 +93,8 @@ const config: Config = {
     prism: {
       theme: themes.vsLight,
       darkTheme: themes.vsDark,
+      defaultLanguage: "solidity",
+      additionalLanguages: ["solidity"],
     },
     // image: "img/header-bg.png",
     metadata: [

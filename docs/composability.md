@@ -1,7 +1,6 @@
 ---
 id: composability
 title: Composability
-sidebar_position: 6
 ---
 
 # Types of Composability
