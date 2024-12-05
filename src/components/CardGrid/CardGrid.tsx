@@ -22,13 +22,13 @@ function GettingStartedGrid() {
                 link="/getting-started"
             />
             <CardItem
-                title="Writing Apps in SOCKET"
-                description="See how to build a chain-abstracted ERC20 airdrop application"
+                title="App Tutorial"
+                description="Build a chain-abstracted ERC20 airdrop app"
                 link="/writing-apps"
             />
             <CardItem
                 title="Architecture"
-                description="Deep dive into Socket Protocol's technical architecture"
+                description="Deep dive into Socket Protocol's architecture"
                 link="/architecture"
             />
             <CardItem
