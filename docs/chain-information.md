@@ -3,7 +3,7 @@ id: chain-information
 title: Chain Information
 ---
 
-# Composer Chain Details
+# offchainVM Details
 
 HTTPS RPC: `https://rpc-socket-composer-testnet.t.conduit.xyz`
 
@@ -13,20 +13,10 @@ Block Explorer: [https://explorer-socket-composer-testnet.t.conduit.xyz](https:/
 
 Bridge: [https://socket-composer-testnet-8b802af208e24e82.testnets.rollbridge.app](https://socket-composer-testnet-8b802af208e24e82.testnets.rollbridge.app)
 
-ChainId: `7625382`
-
-Watcher Address: `0x`
-
-Auction House: `0x`
-
-| Chain Name                                                    | Chain Slug | Addresses                                            |
-| ------------------------------------------------------------- | ---------- | ---------------------------------------------------- |
-| Optimism Testnet                                              | 11155420   | Socket: `0x1463b319BC177e4000e620023AD62c006A656420` |
-| PayloadDelivery: `0xBf0b40cBbe8F947EEC55294207c597437292f565` |
-| Arbitrum Testnet                                              | 421614     | Socket: `0x123415Fb068285823B0A113b62706beE48bcE811` |
-| PayloadDelivery: `0x82dc804B1A84474266d59e1ccD51FAE43B4df19B` |
-| Base Testnet                                                  |            |                                                      |
-| Optimism Mainnet                                              |            |                                                      |
-| Arbitrum Mainnet                                              |            |                                                      |
-| Base Mainnet                                                  |            |                                                      |
-|                                                               |            |                                                      |
+| **Chain Name**           | **Chain Slug** | **Addresses**                                                                                                                                       |
+|--------------------------|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **offchainVM**           | 7625382        | AuctionHouse: `0x`<br /> Watcher: `0x` <br /> AddressResolver: `0x`<br /> SignatureVerifier: `0x`                       |
+| **Sepolia**              | 11155111       | SOCKET: `0x`<br /> PayloadDelivery: `0x`                       |
+| **Base Testnet**         | 84532          | SOCKET: `0x`<br /> PayloadDelivery: `0x`                       |
+| **Arbitrum Testnet**     | 421614         | SOCKET: `0x`<br /> PayloadDelivery: `0x`                       |
+| **Optimism Testnet**     | 11155420       | SOCKET: `0x`<br /> PayloadDelivery: `0x`                       |
