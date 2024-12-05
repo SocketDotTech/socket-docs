@@ -1,5 +1,5 @@
 ---
-id: deploy-contracts
+id: deploy
 title: Deploying onchain smart contracts
 ---
 

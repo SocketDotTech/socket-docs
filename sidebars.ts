@@ -26,7 +26,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "deploy-contracts",
+          id: "deploy",
           label: "Deploying onchain smart contracts",
         },
         {
