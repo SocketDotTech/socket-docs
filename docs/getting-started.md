@@ -61,6 +61,10 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`.
 
+   :::tip
+   Please ensure you have `--skip-simulation` on the above command otherise Foundry may overestimate how much it takes to deploy.
+   :::
+
    Add the deployed addresses in env for using in rest of the tutorial
 
    ```bash
