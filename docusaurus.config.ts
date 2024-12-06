@@ -7,7 +7,7 @@ const config: Config = {
   title: "Socket Docs",
   tagline:
     "Chain Abstraction Layer - Build Apps that are chain-agnostic via Socket",
-  url: "https://socket.tech",
+  url: "https://docs.socket.tech",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -47,7 +47,99 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-
+  headTags: [
+    {
+      tagName: "meta",
+      attributes: {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "theme-color",
+        content: "#7F1FFF",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "description",
+        content: "Powering Chain Abstracted Apps",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "og:image",
+        content: "/assets/metaImgNew.png",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "og:url",
+        content: "https://docs.socket.tech",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "twitter:url",
+        content: "https://docs.socket.tech",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "twitter:title",
+        content: "Socket - Powering Chain Abstracted Apps",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "twitter:description",
+        content: "Powering Chain Abstracted Apps",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "twitter:image",
+        content: "/assets/metaImgNew.png",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "apple-touch-icon",
+        href: "/assets/logo192.png",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "manifest",
+        href: "/manifest.json",
+      },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "icon",
+        href: "/assets/favicon.ico",
+      },
+    },
+  ],
   themeConfig: {
     announcementBar: {
       id: "alpha-release",
