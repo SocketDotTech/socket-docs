@@ -98,7 +98,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 7. **Deploy onchain contracts**
 
    ```bash
-   forge script script/deployOnchain.s.sol --broadcast
+   forge script script/deployOnchain.s.sol --broadcast --skip-simulation
    ```
 
    Let's ensure that the funds have been spent to pay for the transaction by running,
