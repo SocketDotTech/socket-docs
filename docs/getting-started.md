@@ -49,7 +49,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 4. **Get offchainVM ETH**
 
-   To pay for the transactions on offchainVM you need native tokens. You can get Sepolia ETH using [the bridge](https://socket-composer-testnet-8b802af208e24e82.testnets.rollbridge.app/) or you can get ETH directly on offchainVM using [the faucet](https://faucet.conduit.xyz/socket-composer-testnet).
+   To pay for the transactions on offchainVM you need native tokens. You can get offchainVM ETH using [the bridge](https://socket-composer-testnet-8b802af208e24e82.testnets.rollbridge.app/) or you can get ETH directly on offchainVM using [the faucet](https://faucet.conduit.xyz/socket-composer-testnet).
 
 5. **Deploy the all contracts on the offchainVM and on chain instances**
 
@@ -70,17 +70,17 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 6. **Set up fees.**
 
-   In this example we will be paying fees on Ethereum Sepolia as configured in `script/Deploy.s.sol`.
+   In this example we will be paying fees on Arbitrum Sepolia as configured in `script/Deploy.s.sol`.
 
-   To pay for this increment counter transaction, deposit `sepoliaETH` to the contract address of the `PayloadDeliveryPlug` by running:
+   To pay for this increment counter transaction, deposit `arbsepETH` to the contract address of the `PayloadDeliveryPlug` by running:
 
    ```bash
-   cast send 0x9EDfb162b725CF6d628D68af200cAe8b624111e "deposit(address,uint256,address)" \
+   cast send 0x06C51869C4503eaA8BdfdAB6782CbfCF1369E45a "deposit(address,uint256,address)" \
        0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
        <AMOUNT> \
        $COUNTER_APP_GATEWAY \
        --value <AMOUNT> \
-       --rpc-url $SEPOLIA_RPC \
+       --rpc-url $ARBITRUM_SEPOLIA_RPC \
        --private-key $PRIVATE_KEY
    ```
 
@@ -151,18 +151,24 @@ This example highlights how to abstract away blockchain-specific details, enabli
    `CounterAppGateway` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
 
    ```solidity
-   // CounterAppGateway is an AppGateway, this is the entry point for your app.
     contract CounterAppGateway is AppGatewayBase {
         constructor(
             address _addressResolver,
             address deployerContract_,
             FeesData memory feesData_
-        ) AppGatewayBase(_addressResolver, feesData_) Ownable(msg.sender) {
+        ) AppGatewayBase(_addressResolver) {
             addressResolver.setContractsToGateways(deployerContract_);
+            _setFeesData(feesData_);
         }
 
-        function incrementCounter(address _instance) public async {
-            Counter(_instance).increase();
+        function incrementCounters(address[] memory instances) public async {
+            for (uint256 i = 0; i < instances.length; i++) {
+                Counter(instances[i]).increase();
+            }
+        }
+
+        function setFees(FeesData memory feesData_) public {
+            feesData = feesData_;
         }
     }
    ```
@@ -178,20 +184,23 @@ This example highlights how to abstract away blockchain-specific details, enabli
         constructor(
             address addressResolver_,
             FeesData memory feesData_
-        ) AppDeployerBase(addressResolver_, feesData_) Ownable(msg.sender) {
+        ) AppDeployerBase(addressResolver_) {
             creationCodeWithArgs[counter] = type(Counter).creationCode;
+            _setFeesData(feesData_);
         }
 
-        function deployContracts(
-            uint32 chainSlug
-        ) external async {
+        function deployContracts(uint32 chainSlug) external async {
             _deploy(counter, chainSlug);
         }
 
-        function initialize(uint32 chainSlug) public override async{
+        function initialize(uint32 chainSlug) public override async {
             address socket = getSocketAddress(chainSlug);
             address counterForwarder = forwarderAddresses[counter][chainSlug];
             Counter(counterForwarder).setSocket(socket);
+        }
+
+        function setFees(FeesData memory feesData_) public {
+            feesData = feesData_;
         }
     }
    ```
