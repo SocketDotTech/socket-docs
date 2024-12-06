@@ -110,7 +110,7 @@ Here’s the implementation of `MyTokenDeployer` contract which will be deployed
 pragma solidity >=0.7.0 <0.9.0;
 
 import "./MyToken.sol";
-import "socket-poc/contracts/base/AppDeployerBase.sol";
+import "socket-protocol/contracts/base/AppDeployerBase.sol";
 
 contract MyTokenDeployer is AppDeployerBase {
     bytes32 public myToken = _createContractId("myToken");
@@ -153,7 +153,7 @@ The `initialize` function is empty in this example. Use it for setting chain-spe
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
-import "socket-poc/contracts/base/AppGatewayBase.sol";
+import "socket-protocol/contracts/base/AppGatewayBase.sol";
 import "solady/auth/Ownable.sol";
 import "./MyToken.sol";
 
@@ -208,8 +208,8 @@ import {Script} from "forge-std/Script.sol";
 import {console} from "forge-std/Console.sol";
 import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
 import {MyTokenDeployer} from "../src/MyTokenDeployer.sol";
-import {FeesData} from "lib/socket-poc/contracts/common/Structs.sol";
-import {ETH_ADDRESS} from "lib/socket-poc/contracts/common/Constants.sol";
+import {FeesData} from "lib/socket-protocol/contracts/common/Structs.sol";
+import {ETH_ADDRESS} from "lib/socket-protocol/contracts/common/Constants.sol";
 
 contract SetupMyToken is Script {
     function run() public {
