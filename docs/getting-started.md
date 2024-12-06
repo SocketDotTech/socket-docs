@@ -75,7 +75,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    To pay for this increment counter transaction, deposit `arbsepETH` to the contract address of the `PayloadDeliveryPlug` by running:
 
    ```bash
-   cast send 0x06C51869C4503eaA8BdfdAB6782CbfCF1369E45a "deposit(address,uint256,address)" \
+   cast send 0x804Af74b5b3865872bEf354e286124253782FA95 "deposit(address,uint256,address)" \
        0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
        <AMOUNT> \
        $COUNTER_APP_GATEWAY \
