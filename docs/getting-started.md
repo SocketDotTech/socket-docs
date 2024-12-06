@@ -36,6 +36,12 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge install
    ```
 
+   :::tip
+   Make sure foundry is atleast on following version. Pay attention to the **date** part.
+
+   `forge 0.2.0 (9a0f66e 2024-09-26T00:20:35.649925000Z)`
+   :::
+
 3. **Set Up Environment Variables**
 
    Copy the provided `.env.sample` file and set proper values for private key and rpc.
