@@ -56,7 +56,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    This command deploys all contracts on offchainVM. It includes the `Counter`, `CounterDeployer`, `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
    ```bash
-   forge script script/Deploy.s.sol --broadcast --gas-limit 100000000
+   forge script script/Deploy.s.sol --broadcast  --skip-simulation
    ```
 
    You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`.
