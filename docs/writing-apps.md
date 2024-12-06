@@ -270,8 +270,6 @@ import {Script, console} from "forge-std/Script.sol";
 import {MyTokenDeployer} from "../src/MyTokenDeployer.sol";
 
 contract DeployMyToken is Script {
-    function setUp() public {}
-
     function run() public {
         string memory rpc = vm.envString("SOCKET_RPC");
         vm.createSelectFork(rpc);
@@ -283,8 +281,6 @@ contract DeployMyToken is Script {
         myTokenDeployer.deployContracts(<chainSlug1>);
         myTokenDeployer.deployContracts(<chainSlug2>);
         myTokenDeployer.deployContracts(<chainSlug3>);
-
-        vm.stopBroadcast();
     }
 }
 ```
@@ -294,7 +290,7 @@ Set proper values for `deployerAddress` and `chainSlugs` before running this scr
 `deployerAddress` should have been logged in by previous script.
 
 ```bash
-forge script ./script/DeployMyToken.s.sol
+forge script ./script/DeployMyToken.s.sol --broadcast
 ```
 
 Deployment of on chain contracts should take couple minutes. You can track the status of this request and also check the deployed addresses using our [apis](/api).
@@ -324,15 +320,15 @@ contract AddReceivers is Script {
         <amount3>
     ];
 
-    function setUp() public {}
-
     function run() public {
-        vm.startBroadcast();
+        string memory rpc = vm.envString("SOCKET_RPC");
+        vm.createSelectFork(rpc);
+
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
 
         MyTokenAppGateway myTokenAppGateway = MyTokenAppGateway(<myTokenAppGatewayAddress>);
         myTokenAppGateway.addAirdropReceivers(receivers, amounts);
-
-        vm.stopBroadcast();
     }
 }
 ```
@@ -351,15 +347,15 @@ import {Script, console} from "forge-std/Script.sol";
 import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
 
 contract ClaimAirdrop is Script {
-    function setUp() public {}
-
     function run() public {
-        vm.startBroadcast();
+        string memory rpc = vm.envString("SOCKET_RPC");
+        vm.createSelectFork(rpc);
+
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
 
         MyTokenAppGateway myTokenAppGateway = MyTokenAppGateway(<myTokenAppGatewayAddress>);
         myTokenAppGateway.claimAirdrop(<instance>);
-
-        vm.stopBroadcast();
     }
 }
 ```
