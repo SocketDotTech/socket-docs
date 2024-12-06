@@ -68,8 +68,8 @@ This example highlights how to abstract away blockchain-specific details, enabli
    Add the deployed addresses in env for using in rest of the tutorial
 
    ```bash
-   export COUNTER_APP_GATEWAY=<Counter App Address>;
    export COUNTER_DEPLOYER=<Counter Deployer Address>;
+   export COUNTER_APP_GATEWAY=<Counter App Address>;
    ```
 
 6. **Set up fees.**
@@ -112,6 +112,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 8. **Increment multiple counters**
 
    To increment the various counters deployed on all different chains by different values we will run,
+
    ```bash
    forge script script/incrementCounters.s.sol --broadcast
    ```
@@ -128,87 +129,87 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 ## **Counter**
 
-   This is the instance of the app that is deployed on chain. Unlike a normal counter, the `increase` function of this counter is called via SOCKET.
+This is the instance of the app that is deployed on chain. Unlike a normal counter, the `increase` function of this counter is called via SOCKET.
 
-   ```solidity
-    contract Counter is Ownable(msg.sender) {
-        address public socket;
-        uint256 public counter;
+```solidity
+ contract Counter is Ownable(msg.sender) {
+     address public socket;
+     uint256 public counter;
 
-        modifier onlySocket() {
-            require(msg.sender == socket, "not socket");
-            _;
-        }
+     modifier onlySocket() {
+         require(msg.sender == socket, "not socket");
+         _;
+     }
 
-        function setSocket(address _socket) external onlyOwner {
-            socket = _socket;
-        }
+     function setSocket(address _socket) external onlyOwner {
+         socket = _socket;
+     }
 
-        function getSocket() external view returns (address) {
-            return socket;
-        }
+     function getSocket() external view returns (address) {
+         return socket;
+     }
 
-        function increase() external onlySocket {
-            counter++;
-        }
-    }
-   ```
+     function increase() external onlySocket {
+         counter++;
+     }
+ }
+```
 
 ## **CounterAppGateway**
 
-   `CounterAppGateway` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
+`CounterAppGateway` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
 
-   ```solidity
-    contract CounterAppGateway is AppGatewayBase {
-        constructor(
-            address _addressResolver,
-            address deployerContract_,
-            FeesData memory feesData_
-        ) AppGatewayBase(_addressResolver) {
-            addressResolver.setContractsToGateways(deployerContract_);
-            _setFeesData(feesData_);
-        }
+```solidity
+ contract CounterAppGateway is AppGatewayBase {
+     constructor(
+         address _addressResolver,
+         address deployerContract_,
+         FeesData memory feesData_
+     ) AppGatewayBase(_addressResolver) {
+         addressResolver.setContractsToGateways(deployerContract_);
+         _setFeesData(feesData_);
+     }
 
-        function incrementCounters(address[] memory instances) public async {
-            for (uint256 i = 0; i < instances.length; i++) {
-                Counter(instances[i]).increase();
-            }
-        }
+     function incrementCounters(address[] memory instances) public async {
+         for (uint256 i = 0; i < instances.length; i++) {
+             Counter(instances[i]).increase();
+         }
+     }
 
-        function setFees(FeesData memory feesData_) public {
-            feesData = feesData_;
-        }
-    }
-   ```
+     function setFees(FeesData memory feesData_) public {
+         feesData = feesData_;
+     }
+ }
+```
 
 ## **CounterDeployer**
 
-   The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy).
+The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy).
 
-   ```solidity
-    contract CounterDeployer is AppDeployerBase {
-        bytes32 public counter = _createContractId("counter");
+```solidity
+ contract CounterDeployer is AppDeployerBase {
+     bytes32 public counter = _createContractId("counter");
 
-        constructor(
-            address addressResolver_,
-            FeesData memory feesData_
-        ) AppDeployerBase(addressResolver_) {
-            creationCodeWithArgs[counter] = type(Counter).creationCode;
-            _setFeesData(feesData_);
-        }
+     constructor(
+         address addressResolver_,
+         FeesData memory feesData_
+     ) AppDeployerBase(addressResolver_) {
+         creationCodeWithArgs[counter] = type(Counter).creationCode;
+         _setFeesData(feesData_);
+     }
 
-        function deployContracts(uint32 chainSlug) external async {
-            _deploy(counter, chainSlug);
-        }
+     function deployContracts(uint32 chainSlug) external async {
+         _deploy(counter, chainSlug);
+     }
 
-        function initialize(uint32 chainSlug) public override async {
-            address socket = getSocketAddress(chainSlug);
-            address counterForwarder = forwarderAddresses[counter][chainSlug];
-            Counter(counterForwarder).setSocket(socket);
-        }
+     function initialize(uint32 chainSlug) public override async {
+         address socket = getSocketAddress(chainSlug);
+         address counterForwarder = forwarderAddresses[counter][chainSlug];
+         Counter(counterForwarder).setSocket(socket);
+     }
 
-        function setFees(FeesData memory feesData_) public {
-            feesData = feesData_;
-        }
-    }
-   ```
+     function setFees(FeesData memory feesData_) public {
+         feesData = feesData_;
+     }
+ }
+```
