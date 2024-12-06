@@ -52,7 +52,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "chain-information",
-          label: "Chain Information",
+          label: "OffchainVM Information",
         },
         {
           type: "doc",

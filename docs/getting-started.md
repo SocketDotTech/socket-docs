@@ -92,7 +92,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    You can pay using any token on a chain of your choice that has a `PayloadDelivery` contract. You can deposit them to a `PayloadDelivery` on any chain by calling the `deposit` function. Find all about the available `PayloadDelivery` addresses [here](/chain-information) and about fees [here](/fees)
 
    :::tip
-   Don't forget to export ARBITRUM_SEPOLIA_RPC if you do not have it in your environment yet.
+   Don't forget to export `ARBITRUM_SEPOLIA_RPC` if you do not have it in your environment yet.
    :::
 
 7. **Deploy onchain contracts**
