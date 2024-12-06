@@ -55,13 +55,16 @@ pragma solidity >=0.7.0 <0.9.0;
 import "solady/tokens/ERC20.sol";
 
 contract MyToken is ERC20 {
+    string private _name;
+    string private _symbol;
+    uint8 private _decimals;
+
     address public _SOCKET;
 
-    constructor(
-        string calldata name_,
-        string calldata symbol_,
-        uint8 decimals_
-    ) ERC20(name_, symbol_, decimals_) {
+    constructor(string memory name_, string memory symbol_, uint8 decimals_) {
+        _name = name_;
+        _symbol = symbol_;
+        _decimals = decimals_;
         _SOCKET = msg.sender;
     }
 
@@ -79,6 +82,18 @@ contract MyToken is ERC20 {
     function burn(uint256 amount_) external onlySOCKET {
         _burn(msg.sender, amount_);
     }
+
+    function name() public view override returns (string memory) {
+        return _name;
+    }
+
+    function symbol() public view override returns (string memory) {
+        return _symbol;
+    }
+
+    function decimals() public view override returns (uint8) {
+        return _decimals;
+    }
 }
 ```
 
@@ -91,6 +106,7 @@ The `mint` and `burn` functions have `onlySOCKET` modifier because these are cal
 Here’s the implementation of `MyTokenDeployer` contract which will be deployed to offchainVM. It extends the `AppDeployerBase` to manage the deployment process.
 
 ```solidity
+// SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
 import "./MyToken.sol";
@@ -102,10 +118,10 @@ contract MyTokenDeployer is AppDeployerBase {
     constructor(
         address addressResolver_,
         FeesData memory feesData_,
-        string calldata name_,
-        string calldata symbol_,
+        string memory name_,
+        string memory symbol_,
         uint8 decimals_
-    ) AppDeployerBase(addressResolver_, feesData_) {
+    ) AppDeployerBase(addressResolver_) {
         creationCodeWithArgs[myToken] = abi.encodePacked(
             type(MyToken).creationCode,
             abi.encode(name_, symbol_, decimals_)
@@ -113,9 +129,7 @@ contract MyTokenDeployer is AppDeployerBase {
         _setFeesData(feesData_);
     }
 
-    function deployContracts(
-        uint32 chainSlug
-    ) external async {
+    function deployContracts(uint32 chainSlug) external async {
         _deploy(myToken, chainSlug);
     }
 
@@ -140,17 +154,17 @@ The `initialize` function is empty in this example. Use it for setting chain-spe
 pragma solidity >=0.7.0 <0.9.0;
 
 import "socket-poc/contracts/base/AppGatewayBase.sol";
-import "solmate/src/auth/Owned.sol";
+import "solady/auth/Ownable.sol";
 import "./MyToken.sol";
 
-contract MyTokenAppGateway is AppGatewayBase {
+contract MyTokenAppGateway is AppGatewayBase, Ownable {
     mapping(address => uint256) public airdropReceivers;
 
     constructor(
         address _addressResolver,
         address deployerContract_,
         FeesData memory feesData_
-    ) AppGatewayBase(_addressResolver, feesData_) Owned(msg.sender) {
+    ) AppGatewayBase(_addressResolver) Ownable() {
         addressResolver.setContractsToGateways(deployerContract_);
         _setFeesData(feesData_);
     }
@@ -190,13 +204,14 @@ You can get the `addressResolver` from [here](/chain-information).
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Script, console} from "forge-std/Script.sol";
-import {MyTokenDeployer} from "../src/MyTokenDeployer.sol";
+import {Script} from "forge-std/Script.sol";
+import {console} from "forge-std/Console.sol";
 import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
+import {MyTokenDeployer} from "../src/MyTokenDeployer.sol";
+import {FeesData} from "lib/socket-poc/contracts/common/Structs.sol";
+import {ETH_ADDRESS} from "lib/socket-poc/contracts/common/Constants.sol";
 
 contract SetupMyToken is Script {
-    function setUp() public {}
-
     function run() public {
         address addressResolver = vm.envAddress("ADDRESS_RESOLVER");
 
@@ -205,6 +220,13 @@ contract SetupMyToken is Script {
 
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
+
+        // Setting fee payment on Ethereum Sepolia
+        FeesData memory feesData = FeesData({
+            feePoolChain: 11155111,
+            feePoolToken: ETH_ADDRESS,
+            maxFees: 0.01 ether
+        });
 
         MyTokenDeployer myTokenDeployer = new MyTokenDeployer(
             addressResolver,
@@ -220,16 +242,8 @@ contract SetupMyToken is Script {
             feesData
         );
 
-        console.log(
-            "MyTokenDeployer deployed at: ",
-            address(myTokenDeployer)
-        );
-        console.log(
-            "MyTokenAppGateway deployed at: ",
-            address(myTokenAppGateway)
-        );
-
-        vm.stopBroadcast();
+        console.log("MyTokenDeployer: ", address(myTokenDeployer));
+        console.log("MyTokenAppGateway: ", address(myTokenAppGateway));
     }
 }
 ```
@@ -237,7 +251,7 @@ contract SetupMyToken is Script {
 Run the script using cast, providing rpc and private key.
 
 ```bash
-forge script ./script/SetupMyToken.s.sol
+forge script script/SetupMyToken.s.sol --broadcast
 ```
 
 ### Fund your App
