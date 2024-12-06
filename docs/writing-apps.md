@@ -131,9 +131,9 @@ The `deployContracts` function takes a `chainSlug` as an argument, specifying th
 
 The `initialize` function is empty in this example. Use it for setting chain-specific or dynamic variables after deployment if needed. More details [here](/deploy).
 
-### AppGateway Contract implementation: MyTokenDistributor.sol
+### AppGateway Contract implementation: MyTokenAppGateway.sol
 
-`MyTokenDistributor` is an AppGateway, it extends `AppGatewayBase` for logic related to interacting with onchain instances. This is where users interact with your app without worrying about the underlying chains. It has an `addAirdropReceivers` function that the owner can call and a `claimAirdrop` function that users can call.
+`MyTokenAppGateway` is an AppGateway, it extends `AppGatewayBase` for logic related to interacting with onchain instances. This is where users interact with your app without worrying about the underlying chains. It has an `addAirdropReceivers` function that the owner can call and a `claimAirdrop` function that users can call.
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
@@ -143,7 +143,7 @@ import "socket-poc/contracts/base/AppGatewayBase.sol";
 import "solmate/src/auth/Owned.sol";
 import "./MyToken.sol";
 
-contract MyTokenDistributor is AppGatewayBase {
+contract MyTokenAppGateway is AppGatewayBase {
     mapping(address => uint256) public airdropReceivers;
 
     constructor(
@@ -192,7 +192,7 @@ pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
 import {MyTokenDeployer} from "../src/MyTokenDeployer.sol";
-import {MyTokenDistributor} from "../src/MyTokenDistributor.sol";
+import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
 
 contract SetupMyToken is Script {
     function setUp() public {}
@@ -214,7 +214,7 @@ contract SetupMyToken is Script {
             18
         );
 
-        MyTokenDistributor myTokenDistributor = new MyTokenDistributor(
+        MyTokenAppGateway myTokenAppGateway = new MyTokenAppGateway(
             addressResolver,
             address(myTokenDeployer),
             feesData
@@ -225,8 +225,8 @@ contract SetupMyToken is Script {
             address(myTokenDeployer)
         );
         console.log(
-            "MyTokenDistributor deployed at: ",
-            address(myTokenDistributor)
+            "MyTokenAppGateway deployed at: ",
+            address(myTokenAppGateway)
         );
 
         vm.stopBroadcast();
@@ -242,7 +242,7 @@ forge script ./script/SetupMyToken.s.sol
 
 ### Fund your App
 
-Next, go on to setup fees so that offchainVM can send transactions and deploy contracts on your app’s behalf. On any supported chain, deposit fees against `MyTokenDistributor`’s address. Read more about setting up fees and generating `feesData` [here](/fees).
+Next, go on to setup fees so that offchainVM can send transactions and deploy contracts on your app’s behalf. On any supported chain, deposit fees against `MyTokenAppGateway`’s address. Read more about setting up fees and generating `feesData` [here](/fees).
 
 ### Deploy Token to chains: DeployMyToken.s.sol
 
@@ -296,7 +296,7 @@ Once the setup is done, you can call `addAirdropReceivers`.
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import {MyTokenDistributor} from "../src/MyTokenDistributor.sol";
+import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
 
 contract AddReceivers is Script {
     address[] receivers = [
@@ -315,8 +315,8 @@ contract AddReceivers is Script {
     function run() public {
         vm.startBroadcast();
 
-        MyTokenDistributor myTokenDistributor = MyTokenDistributor(<myTokenDistributorAddress>);
-        myTokenDistributor.addAirdropReceivers(receivers, amounts);
+        MyTokenAppGateway myTokenAppGateway = MyTokenAppGateway(<myTokenAppGatewayAddress>);
+        myTokenAppGateway.addAirdropReceivers(receivers, amounts);
 
         vm.stopBroadcast();
     }
@@ -334,7 +334,7 @@ Note that the instance addresses are not the same as where token contracts are d
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import {MyTokenDistributor} from "../src/MyTokenDistributor.sol";
+import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
 
 contract ClaimAirdrop is Script {
     function setUp() public {}
@@ -342,8 +342,8 @@ contract ClaimAirdrop is Script {
     function run() public {
         vm.startBroadcast();
 
-        MyTokenDistributor myTokenDistributor = MyTokenDistributor(<myTokenDistributorAddress>);
-        myTokenDistributor.claimAirdrop(<instance>);
+        MyTokenAppGateway myTokenAppGateway = MyTokenAppGateway(<myTokenAppGatewayAddress>);
+        myTokenAppGateway.claimAirdrop(<instance>);
 
         vm.stopBroadcast();
     }
