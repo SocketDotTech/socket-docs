@@ -36,7 +36,7 @@ The System consists of 3 main components.
 
 To begin, we’ll implement a token contract for our application. The token will be an ERC20 token with mint and burn capabilities, specifically designed to interact with the Socket Protocol. We'll use **Solady**, a lightweight library for ERC20 implementation.
 
-### Install Solmate
+### Install Solady
 
 Install Solady as a dependency using Forge:
 
