@@ -110,6 +110,7 @@ contract MyTokenDeployer is AppDeployerBase {
             type(MyToken).creationCode,
             abi.encode(name_, symbol_, decimals_)
         );
+        _setFeesData(feesData_);
     }
 
     function deployContracts(
@@ -151,6 +152,7 @@ contract MyTokenDistributor is AppGatewayBase {
         FeesData memory feesData_
     ) AppGatewayBase(_addressResolver, feesData_) Owned(msg.sender) {
         addressResolver.setContractsToGateways(deployerContract_);
+        _setFeesData(feesData_);
     }
 
     function addAirdropReceivers(
