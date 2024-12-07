@@ -113,7 +113,11 @@ This example highlights how to abstract away blockchain-specific details, enabli
    https://apiv2.dev.socket.tech/getDetailsByTxHash?txHash=<TX_HASH>
    ```
 
-   Replace `<TX_HASH>` with the last transaction executed and ensure status is `COMPLETED`.
+   Replace `<TX_HASH>` with the last transaction executed and ensure status is `COMPLETED`. If you want to monitor all transactions at the same time you can run:
+
+   ```bash
+   node script/transactionStatus.js deployOnchain
+   ```
 
 8. **Increment multiple counters**
 
@@ -124,6 +128,12 @@ This example highlights how to abstract away blockchain-specific details, enabli
    ```
 
    Read [here](/call-contracts#2-call-forwarders) to learn more about how forwarder addresses are assigned on the offchainVM to represent onchain contracts.
+
+   If you want to know when the transaction is complete you can run the command below or directly use the API as described in the previous step.
+
+   ```bash
+   node script/transactionStatus.js incrementCounters
+   ```
 
 9. **Check that the counters on chain have incremented**
 
