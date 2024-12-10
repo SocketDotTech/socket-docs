@@ -1,6 +1,6 @@
 ---
 id: writing-apps
-title: Writting Apps on SOCKET
+title: Writing Apps on SOCKET
 ---
 
 # Writing Apps on SOCKET
@@ -52,7 +52,7 @@ Here’s the implementation of the `MyToken` contract that uses Solmate's ERC20 
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
-import "solady/tokens/ERC20.sol";
+import "../lib/solady/src/tokens/ERC20.sol";
 
 contract MyToken is ERC20 {
     string private _name;
@@ -110,7 +110,7 @@ Here’s the implementation of `MyTokenDeployer` contract which will be deployed
 pragma solidity >=0.7.0 <0.9.0;
 
 import "./MyToken.sol";
-import "socket-protocol/contracts/base/AppDeployerBase.sol";
+import "../lib/socket-protocol/contracts/base/AppDeployerBase.sol";
 
 contract MyTokenDeployer is AppDeployerBase {
     bytes32 public myToken = _createContractId("myToken");
@@ -153,8 +153,8 @@ The `initialize` function is empty in this example. Use it for setting chain-spe
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
-import "socket-protocol/contracts/base/AppGatewayBase.sol";
-import "solady/auth/Ownable.sol";
+import "../lib/socket-protocol/contracts/base/AppGatewayBase.sol";
+import "../lib/solady/src/auth/Ownable.sol";
 import "./MyToken.sol";
 
 contract MyTokenAppGateway is AppGatewayBase, Ownable {
@@ -204,12 +204,12 @@ You can get the `addressResolver` from [here](/chain-information).
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Script} from "forge-std/Script.sol";
-import {console} from "forge-std/Console.sol";
+import {Script} from "../lib/forge-std/src/Script.sol";
+import {console} from "../lib/forge-std/src/console.sol";
 import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
 import {MyTokenDeployer} from "../src/MyTokenDeployer.sol";
-import {FeesData} from "lib/socket-protocol/contracts/common/Structs.sol";
-import {ETH_ADDRESS} from "lib/socket-protocol/contracts/common/Constants.sol";
+import {FeesData} from "../lib/socket-protocol/contracts/common/Structs.sol";
+import {ETH_ADDRESS} from "../lib/socket-protocol/contracts/common/Constants.sol";
 
 contract SetupMyToken is Script {
     function run() public {
@@ -251,7 +251,7 @@ contract SetupMyToken is Script {
 Run the script using cast, providing rpc and private key.
 
 ```bash
-forge script script/SetupMyToken.s.sol --broadcast
+forge script script/SetupMyToken.s.sol --broadcast --skip-simulation
 ```
 
 ### Fund your App
@@ -266,7 +266,7 @@ Once your app is funded, you can trigger the deployment of `MyToken` on desired 
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Script, console} from "forge-std/Script.sol";
+import {Script, console} from "../lib/forge-std/src/Script.sol";
 import {MyTokenDeployer} from "../src/MyTokenDeployer.sol";
 
 contract DeployMyToken is Script {
@@ -305,7 +305,7 @@ Once the setup is done, you can call `addAirdropReceivers`.
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Script, console} from "forge-std/Script.sol";
+import {Script, console} from "../lib/forge-std/src/Script.sol";
 import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
 
 contract AddReceivers is Script {
@@ -343,7 +343,7 @@ Note that the instance addresses are not the same as where token contracts are d
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Script, console} from "forge-std/Script.sol";
+import {Script, console} from "../lib/forge-std/src/Script.sol";
 import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
 
 contract ClaimAirdrop is Script {
