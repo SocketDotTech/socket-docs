@@ -48,6 +48,21 @@ const config: Config = {
     ],
   ],
   headTags: [
+    // HTML Meta Tags
+    {
+      tagName: "meta",
+      attributes: {
+        name: "title",
+        content: "It's time to get Plugged into Socket Docs | Socket Docs",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "description",
+        content: "Powering Chain Abstracted Apps",
+      },
+    },
     {
       tagName: "meta",
       attributes: {
@@ -62,60 +77,83 @@ const config: Config = {
         content: "#7F1FFF",
       },
     },
+    // OpenGraph Meta Tags
     {
-      tagName: "meta",
+      tagName: 'meta',
       attributes: {
-        name: "description",
-        content: "Powering Chain Abstracted Apps",
+        property: 'og:url',
+        content: 'https://docs.socket.tech',
       },
     },
     {
-      tagName: "meta",
+      tagName: 'meta',
       attributes: {
-        name: "og:image",
-        content: "/assets/metaImgNew.png",
+        property: 'og:type',
+        content: 'website',
       },
     },
     {
-      tagName: "meta",
+      tagName: 'meta',
       attributes: {
-        name: "og:url",
-        content: "https://docs.socket.tech",
+        property: 'og:title',
+        content: "It's time to get Plugged into Socket Docs | Socket Docs",
       },
     },
     {
-      tagName: "meta",
+      tagName: 'meta',
       attributes: {
-        name: "twitter:card",
-        content: "summary_large_image",
+        property: 'og:description',
+        content: 'Socket powers chain abstracted applications.',
       },
     },
     {
-      tagName: "meta",
+      tagName: 'meta',
       attributes: {
-        name: "twitter:url",
-        content: "https://docs.socket.tech",
+        property: 'og:image',
+        content: 'https://docs.socket.tech/assets/metaImg.png',
+      },
+    },
+    // Twitter Meta Tags
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'twitter:card',
+        content: 'summary_large_image',
       },
     },
     {
-      tagName: "meta",
+      tagName: 'meta',
       attributes: {
-        name: "twitter:title",
-        content: "Socket - Powering Chain Abstracted Apps",
+        property: 'twitter:domain',
+        content: 'docs.socket.tech',
       },
     },
     {
-      tagName: "meta",
+      tagName: 'meta',
       attributes: {
-        name: "twitter:description",
-        content: "Powering Chain Abstracted Apps",
+        property: 'twitter:url',
+        content: 'https://docs.socket.tech',
       },
     },
     {
-      tagName: "meta",
+      tagName: 'meta',
       attributes: {
-        name: "twitter:image",
-        content: "/assets/metaImgNew.png",
+        name: 'twitter:title',
+        content: "It's time to get Plugged into Socket Docs | Socket Docs",
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'twitter:description',
+        content: 'Socket powers chain abstracted applications.',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'twitter:image',
+        content: 'https://docs.socket.tech/assets/metaImg.png',
       },
     },
     {

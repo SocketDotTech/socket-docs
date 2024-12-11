@@ -1,6 +1,6 @@
 ---
 id: writing-apps
-title: Writting Apps on SOCKET
+title: Writing Apps on SOCKET
 ---
 
 # Writing Apps on SOCKET
