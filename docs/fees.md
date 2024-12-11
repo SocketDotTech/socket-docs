@@ -12,7 +12,7 @@ SOCKET works with 2 fee components -
 
 ## 1. Paying for Offchain VM transactions
 
-This part is similar to how you usually make transacions. You specify the `gasPrice` and `gasLimit` while making transactions or you let the libs do the estimation for you.
+This part is similar to how you usually make transactions. You specify the `gasPrice` and `gasLimit` while making transactions or you let the libs do the estimation for you.
 
 You can get native tokens for Offchain VM via [the faucet](https://faucet.conduit.xyz/socket-composer-testnet) or you can also deposit ETH from Sepolia using [the bridge](https://socket-composer-testnet-8b802af208e24e82.testnets.rollbridge.app/).
 
