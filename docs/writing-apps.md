@@ -1,6 +1,6 @@
 ---
 id: writing-apps
-title: Writting Apps on SOCKET
+title: Writing Apps on SOCKET
 ---
 
 # Writing Apps on SOCKET
@@ -34,14 +34,14 @@ The System consists of 3 main components.
 
 # 3. Step-by-Step Implementation
 
-To begin, we’ll implement a token contract for our application. The token will be an ERC20 token with mint and burn capabilities, specifically designed to interact with the Socket Protocol. We'll use **Solmate**, a lightweight library for ERC20 implementation.
+To begin, we’ll implement a token contract for our application. The token will be an ERC20 token with mint and burn capabilities, specifically designed to interact with the Socket Protocol. We'll use **Solady**, a lightweight library for ERC20 implementation.
 
-### Install Solmate
+### Install Solady
 
-Install Solmate as a dependency using Forge:
+Install Solady as a dependency using Forge:
 
 ```bash
-forge install transmissions11/solmate
+forge install vectorized/solady
 ```
 
 ### Token Contract Implementation: MyToken.sol
@@ -52,16 +52,19 @@ Here’s the implementation of the `MyToken` contract that uses Solmate's ERC20 
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
-import "solmate/tokens/ERC20.sol";
+import "solady/tokens/ERC20.sol";
 
 contract MyToken is ERC20 {
+    string private _name;
+    string private _symbol;
+    uint8 private _decimals;
+
     address public _SOCKET;
 
-    constructor(
-        string calldata name_,
-        string calldata symbol_,
-        uint8 decimals_
-    ) ERC20(name_, symbol_, decimals_) {
+    constructor(string memory name_, string memory symbol_, uint8 decimals_) {
+        _name = name_;
+        _symbol = symbol_;
+        _decimals = decimals_;
         _SOCKET = msg.sender;
     }
 
@@ -79,6 +82,18 @@ contract MyToken is ERC20 {
     function burn(uint256 amount_) external onlySOCKET {
         _burn(msg.sender, amount_);
     }
+
+    function name() public view override returns (string memory) {
+        return _name;
+    }
+
+    function symbol() public view override returns (string memory) {
+        return _symbol;
+    }
+
+    function decimals() public view override returns (uint8) {
+        return _decimals;
+    }
 }
 ```
 
@@ -91,10 +106,11 @@ The `mint` and `burn` functions have `onlySOCKET` modifier because these are cal
 Here’s the implementation of `MyTokenDeployer` contract which will be deployed to offchainVM. It extends the `AppDeployerBase` to manage the deployment process.
 
 ```solidity
+// SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
 import "./MyToken.sol";
-import "socket-poc/contracts/base/AppDeployerBase.sol";
+import "socket-protocol/contracts/base/AppDeployerBase.sol";
 
 contract MyTokenDeployer is AppDeployerBase {
     bytes32 public myToken = _createContractId("myToken");
@@ -102,19 +118,18 @@ contract MyTokenDeployer is AppDeployerBase {
     constructor(
         address addressResolver_,
         FeesData memory feesData_,
-        string calldata name_,
-        string calldata symbol_,
+        string memory name_,
+        string memory symbol_,
         uint8 decimals_
-    ) AppDeployerBase(addressResolver_, feesData_) {
+    ) AppDeployerBase(addressResolver_) {
         creationCodeWithArgs[myToken] = abi.encodePacked(
             type(MyToken).creationCode,
             abi.encode(name_, symbol_, decimals_)
         );
+        _setFeesData(feesData_);
     }
 
-    function deployContracts(
-        uint32 chainSlug
-    ) external async {
+    function deployContracts(uint32 chainSlug) external async {
         _deploy(myToken, chainSlug);
     }
 
@@ -130,27 +145,28 @@ The `deployContracts` function takes a `chainSlug` as an argument, specifying th
 
 The `initialize` function is empty in this example. Use it for setting chain-specific or dynamic variables after deployment if needed. More details [here](/deploy).
 
-### AppGateway Contract implementation: MyTokenDistributor.sol
+### AppGateway Contract implementation: MyTokenAppGateway.sol
 
-`MyTokenDistributor` is an AppGateway, it extends `AppGatewayBase` for logic related to interacting with onchain instances. This is where users interact with your app without worrying about the underlying chains. It has an `addAirdropReceivers` function that the owner can call and a `claimAirdrop` function that users can call.
+`MyTokenAppGateway` is an AppGateway, it extends `AppGatewayBase` for logic related to interacting with onchain instances. This is where users interact with your app without worrying about the underlying chains. It has an `addAirdropReceivers` function that the owner can call and a `claimAirdrop` function that users can call.
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
-import "socket-poc/contracts/base/AppGatewayBase.sol";
-import "solmate/src/auth/Owned.sol";
+import "socket-protocol/contracts/base/AppGatewayBase.sol";
+import "solady/auth/Ownable.sol";
 import "./MyToken.sol";
 
-contract MyTokenDistributor is AppGatewayBase {
+contract MyTokenAppGateway is AppGatewayBase, Ownable {
     mapping(address => uint256) public airdropReceivers;
 
     constructor(
         address _addressResolver,
         address deployerContract_,
         FeesData memory feesData_
-    ) AppGatewayBase(_addressResolver, feesData_) Owned(msg.sender) {
+    ) AppGatewayBase(_addressResolver) Ownable() {
         addressResolver.setContractsToGateways(deployerContract_);
+        _setFeesData(feesData_);
     }
 
     function addAirdropReceivers(
@@ -188,40 +204,46 @@ You can get the `addressResolver` from [here](/chain-information).
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Script, console} from "forge-std/Script.sol";
+import {Script} from "forge-std/Script.sol";
+import {console} from "forge-std/Console.sol";
+import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
 import {MyTokenDeployer} from "../src/MyTokenDeployer.sol";
-import {MyTokenDistributor} from "../src/MyTokenDistributor.sol";
+import {FeesData} from "lib/socket-protocol/contracts/common/Structs.sol";
+import {ETH_ADDRESS} from "lib/socket-protocol/contracts/common/Constants.sol";
 
 contract SetupMyToken is Script {
-    function setUp() public {}
-
     function run() public {
-        vm.startBroadcast();
+        address addressResolver = vm.envAddress("ADDRESS_RESOLVER");
+
+        string memory rpc = vm.envString("SOCKET_RPC");
+        vm.createSelectFork(rpc);
+
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
+
+        // Setting fee payment on Ethereum Sepolia
+        FeesData memory feesData = FeesData({
+            feePoolChain: 11155111,
+            feePoolToken: ETH_ADDRESS,
+            maxFees: 0.01 ether
+        });
 
         MyTokenDeployer myTokenDeployer = new MyTokenDeployer(
             addressResolver,
-            feesData, // move to setter
+            feesData,
             "MyToken",
             "MTK",
             18
         );
 
-        MyTokenDistributor myTokenDistributor = new MyTokenDistributor(
+        MyTokenAppGateway myTokenAppGateway = new MyTokenAppGateway(
             addressResolver,
-            address(myTokenDeployer), // move to setter
+            address(myTokenDeployer),
             feesData
         );
 
-        console.log(
-            "MyTokenDeployer deployed at: ",
-            address(myTokenDeployer)
-        );
-        console.log(
-            "MyTokenDistributor deployed at: ",
-            address(myTokenDistributor)
-        );
-
-        vm.stopBroadcast();
+        console.log("MyTokenDeployer: ", address(myTokenDeployer));
+        console.log("MyTokenAppGateway: ", address(myTokenAppGateway));
     }
 }
 ```
@@ -229,12 +251,12 @@ contract SetupMyToken is Script {
 Run the script using cast, providing rpc and private key.
 
 ```bash
-forge script ./script/SetupMyToken.s.sol --rpc-url <RPC_URL> --private-key <PRIVATE_KEY>
+forge script script/SetupMyToken.s.sol --broadcast
 ```
 
 ### Fund your App
 
-Next, go on to setup fees so that offchainVM can send transactions and deploy contracts on your app’s behalf. On any supported chain, deposit fees against `MyTokenDistributor`’s address. Read more about setting up fees and generating `feesData` [here](/fees).
+Next, go on to setup fees so that offchainVM can send transactions and deploy contracts on your app’s behalf. On any supported chain, deposit fees against `MyTokenAppGateway`’s address. Read more about setting up fees and generating `feesData` [here](/fees).
 
 ### Deploy Token to chains: DeployMyToken.s.sol
 
@@ -248,17 +270,17 @@ import {Script, console} from "forge-std/Script.sol";
 import {MyTokenDeployer} from "../src/MyTokenDeployer.sol";
 
 contract DeployMyToken is Script {
-    function setUp() public {}
-
     function run() public {
-        vm.startBroadcast();
+        string memory rpc = vm.envString("SOCKET_RPC");
+        vm.createSelectFork(rpc);
+
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
 
         MyTokenDeployer myTokenDeployer = MyTokenDeployer(<deployerAddress>);
         myTokenDeployer.deployContracts(<chainSlug1>);
         myTokenDeployer.deployContracts(<chainSlug2>);
         myTokenDeployer.deployContracts(<chainSlug3>);
-
-        vm.stopBroadcast();
     }
 }
 ```
@@ -268,7 +290,7 @@ Set proper values for `deployerAddress` and `chainSlugs` before running this scr
 `deployerAddress` should have been logged in by previous script.
 
 ```bash
-forge script ./script/DeployMyToken.s.sol --rpc-url <RPC_URL> --private-key <PRIVATE_KEY>
+forge script ./script/DeployMyToken.s.sol --broadcast
 ```
 
 Deployment of on chain contracts should take couple minutes. You can track the status of this request and also check the deployed addresses using our [apis](/api).
@@ -284,7 +306,7 @@ Once the setup is done, you can call `addAirdropReceivers`.
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import {MyTokenDistributor} from "../src/MyTokenDistributor.sol";
+import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
 
 contract AddReceivers is Script {
     address[] receivers = [
@@ -298,15 +320,15 @@ contract AddReceivers is Script {
         <amount3>
     ];
 
-    function setUp() public {}
-
     function run() public {
-        vm.startBroadcast();
+        string memory rpc = vm.envString("SOCKET_RPC");
+        vm.createSelectFork(rpc);
 
-        MyTokenDistributor myTokenDistributor = MyTokenDistributor(<myTokenDistributorAddress>);
-        myTokenDistributor.addAirdropReceivers(receivers, amounts);
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
 
-        vm.stopBroadcast();
+        MyTokenAppGateway myTokenAppGateway = MyTokenAppGateway(<myTokenAppGatewayAddress>);
+        myTokenAppGateway.addAirdropReceivers(receivers, amounts);
     }
 }
 ```
@@ -322,18 +344,18 @@ Note that the instance addresses are not the same as where token contracts are d
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import {MyTokenDistributor} from "../src/MyTokenDistributor.sol";
+import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
 
 contract ClaimAirdrop is Script {
-    function setUp() public {}
-
     function run() public {
-        vm.startBroadcast();
+        string memory rpc = vm.envString("SOCKET_RPC");
+        vm.createSelectFork(rpc);
 
-        MyTokenDistributor myTokenDistributor = MyTokenDistributor(<myTokenDistributorAddress>);
-        myTokenDistributor.claimAirdrop(<instance>);
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
 
-        vm.stopBroadcast();
+        MyTokenAppGateway myTokenAppGateway = MyTokenAppGateway(<myTokenAppGatewayAddress>);
+        myTokenAppGateway.claimAirdrop(<instance>);
     }
 }
 ```

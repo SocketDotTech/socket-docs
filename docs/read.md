@@ -51,7 +51,13 @@ Notice following things in above contract -
 - if `_readCallOn()` is called, it indicates to SOCKET that the call doesn't need to be sent on chain and just the return data needs to be read.
 - The `totalSupply` call uses `IMyTokenReader` interface. The `totalSupply` function signature is similar to a standard token contract but its visibility is not restricted to `view` and it doesnt have a return value. This needs to be followed for all read calls. The interface needs to be changed in this way to be compatible with the `async` `forwarder` system on Offchain VM.
 - Also, unlike a read on single chain, the return data here is not returned synchronously. Instead it has to be read asynchronously via a `promise` and a `callback` function.
-  The `forwarder` address is interfaced as `IPromise` and `then` function is called on it. In this function we pass the callback function signature as first parameter and data for callback as second parameter.
+
+:::tip
+The contract interface used for reading data needs to be changed to remove visibility modifiers and return values. Eg. we remove the `view` modifier and `returns (uint256)` from signature of original `totalSupply()` function.
+:::
+
+The `forwarder` address is interfaced as `IPromise` and `then` function is called on it. In this function we pass the callback function signature as first parameter and data for callback as second parameter.
+
 - `fetchSupplyCallback` uses `onlyPromises` modifier and has 2 params. First param is the `data` passed from original function and second param is the `returnData` from chain.
 
 ## 2. Promises

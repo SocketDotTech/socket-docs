@@ -41,6 +41,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "revert",
+          label: "Reverting async transactions",
+        },
+        {
+          type: "doc",
           id: "api",
           label: "API",
         },
@@ -52,7 +57,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "chain-information",
-          label: "Chain Information",
+          label: "OffchainVM Information",
         },
         {
           type: "doc",

@@ -36,6 +36,12 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge install
    ```
 
+   :::tip
+   Make sure foundry is atleast on following version. Pay attention to the **date** part.
+
+   `forge 0.2.0 (9a0f66e 2024-09-26T00:20:35.649925000Z)`
+   :::
+
 3. **Set Up Environment Variables**
 
    Copy the provided `.env.sample` file and set proper values for private key and rpc.
@@ -49,37 +55,40 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 4. **Get offchainVM ETH**
 
-   To pay for the transactions on offchainVM you need native tokens. You can get Sepolia ETH using [the bridge](https://socket-composer-testnet-8b802af208e24e82.testnets.rollbridge.app/) or you can get ETH directly on offchainVM using [the faucet](https://faucet.conduit.xyz/socket-composer-testnet).
+   To pay for the transactions on offchainVM you need native tokens. You can get offchainVM ETH using [the bridge](https://socket-composer-testnet-8b802af208e24e82.testnets.rollbridge.app/) or you can get ETH directly on offchainVM using [the faucet](https://faucet.conduit.xyz/socket-composer-testnet).
 
 5. **Deploy the all contracts on the offchainVM and on chain instances**
 
    This command deploys all contracts on offchainVM. It includes the `Counter`, `CounterDeployer`, `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
    ```bash
-   forge run script/Deploy.s.sol
+   forge script script/Deploy.s.sol --broadcast  --skip-simulation
    ```
 
-   You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`, and `Counter`.
+   You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`.
+
+   :::tip
+   Please ensure you have `--skip-simulation` on the above command otherise Foundry may overestimate how much it takes to deploy.
+   :::
 
    Add the deployed addresses in env for using in rest of the tutorial
 
    ```bash
-   export COUNTER_APPGATEWAY=<Counter App Address>;
    export COUNTER_DEPLOYER=<Counter Deployer Address>;
-   export COUNTER=<Counter plug Address>;
+   export COUNTER_APP_GATEWAY=<Counter App Address>;
    ```
 
 6. **Set up fees.**
 
    In this example we will be paying fees on Arbitrum Sepolia as configured in `script/Deploy.s.sol`.
 
-   To pay for this increment counter transaction, deposit Abitrum Sepolia `ETH` to the contract address of the `PayloadDeliveryPlug` by running:
+   To pay for this increment counter transaction, deposit `arbsepETH` to the contract address of the `PayloadDeliveryPlug` by running:
 
    ```bash
-   cast send 0x82dc804B1A84474266d59e1ccD51FAE43B4df19B "deposit(address,uint256,address)" \
+   cast send 0x804Af74b5b3865872bEf354e286124253782FA95 "deposit(address,uint256,address)" \
        0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
        <AMOUNT> \
-       $COUNTER_APPGATEWAY \
+       $COUNTER_APP_GATEWAY \
        --value <AMOUNT> \
        --rpc-url $ARBITRUM_SEPOLIA_RPC \
        --private-key $PRIVATE_KEY
@@ -88,98 +97,135 @@ This example highlights how to abstract away blockchain-specific details, enabli
    Replace `<AMOUNT>` in wei with more than 0.01 ETH. Please ensure the wallet you are using has at least 0.01 Arbitrum Sepolia ETH. Feel free to use any of the supported chains and run the command accordingly.
    You can pay using any token on a chain of your choice that has a `PayloadDelivery` contract. You can deposit them to a `PayloadDelivery` on any chain by calling the `deposit` function. Find all about the available `PayloadDelivery` addresses [here](/chain-information) and about fees [here](/fees)
 
+   :::tip
+   Don't forget to export `ARBITRUM_SEPOLIA_RPC` if you do not have it in your environment yet.
+   :::
 
-7. **Increment multiple counters**
+7. **Deploy onchain contracts**
+
+   ```bash
+   forge script script/deployOnchain.s.sol --broadcast --skip-simulation
+   ```
+
+   Let's ensure that the funds have been spent to pay for the transaction by running,
+
+   ```bash
+   https://apiv2.dev.socket.tech/getDetailsByTxHash?txHash=<TX_HASH>
+   ```
+
+   Replace `<TX_HASH>` with the last transaction executed and ensure status is `COMPLETED`. If you want to monitor all transactions at the same time you can run:
+
+   ```bash
+   node script/transactionStatus.js deployOnchain
+   ```
+
+8. **Increment multiple counters**
 
    To increment the various counters deployed on all different chains by different values we will run,
+
    ```bash
-   forge run script/incrementCounters.s.sol --rpc-url $SOCKET_RPC
+   forge script script/incrementCounters.s.sol --broadcast
    ```
 
    Read [here](/call-contracts#2-call-forwarders) to learn more about how forwarder addresses are assigned on the offchainVM to represent onchain contracts.
 
-8. **Check that the counters on chain have incremented**
+   If you want to know when the transaction is complete you can run the command below or directly use the API as described in the previous step.
 
    ```bash
-   forge run script/checkCounters.s.sol --rpc-url $SOCKET_RPC
+   node script/transactionStatus.js incrementCounters
+   ```
+
+9. **Check that the counters on chain have incremented**
+
+   ```bash
+   forge script script/checkCounters.s.sol
    ```
 
 # 3. Understanding the Components
 
 ## **Counter**
 
-   This is the instance of the app that is deployed on chain. Unlike a normal counter, the `increase` function of this counter is called via SOCKET.
+This is the instance of the app that is deployed on chain. Unlike a normal counter, the `increase` function of this counter is called via SOCKET.
 
-   ```solidity
-    contract Counter is Ownable(msg.sender) {
-        address public socket;
-        uint256 public counter;
+```solidity
+ contract Counter is Ownable(msg.sender) {
+     address public socket;
+     uint256 public counter;
 
-        modifier onlySocket() {
-            require(msg.sender == socket, "not socket");
-            _;
-        }
+     modifier onlySocket() {
+         require(msg.sender == socket, "not socket");
+         _;
+     }
 
-        function setSocket(address _socket) external onlyOwner {
-            socket = _socket;
-        }
+     function setSocket(address _socket) external onlyOwner {
+         socket = _socket;
+     }
 
-        function getSocket() external view returns (address) {
-            return socket;
-        }
+     function getSocket() external view returns (address) {
+         return socket;
+     }
 
-        function increase() external onlySocket {
-            counter++;
-        }
-    }
-   ```
+     function increase() external onlySocket {
+         counter++;
+     }
+ }
+```
 
 ## **CounterAppGateway**
 
-   `CounterAppGateway` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
+`CounterAppGateway` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
 
-   ```solidity
-   // CounterAppGateway is an AppGateway, this is the entry point for your app.
-    contract CounterAppGateway is AppGatewayBase {
-        constructor(
-            address _addressResolver,
-            address deployerContract_,
-            FeesData memory feesData_
-        ) AppGatewayBase(_addressResolver, feesData_) Ownable(msg.sender) {
-            addressResolver.setContractsToGateways(deployerContract_);
-        }
+```solidity
+ contract CounterAppGateway is AppGatewayBase {
+     constructor(
+         address _addressResolver,
+         address deployerContract_,
+         FeesData memory feesData_
+     ) AppGatewayBase(_addressResolver) {
+         addressResolver.setContractsToGateways(deployerContract_);
+         _setFeesData(feesData_);
+     }
 
-        function incrementCounter(address _instance) public async {
-            Counter(_instance).increase();
-        }
-    }
-   ```
+     function incrementCounters(address[] memory instances) public async {
+         for (uint256 i = 0; i < instances.length; i++) {
+             Counter(instances[i]).increase();
+         }
+     }
+
+     function setFees(FeesData memory feesData_) public {
+         feesData = feesData_;
+     }
+ }
+```
 
 ## **CounterDeployer**
 
-   The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy).
+The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy).
 
-   ```solidity
-    contract CounterDeployer is AppDeployerBase {
-        bytes32 public counter = _createContractId("counter");
+```solidity
+ contract CounterDeployer is AppDeployerBase {
+     bytes32 public counter = _createContractId("counter");
 
-        constructor(
-            address addressResolver_,
-            FeesData memory feesData_
-        ) AppDeployerBase(addressResolver_, feesData_) Ownable(msg.sender) {
-            creationCodeWithArgs[counter] = type(Counter).creationCode;
-        }
+     constructor(
+         address addressResolver_,
+         FeesData memory feesData_
+     ) AppDeployerBase(addressResolver_) {
+         creationCodeWithArgs[counter] = type(Counter).creationCode;
+         _setFeesData(feesData_);
+     }
 
-        function deployContracts(
-            uint32 chainSlug
-        ) external async {
-            _deploy(counter, chainSlug);
-        }
+     function deployContracts(uint32 chainSlug) external async {
+         _deploy(counter, chainSlug);
+     }
 
-        function initialize(uint32 chainSlug) public override async{
-            address socket = getSocketAddress(chainSlug);
-            address counterForwarder = forwarderAddresses[counter][chainSlug];
-            Counter(counterForwarder).setSocket(socket);
-        }
-    }
-   ```
+     function initialize(uint32 chainSlug) public override async {
+         address socket = getSocketAddress(chainSlug);
+         address counterForwarder = forwarderAddresses[counter][chainSlug];
+         Counter(counterForwarder).setSocket(socket);
+     }
+
+     function setFees(FeesData memory feesData_) public {
+         feesData = feesData_;
+     }
+ }
+```
