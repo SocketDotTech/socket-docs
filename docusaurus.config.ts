@@ -48,21 +48,6 @@ const config: Config = {
     ],
   ],
   headTags: [
-    // HTML Meta Tags
-    {
-      tagName: "meta",
-      attributes: {
-        name: "title",
-        content: "It's time to get Plugged into Socket Docs | Socket Docs",
-      },
-    },
-    {
-      tagName: "meta",
-      attributes: {
-        name: "description",
-        content: "Powering Chain Abstracted Apps",
-      },
-    },
     {
       tagName: "meta",
       attributes: {
@@ -75,85 +60,6 @@ const config: Config = {
       attributes: {
         name: "theme-color",
         content: "#7F1FFF",
-      },
-    },
-    // OpenGraph Meta Tags
-    {
-      tagName: 'meta',
-      attributes: {
-        property: 'og:url',
-        content: 'https://docs.socket.tech',
-      },
-    },
-    {
-      tagName: 'meta',
-      attributes: {
-        property: 'og:type',
-        content: 'website',
-      },
-    },
-    {
-      tagName: 'meta',
-      attributes: {
-        property: 'og:title',
-        content: "It's time to get Plugged into Socket Docs | Socket Docs",
-      },
-    },
-    {
-      tagName: 'meta',
-      attributes: {
-        property: 'og:description',
-        content: 'Socket powers chain abstracted applications.',
-      },
-    },
-    {
-      tagName: 'meta',
-      attributes: {
-        property: 'og:image',
-        content: 'https://docs.socket.tech/assets/metaImg.png',
-      },
-    },
-    // Twitter Meta Tags
-    {
-      tagName: 'meta',
-      attributes: {
-        name: 'twitter:card',
-        content: 'summary_large_image',
-      },
-    },
-    {
-      tagName: 'meta',
-      attributes: {
-        property: 'twitter:domain',
-        content: 'docs.socket.tech',
-      },
-    },
-    {
-      tagName: 'meta',
-      attributes: {
-        property: 'twitter:url',
-        content: 'https://docs.socket.tech',
-      },
-    },
-    {
-      tagName: 'meta',
-      attributes: {
-        name: 'twitter:title',
-        content: "It's time to get Plugged into Socket Docs | Socket Docs",
-      },
-    },
-    {
-      tagName: 'meta',
-      attributes: {
-        name: 'twitter:description',
-        content: 'Socket powers chain abstracted applications.',
-      },
-    },
-    {
-      tagName: 'meta',
-      attributes: {
-        name: 'twitter:image',
-        content: 'https://docs.socket.tech/assets/metaImg.png',
       },
     },
     {
@@ -233,6 +139,21 @@ const config: Config = {
         content:
           "messaging, datalayer, socket, socket.tech, DL, interoperability, Bungee, chain abstraction, chain-agnostic, cross-chain, messaging infrastructure",
       },
+      // HTML Meta Tags
+      { name: 'description', content: 'Socket powers chain abstracted applications.' },
+      // Open Graph Meta Tags
+      { property: 'og:url', content: 'https://docs.socket.tech' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:title', content: "It's time to get Plugged into Socket Docs | Socket Docs" },
+      { property: 'og:description', content: 'Socket powers chain abstracted applications.' },
+      { property: 'og:image', content: 'https://docs.socket.tech/assets/metaImg.png' },
+      // Twitter Meta Tags
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:domain', content: 'docs.socket.tech' },
+      { name: 'twitter:url', content: 'https://docs.socket.tech' },
+      { name: 'twitter:title', content: "It's time to get Plugged into Socket Docs | Socket Docs" },
+      { name: 'twitter:description', content: 'Socket powers chain abstracted applications.' },
+      { name: 'twitter:image', content: 'https://docs.socket.tech/assets/metaImg.png' },
     ],
   },
   plugins: [["docusaurus-lunr-search", { languages: ["en"] }]],
