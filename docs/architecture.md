@@ -20,7 +20,7 @@ And you as a developer get to dictate not just your onchain logic but also offch
 - **App-Gateway**: You can write custom functionality in these contracts, logic that helps you compose your onchain contracts better, or execution of some pre-execution logic before things get executed onchain like safety checks, auctions or anything you can imagine.
 - **On-Chain App Contracts**: These are smart contracts that get deployed and executed onchain, like how you are used to so far.
 
-Read more about how to build applications on SOCKET here
+Read more about how to build applications on SOCKET [here](/writing-apps)
 
 ![image.png](../static/img/architecture.png)
 
