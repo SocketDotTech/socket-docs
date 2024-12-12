@@ -160,7 +160,7 @@ const config: Config = {
       // Facebook Meta Tags
       {
         property: "og:url",
-        content: "https://staging-docs-update.d6or32u7wu9ja.amplifyapp.com/",
+        content: "https://docs.socket.tech/",
       },
       {
         property: "og:type",
