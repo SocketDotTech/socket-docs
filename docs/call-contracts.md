@@ -7,7 +7,7 @@ title: Calling smart contracts
 
 ## 1. Contract call example
 
-Calling onchain contracts from Socket’s offchain vm is very similar to how you call another contract on single chain. Let us compare both these to understand it.
+Calling onchain contracts from SOCKET’s offchain vm is very similar to how you call another contract on single chain. Let us compare both these to understand it.
 
 Following is an example of how `HelloNoter` calls the `receiveNote` function of `Note` when both of them are on single chain. You simply create an instance of `Note` and call `receiveNote` function on it.
 
@@ -34,7 +34,7 @@ contract HelloNoter {
 }
 ```
 
-Similarly this is how you call a contract that is on chain from Socket’s offchain vm.
+Similarly this is how you call a contract that is on chain from SOCKET’s offchain vm.
 
 ```solidity
 // this contract is on chain
@@ -148,7 +148,7 @@ contract MyTokenAppGateway is AppGatewayBase {
 
         function transferAll(
                 address srcForwarder,
-                address dstForwarder    
+                address dstForwarder
         ) external async {
             _readCallOn();
             MyToken(srcForwarder).burnAll(msg.sender);

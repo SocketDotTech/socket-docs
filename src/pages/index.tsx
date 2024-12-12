@@ -37,7 +37,7 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title={`It's time to get Plugged into ${siteConfig.title}`}
-      description="Socket powers chain abstracted applications."
+      description="SOCKET powers chain abstracted applications."
     >
       {/*<HomepageHeader />*/}
       <main>{/* <HomepageFeatures /> */}</main>

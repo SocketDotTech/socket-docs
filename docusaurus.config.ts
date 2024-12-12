@@ -4,9 +4,9 @@ import type * as Preset from "@docusaurus/preset-classic";
 import { themes } from "prism-react-renderer";
 
 const config: Config = {
-  title: "Socket Docs",
+  title: "SOCKET Docs",
   tagline:
-    "Chain Abstraction Layer - Build Apps that are chain-agnostic via Socket",
+    "Chain Abstraction Layer - Build Apps that are chain-agnostic via SOCKET",
   url: "https://docs.socket.tech",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -88,14 +88,14 @@ const config: Config = {
     announcementBar: {
       id: "alpha-release",
       content:
-        "<b>🚧 Socket dev release is live. It is under active development and has known issues. 🚧</b>",
+        "<b>🚧 SOCKET dev release is live. It is under active development and has known issues. 🚧</b>",
       backgroundColor: "rgb(69, 219, 156)",
       isCloseable: true,
     },
     navbar: {
-      title: "Socket",
+      title: "SOCKET",
       logo: {
-        alt: "Socket Logo",
+        alt: "SOCKET Logo",
         src: "img/socketLogo.png",
       },
       items: [
@@ -119,7 +119,7 @@ const config: Config = {
     },
     footer: {
       style: "dark",
-      copyright: `Copyright © ${new Date().getFullYear()} Socket`,
+      copyright: `Copyright © ${new Date().getFullYear()} SOCKET`,
     },
     colorMode: {
       defaultMode: "dark",
@@ -142,16 +142,16 @@ const config: Config = {
       // HTML Meta Tags
       {
         name: "description",
-        content: "Socket powers chain abstracted applications.",
+        content: "SOCKET powers chain abstracted applications.",
       },
       // Google / Search Engine Tags
       {
         itemprop: "name",
-        content: "It's time to get Plugged into Socket Docs | Socket Docs",
+        content: "It's time to get Plugged into SOCKET Docs | SOCKET Docs",
       },
       {
         itemprop: "description",
-        content: "Socket powers chain abstracted applications.",
+        content: "SOCKET powers chain abstracted applications.",
       },
       {
         itemprop: "image",
@@ -168,11 +168,11 @@ const config: Config = {
       },
       {
         property: "og:title",
-        content: "It's time to get Plugged into Socket Docs | Socket Docs",
+        content: "It's time to get Plugged into SOCKET Docs | SOCKET Docs",
       },
       {
         property: "og:description",
-        content: "Socket powers chain abstracted applications.",
+        content: "SOCKET powers chain abstracted applications.",
       },
       {
         property: "og:image",
@@ -185,11 +185,11 @@ const config: Config = {
       },
       {
         name: "twitter:title",
-        content: "It's time to get Plugged into Socket Docs | Socket Docs",
+        content: "It's time to get Plugged into SOCKET Docs | SOCKET Docs",
       },
       {
         name: "twitter:description",
-        content: "Socket powers chain abstracted applications.",
+        content: "SOCKET powers chain abstracted applications.",
       },
       {
         name: "twitter:image",

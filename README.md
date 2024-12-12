@@ -1,6 +1,6 @@
-# Socket Docs
+# SOCKET Docs
 
-Official documentation for Socket, hosted at [docs.socket.tech](https://docs.socket.tech).
+Official documentation for SOCKET, hosted at [docs.socket.tech](https://docs.socket.tech).
 
 ## Getting Started
 

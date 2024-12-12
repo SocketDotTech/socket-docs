@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: What is Socket Protocol?
+title: What is SOCKET Protocol?
 ---
 
 import Link from '@docusaurus/Link';
