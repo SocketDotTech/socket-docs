@@ -7,7 +7,7 @@ title: Writing Apps on SOCKET
 
 # 1. Introduction
 
-In this guide, we’ll build a **Airdrop application** using the Socket Protocol. Make sure your environment is set up with [socket-starter-kit](/getting-started) before proceeding.
+In this guide, we’ll build a **Airdrop application** using the SOCKET Protocol. Make sure your environment is set up with [socket-starter-kit](/getting-started) before proceeding.
 
 You’ll learn how to:
 
@@ -34,7 +34,7 @@ The System consists of 3 main components.
 
 # 3. Step-by-Step Implementation
 
-To begin, we’ll implement a token contract for our application. The token will be an ERC20 token with mint and burn capabilities, specifically designed to interact with the Socket Protocol. We'll use **Solady**, a lightweight library for ERC20 implementation.
+To begin, we’ll implement a token contract for our application. The token will be an ERC20 token with mint and burn capabilities, specifically designed to interact with the SOCKET Protocol. We'll use **Solady**, a lightweight library for ERC20 implementation.
 
 ### Install Solady
 

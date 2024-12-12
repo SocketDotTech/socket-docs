@@ -28,7 +28,7 @@ function GettingStartedGrid() {
             />
             <CardItem
                 title="Architecture"
-                description="Deep dive into Socket Protocol's architecture"
+                description="Deep dive into SOCKET Protocol's architecture"
                 link="/architecture"
             />
             <CardItem

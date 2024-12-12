@@ -10,15 +10,15 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: "Learn",
-    description: <>Learn about Socket</>,
+    description: <>Learn about SOCKET</>,
   },
   {
     title: "Build",
-    description: <>Build on Socket</>,
+    description: <>Build on SOCKET</>,
   },
   {
     title: "Integrate",
-    description: <>Integrate Socket into your project</>,
+    description: <>Integrate SOCKET into your project</>,
   },
 ];
 

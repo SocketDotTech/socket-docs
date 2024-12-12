@@ -7,11 +7,11 @@ const sidebars: SidebarsConfig = {
     {
       type: "doc",
       id: "introduction",
-      label: "What is Socket Protocol?",
+      label: "What is SOCKET Protocol?",
     },
     {
       type: "category",
-      label: "Building on Socket",
+      label: "Building on SOCKET",
       collapsible: false,
       items: [
         {
@@ -22,7 +22,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "writing-apps",
-          label: "Writing Apps on Socket",
+          label: "Writing Apps on SOCKET",
         },
         {
           type: "doc",
@@ -68,7 +68,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Learn How Socket Works",
+      label: "Learn How SOCKET Works",
       collapsible: false,
       items: [
         {

@@ -9,7 +9,7 @@ title: Getting Started
 
 In this tutorial, we’ll demonstrate how to implement an extended version of the `Counter.sol` contract, inspired by the default Foundry example. Unlike a traditional counter deployed on a single chain, our counter will be deployed across multiple chains, and we will interact with it in a **chain-abstracted fashion**.
 
-This example highlights how to abstract away blockchain-specific details, enabling seamless contract interactions across multiple chains through the Socket Protocol. By leveraging chain abstraction, developers can focus on application logic without worrying about the complexities of inter-chain communication.
+This example highlights how to abstract away blockchain-specific details, enabling seamless contract interactions across multiple chains through the SOCKET Protocol. By leveraging chain abstraction, developers can focus on application logic without worrying about the complexities of inter-chain communication.
 
 **You’ll learn how to**
 
