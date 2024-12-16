@@ -165,6 +165,7 @@ contract MyTokenAppGateway is AppGatewayBase, Ownable {
         address deployerContract_,
         FeesData memory feesData_
     ) AppGatewayBase(_addressResolver) Ownable() {
+        _initializeOwner(msg.sender);
         addressResolver.setContractsToGateways(deployerContract_);
         _setFeesData(feesData_);
     }
