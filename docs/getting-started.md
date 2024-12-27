@@ -62,7 +62,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    This command deploys all contracts on offchainVM. It includes the `Counter`, `CounterDeployer`, `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
    ```bash
-   forge script script/Deploy.s.sol --broadcast  --skip-simulation
+   forge script script/counter/deployCounterOffchain.s.sol --broadcast  --skip-simulation
    ```
 
    You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`.
@@ -104,7 +104,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 7. **Deploy onchain contracts**
 
    ```bash
-   forge script script/deployOnchain.s.sol --broadcast --skip-simulation
+   forge script script/counter/deployCounterOnchain.s.sol --broadcast --skip-simulation
    ```
 
    Let's ensure that the funds have been spent to pay for the transaction by running,
@@ -116,7 +116,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    Replace `<TX_HASH>` with the last transaction executed and ensure status is `COMPLETED`. If you want to monitor all transactions at the same time you can run:
 
    ```bash
-   node script/transactionStatus.js deployOnchain
+   node script/transactionStatus.js deployCounterOnchain
    ```
 
 8. **Increment multiple counters**
@@ -124,7 +124,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    To increment the various counters deployed on all different chains by different values we will run,
 
    ```bash
-   forge script script/incrementCounters.s.sol --broadcast
+   forge script script/counter/incrementCounters.s.sol --broadcast --skip-simulation
    ```
 
    Read [here](/call-contracts#2-call-forwarders) to learn more about how forwarder addresses are assigned on the offchainVM to represent onchain contracts.
@@ -138,7 +138,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 9. **Check that the counters on chain have incremented**
 
    ```bash
-   forge script script/checkCounters.s.sol
+   forge script script/counter/checkCounters.s.sol --skip-simulation
    ```
 
 # 3. Understanding the Components

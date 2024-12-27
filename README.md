@@ -81,4 +81,4 @@ We welcome contributions! Please see our contributing guidelines for more detail
 ## Additional Resources
 
 - [Official Website](https://socket.tech)
-- [GitHub Repository](https://github.com/SocketDotTech)
+- [SOCKET protocol GitHub Repository](https://github.com/SocketDotTech/socket-protocol)
