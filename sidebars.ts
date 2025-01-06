@@ -22,7 +22,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "writing-apps",
-          label: "Writing Apps on SOCKET",
+          label: "Going chain abstracted",
         },
         {
           type: "doc",
