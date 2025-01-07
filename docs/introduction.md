@@ -4,7 +4,7 @@ title: What is SOCKET Protocol?
 ---
 
 import Link from '@docusaurus/Link';
-import GettingStartedGrid from '@site/src/components/CardGrid/CardGrid';
+import CardGrid from '@site/src/components/CardGrid/CardGrid';
 import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 
 ## What is SOCKET Protocol?
@@ -28,4 +28,25 @@ SOCKET is extremely flexible and generic, to allow developers to create and inno
 Read more about the usecases SOCKET enables in [this section](/usecases).
 
 ## Top Links!
-<GettingStartedGrid />
+<CardGrid cards={[
+ {
+   title: "Getting Started",
+   description: "Follow a step by step tutorial",
+   link: "/getting-started"
+ },
+ {
+   title: "App Tutorial",
+   description: "Build a chain-abstracted ERC20 app",
+   link: "/writing-apps"
+ },
+ {
+   title: "Architecture",
+   description: "Deep dive into SOCKET Protocol's architecture",
+   link: "/architecture"
+ },
+ {
+   title: "Usecases",
+   description: "Read more about the usecases SOCKET enables",
+   link: "/usecases"
+ }
+]} />
