@@ -1,49 +1,100 @@
 ---
 id: writing-apps
-title: Going chain abstracted
+title: Writing Apps on SOCKET
 ---
 
-### _A practical example of a horizontally scaled token_
+import Link from '@docusaurus/Link';
+import CardGrid from '@site/src/components/CardGrid/CardGrid';
+import styles from '@site/src/components/CardGrid/CardGrid.module.css';
+
+# Writing Apps on SOCKET
 
 ## Introduction
 
-In this guide, we will expand a single chain ERC20 token into any chain we want using the SOCKET Protocol.
+In this guide, we’ll build a **SimpleToken application** using the SOCKET Protocol.
 
 You’ll learn how to:
 
-- Create an app that allows to bridge those tokens to any chain we want out token in;
-- Create a multi-chain mintable and burnable ERC20 token contract;
-- Use offchainVM to check eligibility and trigger onchain minting;
-- Test and deploy our app across multiple chains.
+- Create a multi-chain application that deploys replicatble tokens across chains;
+- Use offchainVM to trigger onchain minting;
+- Test and Deploy your app across multiple chains.
 
-## Architecture Overview
+### Architecture Overview
 
-The System consists of 4 main components.
+The System consists of 3 main components.
 
-<!--  TODO: UPDATE URLs once it get's merged to the master branch -->
-- A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/going-multichain-erc20/contracts/apps/going-multichain-erc20/MultichainTokenDeployer.sol) on offchainVM that handles the deployment of onchain contracts for this application;
-  - To identify the contracts that are possible to be deployed with this app, see the `bytes32` variables;
-  - These are unique identifiers for the contracts and are used to fetch the `creationCode`, `onchain addresses` and `forwarder addresses` from mappings in `AppGatewayBase`. This identifier can be created using `_createContractId` function;
-  - This stored code is used for deploying the token to the underlying chains.
-- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/going-multichain-erc20/contracts/apps/going-multichain-erc20/MultichainTokenAppGateway.sol) on offchainVM that manages the application logic and logic related to interacting with onchain instances;
-  - An Application Gateway has a Deployer contract associated with it;
-  - This is how you indicate which contracts are allowed to call your onchain contracts and SOCKET protocol knows where to charge fees from when a contract on offchainVM calls a contract on chain;
-  - This is contract users will interact with when using the token in a multichain environment;
-- An onchain [ERC20 Token Contract](https://github.com/SocketDotTech/socket-protocol/blob/going-multichain-erc20/contracts/apps/going-multichain-erc20/MultichainToken.sol) that can be deployed to any chain;
-  - Standard ERC20 token using Solady;
-  - Owner of the contract is the Application Gateway;
-  - This contract is expected to be deployed via SOCKET protocol such that the owner is the Application Gateway;
-  - The `mint` and `burn` functions have `onlySOCKET` modifier because these are called by `AppGateway` via SOCKET.
-  <!-- TODO: Change MultichainToken contract to have Ownable -->
-  <!-- TODO: Have contracts load NotSocket from common/Errors.sol -->
-- An onchain [Vault Contract](https://github.com/SocketDotTech/socket-protocol/blob/going-multichain-erc20/contracts/apps/going-multichain-erc20/Vault.sol) that will be deployed on the existing ERC20 token chain;
-  <!-- TODO: Have contracts load NotSocket from common/Errors.sol -->
+<!-- TODO: Update filepaths once contracts are merged to master branch -->
+- A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/simple-token/contracts/apps/simple-token/SimpleTokenDeployer.sol) on offchainVM to deploy the **SimpleToken** instances.
+    - This contract which will be deployed to offchainVM;
+- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/simple-token/contracts/apps/simple-token/SimpleTokenAppGateway.sol) on offchainVM that handles logic related to interacting with onchain contracts;
+    - This contract which will be deployed to offchainVM;
+    - `AppGateway` contract is the user hub of interactions;
+- An onchain [ERC20 Token Contract](https://github.com/SocketDotTech/socket-protocol/blob/simple-token/contracts/apps/simple-token/SimpleToken.sol) that can be deployed on any chain.
+    - This contract is expected to be deployed via the Deployer Contract;
+    - `AppGateway` will be the owner and will trigger the `mint` and `burn` functions;
 
-## Reading onchain functions
+## Key offchain Contract Concepts
 
-## Calling onchain functions
+### Onchain contract bytecode stored in the Deployer Contract
+The Deployer Contract has two key pieces of code to ensure that onchain deployments are replicable `SimpleToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
+```solidity
+creationCodeWithArgs[simpleToken] = abi.encodePacked(
+    type(simpleToken).creationCode,
+    abi.encode(name_, symbol_, decimals_)
+);
+```
 
-## Testing in a chain
+Using  `bytes32` variable is use a unique identifier for the SimpleToken contract generated using the `_createContractId` function. This identifier allows us to fetch `creationCode`, `onchain addresses` and `forwarder addresses` from maps in `AppGatewayBase`.
+<!-- TODO: Link explanation to the forwarder addresses -->
+```solidity
+bytes32 public simpleToken = _createContractId("simpleToken");
+```
+
+While this example handles a single contract, you can extend it to manage multiple contracts by storing their creation codes.
+
+### Onchain contract deployment with the Deployer Contract
+![deployment_flow.svg](../static/img/deployment_flow.svg)
+
+The `deployContracts` function takes a `chainSlug` as an argument that specifies the chain where the contract should be deployed.
+```solidity
+function deployContracts(uint32 chainSlug) external async {
+    _deploy(simpleToken, chainSlug);
+}
+```
+It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains.
+<!-- TODO: Explain what _deploy does and what initialize does -->
+
+The `initialize` function is empty in this example. Use it for setting chain-specific or dynamic variables after deployment if needed. More details [here](/deploy).
+<!-- TODO: Review deploy page -->
+
+## What's next!
+<CardGrid cards={[
+ {
+   title: "Mint tokens",
+   description: "Let's mint some tokens",
+   link: "/call-contracts"
+ },
+ {
+   title: "Burn tokens",
+   description: "Read onchain state before burning tokens",
+   link: "/read"
+ },
+ {
+   title: "Deploy onchain",
+   description: "Deploy the ERC20 contracts onchain",
+   link: "/deploy"
+ },
+ {
+   title: "Test your app",
+   description: "Setup Foundry tests and run live tests",
+   link: "/writing-apps"
+ }
+]} />
+<!-- TODO: Add page explaining how to test the app and how to write Foundry tests for the app -->
+
+<!-- TODO: Move the information below to different pages -->
+<!--
+## Deployment and Fee setup
 
 ## Fee setup
 With the contracts ready, we can go on to deploy things. In true Chain Abstracted spirit, you as a developer only need to interact with the offchainVM and never with the chains directly unless you want to verify if things were done correctly.
@@ -65,6 +116,68 @@ Once your app is funded, you can trigger the deployment of `MyToken` on desired 
 
 Deployment of on chain contracts should take couple minutes. You can track the status of this request and also check the deployed addresses using our [apis](/api).
 
-### **Deployment Flow**
+## Testing
 
-![deployment_flow.png](../static/img/deployment_flow.svg)
+### Add Airdrop Receivers: AddReceivers.s.sol
+
+Once the setup is done, you can call `addAirdropReceivers`.
+
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import {Script, console} from "forge-std/Script.sol";
+import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
+
+contract AddReceivers is Script {
+    address[] receivers = [
+        <receiver1>,
+        <receiver2>,
+        <receiver3>
+    ];
+    uint256[] amounts = [
+        <amount1>,
+        <amount2>,
+        <amount3>
+    ];
+
+    function run() public {
+        string memory rpc = vm.envString("SOCKET_RPC");
+        vm.createSelectFork(rpc);
+
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
+
+        MyTokenAppGateway myTokenAppGateway = MyTokenAppGateway(<myTokenAppGatewayAddress>);
+        myTokenAppGateway.addAirdropReceivers(receivers, amounts);
+    }
+}
+```
+
+### Claim Airdrop: ClaimAirdrop.s.sol
+
+For each receiver that was added in previous step, they can call claimAirdrop with their desired instance address to mint tokens on the desired chain. Use our [apis](/api) to get instance addresses.
+
+Note that the instance addresses are not the same as where token contracts are deployed on chain. The instance here is a forwarder address, read more about it [here](/call-contracts).
+
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import {Script, console} from "forge-std/Script.sol";
+import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
+
+contract ClaimAirdrop is Script {
+    function run() public {
+        string memory rpc = vm.envString("SOCKET_RPC");
+        vm.createSelectFork(rpc);
+
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
+
+        MyTokenAppGateway myTokenAppGateway = MyTokenAppGateway(<myTokenAppGatewayAddress>);
+        myTokenAppGateway.claimAirdrop(<instance>);
+    }
+}
+```
+-->
