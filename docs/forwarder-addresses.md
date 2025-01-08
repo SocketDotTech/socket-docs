@@ -12,7 +12,9 @@ Since each forwarder is tied to a specific `(chainSlug, address)` pair, it knows
 
 SOCKET uses these `forwarder` contracts that are automatically deployed alongside your onchain contracts when you [deploy](/deploy). Each forwarder contract is immutable and is specifically tied to a unique `(chain, address)` pair. This ensures that when a forwarder contract is called, it knows exactly which chain and which address to forward the call to.
 
-![image.png](../static/img/forwarder-addresses.svg)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/forwarder-addresses.svg" alt="forwarder addresses" style={{ width: '100%' }} />
+</div>
 
 ## Creating a Forwarder Address for an existing onchain contract
 

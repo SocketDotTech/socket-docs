@@ -62,7 +62,9 @@ The process involves:
 1. A mint operation on the Destination Token Forwarder
 1. Communication between forwarders and the Socket Protocol
 
-![image.png](../static/img/mint_burn.svg)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/mint_burn.svg" alt="forwarder addresses" style={{ width: '70%' }} />
+</div>
 
 <!--
 ## Reading the return data

@@ -52,7 +52,9 @@ bytes32 public simpleToken = _createContractId("simpleToken");
 While this example handles a single contract, you can extend it to manage multiple contracts by storing their creation codes.
 
 ### Onchain contract deployment with the Deployer Contract
-![deployment_flow.svg](../static/img/deployment_flow.svg)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/deployment_flow.svg" alt="deployment flow" style={{ width: '100%' }} />
+</div>
 
 The `deployContracts` function takes a `chainSlug` as an argument that specifies the chain where the contract should be deployed.
 ```solidity
