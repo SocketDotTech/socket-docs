@@ -26,11 +26,6 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "deploy",
-          label: "Deploying onchain smart contracts",
-        },
-        {
-          type: "doc",
           id: "call-contracts",
           label: "Calling onchain smart contracts",
         },
@@ -38,6 +33,11 @@ const sidebars: SidebarsConfig = {
           type: "doc",
           id: "read",
           label: "Reading onchain state",
+        },
+        {
+          type: "doc",
+          id: "deploy",
+          label: "Deploying onchain smart contracts",
         },
         {
           type: "doc",
