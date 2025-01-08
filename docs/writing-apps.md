@@ -44,8 +44,7 @@ creationCodeWithArgs[simpleToken] = abi.encodePacked(
 );
 ```
 
-Using  `bytes32` variable is use a unique identifier for the SimpleToken contract generated using the `_createContractId` function. This identifier allows us to fetch `creationCode`, `onchain addresses` and `forwarder addresses` from maps in `AppGatewayBase`.
-<!-- TODO: Link explanation to the forwarder addresses -->
+Using  `bytes32` variable is use a unique identifier for the SimpleToken contract generated using the `_createContractId` function. This identifier allows us to fetch `creationCode`, `onchain addresses` and `forwarder addresses` from maps in `AppGatewayBase`. See [here](/forwarder-addresses) to know more about [forwarder addresses](/forwarder-addresses).
 ```solidity
 bytes32 public simpleToken = _createContractId("simpleToken");
 ```
@@ -62,9 +61,8 @@ function deployContracts(uint32 chainSlug) external async {
 }
 ```
 It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains.
-<!-- TODO: Explain what _deploy does and what initialize does -->
 
-The `initialize` function is empty in this example. Use it for setting chain-specific or dynamic variables after deployment if needed. More details [here](/deploy).
+The `initialize` function is empty in this example. You can use it for setting chain-specific or dynamic variables after deployment if needed. For more details check [this page](/deploy).
 <!-- TODO: Review deploy page -->
 
 ## What's next!
