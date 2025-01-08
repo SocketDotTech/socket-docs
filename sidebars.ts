@@ -22,7 +22,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "writing-apps",
-          label: "Going chain abstracted",
+          label: "Writing chain abstracted apps",
         },
         {
           type: "doc",
@@ -90,6 +90,11 @@ const sidebars: SidebarsConfig = {
           type: "doc",
           id: "watchers",
           label: "Watchers",
+        },
+        {
+          type: "doc",
+          id: "forwarder-addresses",
+          label: "Forwarder Addresses",
         },
         {
           type: "link",
