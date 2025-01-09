@@ -49,8 +49,8 @@ contract MyTokenAppGateway is AppGatewayBase {
         address srcForwarder,
         address dstForwarder
     ) external async {
-        MyToken(srcForwarder).burn(msg.sender, amount);
-        MyToken(dstForwarder).mint(msg.sender, amount);
+        SimpleToken(srcForwarder).burn(msg.sender, amount);
+        SimpleToken(dstForwarder).mint(msg.sender, amount);
     }
 }
 ```
