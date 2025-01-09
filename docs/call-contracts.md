@@ -65,15 +65,3 @@ The process involves:
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     <img src="/img/mint_burn.svg" alt="forwarder addresses" style={{ width: '70%' }} />
 </div>
-
-<!--
-## Reading the return data
-
-Reading the return data of a contract call is similar to how you [read on chain state](/read). With the difference being that, you need to turn the read mode on by calling `_readCallOn()` and off by calling `_readCallOff()`.
-
-We use the promise and callback pattern, similar to how reads are done.
-
-`transferAllCallback` is set as callback for the `burnAll` function call. We pass the `user` address and `dstForwarder` address as part of `data` to the callback and get the `amount` in `returnData`.
-
-Interestingly, the `transferAllCallback` function also has `async` modifier and the `mint` function is called from this callback. Such nesting of `callbacks` and `async` calls can be done to implement more complex logic that involves interacting with multiple chains at different steps.
--->
