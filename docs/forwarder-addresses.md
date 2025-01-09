@@ -3,7 +3,8 @@ id: forwarder-addresses
 title: Forwarder Addresses
 ---
 
-## What ddes the Forwarder Address do?
+## What does the Forwarder Address do?
+
 The forwarder address is essentially a **proxy contract** that:
 1. **Receives cross-chain messages** through the SOCKET protocol.
 2. **Forwards the calls to the correct chain and address.**
@@ -16,13 +17,11 @@ SOCKET uses these `forwarder` contracts that are automatically deployed alongsid
     <img src="/img/forwarder-addresses.svg" alt="forwarder addresses" style={{ width: '100%' }} />
 </div>
 
-## Creating a Forwarder Address for an existing onchain contract
-
-To create a forwarder address, you need to deploy a **forwarder contract** that will handle cross-chain calls for your onchain contract. This forwarder contract is created by calling the `deployForwarderContract` function provided by the `IAddressResolver` interface.
+## Creating and Accessing Forwarder Addresses
 
 ### Using the Deployer contract constructor to deploy the Forwarder Address
 
-When your `Deployer` contract is deployed, the constructor can automatically create a forwarder for your onchain contract. Here’s the relevant code from the constructor:
+When your `Deployer` contract is deployed, the constructor can automatically create a forwarder for your onchain contract. Here's the relevant code from the constructor:
 
 ```solidity
 IAddressResolver(addressResolver).deployForwarderContract(
@@ -38,18 +37,18 @@ IAddressResolver(addressResolver).deployForwarderContract(
 
 This call ensures that a forwarder contract is deployed and linked to the specified `(chainSlug, onchainTokenAddress)` pair.
 
-### 2. Manually deploying a Forwarder Address elsewhere in the Deployer contract
+### Accessing Forwarder Addresses
 
-If you need to deploy a forwarder address at any other point in your contract (outside the constructor), you can call the same function manually:
+Once deployed, you can access the forwarder addresses through the `forwarderAddresses` mapping in the Deployer contract:
 
 ```solidity
-addressResolver.deployForwarderContract(
-    address(this),
-    onchainAddress,
-    chainSlug
-);
+address forwarderAddress = forwarderAddresses[contractAddress][chainSlug];
 ```
 
-This can be used if:
-- You need to create multiple forwarders for different existing contracts;
-- You want to deploy forwarders dynamically based on certain conditions.
+This mapping allows you to retrieve the forwarder address for any contract and chain combination. For example:
+
+```solidity
+address simpleTokenVaultForwarder = forwarderAddresses[simpleTokenVault][chainSlug];
+```
+
+See how this example usage [here](/deploy#deploy-multiple-contracts).
