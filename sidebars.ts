@@ -41,11 +41,6 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "revert",
-          label: "Reverting async transactions",
-        },
-        {
-          type: "doc",
           id: "api",
           label: "API",
         },

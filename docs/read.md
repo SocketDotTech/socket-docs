@@ -3,8 +3,6 @@ id: read
 title: Reading onchain state
 ---
 
-# How to read onchain state
-
 ## Read Example
 
 SOCKET supports reading public variables and functions from the underlying chains. To understand how this is done, lets extend the SimpleToken example that was introduced in our [guide](/writing-apps) and expanded to have a `transfer` function [here](/call-contracts).
@@ -73,26 +71,34 @@ contract MyTokenAppGateway is AppGatewayBase {
 Let's break down the key points:
 
 - The `transfer` function uses the `async` modifier, which is required for onchain interactions, whether they are read or write operations.
-
 - The `_readCallOn()` and `_readCallOff()` functions are used to tell SOCKET that a particular section only needs to read data from another chain, rather than executing an onchain transaction.
-
 - In multi-chain operations, data cannot be read synchronously. Instead, it follows this pattern:
    1. Make the onchain call (`balanceOf`)
    2. Set up a promise with a callback function using `IPromise(srcForwarder).then()`
    3. The callback function (`checkBalance`) receives the data asynchronously
-
 - The `then` function on the forwarder (cast as `IPromise`) takes:
    - First parameter: The callback function's selector (`this.checkBalance.selector`)
    - Second parameter: Encoded data needed by the callback (`abi.encode(amount, asyncId)`).
-
 - The callback function `checkBalance`:
    - Uses the `onlyPromises` modifier to ensure it's only called by the promises system
    - Takes two parameters:
      - `data`: The encoded data from the original function (amount and asyncId)
      - `returnData`: The actual data returned from the source chain (balance)
-
 - When interacting with contracts on other chains, interface definitions need to be modified:
    - Remove visibility modifiers (like `view`)
    - Remove return value declarations from the function signature
 
-Check the [Promises](/promises) page to see how promises work.
+[Go here to see how promises work.](/promises)
+
+## How to revert async transactions?
+
+When working with async transactions in SOCKET, there might be cases where you need to revert an ongoing transaction in a callback based on certain conditions. SOCKET provides utilities to handle such scenarios through the `_revertTx` function.
+
+- The `_revertTx(asyncId)` function is called when the balance check fails to stop triggering burn and mint.
+   - If `_revertTx(asyncId)` is not called, burn and mint are executed as expected.
+   - The `asyncId` is obtained using `_getCurrentAsyncId()` and passed to callback using data.
+
+:::tip
+The `_revertTx` function is only available in contracts that inherit from `AppGatewayBase`.
+:::
+
