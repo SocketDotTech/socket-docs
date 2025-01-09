@@ -64,8 +64,7 @@ function deployContracts(uint32 chainSlug) external async {
 ```
 It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains.
 
-The `initialize` function is empty in this example. You can use it for setting chain-specific or dynamic variables after deployment if needed. For more details check [this page](/deploy).
-<!-- TODO: Review deploy page -->
+The `initialize` function is empty in this example. You can use it for setting chain-specific or dynamic variables after deployment if needed. For more details check [this page](/deploy#initialize).
 
 ## What's next!
 <CardGrid cards={[
