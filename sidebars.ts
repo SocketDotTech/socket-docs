@@ -97,6 +97,11 @@ const sidebars: SidebarsConfig = {
           label: "Forwarder Addresses",
         },
         {
+          type: "doc",
+          id: "promises",
+          label: "Promises",
+        },
+        {
           type: "link",
           href: "https://media.socket.tech/SocketProtocol_v1.pdf",
           label: "v1 Whitepaper",
