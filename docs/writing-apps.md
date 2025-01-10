@@ -84,8 +84,8 @@ The `initialize` function is empty in this example. You can use it for setting c
    link: "/deploy"
  },
  {
-   title: "Test your app",
-   description: "Setup Foundry tests and run live tests",
+   title: "Pay for transactions",
+   description: "Pay for your offchainVM transactions",
    link: "/writing-apps"
  }
 ]} />
@@ -93,28 +93,6 @@ The `initialize` function is empty in this example. You can use it for setting c
 
 <!-- TODO: Move the information below to different pages -->
 <!--
-## Deployment and Fee setup
-
-## Fee setup
-With the contracts ready, we can go on to deploy things. In true Chain Abstracted spirit, you as a developer only need to interact with the offchainVM and never with the chains directly unless you want to verify if things were done correctly.
-
-### Deploy Contracts to offchainVM: SetupMyToken.s.sol
-
-You need to deploy the `MyTokenDeployer` and `MyTokenDistrbutor` to the offchainVM.
-
-You can get the `addressResolver` from [here](/chain-information).
-
-### Fund your App
-
-Next, go on to setup fees so that offchainVM can send transactions and deploy contracts on your app’s behalf. On any supported chain, deposit fees against `MyTokenAppGateway`’s address. Read more about setting up fees and generating `feesData` [here](/fees).
-
-## Deployment
-### Deploy Token to chains: DeployMyToken.s.sol
-
-Once your app is funded, you can trigger the deployment of `MyToken` on desired chains. In this case as well, just interact with offchainVM. Call `deployContracts` function of `MyTokenDeployer` contract for each chain where deployment needs to be done.
-
-Deployment of on chain contracts should take couple minutes. You can track the status of this request and also check the deployed addresses using our [apis](/api).
-
 ## Testing
 
 ### Add Airdrop Receivers: AddReceivers.s.sol

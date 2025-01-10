@@ -41,6 +41,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "fees",
+          label: "Paying for transactions",
+        },
+        {
+          type: "doc",
           id: "api",
           label: "API",
         },
@@ -53,11 +58,6 @@ const sidebars: SidebarsConfig = {
           type: "doc",
           id: "chain-information",
           label: "OffchainVM Information",
-        },
-        {
-          type: "doc",
-          id: "fees",
-          label: "offchainVM Fees",
         },
       ],
     },
