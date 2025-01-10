@@ -10,15 +10,15 @@ const sidebars: SidebarsConfig = {
       label: "What is SOCKET Protocol?",
     },
     {
+      type: "doc",
+      id: "getting-started",
+      label: "Getting Started",
+    },
+    {
       type: "category",
       label: "Building on SOCKET",
       collapsible: false,
       items: [
-        {
-          type: "doc",
-          id: "getting-started",
-          label: "Getting Started",
-        },
         {
           type: "doc",
           id: "writing-apps",
