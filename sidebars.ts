@@ -22,27 +22,27 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "writing-apps",
-          label: "Writing chain abstracted apps",
+          label: "Build chain abstracted apps",
         },
         {
           type: "doc",
           id: "call-contracts",
-          label: "Calling onchain smart contracts",
+          label: "Write onchain",
         },
         {
           type: "doc",
           id: "read",
-          label: "Reading onchain state",
+          label: "Read onchain",
         },
         {
           type: "doc",
           id: "deploy",
-          label: "Deploying onchain smart contracts",
+          label: "Deploy contracts onchain",
         },
         {
           type: "doc",
           id: "fees",
-          label: "Paying for transactions",
+          label: "Pay for your transactions",
         },
         {
           type: "doc",
