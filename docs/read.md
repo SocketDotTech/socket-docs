@@ -23,50 +23,54 @@ This needs to be followed for all calls that return values to be read. This mean
 :::
 
 The `transfer` function created [here](/call-contracts) had an issue that would be prone to happen. It was not checking the user's balance on the source chain before executing the transfer. Below is a read example where we read and validate the user's balance on the source chain before attempting to transfer the funds.
-```solidity
-contract MyTokenAppGateway is AppGatewayBase {
-    (...)
-    /**
-     * @notice Validates user's token balance for a cross-chain transaction
-     * @param data Encoded user order and async transaction ID
-     * @param returnData Balance data returned from the source chain
-     * @dev Checks if user has sufficient balance to complete the bridge transaction
-     * @custom:modifier onlyPromises Ensures the function can only be called by the promises system
-     */
-    function checkBalance(bytes memory data, bytes memory returnData) external onlyPromises {
-        (uint256 amount, bytes32 asyncId) = abi.decode(data, (uint256, bytes32));
 
-        uint256 balance = abi.decode(returnData, (uint256));
-        if (balance < amount) {
-            _revertTx(asyncId);
-            return;
-        }
-    }
+<details>
+   <summary>Click to expand `MyTokenAppGateway` changes</summary>
+   ```solidity
+   contract MyTokenAppGateway is AppGatewayBase {
+       (...)
+       /**
+        * @notice Validates user's token balance for a cross-chain transaction
+        * @param data Encoded user order and async transaction ID
+        * @param returnData Balance data returned from the source chain
+        * @dev Checks if user has sufficient balance to complete the bridge transaction
+        * @custom:modifier onlyPromises Ensures the function can only be called by the promises system
+        */
+       function checkBalance(bytes memory data, bytes memory returnData) external onlyPromises {
+           (uint256 amount, bytes32 asyncId) = abi.decode(data, (uint256, bytes32));
 
-    /**
-     * @notice Initiates a cross-chain token bridge transaction
-     * @param amount Amount to transfer
-     * @return asyncId Unique identifier for the asynchronous cross-chain transaction
-     * @dev Handles token bridging logic across different chains
-     */
-    function transfer(uint256 amount, address srcForwarder, address dstForwarder)
-        external
-        async
-        returns (bytes32 asyncId)
-    {
-        // Check user balance on src chain
-        _readCallOn();
-        // Request to forwarder and deploys immutable promise contract and stores it
-        ISimpleToken(srcForwarder).balanceOf(msg.sender);
-        IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount, asyncId));
+           uint256 balance = abi.decode(returnData, (uint256));
+           if (balance < amount) {
+               _revertTx(asyncId);
+               return;
+           }
+       }
 
-        _readCallOff();
+       /**
+        * @notice Initiates a cross-chain token bridge transaction
+        * @param amount Amount to transfer
+        * @return asyncId Unique identifier for the asynchronous cross-chain transaction
+        * @dev Handles token bridging logic across different chains
+        */
+       function transfer(uint256 amount, address srcForwarder, address dstForwarder)
+           external
+           async
+           returns (bytes32 asyncId)
+       {
+           // Check user balance on src chain
+           _readCallOn();
+           // Request to forwarder and deploys immutable promise contract and stores it
+           ISimpleToken(srcForwarder).balanceOf(msg.sender);
+           IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount, asyncId));
 
-        ISimpleToken(srcForwarder).burn(msg.sender, amount);
-        ISimpleToken(dstForwarder).mint(msg.sender, amount);
-    }
-}
-```
+           _readCallOff();
+
+           ISimpleToken(srcForwarder).burn(msg.sender, amount);
+           ISimpleToken(dstForwarder).mint(msg.sender, amount);
+       }
+   }
+   ```
+</details>
 
 Let's break down the key points:
 
