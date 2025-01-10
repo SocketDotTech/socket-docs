@@ -138,6 +138,7 @@ After deployment, deposit fees against your `SimpleTokenAppGateway`'s address on
 ### 3. Deploy to Target Chains
 
 Use `DeploySimpleToken.s.sol` to deploy your token to desired chains:
+<!-- TODO: Remove script and add it to the socket-protocol repo -->
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
