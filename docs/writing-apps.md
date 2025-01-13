@@ -23,6 +23,8 @@ You’ll learn how to:
 
 The System consists of 3 main components.
 
+<!-- TODO: Explain addition of PlugBase on onchain contracts -->
+<!-- TODO: Explain where to get auctionManager_ address from. apps can select our auction manager contract or can deploy there own. we can keep it in docs for now maybe and think of having a default auction manager for all -->
 <!-- TODO: Update filepaths once contracts are merged to master branch -->
 - A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/simple-token/contracts/apps/simple-token/SimpleTokenDeployer.sol) on offchainVM to deploy the **SimpleToken** instances.
     - This contract which will be deployed to offchainVM;
