@@ -3,12 +3,12 @@ id: transmitters
 title: Transmitters
 ---
 
-# Transmitters
+**Transmitters** are off-chain smart agents that monitor user requests and submit responses. The **App-Gateway** evaluates these responses based on the predefined logic within it, selecting the most suitable response. The chosen response earns the right to execute the request on-chain.
 
-Transmitters are offchain smart agents that watch for user-requests and submit responses, app-gateways decide the most suitable response according to the logic defined in them. The most suitable response then earns the right to execute the request onchain.
+Depending on the type of application, Transmitters are often referred to by various names, including **Relayers**, **Solvers**, **Fillers**, **Provers**, or **Paymasters**.
 
-Depending upon the type the application, transmitters are often called relayers, solvers, fillers, provers or paymasters
+> **Transmitter** is a general term used to describe a group of smart off-chain agents that respond to user requests with appropriate responses.
 
-> Transmitter is an umbrella term to reference a set of smart offchain agents that respond to various user-requests with responses.
+![Transmitters diagram](../static/img/transmitters.png)
 
-![image.png](../static/img/transmitters.png)
+Transmitters play a crucial role in ensuring efficient off-chain execution while maintaining the integrity of on-chain interactions. They provide flexibility for applications to optimize request handling, improving performance, security, and user experience.

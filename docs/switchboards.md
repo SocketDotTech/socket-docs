@@ -1,14 +1,30 @@
-# Switchboards
+---
+id: switchboards
+title: Switchboards
+---
 
-Switchboards are onchain verifiers to coordinate with watchers, switchboards are:
+**Switchboards** are on-chain verifiers that coordinate with **Watchers**. They play a crucial role in validating off-chain proofs and ensuring the integrity of application interactions. Here's what makes Switchboards unique:
 
-- **Permission-less to register**: Anyone can write a switchboard and register it with SOCKET
-- **Lightweight Interface:** The interface is super simple, switchboards accept proofs and reply with a boolean of acceptance or rejection
-- **Application Defined:**  Application developers can select any switchboard allowing them to accept their required security, cost and latency profiles.
-- **Proof-agnostic:** Switchboards just accept proofs, these proofs could be of any kind, attestations from oracles, zk-proofs or even optimistic submissions.
+### Key Features of Switchboards
 
-Think about switchboards as the connective tissue between watchers and application-builders, enabling application-builders to coordinate effectively with these offchain operators.
+- **Permissionless Registration:**
+  Anyone can create and register a Switchboard with **SOCKET**, making the system open and decentralized.
 
-![image.png](../static/img/switchboards.png)
+- **Lightweight Interface:**
+  The interface is designed to be simple and efficient. Switchboards accept proofs and return a boolean response indicating whether the proof is accepted (`true`) or rejected (`false`).
 
-Switchboards are smart-contracts that acccept proofs, of whatever kind, zkproofs, msig proofs and reply back with a boolen of true/false. Developers can write any condition necessary in these contracts and those will be executed onchain before the application onchain smart contract is called.
+- **Application-Defined:**
+  Application developers have the freedom to choose any Switchboard that fits their specific security, cost, and latency requirements.
+
+- **Proof-Agnostic:**
+  Switchboards are flexible in the type of proofs they accept — from oracle attestations and zk-proofs to optimistic submissions and multi-signature attestations.
+
+Think of **Switchboards** as the connective tissue between **Watchers** and application developers. They empower developers to coordinate effectively with off-chain operators by providing a standardized way to verify proofs before interacting with on-chain smart contracts.
+
+![Switchboards diagram](../static/img/switchboards.png)
+
+### How Switchboards Work
+
+Switchboards are **smart contracts** that accept various types of proofs, such as zk-proofs or multi-signature proofs. They process these proofs and return a boolean (`true/false`) based on the conditions defined by the developer. These on-chain conditions are executed **before** the application's smart contract is called, allowing developers to enforce any necessary pre-validation logic.
+
+Switchboards ensure that off-chain actions are properly verified, creating a seamless bridge between off-chain operators and on-chain application logic.

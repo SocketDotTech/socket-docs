@@ -2,27 +2,32 @@
 id: watchers
 title: Watchers
 ---
-
-# Watchers
-
-If you have read the broad architecture, first do that by reading [this section](/architecture).
+:::tip
+Start by reading [the Architecture section](/architecture) if you have not already.
+:::
 
 ## Introduction
 
-> Watchers are offchain operators that sit and watch chains while also hosting a VM to help application developers write logic there, logic that sits and operates globally, logic that is executed before your applications onchain contracts are executed.
+> Watchers are off-chain operators that monitor blockchain activity while hosting a virtual machine (VM) to help application developers implement global logic that operates before their on-chain contracts are executed.
 
-Today when users try to use your application, they need to access the application via the chain, more chains, more gas, more bridging and all the known issues. Going forward, applications or rather app-devs can help users execute their actions better onchain.
+Currently, users must interact with applications directly via the blockchain, leading to increased complexities such as navigating multiple chains, paying more gas fees, and handling bridging issues. With Watchers, application developers can streamline these interactions by enabling more efficient execution of user actions on-chain.
 
 ![image.png](../static/img/watchers.png)
 
-Watchers are extremely flexible, they sit between the user and the onchain world, allowing application developers to insert useful logic in between that pathway to help users interact with your application better. We call this application defined offchain logic as “app-gateway” that users first interact with before execution of onchain contracts. App-Gateway can enable chain-abstraction by acting as glue for their onchain contracts, [Vitalik mentions of similiar ideas in his blog here on how Modern Applications evolve.](https://vitalik.eth.limo/general/2024/09/02/gluecp.html) Developers and build and deploy app-gateway’s on the watcher-services.
+Watchers provide flexibility by acting as intermediaries between users and the blockchain. This allows developers to incorporate useful off-chain logic to improve user experiences. We refer to this application-defined off-chain logic as an “App-Gateway.” Users interact with the App-Gateway before any on-chain contract execution, simplifying and enhancing their interactions. The App-Gateway enables chain abstraction by acting as a cohesive layer for on-chain contracts. [Vitalik Buterin explores similar concepts in his blog about the evolution of modern applications.](https://vitalik.eth.limo/general/2024/09/02/gluecp.html)
+
+Developers can build and deploy App-Gateways on the Watcher services.
 
 ![image.png](../static/img/watchers1.png)
 
-## Relationship between Watchers and Switchboards
+## Relationship Between Watchers and Switchboards
 
-If watchers are offchain operators then switchboards are their counterpart, switchboards help application developers select and work with watchers. Anyone can be a watcher and anyone can create a switchboard for their watcher, allow app-developers to have full control and ability to customise. Read more about switchboards here
+Watchers and Switchboards work together to create a seamless off-chain and on-chain interaction system. While Watchers are off-chain operators responsible for generating proofs, Switchboards are the on-chain components that consume these proofs.
+
+Switchboards help application developers manage and select Watchers to suit their specific needs. Anyone can become a Watcher, and anyone can create a Switchboard to connect with their Watchers, providing developers with full control and customization capabilities.
+
+Read more about Switchboards [here](/switchboards).
 
 :::info
-Watchers are offchain proof creators, switchboards onchain are proof-consumers.
+**Summary:** Watchers are off-chain proof creators, and Switchboards are on-chain proof consumers.
 :::
