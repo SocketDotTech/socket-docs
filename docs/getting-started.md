@@ -127,7 +127,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge script script/counter/incrementCounters.s.sol --broadcast --skip-simulation
    ```
 
-   Read [here](/call-contracts#2-call-forwarders) to learn more about how forwarder addresses are assigned on the offchainVM to represent onchain contracts.
+   Read [here](/forwarder-addresses) to learn more about how forwarder addresses are assigned on the offchainVM to represent onchain contracts.
 
    If you want to know when the transaction is complete you can run the command below or directly use the API as described in the previous step.
 

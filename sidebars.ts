@@ -10,39 +10,39 @@ const sidebars: SidebarsConfig = {
       label: "What is SOCKET Protocol?",
     },
     {
+      type: "doc",
+      id: "getting-started",
+      label: "Getting Started",
+    },
+    {
       type: "category",
       label: "Building on SOCKET",
       collapsible: false,
       items: [
         {
           type: "doc",
-          id: "getting-started",
-          label: "Getting Started",
-        },
-        {
-          type: "doc",
           id: "writing-apps",
-          label: "Writing Apps on SOCKET",
-        },
-        {
-          type: "doc",
-          id: "deploy",
-          label: "Deploying onchain smart contracts",
+          label: "Build chain abstracted apps",
         },
         {
           type: "doc",
           id: "call-contracts",
-          label: "Calling onchain smart contracts",
+          label: "Write onchain",
         },
         {
           type: "doc",
           id: "read",
-          label: "Reading onchain state",
+          label: "Read onchain",
         },
         {
           type: "doc",
-          id: "revert",
-          label: "Reverting async transactions",
+          id: "deploy",
+          label: "Deploy contracts onchain",
+        },
+        {
+          type: "doc",
+          id: "fees",
+          label: "Pay for your transactions",
         },
         {
           type: "doc",
@@ -58,11 +58,6 @@ const sidebars: SidebarsConfig = {
           type: "doc",
           id: "chain-information",
           label: "OffchainVM Information",
-        },
-        {
-          type: "doc",
-          id: "fees",
-          label: "offchainVM Fees",
         },
       ],
     },
@@ -90,6 +85,16 @@ const sidebars: SidebarsConfig = {
           type: "doc",
           id: "watchers",
           label: "Watchers",
+        },
+        {
+          type: "doc",
+          id: "forwarder-addresses",
+          label: "Forwarder Addresses",
+        },
+        {
+          type: "doc",
+          id: "promises",
+          label: "Promises",
         },
         {
           type: "link",

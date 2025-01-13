@@ -5,79 +5,81 @@ title: Deploying onchain smart contracts
 
 # How to deploy contracts to chains?
 
-## 1. Deploy
+## Deploy
 
-Deployments of onchain contracts from Offchain VM is done using a Deployer contract. Lets look at the deployer of `MyToken` example to better understand.
+Deployments of onchain contracts from Offchain VM is done using a Deployer contract. Lets look at the `Deployer` contract of `SimpleToken` example to better understand the workflow and [code](https://github.com/SocketDotTech/socket-protocol/blob/simple-token/contracts/apps/simple-token/SimpleTokenDeployer.sol).
+<!-- TODO: Update filepath once contracts are merged to master branch -->
 
-![image.png](../static/img/deploy1.png)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/deploy_sequence.svg" alt="deploy" style={{ width: '80%' }} />
+</div>
 
+### Onchain contract bytecode stored in the Deployer Contract
+The Deployer Contract has two key pieces of code to ensure that onchain deployments are replicable `SimpleToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
 ```solidity
-contract MyTokenDeployer is AppDeployerBase {
-    bytes32 public myToken = _createContractId("myToken");
-
-    constructor(
-        address addressResolver_,
-        FeesData memory feesData_,
-        string calldata name_,
-        string calldata symbol_,
-        uint8 decimals_
-    ) AppDeployerBase(addressResolver_, feesData_) {
-        creationCodeWithArgs[myToken] = abi.encodePacked(
-            type(MyToken).creationCode,
-            abi.encode(name_, symbol_, decimals_)
-        );
-    }
-
-    function deployContracts(
-        uint32 chainSlug
-    ) external async {
-        _deploy(myToken, chainSlug);
-    }
-
-    function initialize(uint32 chainSlug) public override async {}
-}
+creationCodeWithArgs[simpleToken] = abi.encodePacked(
+    type(simpleToken).creationCode,
+    abi.encode(name_, symbol_, decimals_)
+);
 ```
 
-Key things to note here are -
+Using  `bytes32` variable is use a unique identifier for the SimpleToken contract generated using the `_createContractId` function. This identifier allows us to fetch `creationCode`, `onchain addresses` and `forwarder addresses` from maps in `AppGatewayBase`. See [here](/forwarder-addresses) to know more about [forwarder addresses](/forwarder-addresses).
+```solidity
+bytes32 public simpleToken = _createContractId("simpleToken");
+```
 
-It extends the `AppDeployerBase` to manage the deployment process.
+While this example handles a single contract, you can extend it to manage multiple contracts by storing their creation codes.
 
-To identify the contract, we use a `bytes32` variable. This is a unique identifier for the contract and is used to fetch the `creationCode`, `on-chain addresses` and `forwarder addresses` from maps in `AppGatewayBase`. This identifier can be created using `_createContractId` function.
+### Onchain contract deployment with the Deployer Contract
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/deployment_flow.svg" alt="deployment flow" style={{ width: '100%' }} />
+</div>
 
-In the `constructor`, `MyToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains. The constructor also takes in `addressResolver` and `feesData`, we will talk more on these at a later stage. Or you can read more about them [here](/call-contracts).
+The `deployContracts` function takes a `chainSlug` as an argument that specifies the chain where the contract should be deployed.
+```solidity
+function deployContracts(uint32 chainSlug) external async {
+    _deploy(simpleToken, chainSlug);
+}
+```
+It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains.
 
-The `deployContracts` function takes a `chainSlug` as an argument, specifying the chain where the contract should be deployed. It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains. When you call \_deploy, both the onchain contract and its [forwarder](/call-contracts) are deployed.
+The `initialize` function is empty in this example. You can use it for setting chain-specific or dynamic variables after deployment if needed.
 
-The `initialize` function is empty in this example, lets see when that can be used next.
+## Initialize
 
-## 2. Initialize
+Since we store the `creationCode` along with `constructor parameters`, they essentially become constants. But there can be use cases where the contract need dynamic or chain specific values while setting up. For such cases, the initialize flow has to be used. Lets extend the `SimpleToken` example to set mint limits following the workflow below.
 
-Since we store the `creationCode` along with `constructor parameters`, they essentially become constants. But there can be use cases where the contract need dynamic or chain specific values while setting up. For such cases, the initialize flow has to be used. Lets extend the `MyToken` example to set mint limits.
-
-![image.png](../static/img/deploy2.png)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/deploy_initialize.svg" alt="deploy initialize" style={{ width: '80%' }} />
+</div>
 
 ```solidity
-contract MyToken is ERC20 {
-    ...
+contract SimpleToken is ERC20, Ownable {
+    (...)
+    error ExceedsMintLimit(uint256 amount, uint256 limit);
 
     uint256 mintLimit;
 
-    function mint(address to_, uint256 amount_) external onlySOCKET {
-        require(amount_ <= mintLimit, "more than mint limit");
+    function mint(address to_, uint256 amount_) external onlyOwner {
+        if (amount_ > mintLimit) revert ExceedsMintLimit(amount_, mintLimit);
         _mint(to_, amount_);
     }
 
-    function setMintLimit(uint256 newLimit) external onlySOCKET {
+    function setMintLimit(uint256 newLimit) external onlyOwner {
         mintLimit = newLimit;
     }
 }
 ```
 
-We will set this limit using `initialize` function, and to make things a bit more dynamic, we will set a higher limit for Ethereum compared to chains.
+We will set this limit using the `initialize` function, and to make things a bit more dynamic, we will set a higher limit for Ethereum compared to chains.
 
 ```solidity
-contract MyTokenDeployer is AppDeployerBase {
-    ...
+interface ISimpleToken {
+    function setMintLimit(uint256 newLimit) external;
+}
+
+contract SimpleTokenDeployer is AppDeployerBase {
+    (...)
 
     function initialize(uint32 chainSlug) public override async {
         uint256 mintLimit;
@@ -87,62 +89,48 @@ contract MyTokenDeployer is AppDeployerBase {
             mintLimit = 1 ether;
         }
 
-        MyToken(forwarderAddresses[myToken][chainSlug]).setMintLimit(
-            mintLimit
-        );
+        ISimpleToken(forwarderAddresses[simpleToken][chainSlug]).setMintLimit(mintLimit);
     }
 }
 ```
 
-The initialize function follows similar flow to how you make on [chain calls](/call-contracts) using the `async` modifier and `forwarderAddress`.
+The initialize function follows similar flow to how demonstrated on [Calling onchain smart contracts](/call-contracts) using the `async` modifier and `forwarderAddress`.
 
+:::info
 You can also note that the forwarder addresses of deployed contracts are stored in `forwarderAddresses` mapping in the `AppDeployerBase` and can be accessed easily here.
+:::
 
-## 3. Deploy multiple contracts
+## Deploy multiple contracts
 
-So far we have been working with a single `MyToken` contract on chain. But the deployer also supports working with multiple contracts. Lets create `MyTokenVault` to lock tokens on chain and extend the deployer to deploy both contracts.
+So far we have been working with a single `SimpleToken` contract onchain. But the deployer also supports working with multiple contracts. Lets create `SimpleTokenVault` to lock tokens on chain and extend the deployer to deploy both contracts.
 
 ```solidity
-contract MyTokenVault {
-    address public myToken;
-    address public _SOCKET;
-
-    // user => amount
+contract SimpleTokenVault is Ownable {
+    address public simpleToken;
     mapping(address => uint256) public lockedAmount;
 
-    constructor() {
-        _SOCKET = msg.sender;
-    }
-
-    error NotSOCKET();
-
-    modifier onlySOCKET() {
-        if (msg.sender != _SOCKET) revert NotSOCKET();
-        _;
-    }
-
-    function setMyToken(address myToken_) external onlySOCKET {
-        myToken = myToken_;
+    function setSimpleToken(address simpleToken_) external onlyOwner {
+        simpleToken = simpleToken_;
     }
 
     function lock(uint256 amount) external {
-        MyToken(myToken).transferFrom(msg.sender, address(this), amount);
+        SimpleToken(simpleToken).transferFrom(msg.sender, address(this), amount);
         lockedAmount[msg.sender] += amount;
     }
 
     function unlock(uint256 amount) external {
         lockedAmount[msg.sender] -= amount;
-        MyToken(myToken).transfer(msg.sender, amount);
+        SimpleToken(simpleToken).transfer(msg.sender, amount);
     }
 }
 ```
 
-This contract needs to be on chain, therefore lets change `MyTokenDeployer` to include it as well.
+This contract needs to be onchain, therefore lets change `SimpleTokenDeployer` to include it as well.
 
 ```solidity
-contract MyTokenDeployer is AppDeployerBase {
-    bytes32 public myToken = _createContractId("myToken");
-    bytes32 public myTokenVault = _createContractId("myTokenVault");
+contract SimpleTokenDeployer is AppDeployerBase {
+    (...)
+    bytes32 public simpleTokenVault = _createContractId("simpleTokenVault");
 
     constructor(
         address addressResolver_,
@@ -151,43 +139,28 @@ contract MyTokenDeployer is AppDeployerBase {
         string calldata symbol_,
         uint8 decimals_
     ) AppDeployerBase(addressResolver_, feesData_) {
-        creationCodeWithArgs[myToken] = abi.encodePacked(
-            type(MyToken).creationCode,
-            abi.encode(name_, symbol_, decimals_)
-        );
-
-        creationCodeWithArgs[myTokenVault] = type(MyTokenVault).creationCode;
+        (...)
+        creationCodeWithArgs[simpleTokenVault] = type(SimpleTokenVault).creationCode;
     }
 
     function deployContracts(uint32 chainSlug) external async {
-        _deploy(myToken, chainSlug);
-        _deploy(myTokenVault, chainSlug);
+        _deploy(simpleToken, chainSlug);
+        _deploy(simpleTokenVault, chainSlug);
     }
 
     function initialize(uint32 chainSlug) public override async {
-        uint256 mintLimit;
-        if (chainSlug == 1) {
-            mintLimit = 10 ether;
-        } else {
-            mintLimit = 1 ether;
-        }
+        address simpleTokenVaultForwarder = forwarderAddresses[simpleTokenVault][chainSlug];
+        address simpleTokenOnChainAddress = getOnChainAddress(simpleToken, chainSlug);
 
-        address myTokenForwarder = forwarderAddresses[myToken][chainSlug];
-        address myTokenVaultForwarder = forwarderAddresses[myTokenVault][chainSlug];
-        address myTokenOnChainAddress = getOnChainAddress(myToken, chainSlug);
-
-        MyToken(myTokenForwarder).setMintLimit(
-            mintLimit
-        );
-        MyTokenVault(myTokenVaultForwarder).setMyToken(
-            myTokenOnChainAddress
-        );
+        SimpleTokenVault(simpleTokenVaultForwarder).setSimpleToken(simpleTokenOnChainAddress);
     }
 }
 ```
 
-This `MyTokenDeployer` deploys both contracts, sets limit on `MyToken` and sets `MyToken’`s onchain address on `MyTokenVault`. Key things to note in this contract -
+This `SimpleTokenDeployer` deploys both contracts, sets limit on `SimpleToken` and sets `SimpleToken’`s onchain address on `SimpleTokenVault`.
 
-- `MyTokenVault` doesn't have any constructor arguments. Therefore we can directly store its `creationCode` without encoding anything along with it.
+:::info
+- `SimpleTokenVault` doesn't have any constructor arguments. Therefore we can directly store its `creationCode` without encoding anything along with it.
 - We can get the forwarder addresses of both these from `forwarderAddresses` mapping.
-- Since `MyTokenVault` locks `MyToken`, its needs the token’s on chain address. This address can be fetched using `getOnChainAddress` function.
+- Since `SimpleTokenVault` locks `SimpleToken`, its needs the token’s onchain address. This address can be fetched using `getOnChainAddress` function.
+:::

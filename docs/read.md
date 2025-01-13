@@ -3,67 +3,106 @@ id: read
 title: Reading onchain state
 ---
 
-# How to read onchain state
+## Read Example
 
-## 1. Read Example
+SOCKET supports reading public variables and functions from the underlying chains. To understand how this is done, lets extend the SimpleToken example that was introduced in our [guide](/writing-apps) and expanded to have a `transfer` function [here](/call-contracts).
 
-SOCKET supports reading public variables and functions from the underlying chains. To understand how this is done, lets extend our MyToken example that was introduced in our [guide](/writing-apps).
-
-On `MyTokenAppGateway`, we will create a `fetchSupply` function. This function will read the `totalSupply` of a given instance and store it on the `AppGateway`.
+On `SimpleTokenAppGateway`, we will create a `checkBalance` function. This function will read the user's `balance` of a given instance and confirm the user has the funds before performing the transfer.
 
 ```solidity
-interface IMyTokenReader {
-    function totalSupply() external;
-}
-
-contract MyTokenAppGateway is AppGatewayBase {
-    ...
-
-    // forwarder => supply
-    mapping(address => uint256) public fetchedSupply;
-
-    function fetchSupply(address forwarder) async {
-        _readCallOn();
-
-        IMyTokenReader(forwarder).totalSupply();
-        IPromise(forwarder).then(
-            this.fetchSupplyCallback.selector,
-            abi.encode(forwarder) // passed to callback
-        );
-
-        _readCallOff();
-    }
-
-    function fetchSupplyCallback(
-        bytes calldata data,
-		bytes calldata returnData
-    ) external onlyPromises {
-        uint256 forwarder = abi.decode(data, (address));
-        uint256 supply = abi.decode(returnData, (uint256));
-        fetchedSupply[forwarder] = supply;
-    }
+interface ISimpleToken {
+    function balanceOf(address owner) external;
 }
 ```
+:::info
+The `balanceOf` function signature is similar to a standard token contract but,
+- its visibility is not restricted to `view`;
+- it does not have any return values.
 
-Notice following things in above contract -
-
-- `fetchSupply` function uses the `async` modifier. This modifier needs to be used for both write and read calls to underlying chains.
-- if `_readCallOn()` is called, it indicates to SOCKET that the call doesn't need to be sent on chain and just the return data needs to be read.
-- The `totalSupply` call uses `IMyTokenReader` interface. The `totalSupply` function signature is similar to a standard token contract but its visibility is not restricted to `view` and it doesnt have a return value. This needs to be followed for all read calls. The interface needs to be changed in this way to be compatible with the `async` `forwarder` system on Offchain VM.
-- Also, unlike a read on single chain, the return data here is not returned synchronously. Instead it has to be read asynchronously via a `promise` and a `callback` function.
-
-:::tip
-The contract interface used for reading data needs to be changed to remove visibility modifiers and return values. Eg. we remove the `view` modifier and `returns (uint256)` from signature of original `totalSupply()` function.
+This needs to be followed for all calls that return values to be read. This means if you have any interfaces that need to be leveraged by the offchainVM they will need to be changed to be compatible with the `async`/`forwarder` system on the offchainVM.
 :::
 
-The `forwarder` address is interfaced as `IPromise` and `then` function is called on it. In this function we pass the callback function signature as first parameter and data for callback as second parameter.
+The `transfer` function created [here](/call-contracts) had an issue that would be prone to happen. It was not checking the user's balance on the source chain before executing the transfer. Below is a read example where we read and validate the user's balance on the source chain before attempting to transfer the funds.
 
-- `fetchSupplyCallback` uses `onlyPromises` modifier and has 2 params. First param is the `data` passed from original function and second param is the `returnData` from chain.
+<details>
+   <summary>Click to expand `MyTokenAppGateway` changes</summary>
+   ```solidity
+   contract MyTokenAppGateway is AppGatewayBase {
+       (...)
+       /**
+        * @notice Validates user's token balance for a cross-chain transaction
+        * @param data Encoded user order and async transaction ID
+        * @param returnData Balance data returned from the source chain
+        * @dev Checks if user has sufficient balance to complete the bridge transaction
+        * @custom:modifier onlyPromises Ensures the function can only be called by the promises system
+        */
+       function checkBalance(bytes memory data, bytes memory returnData) external onlyPromises {
+           (uint256 amount, bytes32 asyncId) = abi.decode(data, (uint256, bytes32));
 
-## 2. Promises
+           uint256 balance = abi.decode(returnData, (uint256));
+           if (balance < amount) {
+               _revertTx(asyncId);
+               return;
+           }
+       }
 
-Let us look at how this is executed to better understand what is going on.
+       /**
+        * @notice Initiates a cross-chain token bridge transaction
+        * @param amount Amount to transfer
+        * @return asyncId Unique identifier for the asynchronous cross-chain transaction
+        * @dev Handles token bridging logic across different chains
+        */
+       function transfer(uint256 amount, address srcForwarder, address dstForwarder)
+           external
+           async
+           returns (bytes32 asyncId)
+       {
+           // Check user balance on src chain
+           _readCallOn();
+           // Request to forwarder and deploys immutable promise contract and stores it
+           ISimpleToken(srcForwarder).balanceOf(msg.sender);
+           IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount, asyncId));
 
-![deployment_flow.png](../static/img/read.png)
+           _readCallOff();
 
-To support asynchronous composability, SOCKET works with special `promise` contracts that are deployed when you call `then` function. Each promise contract is immutable and specific to a read request. It can be used only once and holds context about what needs to be called on callback. The `AppGatewayBase` contract has utilities like `_readCallOn()`, `_readCallOff()`, `onlyPromises` to make it easier to work with SOCKET primitives.
+           ISimpleToken(srcForwarder).burn(msg.sender, amount);
+           ISimpleToken(dstForwarder).mint(msg.sender, amount);
+       }
+   }
+   ```
+</details>
+
+Let's break down the key points:
+
+- The `transfer` function uses the `async` modifier, which is required for onchain interactions, whether they are read or write operations.
+- The `_readCallOn()` and `_readCallOff()` functions are used to tell SOCKET that a particular section only needs to read data from another chain, rather than executing an onchain transaction.
+- In multi-chain operations, data cannot be read synchronously. Instead, it follows this pattern:
+   1. Make the onchain call (`balanceOf`)
+   2. Set up a promise with a callback function using `IPromise(srcForwarder).then()`
+   3. The callback function (`checkBalance`) receives the data asynchronously
+- The `then` function on the forwarder (cast as `IPromise`) takes:
+   - First parameter: The callback function's selector (`this.checkBalance.selector`)
+   - Second parameter: Encoded data needed by the callback (`abi.encode(amount, asyncId)`).
+- The callback function `checkBalance`:
+   - Uses the `onlyPromises` modifier to ensure it's only called by the promises system
+   - Takes two parameters:
+     - `data`: The encoded data from the original function (amount and asyncId)
+     - `returnData`: The actual data returned from the source chain (balance)
+- When interacting with contracts on other chains, interface definitions need to be modified:
+   - Remove visibility modifiers (like `view`)
+   - Remove return value declarations from the function signature
+
+[Go here to see how promises work.](/promises)
+
+## How to revert async transactions?
+
+When working with async transactions in SOCKET, there might be cases where you need to revert an ongoing transaction in a callback based on certain conditions. SOCKET provides utilities to handle such scenarios through the `_revertTx` function.
+
+- The `_revertTx(asyncId)` function is called when the balance check fails to stop triggering burn and mint.
+   - If `_revertTx(asyncId)` is not called, burn and mint are executed as expected.
+   - The `asyncId` is obtained using `_getCurrentAsyncId()` and passed to callback using data.
+
+:::tip
+The `_revertTx` function is only available in contracts that inherit from `AppGatewayBase`.
+:::
+
