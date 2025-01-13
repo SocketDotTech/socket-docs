@@ -7,7 +7,9 @@ title: Transmitters
 
 Depending on the application, **Transmitters** may also be referred to as **Relayers**, **Solvers**, **Fillers**, **Provers**, or **Paymasters**.
 
-![Transmitters diagram](../static/img/transmitters.png)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/transmitters.svg" alt="transmitter diagram" style={{ width: '50%' }} />
+</div>
 
 ### Key Role of Transmitters
 
