@@ -2,32 +2,36 @@
 id: watchers
 title: Watchers
 ---
+
 :::tip
-Start by reading [the Architecture section](/architecture) if you have not already.
+Start by reading the [Architecture section](/architecture) if you haven't already.
 :::
 
-## Introduction
+**Watchers** are off-chain operators that monitor blockchain activity and host the **App-Gateway**, a contract that enables custom off-chain logic. They execute logic defined by application developers and generate a **proof**, which is then passed to a **Transmitter** for on-chain verification by a **Switchboard**.
 
-> Watchers are off-chain operators that monitor blockchain activity while hosting a virtual machine (VM) to help application developers implement global logic that operates before their on-chain contracts are executed.
+Watchers act as a bridge between the user and the blockchain, enabling developers to insert useful off-chain logic before on-chain smart contracts are executed.
 
-Currently, users must interact with applications directly via the blockchain, leading to increased complexities such as navigating multiple chains, paying more gas fees, and handling bridging issues. With Watchers, application developers can streamline these interactions by enabling more efficient execution of user actions on-chain.
+![Watchers diagram](../static/img/watchers.png)
 
-![image.png](../static/img/watchers.png)
+Today, when users interact with your application, they typically do so directly on-chain, facing issues like high gas fees, complex bridging, and multi-chain interactions. **Watchers** help streamline this process by handling some of the logic off-chain, improving performance and user experience.
 
-Watchers provide flexibility by acting as intermediaries between users and the blockchain. This allows developers to incorporate useful off-chain logic to improve user experiences. We refer to this application-defined off-chain logic as an “App-Gateway.” Users interact with the App-Gateway before any on-chain contract execution, simplifying and enhancing their interactions. The App-Gateway enables chain abstraction by acting as a cohesive layer for on-chain contracts. [Vitalik Buterin explores similar concepts in his blog about the evolution of modern applications.](https://vitalik.eth.limo/general/2024/09/02/gluecp.html)
+### Key Role of Watchers
 
-Developers can build and deploy App-Gateways on the Watcher services.
+- **Hosts App-Gateways:**
+  Watchers run specialized virtual machines (VMs) that host App-Gateway contracts, which execute custom off-chain logic defined by application developers.
 
-![image.png](../static/img/watchers1.png)
+- **Generate Proofs:**
+  Watchers observe blockchain events, execute logic, and generate **proofs** that are later verified on-chain by **Switchboards**.
 
-## Relationship Between Watchers and Switchboards
+- **Passive Role:**
+  Anyone can become a Watcher by running a node. There are no special permissions required to participate.
 
-Watchers and Switchboards work together to create a seamless off-chain and on-chain interaction system. While Watchers are off-chain operators responsible for generating proofs, Switchboards are the on-chain components that consume these proofs.
+Read more about the relationship between Watchers and Switchboards [here](/switchboards).
 
-Switchboards help application developers manage and select Watchers to suit their specific needs. Anyone can become a Watcher, and anyone can create a Switchboard to connect with their Watchers, providing developers with full control and customization capabilities.
+## How Watchers Fit into the Protocol
 
-Read more about Switchboards [here](/switchboards).
+1. **User signs an off-chain message** and sends it to a Watcher where the App-Gateway logic is executed.
+2. **The Watcher generates a proof**, which is passed to a Transmitter.
+3. **The Transmitter submits the proof on-chain**, where it is verified by a Switchboard before triggering the on-chain smart contract.
 
-:::info
-**Summary:** Watchers are off-chain proof creators, and Switchboards are on-chain proof consumers.
-:::
+Watchers are a critical component of the SOCKET protocol, providing flexibility to developers to introduce custom logic that can improve security, reduce costs, and enhance user experience.
