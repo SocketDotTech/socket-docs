@@ -7,14 +7,14 @@ title: Calling smart contracts
 
 Calling onchain contracts from SOCKET’s offchain vm is very similar to how you call another contract on single chain.
 
-Continuing the SimpleToken ERC20 example let's add a function to mint tokens to a user from the `SimpleTokenAppGateway` offchainVM contract.
+Continuing the SuperToken ERC20 example let's add a function to mint tokens to a user from the `SuperTokenAppGateway` offchainVM contract.
 ```solidity
 function mint(uint256 amount, address user, address forwarder) external async {
-    SimpleToken(forwarder).mint(user, amount);
+    SuperToken(forwarder).mint(user, amount);
 }
 ```
 
-This looks very similar to the `SimpleToken` onchain contract example:
+This looks very similar to the `SuperToken` onchain contract example:
 ```solidity
 function mint(address to_, uint256 amount_) external onlyOwner {
     _mint(to_, amount_);
@@ -23,10 +23,10 @@ function mint(address to_, uint256 amount_) external onlyOwner {
 
 Let us compare both of these to understand the key differences:
 
-- The `mint` function in the `SimpleToken` onchain contract uses `onlyOwner` modifier to ensure only the `SimpleTokenAppGateway` contract can call those functions from the offchainVM;
-- The `mint` function in the `SimpleTokenAppGateway` has an `async` modifier;
+- The `mint` function in the `SuperToken` onchain contract uses `onlyOwner` modifier to ensure only the `SuperTokenAppGateway` contract can call those functions from the offchainVM;
+- The `mint` function in the `SuperTokenAppGateway` has an `async` modifier;
 - The `async` modifier in the `mint` function enables asynchronous onchain operations;
-- The `SimpleTokenAppGateway` contract instance calls the the onchain contract using a `forwarder` address;
+- The `SuperTokenAppGateway` contract instance calls the the onchain contract using a `forwarder` address;
 
 SOCKET's offchainVM works with special `forwarder` contract addresses that are deployed automatically when you [deploy](/deploy) your onchain contracts and handle the forwarding of calls to the appropriate chain and address.
 
@@ -36,21 +36,17 @@ Read [here](/forwarder-addresses) to learn more about how forwarder addresses ar
 
 The `async` modifier works on a queue of transactions, and therefore you can make a batch of onchain calls in single function and they are delivered to chains in order.
 
-To understand this let us go back to `SimpleTokenAppGateway` example from our [guide](/writing-apps) and extend the it to add a basic `transfer` function that burns tokens on source chain followed by minting them on destination chain.
+To understand this let us go back to `SuperTokenAppGateway` example from our [guide](/writing-apps) and extend the it to add a basic `transfer` function that burns tokens on source chain followed by minting them on destination chain.
 
 This simple function enables burning of tokens on source chain and minting them on destination after burn is done.
 
 ```solidity
-contract MyTokenAppGateway is AppGatewayBase {
-    ...
+contract SuperTokenAppGateway is AppGatewayBase {
+    (...)
 
-    function transfer(
-        uint256 amount,
-        address srcForwarder,
-        address dstForwarder
-    ) external async {
-        SimpleToken(srcForwarder).burn(msg.sender, amount);
-        SimpleToken(dstForwarder).mint(msg.sender, amount);
+    function transfer(uint256 amount, address srcForwarder, address dstForwarder) external async {
+        SuperToken(srcForwarder).burn(msg.sender, amount);
+        SuperToken(dstForwarder).mint(msg.sender, amount);
     }
 }
 ```

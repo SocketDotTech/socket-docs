@@ -48,7 +48,7 @@ address forwarderAddress = forwarderAddresses[contractAddress][chainSlug];
 This mapping allows you to retrieve the forwarder address for any contract and chain combination. For example:
 
 ```solidity
-address simpleTokenVaultForwarder = forwarderAddresses[simpleTokenVault][chainSlug];
+address superTokenVaultForwarder = forwarderAddresses[superTokenVault][chainSlug];
 ```
 
 See how this example usage [here](/deploy#deploy-multiple-contracts).

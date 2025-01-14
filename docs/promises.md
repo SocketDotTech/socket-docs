@@ -24,7 +24,7 @@ In SOCKET, a Promise represents a future outcome of an action initiated by a use
 To create a promise in SOCKET, initiate an `async` action that will generate an immutable promise tracked by the SOCKET protocol. Here's an example of a token transfer that creates a promise to check the user's balance before proceeding:
 
 ```solidity
-contract SimpleTokenAppGateway is AppGatewayBase {
+contract SuperTokenAppGateway is AppGatewayBase {
     (...)
     function transfer(uint256 amount, address srcForwarder, address dstForwarder)
         external
@@ -33,12 +33,12 @@ contract SimpleTokenAppGateway is AppGatewayBase {
     {
         // Check user balance on src chain
         _readCallOn();
-        ISimpleToken(srcForwarder).balanceOf(msg.sender);
+        ISuperToken(srcForwarder).balanceOf(msg.sender);
         IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount, asyncId));
         _readCallOff();
 
-        ISimpleToken(srcForwarder).burn(msg.sender, amount);
-        ISimpleToken(dstForwarder).mint(msg.sender, amount);
+        ISuperToken(srcForwarder).burn(msg.sender, amount);
+        ISuperToken(dstForwarder).mint(msg.sender, amount);
     }
 }
 ```
@@ -73,7 +73,7 @@ Consider a cross-chain token bridge transaction where the user's balance must be
 3. **Process the returned data**: The `checkBalance` function ensures the balance is sufficient before completing the transfer.
 
 ```solidity
-contract SimpleTokenAppGateway is AppGatewayBase {
+contract SuperTokenAppGateway is AppGatewayBase {
     (...)
     function checkBalance(bytes memory data, bytes memory returnData) external onlyPromises {
         (uint256 amount, bytes32 asyncId) = abi.decode(data, (uint256, bytes32));
@@ -93,13 +93,13 @@ contract SimpleTokenAppGateway is AppGatewayBase {
         // Check user balance on src chain
         _readCallOn();
         // Request to forwarder and deploys immutable promise contract and stores it
-        ISimpleToken(srcForwarder).balanceOf(msg.sender);
+        ISuperToken(srcForwarder).balanceOf(msg.sender);
         IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount, asyncId));
 
         _readCallOff();
 
-        ISimpleToken(srcForwarder).burn(msg.sender, amount);
-        ISimpleToken(dstForwarder).mint(msg.sender, amount);
+        ISuperToken(srcForwarder).burn(msg.sender, amount);
+        ISuperToken(dstForwarder).mint(msg.sender, amount);
     }
 }
 ```
@@ -112,7 +112,7 @@ contract SimpleTokenAppGateway is AppGatewayBase {
 ## Related Topics
 <CardGrid cards={[
  {
-   title: "Simple Token",
+   title: "Super Token",
    description: "Go back to the simple token introduction",
    link: "/writing-apps"
  },
