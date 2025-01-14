@@ -22,7 +22,9 @@ And you as a developer get to dictate not just your onchain logic but also offch
 
 Read more about how to build applications on SOCKET [here](/writing-apps)
 
-![image.png](../static/img/architecture.png)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/architecture.svg" alt="architecture diagram" style={{ width: '90%' }} />
+</div>
 
 Using the diagram above as visual aid, let us walkthrough the protocol:
 

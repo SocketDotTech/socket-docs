@@ -13,7 +13,9 @@ SOCKET Protocol is the first chain-abstraction protocol, enabling developers to 
 
 SOCKET is a chain-abstraction protocol, not a network(chain/rollup). Using a combination of offchain agents(watchers, transmitters) and onchain contracts(switchboards) it enables application-builders to build truly chain-abstracted protocols.
 
-![image.png](../static/img/architecture.png)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/architecture.svg" alt="architecture diagram" style={{ width: '90%' }} />
+</div>
 
 Leveraging SOCKET protocol, application developers have the ability to not just control the onchain elements of their application but also define additional offchain logic that can assist users, help with composing smart contracts or execute some pre-execution logic like auctions or resource-locks, security checks etc while being in full control of their application and its properties at all times. SOCKET is fully modular and extremely flexible to enable application developers to mold the infrastructure according to their requirements.
 
