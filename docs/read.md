@@ -5,12 +5,12 @@ title: Reading onchain state
 
 ## Read Example
 
-SOCKET supports reading public variables and functions from the underlying chains. To understand how this is done, lets extend the SimpleToken example that was introduced in our [guide](/writing-apps) and expanded to have a `transfer` function [here](/call-contracts).
+SOCKET supports reading public variables and functions from the underlying chains. To understand how this is done, lets extend the SuperToken example that was introduced in our [guide](/writing-apps) and expanded to have a `transfer` function [here](/call-contracts).
 
-On `SimpleTokenAppGateway`, we will create a `checkBalance` function. This function will read the user's `balance` of a given instance and confirm the user has the funds before performing the transfer.
+On `SuperTokenAppGateway`, we will create a `checkBalance` function. This function will read the user's `balance` of a given instance and confirm the user has the funds before performing the transfer.
 
 ```solidity
-interface ISimpleToken {
+interface ISuperToken {
     function balanceOf(address owner) external;
 }
 ```
@@ -60,13 +60,13 @@ The `transfer` function created [here](/call-contracts) had an issue that would 
            // Check user balance on src chain
            _readCallOn();
            // Request to forwarder and deploys immutable promise contract and stores it
-           ISimpleToken(srcForwarder).balanceOf(msg.sender);
+           ISuperToken(srcForwarder).balanceOf(msg.sender);
            IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount, asyncId));
 
            _readCallOff();
 
-           ISimpleToken(srcForwarder).burn(msg.sender, amount);
-           ISimpleToken(dstForwarder).mint(msg.sender, amount);
+           ISuperToken(srcForwarder).burn(msg.sender, amount);
+           ISuperToken(dstForwarder).mint(msg.sender, amount);
        }
    }
    ```

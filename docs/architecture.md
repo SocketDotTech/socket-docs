@@ -22,7 +22,9 @@ And you as a developer get to dictate not just your onchain logic but also offch
 
 Read more about how to build applications on SOCKET [here](/writing-apps)
 
-![image.png](../static/img/architecture.png)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/architecture.svg" alt="architecture diagram" style={{ width: '90%' }} />
+</div>
 
 Using the diagram above as visual aid, let us walkthrough the protocol:
 
@@ -35,6 +37,8 @@ Using the diagram above as visual aid, let us walkthrough the protocol:
 
 Extending the protocol to multiple chains just means deploying the smart-contracts which can be done permissionlessly and pointing your watcher at the new chain. Now your app-gateway can talk to your onchain contracts across multiple networks and help you compose between them, read more here
 
-![image.png](../static/img/architecture2.png)
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/multichain-architecture.svg" alt="multichain architecture diagram" style={{ width: '90%' }} />
+</div>
 
 SOCKET protocol enables chain-abstraction for developers while being fully adaptable to application needs, there are alot of usecases that can be built on top some of them we highlight on this page.

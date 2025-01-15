@@ -76,34 +76,34 @@ _setFeesData(feesData_);
 ### 1. Deploy to offchainVM
 
 <!-- TODO: Update filepaths once contracts are merged to master branch -->
-Deploy your contracts using the [`SetupSimpleToken.s.sol` script](https://github.com/SocketDotTech/socket-protocol/blob/simple-token/script/simple-token/SetupSimpleToken.s.sol) by running:
+Deploy your contracts using the [`DeployGateway.s.sol` script](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/script/super-token/DeployGateway.s.sol) by running:
 ```bash
-forge script script/SetupSimpleToken.s.sol --broadcast
+forge script script/super-token/SetupSuperToken.s.sol --broadcast
 ```
 
 ### 2. Fund Your App
 
-After deployment, deposit fees against your `SimpleTokenAppGateway`'s address on any supported chain to enable offchainVM to execute transactions on your behalf.
+After deployment, deposit fees against your `SuperTokenAppGateway`'s address on any supported chain to enable offchainVM to execute transactions on your behalf.
 
 ### 3. Deploy to Target Chains
 
 <!-- TODO: Update filepaths once contracts are merged to master branch -->
-Below is an example of how to complete the [script `DeploySimpleToken.s.sol`](https://github.com/SocketDotTech/socket-protocol/blob/simple-token/script/simple-token/DeploySimpleToken.s.sol):
+Below is an example of how to complete the [script `DeployContracts.s.sol`](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/script/super-token/DeployContracts.s.sol):
 ```solidity
-contract DeploySimpleToken is Script {
+contract DeployContracts is Script {
     function run() public {
         (...)
-        SimpleTokenDeployer simpleTokenDeployer = SimpleTokenDeployer(<deployerAddress>);
-        simpleTokenDeployer.deployContracts(84532);     // Base Sepolia
-        simpleTokenDeployer.deployContracts(11155420);  // OP Sepolia
-        simpleTokenDeployer.deployContracts(421614);    // Arbitrum Sepolia
+        SuperTokenDeployer superTokenDeployer = SuperTokenDeployer(<deployerAddress>);
+        superTokenDeployer.deployContracts(84532);     // Base Sepolia
+        superTokenDeployer.deployContracts(11155420);  // OP Sepolia
+        superTokenDeployer.deployContracts(421614);    // Arbitrum Sepolia
     }
 }
 ```
-Use `DeploySimpleToken.s.sol` to deploy your token to desired chains:
+Use `DeployContracts.s.sol` to deploy your token to desired chains:
 
 ```bash
-forge script ./script/DeploySimpleToken.s.sol --broadcast
+forge script ./script/super-token/DeployContracts.s.sol --broadcast
 ```
 
 Deployment typically takes a few minutes. Track deployment status and verify contract addresses using our [APIs](/api).

@@ -11,7 +11,7 @@ import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 
 ## Introduction
 
-In this guide, we’ll build a **SimpleToken application** using the SOCKET Protocol.
+In this guide, we’ll build a **SuperToken application** using the SOCKET Protocol.
 
 You’ll learn how to:
 
@@ -26,29 +26,29 @@ The System consists of 3 main components.
 <!-- TODO: Explain addition of PlugBase on onchain contracts -->
 <!-- TODO: Explain where to get auctionManager_ address from. apps can select our auction manager contract or can deploy there own. we can keep it in docs for now maybe and think of having a default auction manager for all -->
 <!-- TODO: Update filepaths once contracts are merged to master branch -->
-- A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/simple-token/contracts/apps/simple-token/SimpleTokenDeployer.sol) on offchainVM to deploy the **SimpleToken** instances.
+- A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/contracts/apps/super-token/SuperTokenDeployer.sol) on offchainVM to deploy the **SuperToken** instances.
     - This contract which will be deployed to offchainVM;
-- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/simple-token/contracts/apps/simple-token/SimpleTokenAppGateway.sol) on offchainVM that handles logic related to interacting with onchain contracts;
+- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/contracts/apps/super-token/SuperTokenAppGateway.sol) on offchainVM that handles logic related to interacting with onchain contracts;
     - This contract which will be deployed to offchainVM;
     - `AppGateway` contract is the user hub of interactions;
-- An onchain [ERC20 Token Contract](https://github.com/SocketDotTech/socket-protocol/blob/simple-token/contracts/apps/simple-token/SimpleToken.sol) that can be deployed on any chain.
+- An onchain [ERC20 Token Contract](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/contracts/apps/super-token/SuperToken.sol) that can be deployed on any chain.
     - This contract is expected to be deployed via the Deployer Contract;
     - `AppGateway` will be the owner and will trigger the `mint` and `burn` functions;
 
 ## Key offchain Contract Concepts
 
 ### Onchain contract bytecode stored in the Deployer Contract
-The Deployer Contract has two key pieces of code to ensure that onchain deployments are replicable `SimpleToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
+The Deployer Contract has two key pieces of code to ensure that onchain deployments are replicable `SuperToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
 ```solidity
-creationCodeWithArgs[simpleToken] = abi.encodePacked(
-    type(simpleToken).creationCode,
+creationCodeWithArgs[superToken] = abi.encodePacked(
+    type(superToken).creationCode,
     abi.encode(name_, symbol_, decimals_)
 );
 ```
 
-Using  `bytes32` variable is use a unique identifier for the SimpleToken contract generated using the `_createContractId` function. This identifier allows us to fetch `creationCode`, `onchain addresses` and `forwarder addresses` from maps in `AppGatewayBase`. See [here](/forwarder-addresses) to know more about [forwarder addresses](/forwarder-addresses).
+Using  `bytes32` variable is use a unique identifier for the SuperToken contract generated using the `_createContractId` function. This identifier allows us to fetch `creationCode`, `onchain addresses` and `forwarder addresses` from maps in `AppGatewayBase`. See [here](/forwarder-addresses) to know more about [forwarder addresses](/forwarder-addresses).
 ```solidity
-bytes32 public simpleToken = _createContractId("simpleToken");
+bytes32 public superToken = _createContractId("superToken");
 ```
 
 While this example handles a single contract, you can extend it to manage multiple contracts by storing their creation codes.
@@ -61,7 +61,7 @@ While this example handles a single contract, you can extend it to manage multip
 The `deployContracts` function takes a `chainSlug` as an argument that specifies the chain where the contract should be deployed.
 ```solidity
 function deployContracts(uint32 chainSlug) external async {
-    _deploy(simpleToken, chainSlug);
+    _deploy(superToken, chainSlug);
 }
 ```
 It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains.
