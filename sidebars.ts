@@ -46,6 +46,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "write-tests",
+          label: "Write tests for your app",
+        },
+        {
+          type: "doc",
           id: "api",
           label: "API",
         },
