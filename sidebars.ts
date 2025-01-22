@@ -17,7 +17,7 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "Building on SOCKET",
-      collapsible: false,
+      collapsible: true,
       items: [
         {
           type: "doc",
@@ -56,11 +56,6 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "usecases",
-          label: "Usecases",
-        },
-        {
-          type: "doc",
           id: "chain-information",
           label: "OffchainVM Information",
         },
@@ -68,8 +63,25 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Usecases",
+      collapsible: true,
+      items: [
+        {
+          type: "doc",
+          id: "usecases",
+          label: "Key Use Cases",
+        },
+        {
+          type: "doc",
+          id: "magicspend",
+          label: "MagicSpend on SOCKET",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Learn How SOCKET Works",
-      collapsible: false,
+      collapsible: true,
       items: [
         {
           type: "doc",
