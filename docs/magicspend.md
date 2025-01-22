@@ -10,7 +10,7 @@ import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 
 ## Overview
 
-["MagicSpend: Spend Now, Debit Later"](/https://ethresear.ch/t/magicspend-spend-now-debit-later/19678) allows users to spend assets immediately while deferring the debit process. SOCKET's chain-abstraction architecture is well-suited to facilitate this by combining offchain agents and onchain contracts.
+["MagicSpend: Spend Now, Debit Later"](https://ethresear.ch/t/magicspend-spend-now-debit-later/19678) allows users to spend assets immediately while deferring the debit process. SOCKET's chain-abstraction architecture is well-suited to facilitate this by combining offchain agents and onchain contracts.
 
 ## Architecture Overview
 
