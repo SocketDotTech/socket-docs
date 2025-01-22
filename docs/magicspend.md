@@ -6,9 +6,7 @@ import Link from '@docusaurus/Link';
 import CardGrid from '@site/src/components/CardGrid/CardGrid';
 import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 
-# Implement MagicSpend on SOCKET
-
-## Overview
+## Implement MagicSpend on SOCKET
 
 ["MagicSpend: Spend Now, Debit Later"](https://ethresear.ch/t/magicspend-spend-now-debit-later/19678) allows users to spend assets immediately while deferring the debit process. SOCKET's chain-abstraction architecture is well-suited to facilitate this by combining offchain agents and onchain contracts.
 
