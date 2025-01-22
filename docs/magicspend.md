@@ -2,6 +2,10 @@
 id: magicspend
 ---
 
+import Link from '@docusaurus/Link';
+import CardGrid from '@site/src/components/CardGrid/CardGrid';
+import styles from '@site/src/components/CardGrid/CardGrid.module.css';
+
 # Implementing MagicSpend on SOCKET
 
 ## Overview
@@ -57,5 +61,28 @@ id: magicspend
 - Use the `async` modifier in **App-Gateway** to manage multiple chained operations efficiently.
 - Implement **callback-based promises** to synchronize transactions with user accounts.
 
-## Conclusion
+## What's next!
 By leveraging SOCKET’s architecture, **MagicSpend** can be implemented securely and efficiently, ensuring users can spend assets immediately while managing debits asynchronously.
+
+<CardGrid cards={[
+ {
+   title: "Key Use Cases",
+   description: "Read more about other usecases SOCKET enables",
+   link: "/usecases"
+ },
+ {
+   title: "Take another look",
+   description: "Revisit the what is SOCKET protocol",
+   link: "/writing-apps"
+ },
+ {
+   title: "Architecture",
+   description: "Deep dive into SOCKET Protocol's architecture",
+   link: "/architecture"
+ },
+ {
+   title: "App Tutorial",
+   description: "Build a chain-abstracted ERC20 app",
+   link: "/writing-apps"
+ },
+]} />
