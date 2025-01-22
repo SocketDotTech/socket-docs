@@ -14,7 +14,9 @@ import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 
 ## Architecture Overview
 
-TODO: ADD ARCHITECUTURE DIAGRAM
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/magicspend.svg" alt="magicspend diagram" style={{ width: '100%' }} />
+</div>
 
 ## Implementation Steps
 
