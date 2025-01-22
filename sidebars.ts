@@ -18,6 +18,7 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "Building on SOCKET",
       collapsible: true,
+      collapsed: false,
       items: [
         {
           type: "doc",
@@ -65,6 +66,7 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "Usecases",
       collapsible: true,
+      collapsed: false,
       items: [
         {
           type: "doc",
@@ -82,6 +84,7 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "Learn How SOCKET Works",
       collapsible: true,
+      collapsed: false,
       items: [
         {
           type: "doc",
