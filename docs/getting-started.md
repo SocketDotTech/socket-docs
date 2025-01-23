@@ -75,7 +75,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    ```bash
    export COUNTER_DEPLOYER=<Counter Deployer Address>;
-   export COUNTER_APP_GATEWAY=<Counter App Address>;
+   export COUNTER_APPGATEWAY=<Counter App Address>;
    ```
 
 6. **Set up fees.**
