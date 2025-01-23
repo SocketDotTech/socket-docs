@@ -47,7 +47,7 @@ Read more about the usecases SOCKET enables in [this section](/usecases).
    link: "/architecture"
  },
  {
-   title: "Usecases",
+   title: "Key Use Cases",
    description: "Read more about the usecases SOCKET enables",
    link: "/usecases"
  }

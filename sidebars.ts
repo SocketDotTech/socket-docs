@@ -17,7 +17,8 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "Building on SOCKET",
-      collapsible: false,
+      collapsible: true,
+      collapsed: false,
       items: [
         {
           type: "doc",
@@ -46,13 +47,13 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "api",
-          label: "API",
+          id: "write-tests",
+          label: "Write tests for your app",
         },
         {
           type: "doc",
-          id: "usecases",
-          label: "Usecases",
+          id: "api",
+          label: "API",
         },
         {
           type: "doc",
@@ -63,8 +64,27 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Usecases",
+      collapsible: true,
+      collapsed: false,
+      items: [
+        {
+          type: "doc",
+          id: "usecases",
+          label: "Key Use Cases",
+        },
+        {
+          type: "doc",
+          id: "magicspend",
+          label: "MagicSpend on SOCKET",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Learn How SOCKET Works",
-      collapsible: false,
+      collapsible: true,
+      collapsed: false,
       items: [
         {
           type: "doc",

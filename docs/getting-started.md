@@ -75,17 +75,17 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    ```bash
    export COUNTER_DEPLOYER=<Counter Deployer Address>;
-   export COUNTER_APP_GATEWAY=<Counter App Address>;
+   export COUNTER_APPGATEWAY=<Counter App Address>;
    ```
 
 6. **Set up fees.**
 
-   In this example we will be paying fees on Arbitrum Sepolia as configured in `script/Deploy.s.sol`.
+   In this example we will be paying fees on Arbitrum Sepolia as configured in `script/deployCounterOffchain.s.sol`.
 
-   To pay for this increment counter transaction, deposit `arbsepETH` to the contract address of the `PayloadDeliveryPlug` by running:
+   To pay for this increment counter transaction, deposit `arbsepETH` to the contract address of the `FeesPlug` by running:
 
    ```bash
-   cast send 0x804Af74b5b3865872bEf354e286124253782FA95 "deposit(address,uint256,address)" \
+   cast send 0x6c40Fb39B03e32EC4D23e31DdE6D10283F2C7b4F "deposit(address,uint256,address)" \
        0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
        <AMOUNT> \
        $COUNTER_APP_GATEWAY \
@@ -95,7 +95,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    ```
 
    Replace `<AMOUNT>` in wei with more than 0.01 ETH. Please ensure the wallet you are using has at least 0.01 Arbitrum Sepolia ETH. Feel free to use any of the supported chains and run the command accordingly.
-   You can pay using any token on a chain of your choice that has a `PayloadDelivery` contract. You can deposit them to a `PayloadDelivery` on any chain by calling the `deposit` function. Find all about the available `PayloadDelivery` addresses [here](/chain-information) and about fees [here](/fees)
+   You can pay using any token on a chain of your choice that has a `FeesPlug` contract. You can deposit them to a `FeesPlug` on any chain by calling the `deposit` function. Find all about the available `FeesPlug` addresses [here](/chain-information) and about fees [here](/fees)
 
    :::tip
    Don't forget to export `ARBITRUM_SEPOLIA_RPC` if you do not have it in your environment yet.
