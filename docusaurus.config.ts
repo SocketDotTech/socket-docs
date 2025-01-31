@@ -106,14 +106,18 @@ const config: Config = {
           docId: "introduction",
         },
         {
-          position: "left",
-          label: "Dev Support",
+          type: 'search',
+          position: 'right',
+        },
+        {
+          position: "right",
+          html: `<img src="/svg/discord-mark-white.svg" alt="GitHub" style="height: 25px; width: 25px;">`,
           href: "https://discord.gg/KMHEEMw3xU",
         },
         {
-          href: "https://github.com/SocketDotTech",
-          label: "GitHub",
+          href: "https://github.com/SocketDotTech/socket-protocol",
           position: "right",
+          html: `<img src="/svg/github-mark-white.svg" alt="GitHub" style="height: 25px; width: 25px;">`,
         },
       ],
     },

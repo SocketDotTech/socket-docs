@@ -5,7 +5,7 @@ title: Reading onchain state
 
 ## Read Example
 
-SOCKET supports reading public variables and functions from the underlying chains. To understand how this is done, lets extend the SuperToken example that was introduced in our [guide](/writing-apps) and expanded to have a `transfer` function [here](/call-contracts).
+SOCKET supports reading public variables and functions from the underlying chains. To understand how this is done, lets extend the SuperToken example that was introduced in our [tutorial](/writing-apps) and expanded to have a `transfer` function [here](/call-contracts).
 
 On `SuperTokenAppGateway`, we will create a `checkBalance` function. This function will read the user's `balance` of a given instance and confirm the user has the funds before performing the transfer.
 

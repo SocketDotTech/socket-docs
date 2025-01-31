@@ -19,7 +19,7 @@ function setUp() public {
 }
 ```
 
-#### Understanding setUpDeliveryHelper()
+### Understanding setUpDeliveryHelper()
 
 `setUpDeliveryHelper()` initializes the core infrastructure needed to simulate Socket Protocol's multi-chain messaging:
 

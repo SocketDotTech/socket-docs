@@ -11,7 +11,7 @@ import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 
 ## Introduction
 
-In this guide, we’ll build a **SuperToken application** using the SOCKET Protocol.
+In this tutorial, we’ll build a **SuperToken application** using the SOCKET Protocol.
 
 You’ll learn how to:
 
@@ -25,13 +25,12 @@ The System consists of 3 main components.
 
 <!-- TODO: Explain addition of PlugBase on onchain contracts -->
 <!-- TODO: Explain where to get auctionManager_ address from. apps can select our auction manager contract or can deploy there own. we can keep it in docs for now maybe and think of having a default auction manager for all -->
-<!-- TODO: Update filepaths once contracts are merged to master branch -->
-- A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/contracts/apps/super-token/SuperTokenDeployer.sol) on offchainVM to deploy the **SuperToken** instances.
+- A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenDeployer.sol) on offchainVM to deploy the **SuperToken** instances.
     - This contract which will be deployed to offchainVM;
-- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/contracts/apps/super-token/SuperTokenAppGateway.sol) on offchainVM that handles logic related to interacting with onchain contracts;
+- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenAppGateway.sol) on offchainVM that handles logic related to interacting with onchain contracts;
     - This contract which will be deployed to offchainVM;
     - `AppGateway` contract is the user hub of interactions;
-- An onchain [ERC20 Token Contract](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/contracts/apps/super-token/SuperToken.sol) that can be deployed on any chain.
+- An onchain [ERC20 Token Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperToken.sol) that can be deployed on any chain.
     - This contract is expected to be deployed via the Deployer Contract;
     - `AppGateway` will be the owner and will trigger the `mint` and `burn` functions;
 
@@ -91,72 +90,3 @@ The `initialize` function is empty in this example. You can use it for setting c
    link: "/writing-apps"
  }
 ]} />
-<!-- TODO: Add page explaining how to test the app and how to write Foundry tests for the app -->
-
-<!-- TODO: Move the information below to different pages -->
-<!--
-## Testing
-
-### Add Airdrop Receivers: AddReceivers.s.sol
-
-Once the setup is done, you can call `addAirdropReceivers`.
-
-```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
-
-import {Script, console} from "forge-std/Script.sol";
-import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
-
-contract AddReceivers is Script {
-    address[] receivers = [
-        <receiver1>,
-        <receiver2>,
-        <receiver3>
-    ];
-    uint256[] amounts = [
-        <amount1>,
-        <amount2>,
-        <amount3>
-    ];
-
-    function run() public {
-        string memory rpc = vm.envString("SOCKET_RPC");
-        vm.createSelectFork(rpc);
-
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
-
-        MyTokenAppGateway myTokenAppGateway = MyTokenAppGateway(<myTokenAppGatewayAddress>);
-        myTokenAppGateway.addAirdropReceivers(receivers, amounts);
-    }
-}
-```
-
-### Claim Airdrop: ClaimAirdrop.s.sol
-
-For each receiver that was added in previous step, they can call claimAirdrop with their desired instance address to mint tokens on the desired chain. Use our [apis](/api) to get instance addresses.
-
-Note that the instance addresses are not the same as where token contracts are deployed on chain. The instance here is a forwarder address, read more about it [here](/call-contracts).
-
-```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
-
-import {Script, console} from "forge-std/Script.sol";
-import {MyTokenAppGateway} from "../src/MyTokenAppGateway.sol";
-
-contract ClaimAirdrop is Script {
-    function run() public {
-        string memory rpc = vm.envString("SOCKET_RPC");
-        vm.createSelectFork(rpc);
-
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
-
-        MyTokenAppGateway myTokenAppGateway = MyTokenAppGateway(<myTokenAppGatewayAddress>);
-        myTokenAppGateway.claimAirdrop(<instance>);
-    }
-}
-```
--->

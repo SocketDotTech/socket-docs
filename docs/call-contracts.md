@@ -36,7 +36,7 @@ Read [here](/forwarder-addresses) to learn more about how forwarder addresses ar
 
 The `async` modifier works on a queue of transactions, and therefore you can make a batch of onchain calls in single function and they are delivered to chains in order.
 
-To understand this let us go back to `SuperTokenAppGateway` example from our [guide](/writing-apps) and extend the it to add a basic `transfer` function that burns tokens on source chain followed by minting them on destination chain.
+To understand this let us go back to `SuperTokenAppGateway` example from our [tutorial](/writing-apps) and extend the it to add a basic `transfer` function that burns tokens on source chain followed by minting them on destination chain.
 
 This simple function enables burning of tokens on source chain and minting them on destination after burn is done.
 

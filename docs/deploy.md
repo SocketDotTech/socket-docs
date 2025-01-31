@@ -7,8 +7,38 @@ title: Deploying onchain smart contracts
 
 ## Deploy
 
-Deployments of onchain contracts from Offchain VM is done using a Deployer contract. Lets look at the `Deployer` contract of `SuperToken` example to better understand the workflow and [code](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/contracts/apps/super-token/SuperTokenDeployer.sol).
-<!-- TODO: Update filepath once contracts are merged to master branch -->
+The deployment of onchain contracts from Offchain VM is managed through a Deployer contract. The key components of deployment include storing contract bytecode and handling the actual deployment process. Here's how it works using the `SuperToken` example ([code here](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenDeployer.sol)):
+
+1. The Deployer Contract stores the contract bytecode:
+    ```solidity
+    creationCodeWithArgs[superToken] = abi.encodePacked(
+        type(superToken).creationCode,
+        abi.encode(name_, symbol_, decimals_)
+    );
+    ```
+
+1. A unique identifier is created for each contract:
+    ```solidity
+    bytes32 public superToken = _createContractId("superToken");
+    ```
+
+1. The deployment is triggered using:
+    ```solidity
+    function deployContracts(uint32 chainSlug) external async {
+        _deploy(superToken, chainSlug);
+    }
+    ```
+
+1. Chain specific parameters may be set automatically right after `_deploy` by overriding `initialize`
+    ```solidity
+    function initialize(uint32 chainSlug) public override async {
+        if (chainSlug == 1) {
+            // Fill in some special variable here
+        }
+    }
+    ```
+
+This system can be extended to manage multiple contracts by storing their respective creation codes.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     <img src="/img/deploy_sequence.svg" alt="deploy" style={{ width: '80%' }} />
@@ -47,7 +77,9 @@ The `initialize` function is empty in this example. You can use it for setting c
 
 ## Initialize
 
-Since we store the `creationCode` along with `constructor parameters`, they essentially become constants. But there can be use cases where the contract need dynamic or chain specific values while setting up. For such cases, the initialize flow has to be used. Lets extend the `SuperToken` example to set mint limits following the workflow below.
+Initialization is a separate process that handles dynamic or chain-specific values after deployment. This is particularly useful when contracts need different configurations based on their deployment chain.
+
+Here's an example using `SuperToken` with chain-specific mint limits:
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     <img src="/img/deploy_initialize.svg" alt="deploy initialize" style={{ width: '80%' }} />

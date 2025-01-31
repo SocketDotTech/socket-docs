@@ -98,3 +98,36 @@ html[data-theme="dark"] {
 code {
   color: #0eb0c1;
 }
+
+.navbar__search {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+}
+
+.navbar__search-input {
+  width: 100%;
+}
+
+/* Ensure that categories do not act like links */
+.menu__list-item-collapsible:hover {
+  background-color: transparent !important; /* Ensure no background color on hover */
+}
+
+.menu__list-item-collapsible > .menu__link {
+  pointer-events: none; /* Disable hover and click interaction on categories */
+  font-weight: bold !important;
+  background-color: transparent !important; /* Ensure no background color on hover */
+  color: inherit !important; /* Make sure color does not change */
+}
+
+.menu__list-item-collapsible .menu__link {
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+.menu__list > .theme-doc-sidebar-item-link-level-2 .menu__link {
+  font-size: 0.95rem;
+}
