@@ -25,13 +25,12 @@ The System consists of 3 main components.
 
 <!-- TODO: Explain addition of PlugBase on onchain contracts -->
 <!-- TODO: Explain where to get auctionManager_ address from. apps can select our auction manager contract or can deploy there own. we can keep it in docs for now maybe and think of having a default auction manager for all -->
-<!-- TODO: Update filepaths once contracts are merged to master branch -->
-- A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/contracts/apps/super-token/SuperTokenDeployer.sol) on offchainVM to deploy the **SuperToken** instances.
+- A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenDeployer.sol) on offchainVM to deploy the **SuperToken** instances.
     - This contract which will be deployed to offchainVM;
-- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/contracts/apps/super-token/SuperTokenAppGateway.sol) on offchainVM that handles logic related to interacting with onchain contracts;
+- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenAppGateway.sol) on offchainVM that handles logic related to interacting with onchain contracts;
     - This contract which will be deployed to offchainVM;
     - `AppGateway` contract is the user hub of interactions;
-- An onchain [ERC20 Token Contract](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/contracts/apps/super-token/SuperToken.sol) that can be deployed on any chain.
+- An onchain [ERC20 Token Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperToken.sol) that can be deployed on any chain.
     - This contract is expected to be deployed via the Deployer Contract;
     - `AppGateway` will be the owner and will trigger the `mint` and `burn` functions;
 

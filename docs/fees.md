@@ -75,8 +75,7 @@ _setFeesData(feesData_);
 
 ### 1. Deploy to offchainVM
 
-<!-- TODO: Update filepaths once contracts are merged to master branch -->
-Deploy your contracts using the [`DeployGateway.s.sol` script](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/script/super-token/DeployGateway.s.sol) by running:
+Deploy your contracts using the [`DeployGateway.s.sol` script](https://github.com/SocketDotTech/socket-protocol/blob/master/script/super-token/DeployGateway.s.sol) by running:
 ```bash
 forge script script/super-token/SetupSuperToken.s.sol --broadcast
 ```
@@ -87,8 +86,7 @@ After deployment, deposit fees against your `SuperTokenAppGateway`'s address on 
 
 ### 3. Deploy to Target Chains
 
-<!-- TODO: Update filepaths once contracts are merged to master branch -->
-Below is an example of how to complete the [script `DeployContracts.s.sol`](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/script/super-token/DeployContracts.s.sol):
+Below is an example of how to complete the [script `DeployContracts.s.sol`](https://github.com/SocketDotTech/socket-protocol/blob/master/script/super-token/DeployContracts.s.sol):
 ```solidity
 contract DeployContracts is Script {
     function run() public {

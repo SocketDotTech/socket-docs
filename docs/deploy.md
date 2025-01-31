@@ -7,8 +7,7 @@ title: Deploying onchain smart contracts
 
 ## Deploy
 
-Deployments of onchain contracts from Offchain VM is done using a Deployer contract. Lets look at the `Deployer` contract of `SuperToken` example to better understand the workflow and [code](https://github.com/SocketDotTech/socket-protocol/blob/example-tests/contracts/apps/super-token/SuperTokenDeployer.sol).
-<!-- TODO: Update filepath once contracts are merged to master branch -->
+Deployments of onchain contracts from Offchain VM is done using a Deployer contract. Lets look at the `Deployer` contract of `SuperToken` example to better understand the workflow and [code](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenDeployer.sol).
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     <img src="/img/deploy_sequence.svg" alt="deploy" style={{ width: '80%' }} />
