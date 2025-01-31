@@ -71,6 +71,60 @@ or set them in the `constructor` of the `AppGateway` and `Deployer`.
 _setFeesData(feesData_);
 ```
 
+The FeesData structure is designed to manage fee-related parameters for transactions in a dual-execution environment (offchainVM and onchain). Here's how it's implemented:
+
+```solidity
+FeesData memory feesData = FeesData({
+    feePoolChain: 421614,      // Chain ID where fees are collected
+    feePoolToken: ETH_ADDRESS, // Token used for fee payments (ETH in this case)
+    maxFees: 0.001 ether      // Maximum fee amount allowed
+});
+```
+
+#### FeesData Key Components
+
+1. feePoolChain
+    Specifies the blockchain network ID where fees are collected and managed. In this case, it's set to 421614, which appears to be a specific chain ID (possibly a testnet or L2 network).
+
+2. feePoolToken
+    Defines which token is used for fee payments. Here it's set to `ETH_ADDRESS`, meaning Ethereum is used as the payment token.
+
+3. maxFees
+    Sets an upper limit for transaction fees, preventing excessive charges. In this example, it's set to 0.001 ETH.
+
+#### Dual Purpose Usage
+
+**OffchainVM Transactions**
+- Acts as a fee configuration for processing off-chain computations
+- Ensures users have enough balance to cover computational costs
+- Provides a predictable fee structure for off-chain operations
+
+**Onchain Transactions**
+- Sets parameters for standard blockchain transaction fees
+- Manages gas costs for contract interactions
+- Provides fee limits for user protection
+
+#### Implementation Context
+The FeesData structure is passed to both the SuperTokenDeployer and SuperTokenAppGateway contracts, ensuring consistent fee handling across the entire system, whether transactions are processed off-chain or on-chain:
+
+```solidity
+SuperTokenDeployer deployer = new SuperTokenDeployer(
+    addressResolver,
+    owner,
+    address(auctionManager),
+    FAST,
+    SuperTokenDeployer.ConstructorParams({...}),
+    feesData
+);
+
+SuperTokenAppGateway gateway = new SuperTokenAppGateway(
+    addressResolver,
+    address(deployer),
+    feesData,
+    address(auctionManager)
+);
+```
+
 ## Contract Deployment
 
 ### 1. Deploy to offchainVM
