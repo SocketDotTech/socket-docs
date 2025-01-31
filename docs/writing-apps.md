@@ -11,7 +11,7 @@ import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 
 ## Introduction
 
-In this guide, we’ll build a **SuperToken application** using the SOCKET Protocol.
+In this tutorial, we’ll build a **SuperToken application** using the SOCKET Protocol.
 
 You’ll learn how to:
 
