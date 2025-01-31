@@ -111,13 +111,13 @@ const config: Config = {
         },
         {
           position: "right",
-          label: "Dev Support",
+          html: `<img src="/svg/discord-mark-white.svg" alt="GitHub" style="height: 25px; width: 25px;">`,
           href: "https://discord.gg/KMHEEMw3xU",
         },
         {
-          href: "https://github.com/SocketDotTech",
-          label: "GitHub",
+          href: "https://github.com/SocketDotTech/socket-protocol",
           position: "right",
+          html: `<img src="/svg/github-mark-white.svg" alt="GitHub" style="height: 25px; width: 25px;">`,
         },
       ],
     },
