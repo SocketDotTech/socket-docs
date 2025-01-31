@@ -106,7 +106,11 @@ const config: Config = {
           docId: "introduction",
         },
         {
-          position: "left",
+          type: 'search',
+          position: 'right',
+        },
+        {
+          position: "right",
           label: "Dev Support",
           href: "https://discord.gg/KMHEEMw3xU",
         },
