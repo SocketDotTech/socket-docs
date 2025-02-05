@@ -20,6 +20,8 @@ SOCKET Protocol is the first chain-abstraction protocol, enabling developers to 
 - **Account Abstraction:** Consistent account experience across networks
 - **Chain-Abstracted Data:** Unified indexing and querying infrastructure
 
+[↘ Explore more about the usecases SOCKET enables](/usecases)
+
 ## Key Features
 
 1. **Chain-Abstracted Calls**
@@ -43,7 +45,7 @@ SOCKET Protocol is the first chain-abstraction protocol, enabling developers to 
 - **Onchain Contracts**: [Switchboards](/switchboards) that handle execution and state management
 - **Modular Architecture**: Flexible infrastructure that developers can customize for their specific needs
 
-Learn more about the protocol architecture in [this section](/architecture).
+[↘ Learn more about the protocol architecture](/architecture)
 
 ## Top Links!
 <CardGrid cards={[
