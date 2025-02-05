@@ -48,6 +48,16 @@ Learn more about the protocol architecture in [this section](/architecture).
 ## Top Links!
 <CardGrid cards={[
  {
+   title: "Use Cases",
+   description: "Explore more about the usecases SOCKET enables",
+   link: "/usecases"
+ },
+ {
+   title: "Architecture",
+   description: "Deep dive into SOCKET Protocol's architecture",
+   link: "/architecture"
+ },
+ {
    title: "Getting Started",
    description: "Follow a step by step tutorial",
    link: "/getting-started"
@@ -56,15 +66,5 @@ Learn more about the protocol architecture in [this section](/architecture).
    title: "App Tutorial",
    description: "Build a chain-abstracted ERC20 app",
    link: "/writing-apps"
- },
- {
-   title: "Architecture",
-   description: "Deep dive into SOCKET Protocol's architecture",
-   link: "/architecture"
- },
- {
-   title: "Use Cases",
-   description: "Explore more about the usecases SOCKET enables",
-   link: "/usecases"
  }
 ]} />
