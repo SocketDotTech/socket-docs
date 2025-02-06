@@ -3,10 +3,6 @@ id: getting-started
 title: Getting Started
 ---
 
-# Getting Started
-
-# 1. Introduction
-
 In this tutorial, we’ll demonstrate how to implement an extended version of the `Counter.sol` contract, inspired by the default Foundry example. Unlike a traditional counter deployed on a single chain, our counter will be deployed across multiple chains, and we will interact with it in a **chain-abstracted fashion**.
 
 This example highlights how to abstract away blockchain-specific details, enabling seamless contract interactions across multiple chains through the SOCKET Protocol. By leveraging chain abstraction, developers can focus on application logic without worrying about the complexities of inter-chain communication.
@@ -17,7 +13,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 - Extend a simple `Counter` contract into a **chain-abstracted** version.
 - Walk through a `CounterAppGateway` contract to orchestrate updates on multiple counter instances.
 
-# 2. Setting Up Your Environment
+## Setting Up Your Environment
 
 1. **Clone the Starter Kit**
 
@@ -141,91 +137,12 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge script script/counter/checkCounters.s.sol --skip-simulation
    ```
 
-# 3. Understanding the Components
+## Understanding the Components
 
-## **Counter**
+- **Counter:** This is the instance of the app that is deployed on chain. Unlike a normal counter, the `increase` function of this counter is called via SOCKET.
 
-This is the instance of the app that is deployed on chain. Unlike a normal counter, the `increase` function of this counter is called via SOCKET.
+- **CounterAppGateway:** `CounterAppGateway` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
 
-```solidity
- contract Counter is Ownable(msg.sender) {
-     address public socket;
-     uint256 public counter;
+- **CounterDeployer:** The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy).
 
-     modifier onlySocket() {
-         require(msg.sender == socket, "not socket");
-         _;
-     }
-
-     function setSocket(address _socket) external onlyOwner {
-         socket = _socket;
-     }
-
-     function getSocket() external view returns (address) {
-         return socket;
-     }
-
-     function increase() external onlySocket {
-         counter++;
-     }
- }
-```
-
-## **CounterAppGateway**
-
-`CounterAppGateway` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
-
-```solidity
- contract CounterAppGateway is AppGatewayBase {
-     constructor(
-         address _addressResolver,
-         address deployerContract_,
-         FeesData memory feesData_
-     ) AppGatewayBase(_addressResolver) {
-         addressResolver.setContractsToGateways(deployerContract_);
-         _setFeesData(feesData_);
-     }
-
-     function incrementCounters(address[] memory instances) public async {
-         for (uint256 i = 0; i < instances.length; i++) {
-             Counter(instances[i]).increase();
-         }
-     }
-
-     function setFees(FeesData memory feesData_) public {
-         feesData = feesData_;
-     }
- }
-```
-
-## **CounterDeployer**
-
-The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy).
-
-```solidity
- contract CounterDeployer is AppDeployerBase {
-     bytes32 public counter = _createContractId("counter");
-
-     constructor(
-         address addressResolver_,
-         FeesData memory feesData_
-     ) AppDeployerBase(addressResolver_) {
-         creationCodeWithArgs[counter] = type(Counter).creationCode;
-         _setFeesData(feesData_);
-     }
-
-     function deployContracts(uint32 chainSlug) external async {
-         _deploy(counter, chainSlug);
-     }
-
-     function initialize(uint32 chainSlug) public override async {
-         address socket = getSocketAddress(chainSlug);
-         address counterForwarder = forwarderAddresses[counter][chainSlug];
-         Counter(counterForwarder).setSocket(socket);
-     }
-
-     function setFees(FeesData memory feesData_) public {
-         feesData = feesData_;
-     }
- }
-```
+[↘ Learn more about how to build applications on SOCKET](/writing-apps#architecture-overview)
