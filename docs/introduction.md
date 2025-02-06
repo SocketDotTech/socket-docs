@@ -24,20 +24,15 @@ SOCKET Protocol is the first chain-abstraction protocol, enabling developers to 
 
 ## Key Features
 
-1. **Chain-Abstracted Calls**
+- **Chain-Abstracted Contracts**
    - Execute contracts across any supported chain using standard Solidity
    - No complex messaging protocols or async handling required
    - Direct function calls with consistent developer experience
 
-2. **Pre-Execution Framework**
+- **Pre-Execution Framework**
    - Run custom logic before onchain execution
    - Enable advanced features like auctions, intent matching, and security checks
    - Full control over execution flow and user experience
-
-3. **Chain Abstraction**
-   - Connect users and applications across all supported networks
-   - Maintain consistent UX despite underlying chain complexity
-   - Build truly chain-abstracted protocols and applications, providing a consistent monolithic experience to end users while enabling permissionless innovation
 
 ## Core Components
 
