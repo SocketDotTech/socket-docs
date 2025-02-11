@@ -7,7 +7,18 @@ import Link from '@docusaurus/Link';
 import CardGrid from '@site/src/components/CardGrid/CardGrid';
 import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 
-SOCKET Protocol is the first chain-abstraction protocol, enabling developers to build applications that seamlessly interact across 300+ blockchain networks through chain abstraction. Rather than treating each chain as a separate system, SOCKET allows developers to use chains as unified infrastructure - similar to how traditional applications use databases and servers.
+**SOCKET Protocol** is the first chain-abstraction protocol, enabling developers to build applications that seamlessly interact across **300+ blockchain networks** through chain abstraction. Rather than treating each chain as a separate system, SOCKET allows developers to use chains as **unified infrastructure** - similar to how traditional applications use databases and servers.
+
+A **chain-abstraction protocol** serves as a standardized **interface layer** that enables **cross-chain interoperability**. It abstracts away the technical complexities of individual blockchains, allowing seamless **communication** and **asset exchange** between different networks through a **unified interface**.
+
+The protocol manages three core functions:
+- **Cross-chain messaging**: Facilitating data transfer between different blockchain networks
+- **Format translation**: Converting blockchain-specific data into a common format
+- **Transaction validation**: Ensuring secure and accurate cross-chain operations
+
+This abstraction allows developers to build **chain-abstracted applications** without dealing with blockchain-specific implementations.
+
+[↘ Learn about SOCKET's key features](/introduction#key-features)
 
 ## Use Cases
 
