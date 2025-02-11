@@ -100,7 +100,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Glossary",
+      label: "Learn about SOCKET",
       collapsible: false,
       collapsed: false,
       items: [
