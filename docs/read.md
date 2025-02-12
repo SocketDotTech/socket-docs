@@ -19,7 +19,7 @@ The `balanceOf` function signature is similar to a standard token contract but,
 - its visibility is not restricted to `view`;
 - it does not have any return values.
 
-This needs to be followed for all calls that return values to be read. This means if you have any interfaces that need to be leveraged by the offchainVM they will need to be changed to be compatible with the `async`/`forwarder` system on the offchainVM.
+This needs to be followed for all calls that return values to be read. This means if you have any interfaces that need to be leveraged by the EVMx they will need to be changed to be compatible with the `async`/`forwarder` system on the EVMx.
 :::
 
 The `transfer` function created [here](/call-contracts) had an issue that would be prone to happen. It was not checking the user's balance on the source chain before executing the transfer. Below is a read example where we read and validate the user's balance on the source chain before attempting to transfer the funds.

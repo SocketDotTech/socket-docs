@@ -5,7 +5,7 @@ title: Paying fees for transactions
 
 # Fee Setup and Management
 
-Setting up fees is essential for your app to interact with both the offchainVM and supported blockchains. There are two types of fees you need to manage:
+Setting up fees is essential for your app to interact with both the EVMx and supported blockchains. There are two types of fees you need to manage:
 
 1. OffchainVM transaction fees
 2. Onchain transaction sponsorship
@@ -71,7 +71,7 @@ or set them in the `constructor` of the `AppGateway` and `Deployer`.
 _setFeesData(feesData_);
 ```
 
-The FeesData structure is designed to manage fee-related parameters for transactions in a dual-execution environment (offchainVM and onchain). Here's how it's implemented:
+The FeesData structure is designed to manage fee-related parameters for transactions in a dual-execution environment (EVMx and onchain). Here's how it's implemented:
 
 ```solidity
 FeesData memory feesData = FeesData({
@@ -127,7 +127,7 @@ SuperTokenAppGateway gateway = new SuperTokenAppGateway(
 
 ## Contract Deployment
 
-### 1. Deploy to offchainVM
+### 1. Deploy to EVMx
 
 Deploy your contracts using the [`DeployGateway.s.sol` script](https://github.com/SocketDotTech/socket-protocol/blob/master/script/super-token/DeployGateway.s.sol) by running:
 ```bash
@@ -136,7 +136,7 @@ forge script script/super-token/SetupSuperToken.s.sol --broadcast
 
 ### 2. Fund Your App
 
-After deployment, deposit fees against your `SuperTokenAppGateway`'s address on any supported chain to enable offchainVM to execute transactions on your behalf.
+After deployment, deposit fees against your `SuperTokenAppGateway`'s address on any supported chain to enable EVMx to execute transactions on your behalf.
 
 ### 3. Deploy to Target Chains
 

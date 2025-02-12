@@ -49,13 +49,13 @@ This example highlights how to abstract away blockchain-specific details, enabli
    vi .env
    ```
 
-4. **Get offchainVM ETH**
+4. **Get EVMx ETH**
 
-   To pay for the transactions on offchainVM you need native tokens. You can get offchainVM ETH using [the bridge](https://socket-composer-testnet-8b802af208e24e82.testnets.rollbridge.app/) or you can get ETH directly on offchainVM using [the faucet](https://faucet.conduit.xyz/socket-composer-testnet).
+   To pay for the transactions on EVMx you need native tokens. You can get EVMx ETH using [the bridge](https://socket-composer-testnet-8b802af208e24e82.testnets.rollbridge.app/) or you can get ETH directly on EVMx using [the faucet](https://faucet.conduit.xyz/socket-composer-testnet).
 
-5. **Deploy the all contracts on the offchainVM and on chain instances**
+5. **Deploy the all contracts on the EVMx and on chain instances**
 
-   This command deploys all contracts on offchainVM. It includes the `Counter`, `CounterDeployer`, `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
+   This command deploys all contracts on EVMx. It includes the `Counter`, `CounterDeployer`, `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
    ```bash
    forge script script/counter/deployCounterOffchain.s.sol --broadcast  --skip-simulation
@@ -123,7 +123,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge script script/counter/incrementCounters.s.sol --broadcast --skip-simulation
    ```
 
-   Read [here](/forwarder-addresses) to learn more about how forwarder addresses are assigned on the offchainVM to represent onchain contracts.
+   Read [here](/forwarder-addresses) to learn more about how forwarder addresses are assigned on the EVMx to represent onchain contracts.
 
    If you want to know when the transaction is complete you can run the command below or directly use the API as described in the previous step.
 
@@ -141,8 +141,8 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 - **Counter:** This is the instance of the app that is deployed on chain. Unlike a normal counter, the `increase` function of this counter is called via SOCKET.
 
-- **CounterAppGateway:** `CounterAppGateway` is an `AppGateway`. It is a contract deployed on offchainVM and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
+- **CounterAppGateway:** `CounterAppGateway` is an `AppGateway`. It is a contract deployed on EVMx and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
 
-- **CounterDeployer:** The Deployer contract is deployed to offchainVM and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy).
+- **CounterDeployer:** The Deployer contract is deployed to EVMx and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy).
 
 [↘ Learn more about how to build applications on SOCKET](/writing-apps#architecture-overview)

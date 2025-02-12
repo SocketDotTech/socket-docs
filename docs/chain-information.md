@@ -3,7 +3,7 @@ id: chain-information
 title: Chain Information
 ---
 
-# offchainVM Details
+# EVMx Details
 
 HTTPS RPC: `https://rpc-socket-composer-testnet.t.conduit.xyz`
 

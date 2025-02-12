@@ -16,7 +16,7 @@ In this tutorial, we’ll build a **SuperToken application** using the SOCKET Pr
 You’ll learn how to:
 
 - Create a multi-chain application that deploys replicatble tokens across chains;
-- Use offchainVM to trigger onchain minting;
+- Use EVMx to trigger onchain minting;
 - Test and Deploy your app across multiple chains.
 
 ### Architecture Overview
@@ -25,10 +25,10 @@ The System consists of 3 main components.
 
 <!-- TODO: Explain addition of PlugBase on onchain contracts -->
 <!-- TODO: Explain where to get auctionManager_ address from. apps can select our auction manager contract or can deploy there own. we can keep it in docs for now maybe and think of having a default auction manager for all -->
-- A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenDeployer.sol) on offchainVM to deploy the **SuperToken** instances.
-    - This contract which will be deployed to offchainVM;
-- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenAppGateway.sol) on offchainVM that handles logic related to interacting with onchain contracts;
-    - This contract which will be deployed to offchainVM;
+- A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenDeployer.sol) on EVMx to deploy the **SuperToken** instances.
+    - This contract which will be deployed to EVMx;
+- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenAppGateway.sol) on EVMx that handles logic related to interacting with onchain contracts;
+    - This contract which will be deployed to EVMx;
     - `AppGateway` contract is the user hub of interactions;
 - An onchain [ERC20 Token Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperToken.sol) that can be deployed on any chain.
     - This contract is expected to be deployed via the Deployer Contract;
@@ -86,7 +86,7 @@ The `initialize` function is empty in this example. You can use it for setting c
  },
  {
    title: "Pay for transactions",
-   description: "Pay for your offchainVM transactions",
+   description: "Pay for your EVMx transactions",
    link: "/writing-apps"
  }
 ]} />

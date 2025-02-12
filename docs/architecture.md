@@ -28,7 +28,7 @@ SOCKET consists of several key components:
     [↘ Read more about switchboards here](/switchboards).
 
 - **Onchain App Contracts**: Traditional smart contracts deployed on the blockchain, interacting with the SOCKET ecosystem.
-- **App-Gateway Contracts**: Deployed on offchainVMs, these contracts handle interactions between users and onchain contracts. They can enforce logic such as safety checks, pre-execution steps, and composability of onchain contracts.
+- **App-Gateway Contracts**: Deployed on EVMxs, these contracts handle interactions between users and onchain contracts. They can enforce logic such as safety checks, pre-execution steps, and composability of onchain contracts.
 
     [↘ Learn more about how to build applications on SOCKET](/writing-apps#architecture-overview)
 
