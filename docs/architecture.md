@@ -3,9 +3,13 @@ id: architecture
 title: Architecture
 ---
 
-SOCKET is a protocol, not a blockchain. It enables developers to build chain-abstracted applications using a combination of offchain agents ([Watchers](/watchers), [Transmitters](/transmitters)) and onchain contracts ([Switchboards](/switchboards)). This setup allows for flexible, efficient, and customizable cross-chain interactions.
+SOCKET is a protocol, not a blockchain. It enables developers to build chain-abstracted applications using a combination of offchain agents and onchain contracts. This setup allows for flexible, efficient, and customizable cross-chain interactions.
 
-Developers can leverage **Application Gateway Contracts (App-Gateways)**, which operate on an offchainVM to handle logic related to onchain contract interactions. These contracts function as hubs for user interactions, managing pre-execution checks, auctions, or other logic before onchain execution.
+Developers can leverage **Application Gateway (AppGateway)**, which operate on an EVMx to handle logic related to onchain contract interactions. These contracts function as hubs for user interactions, managing pre-execution checks, auctions, or other logic before onchain execution.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/simple-architecture.svg" alt="simple architecture diagram" style={{ width: '65%' }} />
+</div>
 
 ## SOCKET Protocol Components
 
