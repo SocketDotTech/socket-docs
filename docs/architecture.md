@@ -3,7 +3,7 @@ id: architecture
 title: Architecture
 ---
 
-SOCKET is a protocol, not a blockchain. It enables developers to build chain-abstracted applications using a combination of offchain agents (**watchers, transmitters**) and onchain contracts (**switchboards**). This setup allows for flexible, efficient, and customizable cross-chain interactions.
+SOCKET is a protocol, not a blockchain. It enables developers to build chain-abstracted applications using a combination of offchain agents ([Watchers](/watchers), [Transmitters](/transmitters)) and onchain contracts ([Switchboards](/switchboards)). This setup allows for flexible, efficient, and customizable cross-chain interactions.
 
 Developers can leverage **Application Gateway Contracts (App-Gateways)**, which operate on an offchainVM to handle logic related to onchain contract interactions. These contracts function as hubs for user interactions, managing pre-execution checks, auctions, or other logic before onchain execution.
 
@@ -11,15 +11,15 @@ Developers can leverage **Application Gateway Contracts (App-Gateways)**, which 
 
 SOCKET consists of several key components:
 
-- **Watchers**: Offchain operators running specialized VMs that monitor blockchain activity and act as hosts for App-Gateways. They generate proofs, which can be verified onchain via application-defined switchboards. Anyone can become a watcher by running a node.
+- **Watchers**: Offchain operators running specialized VMs that monitor blockchain activity and act as hosts for App-Gateways. They generate proofs, which can be verified onchain via application-defined Switchboards. Anyone can become a Watcher by running a node.
 
     [↘ Read more about Watchers](/watchers).
 
-- **Transmitters**: Offchain smart operators that collect watcher-generated proofs and execute onchain actions on behalf of users. They coordinate with App-Gateways to ensure seamless execution.
+- **Transmitters**: Offchain smart operators that collect Watcher-generated proofs and execute onchain actions on behalf of users. They coordinate with App-Gateways to ensure seamless execution.
 
     [↘ Read more about transmitters here](/transmitters).
 
-- **Switchboards**: Onchain smart contracts used to validate offchain execution. Developers can build verifiers that enforce conditions under which watcher proofs are considered valid. This modular approach allows for flexibility in security, cost, and speed optimization.
+- **Switchboards**: Onchain smart contracts used to validate offchain execution. Developers can build verifiers that enforce conditions under which Watcher proofs are considered valid. This modular approach allows for flexibility in security, cost, and speed optimization.
 
     [↘ Read more about switchboards here](/switchboards).
 
@@ -37,10 +37,10 @@ SOCKET consists of several key components:
 Using the diagram above as a visual aid, here’s how the protocol functions:
 
 1. The user signs an offchain message and sends it to a watcher, where their App-Gateway is deployed.
-2. The App-Gateway processes the request, and the watcher generates a proof.
-3. The transmitter collects the signed user message and watcher proof, then submits them onchain.
+2. The App-Gateway processes the request, and the Watcher generates a proof.
+3. The Transmitter collects the signed user message and watcher proof, then submits them onchain.
 4. The onchain SOCKET contract forwards the proofs to the application's selected switchboard.
-5. The switchboard verifies the proof and returns a boolean response.
+5. The Switchboard verifies the proof and returns a boolean response.
 6. Based on this response, the user's onchain contract execution is triggered via the onchain SOCKET contract.
 
 ## Expanding Across Networks

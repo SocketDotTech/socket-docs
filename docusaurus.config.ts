@@ -100,12 +100,6 @@ const config: Config = {
       },
       items: [
         {
-          type: "doc",
-          position: "left",
-          label: "Get Started",
-          docId: "introduction",
-        },
-        {
           type: 'search',
           position: 'right',
         },

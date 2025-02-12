@@ -43,6 +43,11 @@ const sidebars: SidebarsConfig = {
           id: "magicspend",
           label: "MagicSpend on SOCKET",
         },
+        {
+          type: "doc",
+          id: "eip7683",
+          label: "Multi-chain intents on SOCKET",
+        },
       ],
     },
     {
@@ -95,7 +100,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Glossary",
+      label: "Learn about SOCKET",
       collapsible: false,
       collapsed: false,
       items: [

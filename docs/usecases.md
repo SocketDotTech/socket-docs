@@ -3,28 +3,48 @@ id: usecases
 title: Key Use Cases
 ---
 
-This is not an exhaustive list of usecases that can be built on top but rather some initial ones that are either in progres or we think would make for strong usecase for SOCKET, we would love to hear from you and your usecase!
-
-Leveraging chain-abstracted composability and pre-execution and a combination of both of these features some really powerful applications can be built on SOCKET.
+SOCKET Protocol enables powerful applications through **chain-abstracted composability** and **pre-execution capabilities**. Here are some key use cases, though this list continues to grow as developers innovate with the protocol.
 
 ## Horizontal Scaling
 
-Today to scale, more applications either launch an app-chain or go launch on a high-throughput chain, both are examples of scaling vertically. Scaling vertically in both cases has a massive composability disadvantage because applications and users on other platforms(chains/rollups) find it very hard to compose with your application.
+Traditional blockchain scaling typically follows two vertical approaches:
+- Launching an app-chain
+- Deploying on high-throughput chains
 
-There is another way to scale your application leveraging horizontal scaling, this kind of scaling is used today by modern applications to scale to handle real user traffic, where multiple instances of your application can be deployed simultaneously to multiple servers(rollups/chains) and traffic can be redirected/loadbalanced between them.
+However, these methods create **composability challenges**, making it difficult for applications and users on other chains/rollups to interact with your application.
 
-Leveaging SOCKET you can write an app-gateway that does this seamlessly for your onchain contracts, [this is in effect today for some top applications and would be very cool to see more such applications](https://x.com/vaibhavchellani/status/1859544081539690909)
+SOCKET enables a different approach: **horizontal scaling**. Similar to modern web applications, your application can be deployed across multiple chains/rollups simultaneously, with traffic load-balanced between them. Using SOCKET's app-gateway, this process becomes seamless for onchain contracts. [This approach is already being utilized by several leading applications](https://x.com/vaibhavchellani/status/1859544081539690909).
 
-## Intents
+## Intent-Based Execution
 
-Intents are a great way to abstract alot of complexity from the user perspective and offer better user experience and efficiency of execution, developers can leverage SOCKET protocol and build app-gateways that consume intents, run auctions and much more. SOCKET enables developers to build any intent protocol they might want with full control and ability over its security, cost and performance by just writing simple solidity functions. Transmitters are part of core-protocol and will be immediately available to solve for your intent application!
+SOCKET allows developers to build sophisticated intent systems that improve user experience and execution efficiency. Through app-gateways, developers can:
+- Process user intents
+- Run execution auctions
+- Optimize transaction routing
 
-## Application Specific Sequencing
+The protocol's built-in transmitters enable immediate implementation of intent-based systems while maintaining full control over security, cost, and performance.
 
-Alot of times applications generate MEV and its beneficial for developers of these applications to capture this value and redirect it to another stake holder other than the validator of the chain the application is running on. A good example of this is OEV aka Oracle Extractable Value and the work Sorella Labs is doing to capture MEV from swaps. Developers can simply write app-gateways that sequence all the transactions for their onchain contracts, capture value and redirect it to another stake holder.
+## Application-Specific Sequencing
 
-## Security Checks
+Applications generating MEV (Miner Extractable Value) can benefit from custom transaction sequencing. Rather than letting chain validators capture this value, developers can:
+- Create app-gateways to sequence transactions
+- Capture and redirect value to designated stakeholders
+- Implement custom execution ordering
 
-Hacks in blockchain protocols are a serious issue, while there are security services that promise to protect your application these services often take effect post the transaction where the protocol gets impacted, however using an app-gateway to process all transactions before they get executed onchain allows you to run several security checks BEFORE a transaction gets executed onchain meaning you can have a high degree of security in your application. These can be critical invariants that the application wants to ensure are never broken
+A notable example is Oracle Extractable Value (OEV) capture from swap transactions.
 
-There are so many other usecases like resouce-locks, aucitons and this document will be updated with time as we discover more! Go build!
+## Pre-Execution Security
+
+Unlike traditional security services that operate post-transaction, SOCKET enables preventative security through pre-execution checks. Using app-gateways, developers can:
+- Implement security validations before onchain execution
+- Enforce critical protocol invariants
+- Prevent potential exploits proactively
+
+## Additional Use Cases
+
+The protocol continues to enable new applications, including:
+- Resource locking mechanisms
+- Custom auction systems
+- Cross-chain composability features
+
+We welcome developers to explore these possibilities and discover new use cases. Share your ideas and implementations with the SOCKET community!
