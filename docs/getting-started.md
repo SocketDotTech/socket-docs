@@ -58,7 +58,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    This command deploys all contracts on EVMx. It includes the `Counter`, `CounterDeployer`, `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
    ```bash
-   forge script script/counter/deployCounterOffchain.s.sol --broadcast  --skip-simulation
+   forge script script/counter/deployEVMxCounterApp.s.sol --broadcast  --skip-simulation
    ```
 
    You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`.
@@ -70,37 +70,35 @@ This example highlights how to abstract away blockchain-specific details, enabli
    Add the deployed addresses in env for using in rest of the tutorial
 
    ```bash
-   export COUNTER_DEPLOYER=<Counter Deployer Address>;
-   export COUNTER_APPGATEWAY=<Counter App Address>;
+   export DEPLOYER=<Counter Deployer Address>;
+   export APP_GATEWAY=<Counter App Address>;
    ```
 
-6. **Set up fees.**
+6. **Set up fees to pay for your App transactions**
 
-   In this example we will be paying fees on Arbitrum Sepolia as configured in `script/deployCounterOffchain.s.sol`.
+   In this example we will be paying fees on Arbitrum Sepolia as configured in `script/deployEVMxCounterApp.s.sol`.
 
-   To pay for this increment counter transaction, deposit `arbsepETH` to the contract address of the `FeesPlug` by running:
+   To pay for this increment counter transaction, deposit `arbsepETH` to the `FeesPlug` contract address by running:
 
    ```bash
-   cast send 0x6c40Fb39B03e32EC4D23e31DdE6D10283F2C7b4F "deposit(address,uint256,address)" \
-       0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
-       <AMOUNT> \
-       $COUNTER_APP_GATEWAY \
-       --value <AMOUNT> \
-       --rpc-url $ARBITRUM_SEPOLIA_RPC \
-       --private-key $PRIVATE_KEY
+   forge script script/PayFeesInArbitrumETH.s.sol --broadcast  --skip-simulation
    ```
 
-   Replace `<AMOUNT>` in wei with more than 0.01 ETH. Please ensure the wallet you are using has at least 0.01 Arbitrum Sepolia ETH. Feel free to use any of the supported chains and run the command accordingly.
-   You can pay using any token on a chain of your choice that has a `FeesPlug` contract. You can deposit them to a `FeesPlug` on any chain by calling the `deposit` function. Find all about the available `FeesPlug` addresses [here](/chain-information) and about fees [here](/fees)
-
    :::tip
+   Please ensure the wallet you are using has at least 0.01 Arbitrum Sepolia ETH.
    Don't forget to export `ARBITRUM_SEPOLIA_RPC` if you do not have it in your environment yet.
+   :::
+
+   ::: note
+   You can pay using any token on any of the supported chains that has a `FeesPlug` contract.
+   You can deposit them to a `FeesPlug` on any chain by calling the `deposit` function.
+   Find all about the available `FeesPlug` addresses [here](/chain-information) and about fees [here](/fees)
    :::
 
 7. **Deploy onchain contracts**
 
    ```bash
-   forge script script/counter/deployCounterOnchain.s.sol --broadcast --skip-simulation
+   forge script script/counter/deployOnchainCounters.s.sol --broadcast --skip-simulation
    ```
 
    Let's ensure that the funds have been spent to pay for the transaction by running,
@@ -112,7 +110,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    Replace `<TX_HASH>` with the last transaction executed and ensure status is `COMPLETED`. If you want to monitor all transactions at the same time you can run:
 
    ```bash
-   node script/transactionStatus.js deployCounterOnchain
+   node script/transactionStatus.js deployOnchainCounters
    ```
 
 8. **Increment multiple counters**
@@ -120,7 +118,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    To increment the various counters deployed on all different chains by different values we will run,
 
    ```bash
-   forge script script/counter/incrementCounters.s.sol --broadcast --skip-simulation
+   forge script script/counter/IncrementCountersFromApp.s.sol --broadcast --skip-simulation
    ```
 
    Read [here](/forwarder-addresses) to learn more about how forwarder addresses are assigned on the EVMx to represent onchain contracts.
@@ -128,20 +126,20 @@ This example highlights how to abstract away blockchain-specific details, enabli
    If you want to know when the transaction is complete you can run the command below or directly use the API as described in the previous step.
 
    ```bash
-   node script/transactionStatus.js incrementCounters
+   node script/transactionStatus.js IncrementCountersFromApp
    ```
 
 9. **Check that the counters on chain have incremented**
 
    ```bash
-   forge script script/counter/checkCounters.s.sol --skip-simulation
+   forge script script/counter/ReadOnchainCounters.s.sol --skip-simulation
    ```
 
 ## Understanding the Components
 
 - **Counter:** This is the instance of the app that is deployed on chain. Unlike a normal counter, the `increase` function of this counter is called via SOCKET.
 
-- **CounterAppGateway:** `CounterAppGateway` is an `AppGateway`. It is a contract deployed on EVMx and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state.
+- **CounterAppGateway:** `CounterAppGateway` is an `AppGateway`. It is a contract deployed on EVMx and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state (see `readCounters`).
 
 - **CounterDeployer:** The Deployer contract is deployed to EVMx and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy).
 
