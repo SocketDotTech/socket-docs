@@ -138,7 +138,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "link",
-      href: "https://drive.google.com/drive/folders/1vZVpf2dJvNHx7XSAFCAViSd3ieWk4WWI?usp=sharing",
+      href: "https://sockettech.notion.site/SOCKET-Brand-Kit-184818fd285880b3b974e2e957cd70bd",
       label: "Brand Assets",
     },
   ],
