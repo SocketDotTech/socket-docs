@@ -29,20 +29,6 @@ function setUp() public {
 4. Initializes the auction manager for bid processing
 5. Deploys and configures Socket Protocol contracts on test chains (Arbitrum and Optimism in this case)
 
-### Setting Application Limits
-
-```solidity
-setLimit(address(superTokenApp));
-```
-
-The `setLimit()` function configures resource limits for the application gateway, specifically:
-
-- QUERY: Limits for reading state from other chains
-- SCHEDULE: Limits for scheduling multi-chain transactions
-- FINALIZE: Limits for finalizing multi-chain operations
-
-These limits prevent abuse and ensure proper resource allocation in production. In tests, they're set to high values to avoid constraints during testing.
-
 ### Executing Multi-Chain Operations
 
 ```solidity
@@ -79,45 +65,58 @@ These addresses are essential for:
 - Sending multi-chain messages
 - Checking token balances across chains
 
-## Example Test Case
+### Example
+<details>
+   <summary>Here's a breakdown of how these components work together in the `testTransfer()` function</summary>
+    ```solidity
+    function testTransfer() public {
+            beforeTransfer();
 
-Here's a breakdown of how these components work together in the `testTransfer()` function:
+            (address onChainArb, address forwarderArb) = getOnChainAndForwarderAddresses(
+                arbChainSlug,
+                appContracts.superToken,
+                appContracts.superTokenDeployer
+            );
 
-```solidity
-function testTransfer() public {
-    // Deploy contracts to both chains
-    beforeTransfer();
+            (address onChainOpt, address forwarderOpt) = getOnChainAndForwarderAddresses(
+                optChainSlug,
+                appContracts.superToken,
+                appContracts.superTokenDeployer
+            );
 
-    // Get contract addresses on both chains
-    (address onChainArb, address forwarderArb) = getOnChainAndForwarderAddresses(
-        arbChainSlug,
-        appContracts.superToken,
-        appContracts.superTokenDeployer
-    );
+            uint256 arbBalanceBefore = SuperToken(onChainArb).balanceOf(owner);
+            uint256 optBalanceBefore = SuperToken(onChainOpt).balanceOf(owner);
 
-    // Create and execute transfer
-    transferOrder = SuperTokenAppGateway.TransferOrder({
-        srcToken: forwarderArb,
-        dstToken: forwarderOpt,
-        user: owner,
-        srcAmount: srcAmount,
-        deadline: block.timestamp + 1000000
-    });
+            transferOrder = SuperTokenAppGateway.TransferOrder({
+                srcToken: forwarderArb,
+                dstToken: forwarderOpt,
+                user: owner,
+                srcAmount: srcAmount,
+                deadline: block.timestamp + 1000000
+            });
+            bytes memory encodedOrder = abi.encode(transferOrder);
+            appContracts.superTokenApp.transfer(encodedOrder);
 
-    // Execute the multi-chain transfer
-    appContracts.superTokenApp.transfer(encodedOrder);
+            uint32[] memory chainSlugs = new uint32[](2);
+            chainSlugs[0] = IForwarder(forwarderArb).getChainSlug();
+            chainSlugs[1] = IForwarder(forwarderOpt).getChainSlug();
+            // You can run the function below whenever you want to simulate the onchain execution for
+            // the txs in batch of the current asyncId. It bids, finalises, relays and resolves promises
+            _executeWriteBatchMultiChain(chainSlugs);
 
-    // Simulate multi-chain message delivery
-    _executeWriteBatchMultiChain(chainSlugs);
-
-    // Verify balances updated correctly
-    assertEq(
-        SuperToken(onChainArb).balanceOf(owner),
-        arbBalanceBefore - srcAmount,
-        "Arb balance should be decreased by srcAmount"
-    );
-}
-```
+            assertEq(
+                SuperToken(onChainArb).balanceOf(owner),
+                arbBalanceBefore - srcAmount,
+                "Arb balance should be decreased by srcAmount"
+            );
+            assertEq(
+                SuperToken(onChainOpt).balanceOf(owner),
+                optBalanceBefore + srcAmount,
+                "Opt balance should be increased by srcAmount"
+            );
+        }
+    ```
+</details>
 
 ## Best Practices
 
