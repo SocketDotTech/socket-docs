@@ -5,19 +5,7 @@ title: Paying fees for transactions
 
 # Fee Setup and Management
 
-Setting up fees is essential for your app to interact with both the EVMx and supported blockchains. There are two types of fees you need to manage:
-
-1. OffchainVM transaction fees
-2. Onchain transaction sponsorship
-
-## OffchainVM Transaction Fees
-
-OffchainVM transactions require its native gas token. You can:
-
-- Obtain tokens from [the faucet](https://faucet.conduit.xyz/socket-composer-testnet)
-- Bridge ETH from Sepolia using [the bridge](https://socket-composer-testnet-8b802af208e24e82.testnets.rollbridge.app/)
-
-Transaction fees work similarly to standard blockchain transactions - specify `gasPrice` and `gasLimit` or use automatic estimation.
+Setting up fees is essential for your app to interact with both the EVMx and supported blockchains. There is only one type of fees you need to manage: onchain transaction sponsorship
 
 ## Onchain Transaction Sponsorship
 
