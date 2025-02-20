@@ -25,9 +25,9 @@ This needs to be followed for all calls that return values to be read. This mean
 The `transfer` function created [here](/call-contracts) had an issue that would be prone to happen. It was not checking the user's balance on the source chain before executing the transfer. Below is a read example where we read and validate the user's balance on the source chain before attempting to transfer the funds.
 
 <details>
-   <summary>Click to expand `MyTokenAppGateway` changes</summary>
+   <summary>Click to expand `SuperTokenAppGateway` changes</summary>
    ```solidity
-   contract MyTokenAppGateway is AppGatewayBase {
+   contract SuperTokenAppGateway is AppGatewayBase {
        (...)
        /**
         * @notice Validates user's token balance for a cross-chain transaction
@@ -37,7 +37,7 @@ The `transfer` function created [here](/call-contracts) had an issue that would 
         * @custom:modifier onlyPromises Ensures the function can only be called by the promises system
         */
        function checkBalance(bytes memory data, bytes memory returnData) external onlyPromises {
-           (uint256 amount, bytes32 asyncId) = abi.decode(data, (uint256, bytes32));
+           (uint256 amount, bytes32 asyncId) = = abi.decode(data, (uint256, bytes32));
 
            uint256 balance = abi.decode(returnData, (uint256));
            if (balance < amount) {
@@ -57,13 +57,13 @@ The `transfer` function created [here](/call-contracts) had an issue that would 
            async
            returns (bytes32 asyncId)
        {
+           asyncId = _getCurrentAsyncId();
            // Check user balance on src chain
-           _readCallOn();
+           _setOverrides(Read.ON);
            // Request to forwarder and deploys immutable promise contract and stores it
            ISuperToken(srcForwarder).balanceOf(msg.sender);
-           IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount, asyncId));
-
-           _readCallOff();
+           IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount, asyncId);
+           _setOverrides(Read.OFF);
 
            ISuperToken(srcForwarder).burn(msg.sender, amount);
            ISuperToken(dstForwarder).mint(msg.sender, amount);
@@ -75,7 +75,7 @@ The `transfer` function created [here](/call-contracts) had an issue that would 
 Let's break down the key points:
 
 - The `transfer` function uses the `async` modifier, which is required for onchain interactions, whether they are read or write operations.
-- The `_readCallOn()` and `_readCallOff()` functions are used to tell SOCKET that a particular section only needs to read data from another chain, rather than executing an onchain transaction.
+- The `_setOverrides(Read.ON)` and `_setOverrides(Read.OFF)` functions are used to tell SOCKET that a particular section only needs to read data from another chain, rather than executing an onchain transaction.
 - In multi-chain operations, data cannot be read synchronously. Instead, it follows this pattern:
    1. Make the onchain call (`balanceOf`)
    2. Set up a promise with a callback function using `IPromise(srcForwarder).then()`
