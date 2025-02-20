@@ -12,8 +12,14 @@ The deployment of onchain contracts from Offchain VM is managed through a Deploy
 1. The Deployer Contract stores the contract bytecode:
     ```solidity
     creationCodeWithArgs[superToken] = abi.encodePacked(
-        type(superToken).creationCode,
-        abi.encode(name_, symbol_, decimals_)
+        type(SuperToken).creationCode,
+        abi.encode(
+            params_.name_,
+            params_.symbol_,
+            params_.decimals_,
+            params_.initialSupplyHolder_,
+            params_.initialSupply_
+        )
     );
     ```
 
@@ -24,8 +30,8 @@ The deployment of onchain contracts from Offchain VM is managed through a Deploy
 
 1. The deployment is triggered using:
     ```solidity
-    function deployContracts(uint32 chainSlug) external async {
-        _deploy(superToken, chainSlug);
+    function deployContracts(uint32 chainSlug_) external async {
+        _deploy(superToken, chainSlug_, IsPlug.YES);
     }
     ```
 
@@ -48,8 +54,14 @@ This system can be extended to manage multiple contracts by storing their respec
 The Deployer Contract has two key pieces of code to ensure that onchain deployments are replicable `SuperToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
 ```solidity
 creationCodeWithArgs[superToken] = abi.encodePacked(
-    type(superToken).creationCode,
-    abi.encode(name_, symbol_, decimals_)
+    type(SuperToken).creationCode,
+    abi.encode(
+        params_.name_,
+        params_.symbol_,
+        params_.decimals_,
+        params_.initialSupplyHolder_,
+        params_.initialSupply_
+    )
 );
 ```
 
@@ -67,11 +79,17 @@ While this example handles a single contract, you can extend it to manage multip
 
 The `deployContracts` function takes a `chainSlug` as an argument that specifies the chain where the contract should be deployed.
 ```solidity
-function deployContracts(uint32 chainSlug) external async {
-    _deploy(superToken, chainSlug);
+function deployContracts(uint32 chainSlug_) external async {
+    _deploy(superToken, chainSlug_, IsPlug.YES);
 }
 ```
 It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains.
+
+The `IsPlug` enum determines whether a contract will be connected to Socket's cross-chain messaging system:
+
+- `IsPlug.YES`: Contract will be registered as a Socket plug, enabling direct communication with Socket's messaging system. Use this for contracts that need to interact directly with Socket (e.g., SuperToken contracts).
+
+- `IsPlug.NO`: Contract will be deployed without Socket integration and cannot be called directly via Socket's messaging system. Use this for contracts that only need to be called internally by other contracts (e.g., LimitHook contracts that don't require direct Socket communication).
 
 The `initialize` function is empty in this example. You can use it for setting chain-specific or dynamic variables after deployment if needed.
 
@@ -86,7 +104,7 @@ Here's an example using `SuperToken` with chain-specific mint limits:
 </div>
 
 ```solidity
-contract SuperToken is ERC20, Ownable {
+contract SuperToken is ERC20, Ownable, PlugBase {
     (...)
     error ExceedsMintLimit(uint256 amount, uint256 limit);
 
@@ -110,15 +128,15 @@ interface ISuperToken {
     function setMintLimit(uint256 newLimit) external;
 }
 
-contract SuperTokenDeployer is AppDeployerBase {
+contract SuperTokenDeployer is AppDeployerBase, Ownable {
     (...)
 
     function initialize(uint32 chainSlug) public override async {
         uint256 mintLimit;
         if (chainSlug == 1) {
-            mintLimit = 10 ether;
-        } else {
             mintLimit = 1 ether;
+        } else {
+            mintLimit = 10 ether;
         }
 
         ISuperToken(forwarderAddresses[superToken][chainSlug]).setMintLimit(mintLimit);
@@ -137,7 +155,7 @@ You can also note that the forwarder addresses of deployed contracts are stored 
 So far we have been working with a single `SuperToken` contract onchain. But the deployer also supports working with multiple contracts. Lets create `SuperTokenVault` to lock tokens on chain and extend the deployer to deploy both contracts.
 
 ```solidity
-contract SuperTokenVault is Ownable {
+contract SuperTokenVault is Ownable, PlugBase {
     address public superToken;
     mapping(address => uint256) public lockedAmount;
 
@@ -160,7 +178,7 @@ contract SuperTokenVault is Ownable {
 This contract needs to be onchain, therefore lets change `SuperTokenDeployer` to include it as well.
 
 ```solidity
-contract SuperTokenDeployer is AppDeployerBase {
+contract SuperTokenDeployer is AppDeployerBase, Ownable {
     (...)
     bytes32 public superTokenVault = _createContractId("superTokenVault");
 
@@ -176,8 +194,8 @@ contract SuperTokenDeployer is AppDeployerBase {
     }
 
     function deployContracts(uint32 chainSlug) external async {
-        _deploy(superToken, chainSlug);
-        _deploy(superTokenVault, chainSlug);
+        _deploy(superToken, chainSlug, IsPlug.YES);
+        _deploy(superTokenVault, chainSlug, IsPlug.YES);
     }
 
     function initialize(uint32 chainSlug) public override async {

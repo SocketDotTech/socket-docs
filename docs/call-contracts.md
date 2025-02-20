@@ -41,7 +41,7 @@ To understand this let us go back to `SuperTokenAppGateway` example from our [tu
 This simple function enables burning of tokens on source chain and minting them on destination after burn is done.
 
 ```solidity
-contract SuperTokenAppGateway is AppGatewayBase {
+contract SuperTokenAppGateway is AppGatewayBase, Ownable {
     (...)
 
     function transfer(uint256 amount, address srcForwarder, address dstForwarder) external async {
