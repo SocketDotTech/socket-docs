@@ -5,10 +5,10 @@ title: Chain Information
 
 # EVMx Details
 
-HTTPS RPC: `https://rpc-socket-composer-testnet.t.conduit.xyz`
+HTTPS RPC: `https://rpc.evmx.socket.tech`
 
-WSS RPC: `wss://rpc-socket-composer-testnet.t.conduit.xyz`
+WSS RPC: `wss://rpc.evmx.socket.tech`
 
-Block Explorer: [https://explorer-socket-composer-testnet.t.conduit.xyz](https://explorer-socket-composer-testnet.t.conduit.xyz/)
+Block Explorer: [https://evms.cloud.blockscout.com](https://evms.cloud.blockscout.com/)
 
 See all up to date information on the devnet addresses [here](https://github.com/SocketDotTech/socket-protocol/blob/master/deployments/dev_addresses.json).
