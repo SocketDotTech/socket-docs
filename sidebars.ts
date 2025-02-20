@@ -94,7 +94,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "chain-information",
-          label: "OffchainVM Information",
+          label: "EVMx Information",
         },
       ],
     },
