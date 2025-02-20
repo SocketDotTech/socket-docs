@@ -40,8 +40,14 @@ The System consists of 3 main components.
 The Deployer Contract has two key pieces of code to ensure that onchain deployments are replicable `SuperToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
 ```solidity
 creationCodeWithArgs[superToken] = abi.encodePacked(
-    type(superToken).creationCode,
-    abi.encode(name_, symbol_, decimals_)
+    type(SuperToken).creationCode,
+    abi.encode(
+        params_.name_,
+        params_.symbol_,
+        params_.decimals_,
+        params_.initialSupplyHolder_,
+        params_.initialSupply_
+    )
 );
 ```
 
@@ -58,14 +64,32 @@ While this example handles a single contract, you can extend it to manage multip
 </div>
 
 The `deployContracts` function takes a `chainSlug` as an argument that specifies the chain where the contract should be deployed.
+
 ```solidity
-function deployContracts(uint32 chainSlug) external async {
-    _deploy(superToken, chainSlug);
+function deployContracts(uint32 chainSlug_) external async {
+    _deploy(superToken, chainSlug_, IsPlug.YES);
 }
 ```
-It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains.
 
-The `initialize` function is empty in this example. You can use it for setting chain-specific or dynamic variables after deployment if needed. For more details check [this page](/deploy#initialize).
+The function calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains.
+
+The `IsPlug` enum determines whether a contract will be connected to Socket's cross-chain messaging system:
+
+- `IsPlug.YES`: Contract will be registered as a Socket plug, enabling direct communication with Socket's messaging system. Use this for contracts that need to interact directly with Socket (e.g., SuperToken contracts).
+
+- `IsPlug.NO`: Contract will be deployed without Socket integration and cannot be called directly via Socket's messaging system. Use this for contracts that only need to be called internally by other contracts (e.g., LimitHook contracts that don't require direct Socket communication).
+
+#### Example Usage
+
+```solidity
+// For contracts requiring Socket communication
+_deploy(superToken, chainSlug_, IsPlug.YES);
+
+// For contracts that only need internal calls
+_deploy(someHelperContract, chainSlug_, IsPlug.NO);
+```
+
+The `initialize` function is empty in this example. You can use it for setting chain-specific or dynamic variables after deployment if needed. For more details on how to use the initialize [this page](/deploy#initialize).
 
 ## What's next!
 <CardGrid cards={[
