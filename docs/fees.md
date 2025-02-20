@@ -26,10 +26,10 @@ Transaction fees work similarly to standard blockchain transactions - specify `g
 First, deposit ETH to the PayloadDeliveryPlug contract on your chosen chain:
 
 ```bash
-cast send <PLUG_ADDRESS> "deposit(address,uint256,address)" \
+cast send <ARBITRUM_FEES_PLUG> "deposit(address,uint256,address)" \
     0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
     <AMOUNT> \
-    $COUNTER_APPGATEWAY \
+    $APP_GATEWAY \
     --value <AMOUNT> \
     --rpc-url $SEPOLIA_RPC \
     --private-key $PRIVATE_KEY
@@ -51,9 +51,9 @@ struct FeesData {
 }
 
 FeesData feesData = FeesData({
-    feePoolChain: <chain_slug>,
-    feePoolToken: 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
-    maxFees: <max_fee_per_tx>
+    feePoolChain: <CHAINSLUG>,
+    feePoolToken: <TOKEN_ADDRESS>,
+    maxFees: <MAX_FEE_PER_TRANSACTION>
 });
 ```
 
@@ -77,25 +77,25 @@ The FeesData structure is designed to manage fee-related parameters for transact
 FeesData memory feesData = FeesData({
     feePoolChain: 421614,      // Chain ID where fees are collected
     feePoolToken: ETH_ADDRESS, // Token used for fee payments (ETH in this case)
-    maxFees: 0.001 ether      // Maximum fee amount allowed
+    maxFees: 0.001 ether       // Maximum fee amount allowed
 });
 ```
 
 #### FeesData Key Components
 
-1. feePoolChain
-    Specifies the blockchain network ID where fees are collected and managed. In this case, it's set to 421614, which appears to be a specific chain ID (possibly a testnet or L2 network).
+1. `feePoolChain`
+    Specifies the blockchain network ID where fees are collected and managed. In this case, it's set to `421614`, which is Arbitrum Sepolia's chain ID.
 
-2. feePoolToken
+2. `feePoolToken`
     Defines which token is used for fee payments. Here it's set to `ETH_ADDRESS`, meaning Ethereum is used as the payment token.
 
-3. maxFees
-    Sets an upper limit for transaction fees, preventing excessive charges. In this example, it's set to 0.001 ETH.
+3. `maxFees`
+    Sets an upper limit for transaction fees, preventing excessive charges. In this example, it's set to `0.001 ETH`.
 
 #### Dual Purpose Usage
 
-**OffchainVM Transactions**
-- Acts as a fee configuration for processing off-chain computations
+**EVMx Transactions**
+- Acts as a fee configuration for processing offchain computations
 - Ensures users have enough balance to cover computational costs
 - Provides a predictable fee structure for off-chain operations
 
@@ -105,7 +105,7 @@ FeesData memory feesData = FeesData({
 - Provides fee limits for user protection
 
 #### Implementation Context
-The FeesData structure is passed to both the SuperTokenDeployer and SuperTokenAppGateway contracts, ensuring consistent fee handling across the entire system, whether transactions are processed off-chain or on-chain:
+The `FeesData` structure is passed to both the `SuperTokenDeployer` and `SuperTokenAppGateway` contracts, ensuring consistent fee handling across the entire system, whether transactions are processed offchain or onchain:
 
 ```solidity
 SuperTokenDeployer deployer = new SuperTokenDeployer(
@@ -129,9 +129,9 @@ SuperTokenAppGateway gateway = new SuperTokenAppGateway(
 
 ### 1. Deploy to EVMx
 
-Deploy your contracts using the [`DeployGateway.s.sol` script](https://github.com/SocketDotTech/socket-protocol/blob/master/script/super-token/DeployGateway.s.sol) by running:
+Deploy your contracts using the [`DeployGateway.s.sol` script](https://github.com/SocketDotTech/socket-protocol/blob/watcher-precompile-changes/script/super-token/DeployGateway.s.sol) by running:
 ```bash
-forge script script/super-token/SetupSuperToken.s.sol --broadcast
+forge script script/super-token/DeployGateway.s.sol --broadcast
 ```
 
 ### 2. Fund Your App
