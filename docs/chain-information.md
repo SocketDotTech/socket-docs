@@ -5,9 +5,9 @@ title: Chain Information
 
 # EVMx Details
 
-HTTPS RPC: `https://rpc.evmx.socket.tech`
+HTTPS RPC: `https://rpc-evmx.socket.tech`
 
-WSS RPC: `wss://rpc.evmx.socket.tech`
+WSS RPC: `wss://rpc-evmx.socket.tech`
 
 Block Explorer: [https://evms.cloud.blockscout.com](https://evms.cloud.blockscout.com/)
 
