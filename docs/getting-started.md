@@ -58,7 +58,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    This command deploys all contracts on EVMx. It includes the `Counter`, `CounterDeployer`, `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
    ```bash
-   forge script script/counter/deployEVMxCounterApp.s.sol --broadcast  --skip-simulation
+   forge script script/counter/deployEVMxCounterApp.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
    ```
 
    You will see the deployed addresses in script logs under names `Counter Deployer`, `Counter AppGateway`.
@@ -89,16 +89,22 @@ This example highlights how to abstract away blockchain-specific details, enabli
    Don't forget to export `ARBITRUM_SEPOLIA_RPC` if you do not have it in your environment yet.
    :::
 
-   ::: note
+   :::note
    You can pay using any token on any of the supported chains that has a `FeesPlug` contract.
    You can deposit them to a `FeesPlug` on any chain by calling the `deposit` function.
    Find all about the available `FeesPlug` addresses [here](/chain-information) and about fees [here](/fees)
    :::
 
+   Confirm your available fees to pay for transactions at any time by running:
+
+   ```bash
+   forge script script/AppGatewayFeeBalance.s.sol
+   ```
+
 7. **Deploy onchain contracts**
 
    ```bash
-   forge script script/counter/deployOnchainCounters.s.sol --broadcast --skip-simulation
+   forge script script/counter/deployOnchainCounters.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
    ```
 
    Let's ensure that the funds have been spent to pay for the transaction by running,
@@ -118,7 +124,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    To increment the various counters deployed on all different chains by different values we will run,
 
    ```bash
-   forge script script/counter/IncrementCountersFromApp.s.sol --broadcast --skip-simulation
+   forge script script/counter/IncrementCountersFromApp.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
    ```
 
    Read [here](/forwarder-addresses) to learn more about how forwarder addresses are assigned on the EVMx to represent onchain contracts.
@@ -134,6 +140,12 @@ This example highlights how to abstract away blockchain-specific details, enabli
    ```bash
    forge script script/counter/ReadOnchainCounters.s.sol --skip-simulation
    ```
+
+10. **Withdraw your AppGateway Fee balance**
+
+    ```bash
+    forge script script/counter/WithdrawFeesArbitrumFeesPlug.s.sol --skip-simulation
+    ```
 
 ## Understanding the Components
 
