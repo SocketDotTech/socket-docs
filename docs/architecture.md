@@ -15,11 +15,11 @@ Developers can leverage **Application Gateway (AppGateway)**, which operate on a
 
 SOCKET consists of several key components:
 
-- **Watchers**: Offchain operators running specialized VMs that monitor blockchain activity and act as hosts for App-Gateways. They generate proofs, which can be verified onchain via application-defined Switchboards. Anyone can become a Watcher by running a node.
+- **Watchers**: Offchain operators running specialized VMs that monitor blockchain activity and act as hosts for AppGateways. They generate proofs, which can be verified onchain via application-defined Switchboards. Anyone can become a Watcher by running a node.
 
     [↘ Read more about Watchers](/watchers).
 
-- **Transmitters**: Offchain smart operators that collect Watcher-generated proofs and execute onchain actions on behalf of users. They coordinate with App-Gateways to ensure seamless execution.
+- **Transmitters**: Offchain smart operators that collect Watcher-generated proofs and execute onchain actions on behalf of users. They coordinate with AppGateways to ensure seamless execution.
 
     [↘ Read more about transmitters here](/transmitters).
 
@@ -40,8 +40,8 @@ SOCKET consists of several key components:
 
 Using the diagram above as a visual aid, here’s how the protocol functions:
 
-1. The user signs an offchain message and sends it to a watcher, where their App-Gateway is deployed.
-2. The App-Gateway processes the request, and the Watcher generates a proof.
+1. The user signs an offchain message and sends it to a watcher, where their AppGateway is deployed.
+2. The AppGateway processes the request, and the Watcher generates a proof.
 3. The Transmitter collects the signed user message and watcher proof, then submits them onchain.
 4. The onchain SOCKET contract forwards the proofs to the application's selected switchboard.
 5. The Switchboard verifies the proof and returns a boolean response.
@@ -49,7 +49,7 @@ Using the diagram above as a visual aid, here’s how the protocol functions:
 
 ## Expanding Across Networks
 
-SOCKET is designed for easy multi-chain expansion. Extending to additional networks simply involves deploying smart contracts permissionlessly and configuring a watcher to monitor the new chain. This allows App-Gateways to facilitate seamless cross-chain contract interactions.
+SOCKET is designed for easy multi-chain expansion. Extending to additional networks simply involves deploying smart contracts permissionlessly and configuring a watcher to monitor the new chain. This allows AppGateways to facilitate seamless cross-chain contract interactions.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     <img src="/img/multichain-architecture.svg" alt="multichain architecture diagram" style={{ width: '90%' }} />

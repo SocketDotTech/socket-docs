@@ -49,7 +49,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    vi .env
    ```
 
-1. **Deploy the all contracts on the EVMx and on chain instances**
+1. **Deploy the all contracts on EVMx**
 
    This command deploys all contracts on EVMx. It includes the `Counter` and `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
@@ -130,7 +130,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    node script/transactionStatus.js IncrementCountersFromApp
    ```
 
-1. **Check that the counters on chain have incremented**
+1. **Check that the counters onchain have incremented**
 
    ```bash
    forge script script/counter/ReadOnchainCounters.s.sol --skip-simulation
@@ -144,10 +144,8 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 ## Understanding the Components
 
-- **Counter:** This is the instance of the app that is deployed on chain. Unlike a normal counter, the `increase` function of this counter is called via SOCKET.
+- **Counter:** This is the instance of the app that is deployed . Unlike a normal counter, the `increase` function of this counter is called via EVMx.
 
-- **CounterAppGateway:** `CounterAppGateway` is an `AppGateway`. It is a contract deployed on EVMx and not on chain. It dictates how the onchain contracts are called and composed. In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state (see `readCounters`).
-
-- **CounterDeployer:** The Deployer contract is deployed to EVMx and indicates how app contracts are to be deployed and initialized on a chain. You can read more about chain abstracted deployments [here](/deploy).
+- **CounterAppGateway:** `CounterAppGateway` is an `AppGateway`. It is a contract deployed on EVMx and not onchain. It dictates how the onchain contracts are called, composed, deployed and initalized. You can read more about chain abstracted deployments [here](/deploy). In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state (see `readCounters`).
 
 [↘ Learn more about how to build applications on SOCKET](/writing-apps#architecture-overview)

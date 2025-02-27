@@ -37,7 +37,7 @@ import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 </details>
 
 ### Step 2: Deferred Debit Mechanism
-- The **App-Gateway** schedules the debit in the **Off-Chain VM**.
+- The **AppGateway** schedules the debit in the **EVMx**.
 - The **Watcher** monitors the scheduled time.
 - When the time arrives, the **Watcher** triggers a proof for the **Switchboard**.
 - The **Smart Contract** executes the debit from the user’s account.
@@ -77,7 +77,7 @@ import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 ## Key Considerations
 
 ### Security Measures
-- **On-Chain State Validation**: Before allowing a spend, [check balances](/read) using `read()` functions.
+- **Onchain State Validation**: Before allowing a spend, [check balances](/read) using `read()` functions.
 - **Fraud Prevention**: Implement signature verifications in [Switchboard](/switchboards).
 - **Failover Handling**: Define fail-safe conditions if a scheduled debit fails (e.g., fallback mechanisms, notifications).
 

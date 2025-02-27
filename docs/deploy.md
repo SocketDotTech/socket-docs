@@ -7,9 +7,9 @@ title: Deploying onchain smart contracts
 
 ## Deploy
 
-The deployment of onchain contracts from Offchain VM is managed through a Deployer contract. The key components of deployment include storing contract bytecode and handling the actual deployment process. Here's how it works using the `SuperToken` example ([code here](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenDeployer.sol)):
+The deployment of onchain contracts from EVMx is managed through an AppGateway contract. The key components of deployment include storing contract bytecode and handling the actual deployment process. Here's how it works using the `SuperToken` example ([code here](https://github.com/SocketDotTech/socket-protocol/blob/master/test/apps/app-gateways/super-token/SuperTokenAppGateway.sol)):
 
-1. The Deployer Contract stores the contract bytecode:
+1. The AppGateway Contract stores the contract bytecode:
     ```solidity
     creationCodeWithArgs[superToken] = abi.encodePacked(
         type(SuperToken).creationCode,
@@ -50,8 +50,8 @@ This system can be extended to manage multiple contracts by storing their respec
     <img src="/img/deploy_sequence.svg" alt="deploy" style={{ width: '80%' }} />
 </div>
 
-### Onchain contract bytecode stored in the Deployer Contract
-The Deployer Contract has two key pieces of code to ensure that onchain deployments are replicable `SuperToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
+### Onchain contract bytecode stored in the AppGateway Contract
+The AppGateway Contract has two key pieces of code to ensure that onchain deployments are replicable `SuperToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
 ```solidity
 creationCodeWithArgs[superToken] = abi.encodePacked(
     type(SuperToken).creationCode,
@@ -72,7 +72,7 @@ bytes32 public superToken = _createContractId("superToken");
 
 While this example handles a single contract, you can extend it to manage multiple contracts by storing their creation codes.
 
-### Onchain contract deployment with the Deployer Contract
+### Onchain contract deployment with the AppGateway Contract
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     <img src="/img/deployment_flow.svg" alt="deployment flow" style={{ width: '100%' }} />
 </div>
@@ -128,7 +128,7 @@ interface ISuperToken {
     function setMintLimit(uint256 newLimit) external;
 }
 
-contract SuperTokenDeployer is AppDeployerBase, Ownable {
+contract SuperTokenAppGateway is AppGatewayBase, Ownable {
     (...)
 
     function initialize(uint32 chainSlug) public override async {
@@ -147,12 +147,12 @@ contract SuperTokenDeployer is AppDeployerBase, Ownable {
 The initialize function follows similar flow to how demonstrated on [Calling onchain smart contracts](/call-contracts) using the `async` modifier and `forwarderAddress`.
 
 :::info
-You can also note that the forwarder addresses of deployed contracts are stored in `forwarderAddresses` mapping in the `AppDeployerBase` and can be accessed easily here.
+You can also note that the forwarder addresses of deployed contracts are stored in `forwarderAddresses` mapping in the `AppGatewayBase` and can be easily accessed here.
 :::
 
 ## Deploy multiple contracts
 
-So far we have been working with a single `SuperToken` contract onchain. But the deployer also supports working with multiple contracts. Lets create `SuperTokenVault` to lock tokens on chain and extend the deployer to deploy both contracts.
+So far we have been working with a single `SuperToken` contract onchain. But the AppGateway also supports working with multiple contracts. Lets create `SuperTokenVault` to lock tokens and extend the AppGateway to deploy both contracts.
 
 ```solidity
 contract SuperTokenVault is Ownable, PlugBase {
@@ -175,10 +175,10 @@ contract SuperTokenVault is Ownable, PlugBase {
 }
 ```
 
-This contract needs to be onchain, therefore lets change `SuperTokenDeployer` to include it as well.
+This contract needs to be onchain, therefore lets change `SuperTokenAppGateway` to include it as well.
 
 ```solidity
-contract SuperTokenDeployer is AppDeployerBase, Ownable {
+contract SuperTokenAppGateway is AppGatewayBase, Ownable {
     (...)
     bytes32 public superTokenVault = _createContractId("superTokenVault");
 
@@ -188,7 +188,7 @@ contract SuperTokenDeployer is AppDeployerBase, Ownable {
         string calldata name_,
         string calldata symbol_,
         uint8 decimals_
-    ) AppDeployerBase(addressResolver_, feesData_) {
+    ) AppGatewayBase(addressResolver_, feesData_) {
         (...)
         creationCodeWithArgs[superTokenVault] = type(SuperTokenVault).creationCode;
     }
@@ -207,7 +207,7 @@ contract SuperTokenDeployer is AppDeployerBase, Ownable {
 }
 ```
 
-This `SuperTokenDeployer` deploys both contracts, sets limit on `SuperToken` and sets `SuperToken’`s onchain address on `SuperTokenVault`.
+This `SuperTokenAppGateway` deploys both contracts, sets limit on `SuperToken` and sets `SuperToken’`s onchain address on `SuperTokenVault`.
 
 :::info
 - `SuperTokenVault` doesn't have any constructor arguments. Therefore we can directly store its `creationCode` without encoding anything along with it.

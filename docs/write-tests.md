@@ -3,7 +3,7 @@ id: write-tests
 title: Test SOCKET Protocol Applications
 ---
 
-Testing multi-chain applications with Foundry requires simulating both onchain behavior and the Socket Protocol's off-chain components (Watchers, Transmitters). The SuperToken test suite demonstrates how to effectively test multi-chain token transfers using Foundry's testing framework.
+Testing multi-chain applications with Foundry requires simulating both onchain behavior and the Socket Protocol's offchain components (Watchers, Transmitters). The SuperToken test suite demonstrates how to effectively test multi-chain token transfers using Foundry's testing framework.
 
 ## Key Testing Components
 
@@ -23,7 +23,7 @@ function setUp() public {
 
 `setUpDeliveryHelper()` initializes the core infrastructure needed to simulate Socket Protocol's multi-chain messaging:
 
-1. Deploys the off-chain VM core components
+1. Deploys the EVMx core components
 2. Sets up the fees manager for handling transaction fees
 3. Creates the delivery helper for managing multi-chain message delivery
 4. Initializes the auction manager for bid processing
@@ -51,7 +51,6 @@ This function is crucial for testing scenarios like token transfers between chai
 getOnChainAndForwarderAddresses(
     uint32 chainSlug_,
     bytes32 contractId_,
-    IAppDeployer deployer_
 )
 ```
 
@@ -75,13 +74,11 @@ These addresses are essential for:
             (address onChainArb, address forwarderArb) = getOnChainAndForwarderAddresses(
                 arbChainSlug,
                 appContracts.superToken,
-                appContracts.superTokenDeployer
             );
 
             (address onChainOpt, address forwarderOpt) = getOnChainAndForwarderAddresses(
                 optChainSlug,
                 appContracts.superToken,
-                appContracts.superTokenDeployer
             );
 
             uint256 arbBalanceBefore = SuperToken(onChainArb).balanceOf(owner);

@@ -51,10 +51,9 @@ Set the fee configuration in your contracts:
 
 ```solidity
 AppGateway(appGateway).setFees(feesData);
-Deployer(deployer).setFees(feesData);
 ```
 
-or set them in the `constructor` of the `AppGateway` and `Deployer`.
+or set them in the `constructor` of the `AppGateway`.
 ```solidity
 _setFeesData(feesData_);
 ```
@@ -85,7 +84,7 @@ FeesData memory feesData = FeesData({
 **EVMx Transactions**
 - Acts as a fee configuration for processing offchain computations
 - Ensures users have enough balance to cover computational costs
-- Provides a predictable fee structure for off-chain operations
+- Provides a predictable fee structure for offchain operations
 
 **Onchain Transactions**
 - Sets parameters for standard blockchain transaction fees
@@ -93,23 +92,15 @@ FeesData memory feesData = FeesData({
 - Provides fee limits for user protection
 
 #### Implementation Context
-The `FeesData` structure is passed to both the `SuperTokenDeployer` and `SuperTokenAppGateway` contracts, ensuring consistent fee handling across the entire system, whether transactions are processed offchain or onchain:
+The `FeesData` structure is passed to the `SuperTokenAppGateway` contract ensuring consistent fee handling across the entire system, whether transactions are processed offchain or onchain:
 
 ```solidity
-SuperTokenDeployer deployer = new SuperTokenDeployer(
+SuperTokenAppGateway gateway = new SuperTokenAppGateway(
     addressResolver,
     owner,
     address(auctionManager),
     FAST,
-    SuperTokenDeployer.ConstructorParams({...}),
     feesData
-);
-
-SuperTokenAppGateway gateway = new SuperTokenAppGateway(
-    addressResolver,
-    address(deployer),
-    feesData,
-    address(auctionManager)
 );
 ```
 
@@ -133,10 +124,10 @@ Below is an example of how to complete the [script `DeployContracts.s.sol`](http
 contract DeployContracts is Script {
     function run() public {
         (...)
-        SuperTokenDeployer superTokenDeployer = SuperTokenDeployer(<deployerAddress>);
-        superTokenDeployer.deployContracts(84532);     // Base Sepolia
-        superTokenDeployer.deployContracts(11155420);  // OP Sepolia
-        superTokenDeployer.deployContracts(421614);    // Arbitrum Sepolia
+        SuperTokenAppGateway superTokenAppGateway = SuperTokenAppGateway(<appGatewayAddress>);
+        superTokenAppGateway.deployContracts(84532);     // Base Sepolia
+        superTokenAppGateway.deployContracts(11155420);  // OP Sepolia
+        superTokenAppGateway.deployContracts(421614);    // Arbitrum Sepolia
     }
 }
 ```

@@ -5,7 +5,7 @@ title: Calling smart contracts
 
 # How to call onchain contracts?
 
-Calling onchain contracts from SOCKET’s offchain vm is very similar to how you call another contract on single chain.
+Calling onchain contracts from SOCKET’s EVMx is very similar to how you call another contract on single chain.
 
 Continuing the SuperToken ERC20 example let's add a function to mint tokens to a user from the `SuperTokenAppGateway` EVMx contract.
 ```solidity
@@ -54,7 +54,7 @@ The diagram below shows how tokens are transferred between two different blockch
 
 The process involves:
 1. A burn operation on the Source Token Forwarder
-1. Forwarding through a Socket Offchain VM
+1. Forwarding through Socket's EVMx
 1. A mint operation on the Destination Token Forwarder
 1. Communication between forwarders and the Socket Protocol
 

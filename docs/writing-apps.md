@@ -21,23 +21,19 @@ You’ll learn how to:
 
 ### Architecture Overview
 
-The System consists of 3 main components.
+The System consists of 2 main components.
 
-<!-- TODO: Explain addition of PlugBase on onchain contracts -->
-<!-- TODO: Explain where to get auctionManager_ address from. apps can select our auction manager contract or can deploy there own. we can keep it in docs for now maybe and think of having a default auction manager for all -->
-- A [Deployer Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenDeployer.sol) on EVMx to deploy the **SuperToken** instances.
-    - This contract which will be deployed to EVMx;
-- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperTokenAppGateway.sol) on EVMx that handles logic related to interacting with onchain contracts;
+- An [Application Gateway Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/test/apps/app-gateways/super-token/SuperTokenAppGateway.sol) on EVMx that handles logic related to interacting with onchain contracts;
     - This contract which will be deployed to EVMx;
     - `AppGateway` contract is the user hub of interactions;
-- An onchain [ERC20 Token Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/apps/super-token/SuperToken.sol) that can be deployed on any chain.
-    - This contract is expected to be deployed via the Deployer Contract;
+- An onchain [ERC20 Token Contract](https://github.com/SocketDotTech/socket-protocol/blob/master/test/apps/app-gateways/super-token/SuperToken.sol) that can be deployed on any chain.
+    - This contract is expected to be deployed via the AppGateway Contract;
     - `AppGateway` will be the owner and will trigger the `mint` and `burn` functions;
 
 ## Key offchain Contract Concepts
 
-### Onchain contract bytecode stored in the Deployer Contract
-The Deployer Contract has two key pieces of code to ensure that onchain deployments are replicable `SuperToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
+### Onchain contract bytecode stored in the AppGateway Contract
+The AppGateway Contract has two key pieces of code to ensure that onchain deployments are replicable `SuperToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
 ```solidity
 creationCodeWithArgs[superToken] = abi.encodePacked(
     type(SuperToken).creationCode,
@@ -58,7 +54,7 @@ bytes32 public superToken = _createContractId("superToken");
 
 While this example handles a single contract, you can extend it to manage multiple contracts by storing their creation codes.
 
-### Onchain contract deployment with the Deployer Contract
+### Onchain contract deployment with the AppGateway Contract
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     <img src="/img/deployment_flow.svg" alt="deployment flow" style={{ width: '100%' }} />
 </div>
