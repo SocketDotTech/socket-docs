@@ -139,7 +139,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 1. **Withdraw your AppGateway Fee balance**
 
     ```bash
-    forge script script/counter/WithdrawFeesArbitrumFeesPlug.s.sol --skip-simulation
+    forge script script/counter/WithdrawFeesArbitrumFeesPlug.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
     ```
 
 ## Understanding the Components
