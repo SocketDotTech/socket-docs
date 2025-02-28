@@ -45,6 +45,12 @@ FeesData feesData = FeesData({
 });
 ```
 
+The `maxFees` parameter serves a dual purpose:
+- It represents the minimum amount of fees that must be available in the contract to process the transaction
+- It also represents the maximum amount the user is willing to pay for this transaction to be included in a batch
+
+User must have deposited at least this amount to the contract before initiating the transaction, which ensures the transmitter (entity processing batches) is guaranteed compensation for including this transaction.
+
 ### 3. Apply Fee Configuration
 
 Set the fee configuration in your contracts:
@@ -64,7 +70,7 @@ The FeesData structure is designed to manage fee-related parameters for transact
 FeesData memory feesData = FeesData({
     feePoolChain: 421614,      // Chain ID where fees are collected
     feePoolToken: ETH_ADDRESS, // Token used for fee payments (ETH in this case)
-    maxFees: 0.001 ether       // Maximum fee amount allowed
+    maxFees: 0.001 ether       // Maximum fee amount allowed and minimum required deposit
 });
 ```
 
@@ -78,6 +84,8 @@ FeesData memory feesData = FeesData({
 
 3. `maxFees`
     Sets an upper limit for transaction fees, preventing excessive charges. In this example, it's set to `0.001 ETH`.
+    The user must have deposited at least this amount, ensuring the transmitter gets compensated for including this transaction in a batch.
+    If the actual cost is less than this amount, the user only pays what's needed.
 
 #### Dual Purpose Usage
 

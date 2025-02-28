@@ -80,7 +80,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    ```
 
    :::tip
-   Please ensure the wallet you are using has at least 0.01 Arbitrum Sepolia ETH.
+   Please ensure the wallet you are using has at least 0.001 Arbitrum Sepolia ETH.
    Don't forget to export `ARBITRUM_SEPOLIA_RPC` if you do not have it in your environment yet.
    :::
 
