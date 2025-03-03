@@ -5,9 +5,9 @@ title: Calling smart contracts
 
 # How to call onchain contracts?
 
-Calling onchain contracts from SOCKET’s offchain vm is very similar to how you call another contract on single chain.
+Calling onchain contracts from SOCKET’s EVMx is very similar to how you call another contract on single chain.
 
-Continuing the SuperToken ERC20 example let's add a function to mint tokens to a user from the `SuperTokenAppGateway` offchainVM contract.
+Continuing the SuperToken ERC20 example let's add a function to mint tokens to a user from the `SuperTokenAppGateway` EVMx contract.
 ```solidity
 function mint(uint256 amount, address user, address forwarder) external async {
     SuperToken(forwarder).mint(user, amount);
@@ -23,14 +23,14 @@ function mint(address to_, uint256 amount_) external onlyOwner {
 
 Let us compare both of these to understand the key differences:
 
-- The `mint` function in the `SuperToken` onchain contract uses `onlyOwner` modifier to ensure only the `SuperTokenAppGateway` contract can call those functions from the offchainVM;
+- The `mint` function in the `SuperToken` onchain contract uses `onlyOwner` modifier to ensure only the `SuperTokenAppGateway` contract can call those functions from the EVMx;
 - The `mint` function in the `SuperTokenAppGateway` has an `async` modifier;
 - The `async` modifier in the `mint` function enables asynchronous onchain operations;
 - The `SuperTokenAppGateway` contract instance calls the the onchain contract using a `forwarder` address;
 
-SOCKET's offchainVM works with special `forwarder` contract addresses that are deployed automatically when you [deploy](/deploy) your onchain contracts and handle the forwarding of calls to the appropriate chain and address.
+SOCKET's EVMx works with special `forwarder` contract addresses that are deployed automatically when you [deploy](/deploy) your onchain contracts and handle the forwarding of calls to the appropriate chain and address.
 
-Read [here](/forwarder-addresses) to learn more about how forwarder addresses are assigned on the offchainVM to represent onchain contracts.
+Read [here](/forwarder-addresses) to learn more about how forwarder addresses are assigned on the EVMx to represent onchain contracts.
 
 ## Batch calling
 
@@ -41,7 +41,7 @@ To understand this let us go back to `SuperTokenAppGateway` example from our [tu
 This simple function enables burning of tokens on source chain and minting them on destination after burn is done.
 
 ```solidity
-contract SuperTokenAppGateway is AppGatewayBase {
+contract SuperTokenAppGateway is AppGatewayBase, Ownable {
     (...)
 
     function transfer(uint256 amount, address srcForwarder, address dstForwarder) external async {
@@ -54,7 +54,7 @@ The diagram below shows how tokens are transferred between two different blockch
 
 The process involves:
 1. A burn operation on the Source Token Forwarder
-1. Forwarding through a Socket Offchain VM
+1. Forwarding through Socket's EVMx
 1. A mint operation on the Destination Token Forwarder
 1. Communication between forwarders and the Socket Protocol
 

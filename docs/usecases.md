@@ -13,11 +13,11 @@ Traditional blockchain scaling typically follows two vertical approaches:
 
 However, these methods create **composability challenges**, making it difficult for applications and users on other chains/rollups to interact with your application.
 
-SOCKET enables a different approach: **horizontal scaling**. Similar to modern web applications, your application can be deployed across multiple chains/rollups simultaneously, with traffic load-balanced between them. Using SOCKET's app-gateway, this process becomes seamless for onchain contracts. [This approach is already being utilized by several leading applications](https://x.com/vaibhavchellani/status/1859544081539690909).
+SOCKET enables a different approach: **horizontal scaling**. Similar to modern web applications, your application can be deployed across multiple chains/rollups simultaneously, with traffic load-balanced between them. Using SOCKET's AppGateway, this process becomes seamless for onchain contracts. [This approach is already being utilized by several leading applications](https://x.com/vaibhavchellani/status/1859544081539690909).
 
 ## Intent-Based Execution
 
-SOCKET allows developers to build sophisticated intent systems that improve user experience and execution efficiency. Through app-gateways, developers can:
+SOCKET allows developers to build sophisticated intent systems that improve user experience and execution efficiency. Through AppGateways, developers can:
 - Process user intents
 - Run execution auctions
 - Optimize transaction routing
@@ -27,7 +27,7 @@ The protocol's built-in transmitters enable immediate implementation of intent-b
 ## Application-Specific Sequencing
 
 Applications generating MEV (Miner Extractable Value) can benefit from custom transaction sequencing. Rather than letting chain validators capture this value, developers can:
-- Create app-gateways to sequence transactions
+- Create AppGateways to sequence transactions
 - Capture and redirect value to designated stakeholders
 - Implement custom execution ordering
 
@@ -35,7 +35,7 @@ A notable example is Oracle Extractable Value (OEV) capture from swap transactio
 
 ## Pre-Execution Security
 
-Unlike traditional security services that operate post-transaction, SOCKET enables preventative security through pre-execution checks. Using app-gateways, developers can:
+Unlike traditional security services that operate post-transaction, SOCKET enables preventative security through pre-execution checks. Using AppGateways, developers can:
 - Implement security validations before onchain execution
 - Enforce critical protocol invariants
 - Prevent potential exploits proactively

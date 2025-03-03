@@ -19,7 +19,7 @@ SOCKET Protocol enables developers to build chain-abstracted applications to com
 - **Watchers**: Offchain operators running specialized VMs
 - **Transmitters**: Smart operators performing onchain actions
 - **Switchboards**: Onchain contracts for validation
-- **App-Gateway**: Custom contracts for composing smart contracts
+- **AppGateway**: Custom contracts for composing smart contracts
 
 ## Getting Started
 

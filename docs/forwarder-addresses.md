@@ -19,9 +19,9 @@ SOCKET uses these `forwarder` contracts that are automatically deployed alongsid
 
 ## Creating and Accessing Forwarder Addresses
 
-### Using the Deployer contract constructor to deploy the Forwarder Address
+### Using the AppGateway contract constructor to deploy the Forwarder Address
 
-When your `Deployer` contract is deployed, the constructor can automatically create a forwarder for your onchain contract. Here's the relevant code from the constructor:
+When your `AppGateway` contract is deployed, the constructor can automatically create a forwarder for your onchain contract. Here's the relevant code from the constructor:
 
 ```solidity
 IAddressResolver(addressResolver).deployForwarderContract(
@@ -31,7 +31,7 @@ IAddressResolver(addressResolver).deployForwarderContract(
 );
 ```
 
-- `address(this)` — Refers to the current `AppDeployer` contract.
+- `address(this)` — Refers to the current `AppGateway` contract.
 - `onchainTokenAddress` — The address of the onchain contract (such as a token or other smart contract) that needs a forwarder.
 - `chainSlug` — A unique identifier for the target blockchain (e.g., 1- Ethereum, 8453 - Base, etc).
 
@@ -39,7 +39,7 @@ This call ensures that a forwarder contract is deployed and linked to the specif
 
 ### Accessing Forwarder Addresses
 
-Once deployed, you can access the forwarder addresses through the `forwarderAddresses` mapping in the Deployer contract:
+Once deployed, you can access the forwarder addresses through the `forwarderAddresses` mapping in the AppGateway contract:
 
 ```solidity
 address forwarderAddress = forwarderAddresses[contractAddress][chainSlug];
