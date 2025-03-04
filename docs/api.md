@@ -162,7 +162,7 @@ appGatewayDetails":
 
 As soon as onchain deployment is done, we will get the onChainAddress and forwarderAddress. ForwarderAddress is derived from chainSlug and onChainAddress. In the callback, forwarderAddress is deployed and the `isForwarderDeployed` variable will become `true`.  Now you can start using your forwarderAddress.
 
-## `getAddresses`
+## `getAddresses` - onchain and forwarder addresses
 
 **Description:**
 
@@ -207,7 +207,7 @@ Note: Once you call `deployContracts()` function on your AppGateway, it will tak
 
 If some of the addresses return as Address(0), wait for some time, as deployment might be in progress. If you get Address(0) after 5 minutes of the initial call, contact the team.
 
-## `getForwarderAddress`
+## `getForwarderAddress` - from onchain address
 
 **Description:**
 
