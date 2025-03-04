@@ -254,4 +254,6 @@ GET /getForwarderAddress?onChainAddress=0x7Fe1141202de13F6884d2A50612DC7685eC686
 }
 ```
 
-Note: If the onchain contracts are deployed using an AppGateway, they will already have a forwarder contract. However, suppose you wish to use a contract already deployed onchain, for example, UniswapFactory. In that case, you will get `isDeployed` as false, and you can deploy it using \<insert forwarder deployment doc link here\> and then start using it.
+:::note
+If the onchain contracts are deployed using an AppGateway, they will already have a forwarder contract. However, suppose you wish to use a contract already deployed onchain, for example, UniswapFactory. In that case, you will get `isDeployed` as false, and you can deploy it using [Forwarder Addresses](/forwarder-addresses) and then start using it.
+:::
