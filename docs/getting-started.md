@@ -49,7 +49,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    vi .env
    ```
 
-1. **Deploy the all contracts on EVMx**
+1. **Deploy the AppGateway contract on EVMx**
 
    This command deploys all contracts on EVMx. It includes the `Counter` and `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
@@ -66,12 +66,12 @@ This example highlights how to abstract away blockchain-specific details, enabli
    Add the deployed address in env for using in rest of the tutorial.
 
    ```bash
-   export APP_GATEWAY=<Counter App Address>;
+   APP_GATEWAY=<Counter App Address>;
    ```
 
 1. **Set up fees to pay for your App transactions**
 
-   In this example we will be paying fees on Arbitrum Sepolia as configured in `script/deployEVMxCounterApp.s.sol`.
+   In this example we will be paying fees on Arbitrum Sepolia as configured in `script/deployEVMxCounterApp.s.sol`. Find all about fees [here](/fees).
 
    To pay for this increment counter transaction, deposit `arbsepETH` to the `FeesPlug` contract address by running:
 
@@ -81,13 +81,6 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    :::tip
    Please ensure the wallet you are using has at least 0.001 Arbitrum Sepolia ETH.
-   Don't forget to export `ARBITRUM_SEPOLIA_RPC` if you do not have it in your environment yet.
-   :::
-
-   :::note
-   You can pay using any token on any of the supported chains that has a `FeesPlug` contract.
-   You can deposit them to a `FeesPlug` on any chain by calling the `deposit` function.
-   Find all about the available `FeesPlug` addresses [here](/chain-information) and about fees [here](/fees)
    :::
 
    Confirm your available fees to pay for transactions at any time by running:
@@ -102,7 +95,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge script script/counter/DeployOnchainCounters.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
    ```
 
-   Let's ensure that the funds have been spent to pay for the transaction by running,
+   Let's confirm the transaction status by running,
 
    ```bash
    https://api-evmx-devnet.socket.tech/getDetailsByTxHash?txHash=<TX_HASH>
