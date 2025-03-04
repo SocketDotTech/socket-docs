@@ -29,11 +29,65 @@ export const chainDetails = {
     blockExplorerUrl: "https://testnet.tomoscan.io",
     logoURI: "",
   },
+  100: {
+    chainSlug: 100,
+    chainName: "Gnosis Chain",
+    blockExplorerUrl: "https://gnosisscan.io/",
+    logoURI: "",
+  },
+  130: {
+    chainSlug: 130,
+    chainName: "Unichain",
+    blockExplorerUrl: "https://unichain.blockscout.com/",
+    logoURI: "",
+  },
   137: {
     chainSlug: 137,
     chainName: "Polygon",
     blockExplorerUrl: "https://polygonscan.com",
     logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/Matic.svg",
+  },
+  146: {
+    chainSlug: 146,
+    chainName: "Sonic",
+    blockExplorerUrl: "https://sonicscan.org/",
+    logoURI: "",
+  },
+  169: {
+    chainSlug: 169,
+    chainName: "Manta Pacific",
+    blockExplorerUrl: "https://pacific-explorer.manta.network/",
+    logoURI: "",
+  },
+  196: {
+    chainSlug: 196,
+    chainName: "XLayer",
+    blockExplorerUrl: "https://www.okx.com/web3/explorer/xlayer",
+    logoURI: "",
+  },
+  204: {
+    chainSlug: 204,
+    chainName: "Opbnb",
+    blockExplorerUrl: "https://opbnb.bscscan.com/",
+    logoURI: "",
+  },
+  324: {
+    chainSlug: 324,
+    chainName: "ZkSync Era",
+    blockExplorerUrl: "https://explorer.zksync.io/",
+    logoURI: "",
+  },
+  404: {
+    chainSlug: 404,
+    chainName: "Syndr",
+    blockExplorerUrl: "https://explorer.syndr.com/",
+    logoURI: "",
+  },
+  416: {
+    chainSlug: 416,
+    chainName: "SX Network",
+    blockExplorerUrl: "https://explorer.sx.technology/",
+    logoURI: "",
   },
   420: {
     chainSlug: 420,
@@ -50,7 +104,8 @@ export const chainDetails = {
   901: {
     chainSlug: 901,
     chainName: "Lyra testnet",
-    blockExplorerUrl: "https://explorerl2new-prod-testnet-0eakp60405.t.conduit.xyz",
+    blockExplorerUrl:
+      "https://explorerl2new-prod-testnet-0eakp60405.t.conduit.xyz",
     logoURI: "/img/lyra-logo.png",
   },
   919: {
@@ -70,10 +125,22 @@ export const chainDetails = {
     chainName: "Parallel",
     blockExplorerUrl: "https://explorer.parallel.fi",
   },
+  1101: {
+    chainSlug: 1101,
+    chainName: "zkEVM",
+    blockExplorerUrl: "https://zkevm.polygonscan.com/",
+    logoURI: "",
+  },
   1729: {
     chainSlug: 1729,
     chainName: "Reya Cronos Testnet",
     blockExplorerUrl: "https://reya-cronos.blockscout.com",
+  },
+  1868: {
+    chainSlug: 1868,
+    chainName: "Soneium",
+    blockExplorerUrl: "https://soneium.blockscout.com/",
+    logoURI: "",
   },
   2999: {
     chainSlug: 2999,
@@ -91,11 +158,41 @@ export const chainDetails = {
     chainName: "Mantle",
     blockExplorerUrl: "https://explorer.mantle.xyz",
   },
+  7887: {
+    chainSlug: 7887,
+    chainName: "Kinto",
+    blockExplorerUrl: "https://explorer.kinto.xyz/",
+    logoURI: "",
+  },
+  7897: {
+    chainSlug: 7897,
+    chainName: "Arena Z",
+    blockExplorerUrl: "https://explorer.arena-z.gg/",
+    logoURI: "",
+  },
+  8008: {
+    chainSlug: 8008,
+    chainName: "Polynomial",
+    blockExplorerUrl: "https://explorer.polynomial.fi",
+    logoURI: "",
+  },
+  8333: {
+    chainSlug: 8333,
+    chainName: "B3",
+    blockExplorerUrl: "https://explorer.b3.fun/",
+    logoURI: "",
+  },
   8453: {
     chainSlug: 8453,
     chainName: "Base",
     blockExplorerUrl: "https://basescan.org",
     logoURI: "https://media.socket.tech/Base.png",
+  },
+  10143: {
+    chainSlug: 10143,
+    chainName: "Monad Testnet",
+    blockExplorerUrl: "https://monad-testnet.socialscan.io/",
+    logoURI: "",
   },
   34443: {
     chainSlug: 34443,
@@ -109,11 +206,77 @@ export const chainDetails = {
     blockExplorerUrl: "https://arbiscan.io",
     logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/Arbitrum.svg",
   },
+  43114: {
+    chainSlug: 43114,
+    chainName: "Avalanche C-Chain",
+    blockExplorerUrl: "https://snowtrace.io/",
+    logoURI: "",
+  },
+  43210: {
+    chainSlug: 43210,
+    chainName: "Zero Sepolia",
+    blockExplorerUrl: "",
+    logoURI: "",
+  },
+  47763: {
+    chainSlug: 47763,
+    chainName: "NeoX",
+    blockExplorerUrl: "https://xexplorer.neo.org",
+    logoURI: "",
+  },
+  57073: {
+    chainSlug: 57073,
+    chainName: "Ink",
+    blockExplorerUrl: "https://explorer.inkonchain.com/",
+    logoURI: "",
+  },
+  59144: {
+    chainSlug: 59144,
+    chainName: "Linea",
+    blockExplorerUrl: "https://lineascan.build/",
+    logoURI: "",
+  },
+  60808: {
+    chainSlug: 60808,
+    chainName: "Bob",
+    blockExplorerUrl: "https://explorer.gobob.xyz/",
+    logoURI: "",
+  },
+  63157: {
+    chainSlug: 63157,
+    chainName: "Geist",
+    blockExplorerUrl: "https://geist-mainnet.explorer.alchemy.com/",
+    logoURI: "",
+  },
   80001: {
     chainSlug: 80001,
     chainName: "Polygon Mumbai testnet",
     blockExplorerUrl: "https://mumbai.polygonscan.com",
     logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/Matic.svg",
+  },
+  80008: {
+    chainSlug: 80008,
+    chainName: "Polynomial Testnet",
+    blockExplorerUrl: "",
+    logoURI: "",
+  },
+  80094: {
+    chainSlug: 80094,
+    chainName: "Berachain",
+    blockExplorerUrl: "https://berascan.com/",
+    logoURI: "",
+  },
+  81457: {
+    chainSlug: 81457,
+    chainName: "Blast",
+    blockExplorerUrl: "https://blastscan.io",
+    logoURI: "",
+  },
+  412346: {
+    chainSlug: 412346,
+    chainName: "Kinto Devnet",
+    blockExplorerUrl: "",
+    logoURI: "",
   },
   421613: {
     chainSlug: 421613,
@@ -126,6 +289,30 @@ export const chainDetails = {
     chainName: "Arbitrum Sepolia",
     blockExplorerUrl: "https://sepolia.arbiscan.io",
     logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/Arbitrum.svg",
+  },
+  444444: {
+    chainSlug: 444444,
+    chainName: "Syndr Sepolia L3",
+    blockExplorerUrl: "",
+    logoURI: "",
+  },
+  534352: {
+    chainSlug: 534352,
+    chainName: "Scroll",
+    blockExplorerUrl: "https://scrollscan.com/",
+    logoURI: "",
+  },
+  543210: {
+    chainSlug: 543210,
+    chainName: "Zero",
+    blockExplorerUrl: "https://explorer.zero.network/",
+    logoURI: "",
+  },
+  777777: {
+    chainSlug: 777777,
+    chainName: "Winr",
+    blockExplorerUrl: "https://explorerl2new-winr-mainnet-0.t.conduit.xyz",
+    logoURI: "",
   },
   11155111: {
     chainSlug: 11155111,
@@ -145,10 +332,28 @@ export const chainDetails = {
     blockExplorerUrl: "https://sepolia-optimism.etherscan.io",
     logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/Optimism.svg",
   },
+  12227331: {
+    chainSlug: 12227331,
+    chainName: "NeoX Testnet",
+    blockExplorerUrl: "",
+    logoURI: "",
+  },
+  12227332: {
+    chainSlug: 12227332,
+    chainName: "NeoX T4 Testnet",
+    blockExplorerUrl: "",
+    logoURI: "",
+  },
   46658378: {
     chainSlug: 46658378,
     chainName: "Hook testnet",
     blockExplorerUrl: "https://hook-stylus-testnet.explorer.caldera.xyz",
+    logoURI: "",
+  },
+  89346162: {
+    chainSlug: 89346162,
+    chainName: "Reya Cronos Testnet",
+    blockExplorerUrl: "",
     logoURI: "",
   },
   686669576: {
@@ -163,10 +368,22 @@ export const chainDetails = {
     blockExplorerUrl: "https://scanv2-testnet.ancient8.gg",
     logoURI: "",
   },
+  1324967486: {
+    chainSlug: 1324967486,
+    chainName: "Reya",
+    blockExplorerUrl: "https://explorer.reya.network/",
+    logoURI: "",
+  },
   1399904803: {
     chainSlug: 1399904803,
     chainName: "XAI Testnet",
     blockExplorerUrl: "https://testnet-explorer.xai-chain.net",
     logoURI: "/img/xai-logo.png",
+  },
+  2863311531: {
+    chainSlug: 2863311531,
+    chainName: "Ancient8 Testnet",
+    blockExplorerUrl: "",
+    logoURI: "",
   },
 };

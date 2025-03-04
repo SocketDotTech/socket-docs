@@ -40,6 +40,20 @@ function ChainConfig() {
                   </a>
                 </div>
               </div>{" "}
+              <div>
+                <div>
+                  {" "}
+                  <span className="font-semibold"> Switchboard : </span>
+                  <a
+                    href={`${chainDetails[Object.keys(deployments)[index]]?.blockExplorerUrl
+                      }/address/${item["FastSwitchboard"]}`}
+                    target="_blank"
+                  >
+                    {" "}
+                    {shortenAddress(item["FastSwitchboard"])}{" "}
+                  </a>
+                </div>
+              </div>{" "}
             </div>
           </div>
         ))}

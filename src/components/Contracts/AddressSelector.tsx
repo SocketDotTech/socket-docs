@@ -10,7 +10,7 @@ enum PATH {
   OPTIMISTIC = "OPTIMISTIC",
 }
 
-function SwitchboardAddresses() {
+function AddressSelector() {
   const [selectedChainSlug, setSelectedChainSlug] = useState("10");
   const [selectedDestinationChain, setSelectedDestinationChain] = useState(
     "10"
@@ -85,6 +85,7 @@ function Table({ selectedChainSlug, selectedDestinationChain, selectedPath }) {
           <th>LocalSlug</th>
           <th>SiblingSlug</th>
           <th>Type</th>
+          <th>Socket Address</th>
           <th>Switchboard Address</th>
         </tr>
       </thead>
@@ -94,6 +95,9 @@ function Table({ selectedChainSlug, selectedDestinationChain, selectedPath }) {
           <td>{selectedChainSlug}</td>
           <td>{selectedDestinationChain}</td>
           <td>{selectedPath}</td>
+          <td>
+            {deployments[selectedChainSlug].Socket}
+          </td>
           <td>
             {deployments[selectedChainSlug].integrations?.[
               selectedDestinationChain
@@ -105,4 +109,4 @@ function Table({ selectedChainSlug, selectedDestinationChain, selectedPath }) {
   );
 }
 
-export default SwitchboardAddresses;
+export default AddressSelector;
