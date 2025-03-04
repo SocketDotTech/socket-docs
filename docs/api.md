@@ -1,19 +1,13 @@
 ---
 id: api
-title: API
+title: API usage
 ---
-
-# API usage
 
 We include a few helper APIs to help developers build effectively, while all data is available publicly these are to help developers build applications seamlessly.
 
-## API Documentation
-
 Base URL - [https://api-evmx-devnet.socket.tech/](https://api-evmx-devnet.socket.tech/)
 
-### `Tx Details`
-
-/getDetailsByTxHash
+## `/getDetailsByTxHash` - Transaction hash details
 
 **Description**
 
@@ -168,7 +162,7 @@ appGatewayDetails":
 
 As soon as onchain deployment is done, we will get the onChainAddress and forwarderAddress. ForwarderAddress is derived from chainSlug and onChainAddress. In the callback, forwarderAddress is deployed and the `isForwarderDeployed` variable will become `true`.  Now you can start using your forwarderAddress.
 
-### `getAddresses`
+## `getAddresses`
 
 **Description:**
 
@@ -213,7 +207,7 @@ Note: Once you call `deployContracts()` function on your AppGateway, it will tak
 
 If some of the addresses return as Address(0), wait for some time, as deployment might be in progress. If you get Address(0) after 5 minutes of the initial call, contact the team.
 
-### `getForwarderAddress`
+## `getForwarderAddress`
 
 **Description:**
 
