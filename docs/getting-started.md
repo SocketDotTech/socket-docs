@@ -115,8 +115,6 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge script script/counter/IncrementCountersFromApp.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
    ```
 
-   Read [here](/forwarder-addresses) to learn more about how forwarder addresses are assigned on the EVMx to represent onchain contracts.
-
    If you want to know when the transaction is complete you can run the command below or directly use the API as described in the previous step.
 
    ```bash
