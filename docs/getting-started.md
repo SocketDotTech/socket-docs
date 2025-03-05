@@ -95,9 +95,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge script script/counter/DeployOnchainCounters.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
    ```
 
-   This script may take longer to run as it will broadcast one contract deployment to the following Sepolia chains: Base, Optimism, Arbitrum.
-
-   Learn more on how to track the transaction status using the [transaction hash via API endpoint](/api#getdetailsbytxhash---transaction-hash-details).
+   This script may take longer to run as it will broadcast one contract deployment to the following Sepolia chains: Base, Optimism, Arbitrum. Learn more on how to track the transaction status using the [transaction hash via API endpoint](/api#getdetailsbytxhash---transaction-hash-details).
 
 1. **Increment multiple counters**
 

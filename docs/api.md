@@ -9,15 +9,13 @@ Base URL - [https://api-evmx-devnet.socket.tech/](https://api-evmx-devnet.socket
 
 ## `/getDetailsByTxHash` - Transaction hash details
 
-**Description**
-
 This API retrieves transaction details based on the provided transaction hash (txHash). It returns the status of the transaction and any associated payloads, including execution and simulation details. The txHash is of `EVMx`.
 
-**Request Parameters**
+### Request Parameters
 
-- **txHash** (string, required): The hash of the transaction for which details are to be retrieved.
+- `txHash` (string, required): The hash of the transaction for which details are to be retrieved.
 
-**Response Format**
+### Response Format
 
 The response is a JSON object containing the following fields:
 
@@ -59,7 +57,7 @@ The response is a JSON object containing the following fields:
 }
 ```
 
-**Response Fields Explanation**
+### Response Fields Explanation
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -87,29 +85,29 @@ The response is a JSON object containing the following fields:
 | .feesInfo.maxFees | string | Maximum allowed fees for payloads |
 | .feesInfo.fee | string | Actual fee charged by transmitter |
 
-**ExecutionStatus Values**
+### ExecutionStatus Values
 
-- **NO**: Indicates that there is no execution status yet.
-- **FINALIZING**: The execution is in the process of being finalized.
-- **FINALIZED**: The execution has been finalized by watcher.
-- **EXECUTING**: The execution is currently in progress.
-- **EXECUTED**: The execution has been completed successfully onchain.
-- **PROMISE_RESOLVING**: The promise/callback related to the execution is being resolved.
-- **PROMISE_RESOLVED**: The promise/callback has been resolved.
+- `NO`: Indicates that there is no execution status yet.
+- `FINALIZING`: The execution is in the process of being finalized.
+- `FINALIZED`: The execution has been finalized by watcher.
+- `EXECUTING`: The execution is currently in progress.
+- `EXECUTED`: The execution has been completed successfully onchain.
+- `PROMISE_RESOLVING`: The promise/callback related to the execution is being resolved.
+- `PROMISE_RESOLVED`: The promise/callback has been resolved.
 
-**Status Values**
+### Status Values
 
-- **IN_PROGRESS**: The payloads are currently being processed.
-- **REVERTING**: One of the payloads is reverting. Check individual payload details for more info.
-- **COMPLETED**: all payloads are executed.
+- `IN_PROGRESS`: The payloads are currently being processed.
+- `REVERTING`: One of the payloads is reverting. Check individual payload details for more info.
+- `COMPLETED`: all payloads are executed.
 
-**Example Request**
+### Example Request
 
 ```json
 GET /getDetailsByTxHash?txHash=0x1c1eddc12771a9f9a9d9b2882c0d7012fcf9b8ee2bb85a76fcb77ce4226340b8
 ```
 
-**Example Response**
+### Example Response
 
 ```json
 {
@@ -164,15 +162,13 @@ As soon as onchain deployment is done, we will get the onChainAddress and forwar
 
 ## `getAddresses` - onchain and forwarder addresses
 
-**Description:**
-
 Retrieves deployed addresses for a specified AppGateway contract. It returns onchain deployed addresses, along with their corresponding forwarderAddresses.
 
-**Endpoint:**
+### Endpoint:
 
 GET /getAddresses
 
-**Query Parameters:**
+### Query Parameters:
 
 | Parameter | Type | Description |
 | --- | --- | --- |
@@ -180,7 +176,7 @@ GET /getAddresses
 | contractId | string | The contract identifier used in appGateway contract |
 | chainSlug | number | The chain id to specify the blockchain. |
 
-**Returns:**
+### Returns:
 
 A JSON object with these fields:
 
@@ -197,7 +193,7 @@ A JSON object with these fields:
 }
 ```
 
-**Example Request:**
+### Example Request:
 
 ```json
 GET /getAddresses?appGatewayAddress=0xD6E4aA932147A3FE5311dA1b67D9e73da06F9cEf&contractId=0xbeca3ec2d1dd91b46d9eccba1f77d96f5e4fe32fc344efb846bbf5cbad45e19e&chainSlug=421614
@@ -209,22 +205,20 @@ If some of the addresses return as Address(0), wait for some time, as deployment
 
 ## `getForwarderAddress` - from onchain address
 
-**Description:**
-
 Retrieves the forwarder address for a given onchain address. This address is predicted using create2.
 
-**Endpoint:**
+### Endpoint:
 
 GET /getForwarderAddress
 
-**Query Parameters:**
+### Query Parameters:
 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | onChainAddress | string | The onchain address |
 | chainSlug | number | The chain id to specify the blockchain |
 
-**Returns:**
+### Returns:
 
 A JSON object with these fields:
 
@@ -237,13 +231,13 @@ A JSON object with these fields:
 }
 ```
 
-**Example Request:**
+### Example Request:
 
 ```json
 GET /getForwarderAddress?onChainAddress=0x7Fe1141202de13F6884d2A50612DC7685eC68640&chainSlug=421614"
 ```
 
-**Example Response:**
+### Example Response:
 
 ```json
 {
