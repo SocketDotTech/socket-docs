@@ -7,7 +7,7 @@ title: Getting Started
 
 This tutorial walks you through building a cross-chain version of the classic `Counter.sol` contract from Foundry. While the traditional Foundry counter lives on a single blockchain, we'll create one that spans multiple chains and can be controlled from a single interface.
 
-This example introduces the core components of the Socket Protocol while keeping things very simple. The aim is to demonstrate how these different components interact with one another and what a typical flow looks like. Each component is fully programmable and customizable, as long as it implements the required interfaces. This flexibility means you can adapt Socket Protocol to support virtually any cross-chain use case you can imagine.
+This example introduces the core components of the Socket Protocol while keeping things very simple. The aim is to demonstrate how these different components interact with one another and what a typical flow looks like. Each component (AppGateway, Switchboard, Plugs, etc.) is fully programmable and customizable, as long as it implements the required interfaces. This flexibility means you can adapt Socket Protocol to support virtually any cross-chain use case you can imagine.
 
 **You'll learn how to**
 
