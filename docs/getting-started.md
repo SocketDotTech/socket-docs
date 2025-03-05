@@ -15,7 +15,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
 ## Setting Up Your Environment
 
-1. **Clone the Starter Kit**
+1. ### Clone the Starter Kit
 
    The repository includes pre-built examples of `Counter` and `CounterAppGateway` contracts.
 
@@ -24,7 +24,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    cd socket-starter-kit
    ```
 
-1. **Install Dependencies**
+1. ### Install Dependencies
 
    Use forge to install the required libraries.
 
@@ -38,7 +38,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    `forge 0.2.0 (9a0f66e 2024-09-26T00:20:35.649925000Z)`
    :::
 
-1. **Set Up Environment Variables**
+1. ### Set Up Environment Variables
 
    Copy the provided `.env.sample` file and set proper values for private key and rpc.
 
@@ -49,7 +49,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    vi .env
    ```
 
-1. **Deploy the AppGateway contract on EVMx**
+1. ### Deploy the AppGateway contract on EVMx
 
    This command deploys all contracts on EVMx. It includes the `Counter` and `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
 
@@ -69,7 +69,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    APP_GATEWAY=<Counter App Address>;
    ```
 
-1. **Set up fees to pay for your App transactions**
+1. ### Set up fees to pay for your App transactions
 
    In this example we will be paying fees on Arbitrum Sepolia as configured in `script/deployEVMxCounterApp.s.sol`. Find all about fees [here](/fees).
 
@@ -89,7 +89,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge script script/helpers/AppGatewayFeeBalance.s.sol
    ```
 
-1. **Deploy onchain contracts**
+1. ### Deploy onchain contracts
 
    ```bash
    forge script script/counter/DeployOnchainCounters.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
@@ -97,7 +97,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    This script may take longer to run as it will broadcast one contract deployment to the following Sepolia chains: Base, Optimism, Arbitrum. Learn more on how to track the transaction status using the [transaction hash via API endpoint](/api#getdetailsbytxhash---transaction-hash-details).
 
-1. **Increment multiple counters**
+1. ### Increment multiple counters
 
    To increment the various counters deployed on all different chains by different values we will run,
 
@@ -107,13 +107,13 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    This script may take longer to run as it will loop through existing counter instances to increment the counter on the following Sepolia chains: Base, Optimism, Arbitrum.
 
-1. **Check that the counters onchain have incremented**
+1. ### Check that the counters onchain have incremented
 
    ```bash
    forge script script/counter/ReadOnchainCounters.s.sol --skip-simulation
    ```
 
-1. **Withdraw your AppGateway Fee balance**
+1. ### Withdraw your AppGateway Fee balance
 
     ```bash
     forge script script/counter/WithdrawFeesArbitrumFeesPlug.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
