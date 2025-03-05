@@ -95,17 +95,9 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge script script/counter/DeployOnchainCounters.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
    ```
 
-   Let's confirm the transaction status by running,
+   This script may take longer to run as it will broadcast one contract deployment to the following Sepolia chains: Base, Optimism, Arbitrum.
 
-   ```bash
-   https://api-evmx-devnet.socket.tech/getDetailsByTxHash?txHash=<TX_HASH>
-   ```
-
-   Replace `<TX_HASH>` with the last transaction executed and ensure status is `COMPLETED`. If you want to monitor all transactions at the same time you can run:
-
-   ```bash
-   node script/transactionStatus.js DeployOnchainCounters
-   ```
+   Learn more on how to track the transaction status using the [transaction hash via API endpoint](/api#getdetailsbytxhash---transaction-hash-details).
 
 1. **Increment multiple counters**
 
@@ -115,11 +107,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
    forge script script/counter/IncrementCountersFromApp.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
    ```
 
-   If you want to know when the transaction is complete you can run the command below or directly use the API as described in the previous step.
-
-   ```bash
-   node script/transactionStatus.js IncrementCountersFromApp
-   ```
+   This script may take longer to run as it will loop through existing counter instances to increment the counter on the following Sepolia chains: Base, Optimism, Arbitrum.
 
 1. **Check that the counters onchain have incremented**
 
