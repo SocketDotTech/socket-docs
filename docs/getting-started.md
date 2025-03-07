@@ -166,7 +166,7 @@ The deployment process follows these steps:
 > **Note**: The FastSwitchboard used here is just one example of a simplified switchboard implementation that allows a trusted watcher to attest that a given transmitter is authorized to execute a specific payload. Switchboards can be customized to handle various verification methods and proof systems depending on your security requirements.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <img src="/img/deploy_flow.png" alt="switchboard diagram" style={{ width: '100%' }} />
+    <img src="/img/deploy_flow.svg" alt="deploy flow diagram" style={{ width: '100%' }} />
 </div>
 
 
