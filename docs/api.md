@@ -1,123 +1,21 @@
 ---
 id: api
-title: API
+title: API usage
 ---
-
-# API usage
 
 We include a few helper APIs to help developers build effectively, while all data is available publicly these are to help developers build applications seamlessly.
 
-## API Documentation
-
 Base URL - [https://api-evmx-devnet.socket.tech/](https://api-evmx-devnet.socket.tech/)
 
-### `getAddresses`
-
-**Description:**
-
-Retrieves deployed addresses for a specified AppGateway contract. It returns onchain deployed addresses, along with their corresponding forwarderAddresses.
-
-**Endpoint:**
-
-GET /getAddresses
-
-**Query Parameters:**
-
-| Parameter | Type | Description |
-| --- | --- | --- |
-| appGatewayAddress | string | offchain address of appGateway contract |
-| contractId | string | The contract identifier used in appGateway contract |
-| chainSlug | number | The chain id to specify the blockchain. |
-
-**Returns:**
-
-A JSON object with these fields:
-
-```json
-{
-	"onchain": {
-		"chainSlug": 421614
-		"deployedContract": "0x3e3d9f517De1CA6d41f5A79ED1D9340d8fF3FC7F"
-	},
-	"offchain": {
-		"forwarder": "0x31828eb15fc1F18901b75329AB1d06f4C5dda43D",
-		"contractId": "0xbeca3ec2d1dd91b46d9eccba1f77d96f5e4fe32fc344efb846bbf5cbad45e19e"
-	}
-}
-```
-
-**Example Request:**
-
-```json
-GET /getAddresses?appGatewayAddress=0xD6E4aA932147A3FE5311dA1b67D9e73da06F9cEf&contractId=0xbeca3ec2d1dd91b46d9eccba1f77d96f5e4fe32fc344efb846bbf5cbad45e19e&chainSlug=421614
-```
-
-Note: Once you call `deployContracts()` function on your AppGateway, it will take some time to deploy the onchain contract and offchain forwarder contract.
-
-If some of the addresses return as Address(0), wait for some time, as deployment might be in progress. If you get Address(0) after 5 minutes of the initial call, contact the team.
-
-### `getForwarderAddress`
-
-**Description:**
-
-Retrieves the forwarder address for a given onchain address. This address is predicted using create2.
-
-**Endpoint:**
-
-GET /getForwarderAddress
-
-**Query Parameters:**
-
-| Parameter | Type | Description |
-| --- | --- | --- |
-| onChainAddress | string | The onchain address |
-| chainSlug | number | The chain id to specify the blockchain |
-
-**Returns:**
-
-A JSON object with these fields:
-
-```json
-{
-  "chainSlug": 421614,
-  "onChainAddress": "0x3e3d9f517De1CA6d41f5A79ED1D9340d8fF3FC7F",
-  "forwarderAddress": "0x31828eb15fc1F18901b75329AB1d06f4C5dda43D",
-  "isDeployed": true
-}
-```
-
-**Example Request:**
-
-```json
-GET /getForwarderAddress?onChainAddress=0x7Fe1141202de13F6884d2A50612DC7685eC68640&chainSlug=421614"
-```
-
-**Example Response:**
-
-```json
-{
-  "chainSlug": 421614,
-  "onChainAddress": "0x3e3d9f517De1CA6d41f5A79ED1D9340d8fF3FC7F",
-  "forwarderAddress": "0x31828eb15fc1F18901b75329AB1d06f4C5dda43D",
-  "isDeployed": true
-}
-```
-
-Note: If the onchain contracts are deployed using an AppGateway, they will already have a forwarder contract. However, suppose you wish to use a contract already deployed onchain, for example, UniswapFactory. In that case, you will get `isDeployed` as false, and you can deploy it using \<insert forwarder deployment doc link here\> and then start using it.
-
-### `Tx Details`
-
-/getDetailsByTxHash
-
-**Description**
+## `/getDetailsByTxHash` - Transaction hash details
 
 This API retrieves transaction details based on the provided transaction hash (txHash). It returns the status of the transaction and any associated payloads, including execution and simulation details. The txHash is of `EVMx`.
 
-**Request Parameters**
+### Request Parameters
 
-- **txHash** (string, required): The hash of the transaction for which details are to be retrieved.
+- `txHash` (string, required): The hash of the transaction for which details are to be retrieved.
 
-**Response Format**
+### Response Format
 
 The response is a JSON object containing the following fields:
 
@@ -159,7 +57,7 @@ The response is a JSON object containing the following fields:
 }
 ```
 
-**Response Fields Explanation**
+### Response Fields Explanation
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -187,29 +85,29 @@ The response is a JSON object containing the following fields:
 | .feesInfo.maxFees | string | Maximum allowed fees for payloads |
 | .feesInfo.fee | string | Actual fee charged by transmitter |
 
-**ExecutionStatus Values**
+### ExecutionStatus Values
 
-- **NO**: Indicates that there is no execution status yet.
-- **FINALIZING**: The execution is in the process of being finalized.
-- **FINALIZED**: The execution has been finalized by watcher.
-- **EXECUTING**: The execution is currently in progress.
-- **EXECUTED**: The execution has been completed successfully onchain.
-- **PROMISE_RESOLVING**: The promise/callback related to the execution is being resolved.
-- **PROMISE_RESOLVED**: The promise/callback has been resolved.
+- `NO`: Indicates that there is no execution status yet.
+- `FINALIZING`: The execution is in the process of being finalized.
+- `FINALIZED`: The execution has been finalized by watcher.
+- `EXECUTING`: The execution is currently in progress.
+- `EXECUTED`: The execution has been completed successfully onchain.
+- `PROMISE_RESOLVING`: The promise/callback related to the execution is being resolved.
+- `PROMISE_RESOLVED`: The promise/callback has been resolved.
 
-**Status Values**
+### Status Values
 
-- **IN_PROGRESS**: The payloads are currently being processed.
-- **REVERTING**: One of the payloads is reverting. Check individual payload details for more info.
-- **COMPLETED**: all payloads are executed.
+- `IN_PROGRESS`: The payloads are currently being processed.
+- `REVERTING`: One of the payloads is reverting. Check individual payload details for more info.
+- `COMPLETED`: all payloads are executed.
 
-**Example Request**
+### Example Request
 
 ```json
 GET /getDetailsByTxHash?txHash=0x1c1eddc12771a9f9a9d9b2882c0d7012fcf9b8ee2bb85a76fcb77ce4226340b8
 ```
 
-**Example Response**
+### Example Response
 
 ```json
 {
@@ -261,3 +159,95 @@ appGatewayDetails":
 ```
 
 As soon as onchain deployment is done, we will get the onChainAddress and forwarderAddress. ForwarderAddress is derived from chainSlug and onChainAddress. In the callback, forwarderAddress is deployed and the `isForwarderDeployed` variable will become `true`.  Now you can start using your forwarderAddress.
+
+## `getAddresses` - onchain and forwarder addresses
+
+Retrieves deployed addresses for a specified AppGateway contract. It returns onchain deployed addresses, along with their corresponding forwarderAddresses.
+
+### Endpoint:
+
+GET /getAddresses
+
+### Query Parameters:
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| appGatewayAddress | string | offchain address of appGateway contract |
+| contractId | string | The contract identifier used in appGateway contract |
+| chainSlug | number | The chain id to specify the blockchain. |
+
+### Returns:
+
+A JSON object with these fields:
+
+```json
+{
+	"onchain": {
+		"chainSlug": 421614
+		"deployedContract": "0x3e3d9f517De1CA6d41f5A79ED1D9340d8fF3FC7F"
+	},
+	"offchain": {
+		"forwarder": "0x31828eb15fc1F18901b75329AB1d06f4C5dda43D",
+		"contractId": "0xbeca3ec2d1dd91b46d9eccba1f77d96f5e4fe32fc344efb846bbf5cbad45e19e"
+	}
+}
+```
+
+### Example Request:
+
+```json
+GET /getAddresses?appGatewayAddress=0xD6E4aA932147A3FE5311dA1b67D9e73da06F9cEf&contractId=0xbeca3ec2d1dd91b46d9eccba1f77d96f5e4fe32fc344efb846bbf5cbad45e19e&chainSlug=421614
+```
+
+Note: Once you call `deployContracts()` function on your AppGateway, it will take some time to deploy the onchain contract and offchain forwarder contract.
+
+If some of the addresses return as Address(0), wait for some time, as deployment might be in progress. If you get Address(0) after 5 minutes of the initial call, contact the team.
+
+## `getForwarderAddress` - from onchain address
+
+Retrieves the forwarder address for a given onchain address. This address is predicted using create2.
+
+### Endpoint:
+
+GET /getForwarderAddress
+
+### Query Parameters:
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| onChainAddress | string | The onchain address |
+| chainSlug | number | The chain id to specify the blockchain |
+
+### Returns:
+
+A JSON object with these fields:
+
+```json
+{
+  "chainSlug": 421614,
+  "onChainAddress": "0x3e3d9f517De1CA6d41f5A79ED1D9340d8fF3FC7F",
+  "forwarderAddress": "0x31828eb15fc1F18901b75329AB1d06f4C5dda43D",
+  "isDeployed": true
+}
+```
+
+### Example Request:
+
+```json
+GET /getForwarderAddress?onChainAddress=0x7Fe1141202de13F6884d2A50612DC7685eC68640&chainSlug=421614"
+```
+
+### Example Response:
+
+```json
+{
+  "chainSlug": 421614,
+  "onChainAddress": "0x3e3d9f517De1CA6d41f5A79ED1D9340d8fF3FC7F",
+  "forwarderAddress": "0x31828eb15fc1F18901b75329AB1d06f4C5dda43D",
+  "isDeployed": true
+}
+```
+
+:::note
+If the onchain contracts are deployed using an AppGateway, they will already have a forwarder contract. However, suppose you wish to use a contract already deployed onchain, for example, UniswapFactory. In that case, you will get `isDeployed` as false, and you can deploy it using [Forwarder Addresses](/forwarder-addresses) and then start using it.
+:::

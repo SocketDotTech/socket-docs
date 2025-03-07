@@ -15,7 +15,7 @@ This example introduces the core components of the Socket Protocol while keeping
 - Deploy an onchain application (Counter.sol) on multiple chains through our deployed AppGateway.
 - Leverage Socket's AppGateway to orchestrate updates on multiple Counter instances across chains.
 
-## 1. Clone the Starter Kit
+1. ### Clone the Starter Kit
 
 Clone our starter kit repository which contains:
 - `Counter.sol` contract for cross-chain deployment
@@ -26,8 +26,7 @@ Clone our starter kit repository which contains:
 git clone https://github.com/SocketDotTech/socket-starter-kit
 cd socket-starter-kit
 ```
-
-## 2. Install Dependencies
+1. ### Install Dependencies
 
 Install the required Foundry dependencies:
 
@@ -48,8 +47,7 @@ To update Foundry:
 foundryup
 ```
 :::
-
-## 3. Set Up Environment Variables
+1. ### Set Up Environment Variables
 
 Copy the `.env.sample` file and add your private key:
 
@@ -60,7 +58,7 @@ vi .env
 
 Add your private key to the `.env` file. TODO: explain the priviliges of that wallet? right now there dont seem to be any cause owner restrictions dont seem to exist.
 
-## 4. Deploy the off chain contract on EVMx
+1. ### Deploy the AppGateway contract on EVMx
 
 This command below deploys the `CounterAppGateway` contracts on EVMx. The off chain gateway contract in this example coordinates how the Counter instances on each chain are deployed and how they can be interacted with from a single interface.
 
@@ -72,15 +70,20 @@ EVMx is Socket Protocol's specialized execution environment that runs on watcher
 forge script script/counter/DeployEVMxCounterApp.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
 ```
 
-After successful deployment, locate the `CounterAppGateway` address in the script output logs. Add the address to your `.env` file under the `APP_GATEWAY` variable.
-
 :::tip
 Always include the `--skip-simulation` flag when deploying to EVMx as shown above. Without it, Foundry may incorrectly estimate gas costs, as EVMx's execution model differs from standard EVM chains.
 :::
 
-## 5. Set up fees to pay for your App transactions
+After successful deployment, locate the `CounterAppGateway` address in the script output logs. Add the address to your `.env` file under the `APP_GATEWAY` variable.
+
+```bash
+   APP_GATEWAY=<Counter App Address>;
+   ```
+
+1. ### Set up fees to pay for your App transactions
 
 Socket Protocol uses a prepaid fee model where you deposit funds to cover all aspects of cross-chain execution, including:
+
 
 - Gas costs for transaction execution on destination chains
 - Transmitter service fees for relaying messages between chains
@@ -104,7 +107,6 @@ Ensure your wallet has at least **0.001 Arbitrum Sepolia ETH**. You can get test
 ```bash
 # Deposits 0.001 arbsepETH to the FeesPlug contract
 forge script script/helpers/PayFeesInArbitrumETH.s.sol --broadcast --skip-simulation
-```
 
 ### Check your fee balance
 
@@ -124,7 +126,8 @@ You have options for how to pay fees:
 See the [chain information](/chain-information) page for available `FeesPlug` addresses and the [fees documentation](/fees) for more details.
 :::
 
-## 6. Deploy onchain contracts
+
+1. ### Deploy onchain contracts
 
 Now that we have our AppGateway deployed on EVMx and fees configured, we'll deploy actual Counter instances on multiple EVM chains:
 
@@ -137,8 +140,6 @@ This single command deploys and initializes Counter contracts across all target 
 ```bash
 forge script script/counter/DeployOnchainCounters.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
 ```
-
-What happens behind the scenes:
 
 The deployment process follows these steps:
 
@@ -189,7 +190,7 @@ node script/transactionStatus.js DeployOnchainCounters
 The deployment process may take a few minutes as transactions need to confirm on each target chain.
 :::
 
-## 7. Increment multiple counters
+1. ### Increment multiple counters
 
 Now that the Counter instances have been deployed we can interact with them through a single interface, our CounterAppGateway. We will increment the counter on each chain by calling `incrementCounters`:
 
