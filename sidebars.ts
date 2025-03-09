@@ -93,7 +93,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "chain-information",
+          id: "evmx",
           label: "EVMx Information",
         },
       ],
