@@ -42,7 +42,7 @@ This example highlights how to abstract away blockchain-specific details, enabli
 
    Copy the provided `.env.sample` file and set proper values for private key and rpc.
 
-   You can get the rpc and other details [here](/chain-information).
+   You can get the rpc and other details [here](/evmx).
 
    ```bash
    cp .env.sample .env

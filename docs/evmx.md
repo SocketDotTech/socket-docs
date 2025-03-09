@@ -1,6 +1,6 @@
 ---
-id: chain-information
-title: Chain Information
+id: evmx
+title: EVMx Details
 ---
 
 # EVMx Details
