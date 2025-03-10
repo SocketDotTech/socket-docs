@@ -3,126 +3,224 @@ id: getting-started
 title: Getting Started
 ---
 
-In this tutorial, we’ll demonstrate how to implement an extended version of the `Counter.sol` contract, inspired by the default Foundry example. Unlike a traditional counter deployed on a single chain, our counter will be deployed across multiple chains, and we will interact with it in a **chain-abstracted fashion**.
+# Building a chain-abstracted Counter
 
-This example highlights how to abstract away blockchain-specific details, enabling seamless contract interactions across multiple chains through the SOCKET Protocol. By leveraging chain abstraction, developers can focus on application logic without worrying about the complexities of inter-chain communication.
+This tutorial walks you through building a chain-abstracted version of the classic `Counter.sol` contract from Foundry. While the traditional Foundry counter lives on a single blockchain, we'll create one that spans multiple chains and can be controlled from a single interface.
 
-**You’ll learn how to**
+This example introduces the core components of the SOCKET Protocol while keeping things very simple. The aim is to demonstrate how these different components interact with one another and what a typical flow looks like. Each component (AppGateway, Switchboard, Plugs, etc.) is fully programmable and customizable, as long as it implements the required interfaces. This flexibility means you can adapt SOCKET Protocol to support virtually any multi-chain use case you can imagine.
 
-- Set up the environment with pre-configured contracts.
-- Extend a simple `Counter` contract into a **chain-abstracted** version.
-- Walk through a `CounterAppGateway` contract to orchestrate updates on multiple counter instances.
+**You'll learn how to**
 
-## Setting Up Your Environment
+- Deploy an AppGateway on SOCKET's EVMx which is hosted by a [Watcher](/watchers) node.
+- Deploy an onchain application (Counter.sol) on multiple chains through our deployed AppGateway.
+- Leverage SOCKET's AppGateway to orchestrate updates on multiple Counter instances across chains.
 
-1. ### Clone the Starter Kit
+## Clone the Starter Kit
 
-   The repository includes pre-built examples of `Counter` and `CounterAppGateway` contracts.
+Clone our starter kit repository which contains:
+- `Counter.sol` contract for multi-chain deployment
+- `CounterAppGateway.sol` for managing chain-abstracted interactions
+- Helper scripts for deployment and testing
 
-   ```bash
-   git clone https://github.com/SocketDotTech/socket-starter-kit
-   cd socket-starter-kit
-   ```
+```bash
+git clone https://github.com/SocketDotTech/socket-starter-kit
+cd socket-starter-kit
+```
 
-1. ### Install Dependencies
+## Install Dependencies
 
-   Use forge to install the required libraries.
+Install the required Foundry dependencies:
 
-   ```bash
-   forge install
-   ```
+```bash
+forge install
+```
 
-   :::tip
-   Make sure foundry is atleast on following version. Pay attention to the **date** part.
+:::tip Foundry Version Requirements
+This project requires Foundry version 0.2.0 or later (minimum build date: 2024-09-26).
 
-   `forge 0.2.0 (9a0f66e 2024-09-26T00:20:35.649925000Z)`
-   :::
+To check your version:
+```bash
+forge --version
+```
 
-1. ### Set Up Environment Variables
+To update Foundry:
+```bash
+foundryup
+```
+:::
 
-   Copy the provided `.env.sample` file and set proper values for private key and rpc.
+## Set Up Environment Variables
 
-   You can get the rpc and other details [here](/evmx).
+Copy the `.env.sample` file and add your private key:
 
-   ```bash
-   cp .env.sample .env
-   vi .env
-   ```
+```bash
+cp .env.sample .env
+vi .env
+```
 
-1. ### Deploy the AppGateway contract on EVMx
+Add your private key to the `.env` file.
+<!-- TODO: explain the priviliges of that wallet? right now there dont seem to be any cause owner restrictions dont seem to exist -->
 
-   This command deploys all contracts on EVMx. It includes the `Counter` and `CounterAppGateway`. These contracts collectively dictate how your app instance on each chain has to be deployed and composed.
+## Deploy the AppGateway contract on EVMx
 
-   ```bash
-   forge script script/counter/DeployEVMxCounterApp.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
-   ```
+The command below deploys the `CounterAppGateway` contracts on EVMx. The application gateway contract in this example coordinates how the `Counter` instances on each chain are deployed and how they can be interacted with from a single interface.
 
-   You will see the deployed addresse in script logs under the name `CounterAppGateway`.
+:::note What is EVMx?
+EVMx is SOCKET Protocol's specialized execution environment that runs on [Watcher](/watchers) nodes. It acts as an offchain orchestration layer where you can deploy contracts that coordinate actions across multiple blockchains.
 
-   :::tip
-   Please ensure you have `--skip-simulation` on the above command otherise Foundry may overestimate how much it takes to deploy.
-   :::
+Since it runs the EVM, Solidity developers can work with familiar types and patterns without needing external libraries when implementing their offchain logic through the `AppGateway`.
 
-   Add the deployed address in env for using in rest of the tutorial.
+SOCKET Protocol enhanced this EVM environment to support `async` operations, enabling it to wait for and react to multi-chain events. This set up makes it very easy to test your offchain orchestration state with foundry.
+:::
 
-   ```bash
-   APP_GATEWAY=<Counter App Address>;
-   ```
+```bash
+forge script script/counter/DeployEVMxCounterApp.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
+```
 
-1. ### Set up fees to pay for your App transactions
+After successful deployment, locate the `CounterAppGateway` address in the script output logs. Add the address to your `.env` file under the `APP_GATEWAY` variable.
 
-   In this example we will be paying fees on Arbitrum Sepolia as configured in `script/deployEVMxCounterApp.s.sol`. Find all about fees [here](/fees).
+:::tip
+Always include the `--skip-simulation` flag when deploying to EVMx as shown above. Without it, Foundry may incorrectly estimate gas costs, as EVMx's execution model differs from standard EVM chains.
+:::
 
-   To pay for this increment counter transaction, deposit `arbsepETH` to the `FeesPlug` contract address by running:
+## Set up fees to pay for your App transactions
 
-   ```bash
-   forge script script/helpers/PayFeesInArbitrumETH.s.sol --broadcast  --skip-simulation
-   ```
+SOCKET Protocol uses a prepaid fee model where you deposit funds to cover all aspects of multi-chain execution, including:
 
-   :::tip
-   Please ensure the wallet you are using has at least 0.001 Arbitrum Sepolia ETH.
-   :::
+- Gas costs for transaction execution on destination chains
+- Transmitter service fees for relaying messages between chains
+- Infrastructure costs for the SOCKET Protocol network
 
-   Confirm your available fees to pay for transactions at any time by running:
+### How the fee system works
 
-   ```bash
-   forge script script/helpers/AppGatewayFeeBalance.s.sol
-   ```
+- Fees are deposited into a `FeesPlug` contract on a specific chain configured in the `AppGateway` contract
+- These funds are drawn from when cross-chain messages are processed
+- The fees are distributed between [Transmitters](/transmitters) (who relay transactions) and the SOCKET Protocol infrastructure
+- Unused fees remain in the `FeesPlug` contract balance for your application gateway future transactions
 
-1. ### Deploy onchain contracts
+### Deposit fees
 
-   ```bash
-   forge script script/counter/DeployOnchainCounters.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
-   ```
+In this example, we'll deposit 0.001 arbsepETH fees on **Arbitrum Sepolia** `FeesPlug` contract as configured in `script/deployEVMxCounterApp.s.sol`:
 
-   This script may take longer to run as it will broadcast one contract deployment to the following Sepolia chains: Base, Optimism, Arbitrum. Learn more on how to track the transaction status using the [transaction hash via API endpoint](/api#getdetailsbytxhash---transaction-hash-details).
+:::tip
+Ensure your wallet has at least **0.001 Arbitrum Sepolia ETH**. You can get testnet ETH from the [Arbitrum Sepolia faucet](https://www.alchemy.com/faucets/arbitrum-sepolia).
+:::
 
-1. ### Increment multiple counters
+```bash
+forge script script/helpers/PayFeesInArbitrumETH.s.sol --broadcast --skip-simulation
+```
 
-   To increment the various counters deployed on all different chains by different values we will run,
+### Check your fee balance
 
-   ```bash
-   forge script script/counter/IncrementCountersFromApp.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
-   ```
+Verify your available fees at any time by running:
 
-   This script may take longer to run as it will loop through existing counter instances to increment the counter on the following Sepolia chains: Base, Optimism, Arbitrum.
+```bash
+forge script script/helpers/AppGatewayFeeBalance.s.sol
+```
 
-1. ### Check that the counters onchain have incremented
+:::note Fee flexibility
+You have options for how to pay fees:
+
+- **Multiple tokens**: Pay using various tokens on supported chains
+- **Multiple chains**: Deposit to any chain with a `FeesPlug` contract
+- **Direct deposits**: Call the `deposit()` function directly on any `FeesPlug` contract
+
+See the [chain information](/chain-information) page for available `FeesPlug` addresses and [fee documentation](/fees) for more details.
+:::
+
+## Deploy onchain contracts
+
+Now that we have our AppGateway deployed on EVMx and fees deposited, we'll deploy the actual `Counter` instances on multiple EVM chains:
+
+- **Base Sepolia**
+- **Arbitrum Sepolia**
+- **Optimism Sepolia**
+
+This single command deploys and initializes `Counter` contracts across all target chains:
+
+```bash
+forge script script/counter/DeployOnchainCounters.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
+```
+
+What happens behind the scenes:
+
+The deployment process follows these steps:
+
+1. **Initialization**: The script calls `deployContracts()` on the CounterAppGateway.
+
+2. **Promise Creation**: An `AsyncPromise` contract is created to track the completion status of the deployment.
+
+3. **Queueing**: The deployment request is queued in a `DeliveryHelper` contract on EVMx.
+
+4. **Payload Processing**: Queued items are processed into `PayloadDetails` and submitted for auction.
+
+5. **Transmitter Bidding**: Offchain [Transmitters](/transmitters) bid to execute the requested deployments.
+
+6. **Watcher Attestation**: Once a winning bid is selected, the watcher attests it on the Fast [Switchboard](/switchboards) on the target chain.
+
+7. **Onchain Execution**: The [Transmitter](/transmitters) executes the deployment on the target chain through the SOCKET contract, which verifies with the [Switchboard](/switchboards) that the Transmitter is authorized to execute the payload.
+
+8. **Event Observation**: The [Watcher](/watchers) observes the execution events and resolves the `AsyncPromise` with the deployment result.
+
+9. **Callback Execution**: This triggers the callback in the `AppGateway`, which:
+   - Stores the deployed contract address
+   - Deploys a Forwarder contract (an EVMx representation of the onchain deployed contract)
+   - Sets up the Forwarder to handle future multi-chain calls
+
+:::note Note
+The Fast Switchboard used here is just one example of a simplified [Switchboard](/switchboards) implementation that allows a trusted [Watcher](/watchers) to attest that a given [Transmitter](/transmitters) is authorized to execute a specific payload. Switchboards can be customized to handle various verification methods and proof systems depending on your security requirements.
+:::
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <img src="/img/deploy_flow.svg" alt="deploy flow diagram" style={{ width: '100%' }} />
+</div>
+
+
+### Verify transaction completion
+
+Chain-abstracted deployments aren't synchronous as shown in the flow above. You queue them within the app gateway and they get picked up by a transmitter to be relayed onchain. Let's verify that our `Counter` instances have been successfully deployed on all chains:
+
+```bash
+# Replace <TX_HASH> with the transaction hash from your deployment output for each chain:
+curl https://api-evmx-devnet.socket.tech/getDetailsByTxHash?txHash=<TX_HASH>
+```
+
+Ensure the status is `COMPLETED`. For convenience, you can monitor all deployment transactions at once using:
+
+```bash
+node script/transactionStatus.js DeployOnchainCounters
+```
+
+:::tip
+The deployment process may take a few minutes as transactions need to confirm on each target chain.
+:::
+
+## Increment multiple counters
+
+Now that the Counter instances have been deployed we can interact with them through a single interface, our `CounterAppGateway`. We will increment the counter on each chain by calling `incrementCounters`:
+
+```bash
+forge script script/counter/IncrementCountersFromApp.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
+```
+
+Behind the scenes this works similarly to the deployment process. The only difference is that we queue our onchain call to the `Counter` instance via their EVMx representation, the [forwarder](/forwarder-addresses) contract that was registered during deployment. Also, this time no callback is registered to run for when the counter has been successfully incremented on chain.
+
+### Check that the counters onchain have incremented
+
+You can also query each Counter contract directly on its respective chain to verify the new counter values. Or run the following script:
 
    ```bash
    forge script script/counter/ReadOnchainCounters.s.sol --skip-simulation
    ```
 
-1. ### Withdraw your AppGateway Fee balance
+### Withdraw your AppGateway Fee balance
 
     ```bash
     forge script script/counter/WithdrawFeesArbitrumFeesPlug.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
     ```
 
-## Understanding the Components
+## Conclusion
 
-- **Counter:** This is the instance of the app that is deployed . Unlike a normal counter, the `increase` function of this counter is called via EVMx.
+You've just built and deployed the most simplistic chain-abstracted application to understand the interaction of the various components that make up the SOCKET Protocol.
 
-- **CounterAppGateway:** `CounterAppGateway` is an `AppGateway`. It is a contract deployed on EVMx and not onchain. It dictates how the onchain contracts are called, composed, deployed and initalized. You can read more about chain abstracted deployments [here](/deploy). In this example when someone calls the `incrementCounters` function, it internally triggers calls to `increase` function on each provided instance. This is an [onchain write](/call-contracts) triggered from AppGateway. You can also [make read calls](/read) to the chains to use their state (see `readCounters`).
-
-[↘ Learn more about how to build applications on SOCKET](/writing-apps#architecture-overview)
+From here, you can explore more complex [use cases](/use-cases) or dive deeper into [SOCKET Protocol's Architecture](/architecture).
