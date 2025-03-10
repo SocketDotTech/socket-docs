@@ -205,15 +205,19 @@ forge script script/counter/IncrementCountersFromApp.s.sol --broadcast --skip-si
 
 Behind the scenes this works similarly to the deployment process. The only difference is that we queue our onchain call to the `Counter` instance via their EVMx representation, the [forwarder](/forwarder-addresses) contract that was registered during deployment. Also, this time no callback is registered to run for when the counter has been successfully incremented on chain.
 
-### Monitoring Transaction Status
+### Check that the counters onchain have incremented
 
-To check the status of your cross-chain counter increments:
+You can also query each Counter contract directly on its respective chain to verify the new counter values. Or run the following script:
 
-```bash
-node script/transactionStatus.js IncrementCountersFromApp
-```
+   ```bash
+   forge script script/counter/ReadOnchainCounters.s.sol --skip-simulation
+   ```
 
-You can also query each Counter contract directly on its respective chain to verify the new counter values.
+### Withdraw your AppGateway Fee balance
+
+    ```bash
+    forge script script/counter/WithdrawFeesArbitrumFeesPlug.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
+    ```
 
 ## Conclusion
 
