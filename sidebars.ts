@@ -88,6 +88,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "inbox",
+          label: "Trigger AppGateway from onchain",
+        },
+        {
+          type: "doc",
           id: "api",
           label: "API",
         },
