@@ -1,9 +1,11 @@
 ---
 id: schedule
-title: Scheduling EVMx execution
+title: Schedule EVMx execution
 ---
 
 Scheduling EVMx execution provides a powerful way to execute delayed operations on the blockchain. This functionality allows developers to schedule function calls that will automatically execute after a specified time period has elapsed, enabling time-based workflows and operations without requiring manual intervention.
+
+[↘ See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/blob/master/src/schedule/ScheduleAppGateway.sol).
 
 ## How It Works
 
@@ -98,5 +100,5 @@ The EVMx Scheduling System enables various use cases:
 - **Event monitoring**: Use both API polling and event listeners for critical applications
 
 :::info
-Head to [GitHub to see a practical implementation of this functionality](https://github.com/SocketDotTech/socket-test-app/blob/master/src/schedule/ScheduleAppGateway.sol).
+[See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/blob/master/src/schedule/ScheduleAppGateway.sol).
 :::

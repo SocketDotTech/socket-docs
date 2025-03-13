@@ -94,7 +94,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "schedule",
-          label: "Scheduling EVMx execution",
+          label: "Schedule EVMx execution",
         },
         {
           type: "doc",
