@@ -24,7 +24,7 @@ cast send <ARBITRUM_FEES_PLUG> "deposit(address,uint256,address)" \
 ```
 
 :::info
-Currently only ETH is supported. Support for additional tokens is coming soon.
+Currently only testnet ETH is supported. Support for additional tokens is coming soon.
 :::
 
 ### 2. Configure Fee Data

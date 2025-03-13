@@ -30,7 +30,7 @@ The System consists of 2 main components.
     - This contract is expected to be deployed via the AppGateway Contract;
     - `AppGateway` will be the owner and will trigger the `mint` and `burn` functions;
 
-## Key offchain Contract Concepts
+## Key EVMx Contract Concepts
 
 ### Onchain contract bytecode stored in the AppGateway Contract
 The AppGateway Contract has two key pieces of code to ensure that onchain deployments are replicable `SuperToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
