@@ -88,7 +88,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "inbox",
+          id: "onchain-to-evmx",
           label: "Trigger AppGateway from onchain",
         },
         {

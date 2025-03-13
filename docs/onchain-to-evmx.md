@@ -1,16 +1,16 @@
 ---
-id: inbox
+id: onchain-to-evmx
 title: Trigger AppGateway from onchain
 ---
 
-## Inbox: Communication Pattern
+## Trigger AppGateway from Onchain Contracts
 
-The Inbox pattern provides a flexible approach for onchain contracts to send data from one blockchain to the AppGateway on EVMx. This enables onchain contracts to trigger AppGateway actions to update information, propagate data to other chains, and trigger actions across blockchains.
+This approach provides a flexible method for onchain contracts to send data from one blockchain to the AppGateway on EVMx. It enables onchain contracts to activate AppGateway actions to update information, propagate data to other chains, and initiate actions across blockchains.
 
-This pattern is particularly useful for applications that need to maintain consistent state across multiple blockchains, especially when actions can be performed directly onchain without interacting with the AppGateway.
+This is particularly useful for applications that need to maintain consistent state across multiple blockchains, especially when actions can be performed directly onchain without interacting with the AppGateway.
 
 To enable this functionality:
-- The onchain contract must extend Socket Protocol's `PlugBase`
+- The onchain contract must extend SOCKET Protocol's `PlugBase`
 - The AppGateway must approve receiving messages from that specific onchain contract by calling the `setValidPlug` function
 - The onchain contract needs a function to call the `_callAppGateway` internal function
 
@@ -18,12 +18,11 @@ Let's break down each point.
 
 ### Extending with `PlugBase`
 
-The `PlugBase` contract enables onchain to EVMx communication for applications. It provides core functionality that allows contracts to connect to the Socket infrastructure and communicate with other chains via the AppGateway.
+The `PlugBase` contract enables onchain to EVMx communication for applications. It provides core functionality that allows contracts to connect to the SOCKET infrastructure and communicate with other chains via the AppGateway.
 
 Key capabilities:
-1. Connection to Socket's infrastructure through the `_connectSocket` and `_disconnect` functions
-2. Communication with AppGateways via the `_callAppGateway` function
-3. Security through the `onlySocket` modifier, ensuring only the authorized Socket contract can call certain functions
+- Connection to SOCKET's infrastructure through the `_connectSocket` and `_disconnectSocket` functions
+- Communication with AppGateways via the `_callAppGateway` function
 
 By inheriting from `PlugBase`, your contracts gain the ability to communicate with the AppGateway on EVMx, allowing you to spread and process information across different blockchains securely.
 
