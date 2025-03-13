@@ -73,16 +73,6 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "deploy",
-          label: "Deploy contracts onchain",
-        },
-        {
-          type: "doc",
-          id: "fees",
-          label: "Pay for your onchain transactions",
-        },
-        {
-          type: "doc",
           id: "onchain-to-evmx",
           label: "Trigger AppGateway from onchain",
         },
@@ -95,6 +85,16 @@ const sidebars: SidebarsConfig = {
           type: "doc",
           id: "write-tests",
           label: "Write tests for an AppGateway",
+        },
+        {
+          type: "doc",
+          id: "deploy",
+          label: "Deploy contracts onchain",
+        },
+        {
+          type: "doc",
+          id: "fees",
+          label: "Pay for your onchain transactions",
         },
         {
           type: "doc",
