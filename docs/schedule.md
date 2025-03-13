@@ -24,7 +24,7 @@ The scheduling mechanism leverages the `setTimeout` function provided by the EVM
 1. You specify a target contract address, payload data, and a delay in seconds
 2. The system generates a unique timeout ID for tracking purposes
 3. The EVMx monitors the timeout and executes the payload when the time elapses
-4. Upon execution, the function is executed and the timeout status is updated
+4. Upon execution the timeout status is updated
 
 ## Implementation Guide
 
@@ -96,8 +96,8 @@ The EVMx Scheduling System enables various use cases:
 ## Best Practices
 
 - **Error handling**: Implement robust error handling in timeout resolution functions
-- **Timeout duration**: Consider gas market conditions when setting very long timeouts for onchain execution
 - **Event monitoring**: Use both API polling and event listeners for critical applications
+- **Timeout duration**: When setting very long timeouts for transaction execution resolved on EVMx. If the execution triggers an onchain transaction via the `targetFunction` after the timeout, ensure gas market dynamics are accounted for to optimize execution cost and reliability.
 
 :::info
 [See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/blob/master/src/schedule/ScheduleAppGateway.sol).
