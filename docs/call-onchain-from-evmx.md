@@ -16,6 +16,8 @@ Here's a simple example of a value increase function where the onchain call does
 ```solidity
 function increaseOnchain(uint256 amount, address forwarder) external async {
     ISomeContract(forwarder).increase(amount);
+    // (optional) Promise-based pattern to handle asynchronous data retrieval
+    IPromise(forwarder).then(this.someFunction.selector, abi.encode(someDataToShareWithPromise));
 }
 ```
 
@@ -30,15 +32,18 @@ function increaseOnchain(uint256 amount, address forwarder) external async {
 
 One powerful feature of EVMx is the ability to make sequential batch calls to multiple contracts or chains within a single function. Since `async` functions work with a transaction queue, all calls are processed in order.
 
-Consider this chain-abstracted value update example where the onchain call does not return any values:
+Consider this chain-abstracted value update example:
 
 ```solidity
 function transfer(uint256 amount, address forwarderChainA, address forwarderChainB) external async {
     // First burn tokens on the source chain
     ISomeContract(forwarderChainA).increase(amount);
-
+    // (optional) Promise-based pattern to handle asynchronous data retrieval
+    IPromise(forwarderChainA).then(this.someFunction.selector, abi.encode(someDataToShareWithPromise));
     // Then mint tokens on the destination chain
     ISomeContract(forwarderChainB).decrease(amount);
+    // (optional) Promise-based pattern to handle asynchronous data retrieval
+    IPromise(forwarderChainB).then(this.someFunction.selector, abi.encode(someDataToShareWithPromise));
 }
 ```
 

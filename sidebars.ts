@@ -68,8 +68,8 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "read",
-          label: "Read onchain",
+          id: "read-onchain-from-evmx",
+          label: "Read onchain from EVMx",
         },
         {
           type: "doc",
