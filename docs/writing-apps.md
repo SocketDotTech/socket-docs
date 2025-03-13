@@ -92,12 +92,12 @@ The `initialize` function is empty in this example. You can use it for setting c
  {
    title: "Mint tokens",
    description: "Let's mint some tokens",
-   link: "/call-contracts"
+   link: "/call-onchain-from-evmx"
  },
  {
    title: "Burn tokens",
    description: "Read onchain state before burning tokens",
-   link: "/read"
+   link: "/read-onchain-from-evmx"
  },
  {
    title: "Deploy onchain",

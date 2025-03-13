@@ -1,41 +1,40 @@
 ---
 id: deploy
-title: Deploying onchain smart contracts
+title: Deploy contracts onchain
 ---
-
-# How to deploy contracts to chains?
 
 ## Deploy
 
-The deployment of onchain contracts from EVMx is managed through an AppGateway contract. The key components of deployment include storing contract bytecode and handling the actual deployment process. Here's how it works using the `SuperToken` example ([code here](https://github.com/SocketDotTech/socket-protocol/blob/master/test/apps/app-gateways/super-token/SuperTokenAppGateway.sol)):
+The deployment of onchain contracts from EVMx is managed through an AppGateway contract. The key components of deployment include storing contract bytecode and handling the actual deployment process. Here's how it works using an example:
 
-1. The AppGateway Contract stores the contract bytecode:
-    ```solidity
-    creationCodeWithArgs[superToken] = abi.encodePacked(
-        type(SuperToken).creationCode,
-        abi.encode(
-            params_.name_,
-            params_.symbol_,
-            params_.decimals_,
-            params_.initialSupplyHolder_,
-            params_.initialSupply_
-        )
-    );
-    ```
+[↘ See a reference implementation here](https://github.com/SocketDotTech/socket-starter-kit/blob/master/src/counter/CounterAppGateway.sol).
 
 1. A unique identifier is created for each contract:
     ```solidity
-    bytes32 public superToken = _createContractId("superToken");
+    bytes32 public someRelevantName = _createContractId("someRelevantName");
+    ```
+
+1. The AppGateway Contract stores the contract bytecode:
+    ```solidity
+    creationCodeWithArgs[someRelevantName] = abi.encodePacked(
+        type(OnChainContractType).creationCode,
+        abi.encode(
+            params_.static_,
+            params_.constructor_,
+            params_.input_arguments_to_,
+            params_.supply_onchain_contract
+        )
+    );
     ```
 
 1. The deployment is triggered using:
     ```solidity
     function deployContracts(uint32 chainSlug_) external async {
-        _deploy(superToken, chainSlug_, IsPlug.YES);
+        _deploy(someRelevantName, chainSlug_, IsPlug.YES);
     }
     ```
 
-1. Chain specific parameters may be set automatically right after `_deploy` by overriding `initialize`
+1. Dynamic or chain specific parameters may be set automatically right after `_deploy` by overriding the `initialize` function:
     ```solidity
     function initialize(uint32 chainSlug) public override async {
         if (chainSlug == 1) {
@@ -51,26 +50,25 @@ This system can be extended to manage multiple contracts by storing their respec
 </div>
 
 ### Onchain contract bytecode stored in the AppGateway Contract
-The AppGateway Contract has two key pieces of code to ensure that onchain deployments are replicable `SuperToken`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
+The AppGateway Contract has two key pieces of code to ensure that onchain deployments are replicable `OnChainContract`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
 ```solidity
-creationCodeWithArgs[superToken] = abi.encodePacked(
-    type(SuperToken).creationCode,
+creationCodeWithArgs[someRelevantName] = abi.encodePacked(
+    type(OnChainContractType).creationCode,
     abi.encode(
-        params_.name_,
-        params_.symbol_,
-        params_.decimals_,
-        params_.initialSupplyHolder_,
-        params_.initialSupply_
+        params_.static_,
+        params_.constructor_,
+        params_.input_arguments_to_,
+        params_.supply_onchain_contract
     )
 );
 ```
 
-Using  `bytes32` variable is use a unique identifier for the SuperToken contract generated using the `_createContractId` function. This identifier allows us to fetch `creationCode`, `onchain addresses` and `forwarder addresses` from maps in `AppGatewayBase`. See [here](/forwarder-addresses) to know more about [forwarder addresses](/forwarder-addresses).
+The  `bytes32` variable is a unique identifier for the `OnChainContract` contract generated using the `_createContractId` function. This identifier allows us to fetch `creationCode`, `onchain addresses` and `forwarder addresses` from maps in `AppGatewayBase`. See [here](/forwarder-addresses) to know more about [forwarder addresses](/forwarder-addresses).
 ```solidity
-bytes32 public superToken = _createContractId("superToken");
+bytes32 public someRelevantName = _createContractId("someRelevantName");
 ```
 
-While this example handles a single contract, you can extend it to manage multiple contracts by storing their creation codes.
+While this handles a single contract, you can extend it to manage multiple contracts by storing their creation codes.
 
 ### Onchain contract deployment with the AppGateway Contract
 <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -80,7 +78,7 @@ While this example handles a single contract, you can extend it to manage multip
 The `deployContracts` function takes a `chainSlug` as an argument that specifies the chain where the contract should be deployed.
 ```solidity
 function deployContracts(uint32 chainSlug_) external async {
-    _deploy(superToken, chainSlug_, IsPlug.YES);
+    _deploy(someRelevantName, chainSlug_, IsPlug.YES);
 }
 ```
 It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains.
@@ -97,14 +95,14 @@ The `initialize` function is empty in this example. You can use it for setting c
 
 Initialization is a separate process that handles dynamic or chain-specific values after deployment. This is particularly useful when contracts need different configurations based on their deployment chain.
 
-Here's an example using `SuperToken` with chain-specific mint limits:
+Here's an example using `SomeContract` with chain-specific mint limits:
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     <img src="/img/deploy_initialize.svg" alt="deploy initialize" style={{ width: '80%' }} />
 </div>
 
 ```solidity
-contract SuperToken is ERC20, Ownable, PlugBase {
+contract SomeContract is ERC20, PlugBase {
     (...)
     error ExceedsMintLimit(uint256 amount, uint256 limit);
 
@@ -124,11 +122,11 @@ contract SuperToken is ERC20, Ownable, PlugBase {
 We will set this limit using the `initialize` function, and to make things a bit more dynamic, we will set a higher limit for Ethereum compared to chains.
 
 ```solidity
-interface ISuperToken {
+interface ISomeContract {
     function setMintLimit(uint256 newLimit) external;
 }
 
-contract SuperTokenAppGateway is AppGatewayBase, Ownable {
+contract SomeContractAppGateway is AppGatewayBase {
     (...)
 
     function initialize(uint32 chainSlug) public override async {
@@ -139,12 +137,12 @@ contract SuperTokenAppGateway is AppGatewayBase, Ownable {
             mintLimit = 10 ether;
         }
 
-        ISuperToken(forwarderAddresses[superToken][chainSlug]).setMintLimit(mintLimit);
+        ISomeContract(forwarderAddresses[someRelevantName][chainSlug]).setMintLimit(mintLimit);
     }
 }
 ```
 
-The initialize function follows similar flow to how demonstrated on [Calling onchain smart contracts](/call-contracts) using the `async` modifier and `forwarderAddress`.
+The initialize function follows similar flow to how demonstrated on [Calling onchain smart contracts](/call-onchain-from-evmx) using the `async` modifier and `forwarderAddress`.
 
 :::info
 You can also note that the forwarder addresses of deployed contracts are stored in `forwarderAddresses` mapping in the `AppGatewayBase` and can be easily accessed here.
@@ -152,35 +150,37 @@ You can also note that the forwarder addresses of deployed contracts are stored 
 
 ## Deploy multiple contracts
 
-So far we have been working with a single `SuperToken` contract onchain. But the AppGateway also supports working with multiple contracts. Lets create `SuperTokenVault` to lock tokens and extend the AppGateway to deploy both contracts.
+So far we have been working with a single contract onchain. But the AppGateway also supports working with multiple contracts. Lets create `SomeOtherContract` to lock tokens and extend the AppGateway to deploy both contracts.
+
+[↘ See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/deploy).
 
 ```solidity
-contract SuperTokenVault is Ownable, PlugBase {
-    address public superToken;
+contract SomeOtherContract is Ownable, PlugBase {
+    address public someContract;
     mapping(address => uint256) public lockedAmount;
 
-    function setSuperToken(address superToken_) external onlyOwner {
-        superToken = superToken_;
+    function setToken(address someContract_) external onlySocket {
+        someContract = someContract_;
     }
 
     function lock(uint256 amount) external {
-        SuperToken(superToken).transferFrom(msg.sender, address(this), amount);
+        SomeContract(someContract).transferFrom(msg.sender, address(this), amount);
         lockedAmount[msg.sender] += amount;
     }
 
     function unlock(uint256 amount) external {
         lockedAmount[msg.sender] -= amount;
-        SuperToken(superToken).transfer(msg.sender, amount);
+        SomeContract(someContract).transfer(msg.sender, amount);
     }
 }
 ```
 
-This contract needs to be onchain, therefore lets change `SuperTokenAppGateway` to include it as well.
+This contract needs to be onchain, therefore lets change `SomeContractAppGateway` to include it as well.
 
 ```solidity
-contract SuperTokenAppGateway is AppGatewayBase, Ownable {
+contract SomeContractAppGateway is AppGatewayBase {
     (...)
-    bytes32 public superTokenVault = _createContractId("superTokenVault");
+    bytes32 public someOtherRelevantName = _createContractId("someOtherRelevantName");
 
     constructor(
         address addressResolver_,
@@ -190,27 +190,31 @@ contract SuperTokenAppGateway is AppGatewayBase, Ownable {
         uint8 decimals_
     ) AppGatewayBase(addressResolver_, feesData_) {
         (...)
-        creationCodeWithArgs[superTokenVault] = type(SuperTokenVault).creationCode;
+        creationCodeWithArgs[someOtherRelevantName] = type(SomeOtherContract).creationCode;
     }
 
     function deployContracts(uint32 chainSlug) external async {
-        _deploy(superToken, chainSlug, IsPlug.YES);
-        _deploy(superTokenVault, chainSlug, IsPlug.YES);
+        _deploy(someRelevantName, chainSlug, IsPlug.YES);
+        _deploy(someOtherRelevantName, chainSlug, IsPlug.YES);
     }
 
     function initialize(uint32 chainSlug) public override async {
-        address superTokenVaultForwarder = forwarderAddresses[superTokenVault][chainSlug];
-        address superTokenOnChainAddress = getOnChainAddress(superToken, chainSlug);
+        address someOtherContractForwarder = forwarderAddresses[someOtherRelevantName][chainSlug];
+        address someContractOnchainAddress = getOnChainAddress(someRelevantName, chainSlug);
 
-        SuperTokenVault(superTokenVaultForwarder).setSuperToken(superTokenOnChainAddress);
+        SomeOtherContract(someOtherContractForwarder).setToken(someContractOnchainAddress);
     }
 }
 ```
 
-This `SuperTokenAppGateway` deploys both contracts, sets limit on `SuperToken` and sets `SuperToken’`s onchain address on `SuperTokenVault`.
+This `SomeContractAppGateway` deploys both contracts, sets limit on `SomeContract` and sets `SomeContract`'s onchain address on `SomeOtherContract`.
+
+In summary:
+
+- `SomeOtherContract` doesn't have any constructor arguments. Therefore we can directly store its `creationCode` without encoding anything along with it.
+- We can get the forwarder addresses of both these from `forwarderAddresses` mapping.
+- Since `SomeOtherContract` locks `SomeContract`, its needs the token’s onchain address. This address can be fetched using `getOnChainAddress` function.
 
 :::info
-- `SuperTokenVault` doesn't have any constructor arguments. Therefore we can directly store its `creationCode` without encoding anything along with it.
-- We can get the forwarder addresses of both these from `forwarderAddresses` mapping.
-- Since `SuperTokenVault` locks `SuperToken`, its needs the token’s onchain address. This address can be fetched using `getOnChainAddress` function.
+[See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/deploy).
 :::
