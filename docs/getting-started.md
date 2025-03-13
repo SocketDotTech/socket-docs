@@ -110,7 +110,7 @@ Ensure your wallet has at least **0.001 Arbitrum Sepolia ETH**. You can get test
 forge script script/helpers/PayFeesInArbitrumETH.s.sol --broadcast --skip-simulation
 ```
 
-### Check your fee balance
+### Check your AppGateway fee balance
 
 Verify your available fees at any time by running:
 
