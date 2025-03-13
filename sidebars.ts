@@ -63,13 +63,28 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "call-contracts",
-          label: "Write onchain",
+          id: "call-onchain-from-evmx",
+          label: "Call onchain from EVMx",
         },
         {
           type: "doc",
-          id: "read",
-          label: "Read onchain",
+          id: "read-onchain-from-evmx",
+          label: "Read onchain from EVMx",
+        },
+        {
+          type: "doc",
+          id: "onchain-to-evmx",
+          label: "Trigger AppGateway from onchain",
+        },
+        {
+          type: "doc",
+          id: "schedule",
+          label: "Schedule EVMx execution",
+        },
+        {
+          type: "doc",
+          id: "write-tests",
+          label: "Write tests for an AppGateway",
         },
         {
           type: "doc",
@@ -79,12 +94,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "fees",
-          label: "Pay for your transactions",
-        },
-        {
-          type: "doc",
-          id: "write-tests",
-          label: "Write tests for your app",
+          label: "Pay for your onchain transactions",
         },
         {
           type: "doc",

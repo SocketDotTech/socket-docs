@@ -110,7 +110,7 @@ Ensure your wallet has at least **0.001 Arbitrum Sepolia ETH**. You can get test
 forge script script/helpers/PayFeesInArbitrumETH.s.sol --broadcast --skip-simulation
 ```
 
-### Check your fee balance
+### Check your AppGateway fee balance
 
 Verify your available fees at any time by running:
 
@@ -125,7 +125,7 @@ You have options for how to pay fees:
 - **Multiple chains**: Deposit to any chain with a `FeesPlug` contract
 - **Direct deposits**: Call the `deposit()` function directly on any `FeesPlug` contract
 
-See the [chain information](/chain-information) page for available `FeesPlug` addresses and [fee documentation](/fees) for more details.
+See the [EVMx](/evmx) page for available `FeesPlug` addresses and [fee documentation](/fees) for more details.
 :::
 
 ## Deploy onchain contracts
@@ -223,4 +223,4 @@ You can also query each Counter contract directly on its respective chain to ver
 
 You've just built and deployed the most simplistic chain-abstracted application to understand the interaction of the various components that make up the SOCKET Protocol.
 
-From here, you can explore more complex [use cases](/use-cases) or dive deeper into [SOCKET Protocol's Architecture](/architecture).
+From here, you can explore more complex [use cases](/usecases) or dive deeper into [SOCKET Protocol's Architecture](/architecture).

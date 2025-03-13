@@ -77,7 +77,7 @@ import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 ## Key Considerations
 
 ### Security Measures
-- **Onchain State Validation**: Before allowing a spend, [check balances](/read) using `read()` functions.
+- **Onchain State Validation**: Before allowing a spend, [check balances](/read-onchain-from-evmx) using `read()` functions.
 - **Fraud Prevention**: Implement signature verifications in [Switchboard](/switchboards).
 - **Failover Handling**: Define fail-safe conditions if a scheduled debit fails (e.g., fallback mechanisms, notifications).
 
