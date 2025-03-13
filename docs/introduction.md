@@ -66,8 +66,8 @@ By abstracting these complexities, developers can build applications that work s
    link: "/getting-started"
  },
  {
-   title: "App Tutorial",
-   description: "Build a chain-abstracted ERC20 app",
+   title: "Core Concepts",
+   description: "Build a chain-abstracted app",
    link: "/writing-apps"
  }
 ]} />

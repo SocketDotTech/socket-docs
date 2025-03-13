@@ -87,23 +87,23 @@ The `initialize` function is empty in this example. You can use it for setting c
 ## What's next!
 <CardGrid cards={[
  {
-   title: "Mint tokens",
-   description: "Let's mint some tokens",
+   title: "Call onchain",
+   description: "Let's call onchain functions",
    link: "/call-onchain-from-evmx"
  },
  {
-   title: "Burn tokens",
-   description: "Read onchain state before burning tokens",
+   title: "Read onchain",
+   description: "Read onchain state",
    link: "/read-onchain-from-evmx"
  },
  {
    title: "Deploy onchain",
-   description: "Deploy the ERC20 contracts onchain",
+   description: "Deploy contracts onchain from EVMx",
    link: "/deploy"
  },
  {
    title: "Pay for transactions",
-   description: "Pay for your EVMx transactions",
-   link: "/writing-apps"
+   description: "Pay for onchain execution",
+   link: "/fees"
  }
 ]} />
