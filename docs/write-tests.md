@@ -9,7 +9,7 @@ Testing multi-chain applications with Foundry requires simulating both onchain b
 
 ### Setting up the test environment
 
-Your test contract should inherit from `DeliveryHelperTest`, which provides the infrastructure for simulating SOCKET Protocol's multi-chain messaging:
+Your test contract should inherit from `DeliveryHelperTest`, which provides the infrastructure for simulating SOCKET Protocol's multi-chain infrastructure:
 
 ```solidity
 function setUp() public {
@@ -19,7 +19,7 @@ function setUp() public {
 
 ### Understanding `setUpDeliveryHelper()`
 
-`setUpDeliveryHelper()` initializes the core infrastructure needed to simulate SOCKET Protocol's multi-chain messaging:
+`setUpDeliveryHelper()` initializes the core infrastructure needed to simulate SOCKET Protocol's multi-chain infrastructure:
 
 1. Deploys the EVMx core components
 2. Sets up the fees manager for handling transaction fees
@@ -33,7 +33,7 @@ function setUp() public {
 _executeWriteBatchMultiChain(chainSlugs);
 ```
 
-`_executeWriteBatchMultiChain()` simulates the entire multi-chain message delivery process:
+`_executeWriteBatchMultiChain()` simulates the entire multi-chain delivery process:
 
 1. Creates an async ID for the batch of operations
 2. Simulates the bidding process for message delivery

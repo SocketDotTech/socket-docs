@@ -87,7 +87,7 @@ The `IsPlug` enum determines whether a contract will be connected to SOCKET's mu
 
 - `IsPlug.YES`: Contract will be registered as a SOCKET plug, enabling direct communication with SOCKET's infrastructure. Use this for contracts that need to interact directly with SOCKET (e.g., SuperToken contracts).
 
-- `IsPlug.NO`: Contract will be deployed without SOCKET integration and cannot be called directly via SOCKET's messaging system. Use this for contracts that only need to be called internally by other contracts (e.g., LimitHook contracts that don't require direct SOCKET communication).
+- `IsPlug.NO`: Contract will be deployed without SOCKET integration and cannot be called directly via SOCKET's infrastructure. Use this for contracts that only need to be called internally by other contracts (e.g., LimitHook contracts that don't require direct SOCKET communication).
 
 The `initialize` function is empty in this example. You can use it for setting chain-specific or dynamic variables after deployment if needed.
 
