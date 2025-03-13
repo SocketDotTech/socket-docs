@@ -1,6 +1,6 @@
 ---
 id: fees
-title: Paying fees for transactions
+title: Pay for your onchain transactions
 ---
 
 Setting up fees is essential for your app to interact with both the EVMx and supported blockchains. There is only one type of fees you need to manage: onchain transaction sponsorship
@@ -36,7 +36,7 @@ User must have deposited at least this amount to the contract before initiating 
 Set the fee configuration in your contracts:
 
 ```solidity
-AppGateway(appGateway).setFees(feesData);
+AppGateway(appGatewayAddress).setFees(feesData);
 ```
 
 or set them in the `constructor` of the `AppGateway`.
@@ -80,27 +80,25 @@ FeesData memory feesData = FeesData({
 - Provides fee limits for user protection
 
 #### Implementation context
-The `FeesData` structure is passed to the `SuperTokenAppGateway` contract ensuring consistent fee handling across the entire system, whether transactions are processed offchain or onchain:
+The `FeesData` structure is passed to the `SomeAppGateway` contract ensuring consistent fee handling across the entire system, whether transactions are processed offchain or onchain:
 
 ```solidity
-SuperTokenAppGateway gateway = new SuperTokenAppGateway(
+SomeAppGateway gateway = new SomeAppGateway(
     addressResolver,
-    owner,
-    address(auctionManager),
-    FAST,
-    feesData
+    feesData,
+    owner
 );
 ```
 
 ### Deposit sponsorship tokens to pay for transactions
 
-First, deposit ETH to the `FeesPlug` contract on your chosen chain:
+First, deposit testnet ETH to the `FeesPlug` contract on your chosen chain:
 
 ```bash
-cast send <CHOSEN_CHAIN_FEES_PLUG> "deposit(address,uint256,address)" \
+cast send <CHOSEN_CHAIN_FEES_PLUG> "deposit(address,address,uint256)" \
     0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
-    <AMOUNT> \
     $APP_GATEWAY \
+    <AMOUNT> \
     --value <AMOUNT> \
     --rpc-url $SEPOLIA_RPC \
     --private-key $PRIVATE_KEY

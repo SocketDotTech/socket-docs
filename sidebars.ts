@@ -79,7 +79,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "fees",
-          label: "Pay for your transactions",
+          label: "Pay for your onchain transactions",
         },
         {
           type: "doc",
