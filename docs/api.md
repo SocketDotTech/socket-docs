@@ -160,15 +160,110 @@ appGatewayDetails":
 
 As soon as onchain deployment is done, we will get the onChainAddress and forwarderAddress. ForwarderAddress is derived from chainSlug and onChainAddress. In the callback, forwarderAddress is deployed and the `isForwarderDeployed` variable will become `true`.  Now you can start using your forwarderAddress.
 
+## `/timeout` - Timeout details
+
+This API retrieves timeout details based on the provided parameters. It returns an array of timeout details containing status, execution time, and other relevant information.
+
+### Request Parameters
+
+At least one of the following parameters is required:
+- `txHash` (string): The hash of the transaction to query timeouts for.
+- `timeoutId` (string): The specific timeout ID to retrieve details for.
+- `target` (string): The target address to query timeouts for.
+
+### Response Format
+
+The response is a JSON object containing the following fields:
+
+```json
+{
+  "status": "SUCCESS",
+  "response": [
+    {
+      "id": "number",
+      "timeoutId": "string",
+      "target": "string",
+      "payload": "string",
+      "executeAt": "number",
+      "executedAt": "number",
+      "isResolved": "boolean",
+      "status": "string",
+      "resolveTxHash": "string",
+      "simulationStatus": "string",
+      "revertString": "string or null",
+      "originTxHash": "string",
+      "createdAt": "string",
+      "updatedAt": "string"
+    }
+  ]
+}
+```
+
+### Response Fields Explanation
+
+| Field | Type | Description |
+| --- | --- | --- |
+| status | string | Status of the API call (e.g., "SUCCESS") |
+| id | number | Unique identifier for the timeout record |
+| timeoutId | string | Unique identifier for the timeout |
+| target | string | Target address for the timeout |
+| payload | string | Payload data for the timeout |
+| executeAt | number | Unix timestamp when the timeout is scheduled to execute |
+| executedAt | number | Unix timestamp when the timeout was executed |
+| isResolved | boolean | Whether the timeout has been resolved |
+| status | string | Current status of the timeout (e.g., "RESOLVED") |
+| resolveTxHash | string | Transaction hash for the resolution |
+| simulationStatus | string | Status of the simulation (e.g., "NO") |
+| revertString | string or null | Error message if the timeout reverted |
+| originTxHash | string | Original transaction hash that created the timeout |
+| createdAt | string | ISO timestamp when the timeout was created |
+| updatedAt | string | ISO timestamp when the timeout was last updated |
+
+### Example Request
+
+```json
+GET /timeout?timeoutId=0x0000002b4b5bcb38014cbdf852ae6429871e0b1ac0a05df80000000000000074
+```
+
+### Example Response
+
+```json
+{
+  "status": "SUCCESS",
+  "response": [
+    {
+      "id": 180,
+      "timeoutId": "0x0000002b4b5bcb38014cbdf852ae6429871e0b1ac0a05df80000000000000074",
+      "target": "0xeeadf7db616a5acc6031687b1fe4ed40f5feb55e",
+      "payload": "0x292f3da50000000000000000000000000000000000000000000000000000000067c87ec4",
+      "executeAt": 1741192910,
+      "executedAt": 1741192912,
+      "isResolved": true,
+      "status": "RESOLVED",
+      "resolveTxHash": "0x743831d51a632036459d948152c27fc876a998dd477774361cc749496c1c62bf",
+      "simulationStatus": "NO",
+      "revertString": null,
+      "originTxHash": "0xd82a8e5d191b2cc0f3d98c32ba83ce9db7c287581833705598dcaeaddd2cdc1f",
+      "createdAt": "2025-03-05T16:41:40.052Z",
+      "updatedAt": "2025-03-05T16:41:50.456Z"
+    }
+  ]
+}
+```
+
+:::note
+The API will return an error if none of the required parameters (txHash, timeoutId, or target) is provided. The response may include multiple timeout records if multiple timeouts match the provided parameters.
+:::
+
 ## `getAddresses` - onchain and forwarder addresses
 
 Retrieves deployed addresses for a specified AppGateway contract. It returns onchain deployed addresses, along with their corresponding forwarderAddresses.
 
-### Endpoint:
+### Endpoint
 
 GET /getAddresses
 
-### Query Parameters:
+### Query Parameters
 
 | Parameter | Type | Description |
 | --- | --- | --- |
@@ -176,7 +271,7 @@ GET /getAddresses
 | contractId | string | The contract identifier used in appGateway contract |
 | chainSlug | number | The chain id to specify the blockchain. |
 
-### Returns:
+### Returns
 
 A JSON object with these fields:
 
@@ -193,7 +288,7 @@ A JSON object with these fields:
 }
 ```
 
-### Example Request:
+### Example Request
 
 ```json
 GET /getAddresses?appGatewayAddress=0xD6E4aA932147A3FE5311dA1b67D9e73da06F9cEf&contractId=0xbeca3ec2d1dd91b46d9eccba1f77d96f5e4fe32fc344efb846bbf5cbad45e19e&chainSlug=421614
@@ -207,18 +302,18 @@ If some of the addresses return as Address(0), wait for some time, as deployment
 
 Retrieves the forwarder address for a given onchain address. This address is predicted using create2.
 
-### Endpoint:
+### Endpoint
 
 GET /getForwarderAddress
 
-### Query Parameters:
+### Query Parameters
 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | onChainAddress | string | The onchain address |
 | chainSlug | number | The chain id to specify the blockchain |
 
-### Returns:
+### Returns
 
 A JSON object with these fields:
 
@@ -231,13 +326,13 @@ A JSON object with these fields:
 }
 ```
 
-### Example Request:
+### Example Request
 
 ```json
 GET /getForwarderAddress?onChainAddress=0x7Fe1141202de13F6884d2A50612DC7685eC68640&chainSlug=421614"
 ```
 
-### Example Response:
+### Example Response
 
 ```json
 {
