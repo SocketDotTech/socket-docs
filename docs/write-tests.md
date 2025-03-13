@@ -122,13 +122,3 @@ These addresses are essential for:
 3. **Error Cases**: Include tests for failed transfers, insufficient balances, and expired deadlines
 4. **Gas Optimization**: Monitor gas usage in tests to catch potential efficiency issues
 5. **State Verification**: Always verify the final state on all involved chains after operations complete
-
-## Running Tests
-
-Execute the test suite using Foundry:
-
-```bash
-forge test --match-contract SuperTokenTest -vv
-```
-
-Use the `-vv` flag for detailed output including event logs and gas usage.
