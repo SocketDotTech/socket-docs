@@ -94,7 +94,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "write-tests",
-          label: "Write tests for your app",
+          label: "Write tests for an AppGateway",
         },
         {
           type: "doc",
