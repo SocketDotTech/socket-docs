@@ -3,31 +3,11 @@ id: fees
 title: Paying fees for transactions
 ---
 
-# Fee Setup and Management
-
 Setting up fees is essential for your app to interact with both the EVMx and supported blockchains. There is only one type of fees you need to manage: onchain transaction sponsorship
 
 ## Onchain Transaction Sponsorship
 
-### 1. Deposit Sponsorship Tokens to pay for transactions
-
-First, deposit ETH to the PayloadDeliveryPlug contract on your chosen chain:
-
-```bash
-cast send <ARBITRUM_FEES_PLUG> "deposit(address,uint256,address)" \
-    0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
-    <AMOUNT> \
-    $APP_GATEWAY \
-    --value <AMOUNT> \
-    --rpc-url $SEPOLIA_RPC \
-    --private-key $PRIVATE_KEY
-```
-
-:::info
-Currently only testnet ETH is supported. Support for additional tokens is coming soon.
-:::
-
-### 2. Configure Fee Data
+### Configure fee data
 
 Set up the `FeesData` structure for your app:
 
@@ -51,7 +31,7 @@ The `maxFees` parameter serves a dual purpose:
 
 User must have deposited at least this amount to the contract before initiating the transaction, which ensures the transmitter (entity processing batches) is guaranteed compensation for including this transaction.
 
-### 3. Apply Fee Configuration
+### Apply fee configuration
 
 Set the fee configuration in your contracts:
 
@@ -74,7 +54,7 @@ FeesData memory feesData = FeesData({
 });
 ```
 
-#### FeesData Key Components
+#### `FeesData` key components
 
 1. `feePoolChain`
     Specifies the blockchain network ID where fees are collected and managed. In this case, it's set to `421614`, which is Arbitrum Sepolia's chain ID.
@@ -87,7 +67,7 @@ FeesData memory feesData = FeesData({
     The user must have deposited at least this amount, ensuring the transmitter gets compensated for including this transaction in a batch.
     If the actual cost is less than this amount, the user only pays what's needed.
 
-#### Dual Purpose Usage
+#### Dual purpose usage
 
 **EVMx Transactions**
 - Acts as a fee configuration for processing offchain computations
@@ -99,7 +79,7 @@ FeesData memory feesData = FeesData({
 - Manages gas costs for contract interactions
 - Provides fee limits for user protection
 
-#### Implementation Context
+#### Implementation context
 The `FeesData` structure is passed to the `SuperTokenAppGateway` contract ensuring consistent fee handling across the entire system, whether transactions are processed offchain or onchain:
 
 ```solidity
@@ -112,37 +92,22 @@ SuperTokenAppGateway gateway = new SuperTokenAppGateway(
 );
 ```
 
-## Contract Deployment
+### Deposit sponsorship tokens to pay for transactions
 
-### 1. Deploy to EVMx
-
-Deploy your contracts using the [`DeployGateway.s.sol` script](https://github.com/SocketDotTech/socket-protocol/blob/watcher-precompile-changes/script/super-token/DeployGateway.s.sol) by running:
-```bash
-forge script script/super-token/DeployGateway.s.sol --broadcast
-```
-
-### 2. Fund Your App
-
-After deployment, deposit fees against your `SuperTokenAppGateway`'s address on any supported chain to enable EVMx to execute transactions on your behalf.
-
-### 3. Deploy to Target Chains
-
-Below is an example of how to complete the [script `DeployContracts.s.sol`](https://github.com/SocketDotTech/socket-protocol/blob/master/script/super-token/DeployContracts.s.sol):
-```solidity
-contract DeployContracts is Script {
-    function run() public {
-        (...)
-        SuperTokenAppGateway superTokenAppGateway = SuperTokenAppGateway(<appGatewayAddress>);
-        superTokenAppGateway.deployContracts(84532);     // Base Sepolia
-        superTokenAppGateway.deployContracts(11155420);  // OP Sepolia
-        superTokenAppGateway.deployContracts(421614);    // Arbitrum Sepolia
-    }
-}
-```
-Use `DeployContracts.s.sol` to deploy your token to desired chains:
+First, deposit ETH to the `FeesPlug` contract on your chosen chain:
 
 ```bash
-forge script ./script/super-token/DeployContracts.s.sol --broadcast
+cast send <CHOSEN_CHAIN_FEES_PLUG> "deposit(address,uint256,address)" \
+    0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
+    <AMOUNT> \
+    $APP_GATEWAY \
+    --value <AMOUNT> \
+    --rpc-url $SEPOLIA_RPC \
+    --private-key $PRIVATE_KEY
 ```
 
-Deployment typically takes a few minutes. Track deployment status and verify contract addresses using our [APIs](/api).
+You may also call or adapt the [existing `PayFeesInArbitrumETH` script](https://github.com/SocketDotTech/socket-protocol/blob/master/script/helpers/PayFeesInArbitrumETH.s.sol) in SOCKET Protocol repository. You may also check your AppGateway total fee balance with [`AppGatewayFeeBalance` script](https://github.com/SocketDotTech/socket-protocol/blob/master/script/helpers/AppGatewayFeeBalance.s.sol).
+
+:::info
+Currently only testnet ETH is supported. Support for additional tokens is coming soon.
+:::
