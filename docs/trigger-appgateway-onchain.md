@@ -1,5 +1,5 @@
 ---
-id: onchain-to-evmx
+id: trigger-appgateway-onchain
 title: Trigger AppGateway from onchain
 ---
 
@@ -18,7 +18,7 @@ To implement this functionality, you'll need to:
 2. Configure your AppGateway to accept messages from your onchain contract
 3. Implement a function in your onchain contract that calls the AppGateway
 
-[↘ See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/onchain-to-evmx).
+[↘ See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/trigger-appgateway-onchain).
 
 ### Extending with `PlugBase`
 
@@ -69,5 +69,5 @@ Parameters for `_callAppGateway`:
 The function returns a transaction identifier that can be used to track the cross-chain message.
 
 :::info
-[See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/onchain-to-evmx).
+[See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/trigger-appgateway-onchain).
 :::

@@ -73,7 +73,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "onchain-to-evmx",
+          id: "trigger-appgateway-onchain",
           label: "Trigger AppGateway from onchain",
         },
         {
