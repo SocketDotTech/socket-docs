@@ -6,7 +6,7 @@ title: Forwarder Addresses
 ## What does the Forwarder Address do?
 
 The forwarder address is essentially a **proxy contract** that:
-1. **Receives cross-chain messages** through the SOCKET protocol.
+1. **Receives chain-abstracted calls** through the SOCKET protocol.
 2. **Forwards the calls to the correct chain and address.**
 
 Since each forwarder is tied to a specific `(chainSlug, address)` pair, it knows exactly where to forward the call when triggered.

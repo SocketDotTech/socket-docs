@@ -9,7 +9,7 @@ import styles from '@site/src/components/CardGrid/CardGrid.module.css';
 
 In this section, we’ll go over the core components of SOCKET Protocol. You will use the EVMx to:
 
-- Create a multi-chain application that deploys replicatble onchain contracts across chains;
+- Create a chain-abstracted application that deploys replicatble onchain contracts across chains;
 - Call onchain functions;
 - Read onchain data;
 - Schedule execution;

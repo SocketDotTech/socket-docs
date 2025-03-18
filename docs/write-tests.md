@@ -3,13 +3,13 @@ id: write-tests
 title: Write tests for an AppGateway
 ---
 
-Testing multi-chain applications with Foundry requires simulating both onchain behavior and the SOCKET Protocol's EVMx components (Watchers and Transmitters). The [SuperToken test suite](https://github.com/SocketDotTech/socket-protocol/blob/master/test/apps/SuperToken.t.sol) demonstrates how to effectively test multi-chain token transfers using Foundry's testing framework.
+Testing chain-abstracted applications with Foundry requires simulating both onchain behavior and the SOCKET Protocol's EVMx components (Watchers and Transmitters). The [SuperToken test suite](https://github.com/SocketDotTech/socket-protocol/blob/master/test/apps/SuperToken.t.sol) demonstrates how to effectively test chain-abstracted token transfers using Foundry's testing framework.
 
 ## Key testing components
 
 ### Setting up the test environment
 
-Your test contract should inherit from `DeliveryHelperTest`, which provides the infrastructure for simulating SOCKET Protocol's multi-chain infrastructure:
+Your test contract should inherit from `DeliveryHelperTest`, which provides the infrastructure for simulating SOCKET Protocol's chain-abstracted infrastructure:
 
 ```solidity
 function setUp() public {
@@ -19,11 +19,11 @@ function setUp() public {
 
 ### Understanding `setUpDeliveryHelper()`
 
-`setUpDeliveryHelper()` initializes the core infrastructure needed to simulate SOCKET Protocol's multi-chain infrastructure:
+`setUpDeliveryHelper()` initializes the core infrastructure needed to simulate SOCKET Protocol's chain-abstracted infrastructure:
 
 1. Deploys the EVMx core components
 2. Sets up the fees manager for handling transaction fees
-3. Creates the delivery helper for managing multi-chain message delivery
+3. Creates the delivery helper for managing chain-abstracted call delivery
 4. Initializes the auction manager for bid processing
 5. Deploys and configures SOCKET Protocol contracts on test chains (Arbitrum and Optimism in this case)
 
@@ -33,7 +33,7 @@ function setUp() public {
 _executeWriteBatchMultiChain(chainSlugs);
 ```
 
-`_executeWriteBatchMultiChain()` simulates the entire multi-chain delivery process:
+`_executeWriteBatchMultiChain()` simulates the entire chain-abstracted delivery process:
 
 1. Creates an async ID for the batch of operations
 2. Simulates the bidding process for message delivery
@@ -56,12 +56,12 @@ This helper function retrieves two critical addresses:
 
 These addresses are essential for:
 - Verifying correct contract deployment
-- Sending multi-chain payloads
+- Sending chain-abstracted payloads
 
 ## Best Practices
 
 1. **Setup Organization**: Keep the setup logic modular and reusable across different test cases
-2. **Chain Simulation**: Test with multiple chains to ensure multi-chain functionality works correctly
+2. **Chain Simulation**: Test with multiple chains to ensure chain-abstracted functionality works correctly
 3. **Error Cases**: Include tests for failed transfers, insufficient balances, and expired deadlines
 4. **Gas Optimization**: Monitor gas usage in tests to catch potential efficiency issues
 5. **State Verification**: Always verify the final state on all involved chains after operations complete

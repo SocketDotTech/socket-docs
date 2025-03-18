@@ -7,7 +7,7 @@ title: Getting Started
 
 This tutorial walks you through building a chain-abstracted version of the classic `Counter.sol` contract from Foundry. While the traditional Foundry counter lives on a single blockchain, we'll create one that spans multiple chains and can be controlled from a single interface.
 
-This example introduces the core components of the SOCKET Protocol while keeping things very simple. The aim is to demonstrate how these different components interact with one another and what a typical flow looks like. Each component (AppGateway, Switchboard, Plugs, etc.) is fully programmable and customizable, as long as it implements the required interfaces. This flexibility means you can adapt SOCKET Protocol to support virtually any multi-chain use case you can imagine.
+This example introduces the core components of the SOCKET Protocol while keeping things very simple. The aim is to demonstrate how these different components interact with one another and what a typical flow looks like. Each component (AppGateway, Switchboard, Plugs, etc.) is fully programmable and customizable, as long as it implements the required interfaces. This flexibility means you can adapt SOCKET Protocol to support virtually any chain-abstracted use case you can imagine.
 
 **You'll learn how to**
 
@@ -18,7 +18,7 @@ This example introduces the core components of the SOCKET Protocol while keeping
 ## Clone the Starter Kit
 
 Clone our starter kit repository which contains:
-- `Counter.sol` contract for multi-chain deployment
+- `Counter.sol` contract for chain-abstracted deployment
 - `CounterAppGateway.sol` for managing chain-abstracted interactions
 - Helper scripts for deployment and testing
 
@@ -70,7 +70,7 @@ EVMx is SOCKET Protocol's specialized execution environment that runs on [Watche
 
 Since it runs the EVM, Solidity developers can work with familiar types and patterns without needing external libraries when implementing their offchain logic through the `AppGateway`.
 
-SOCKET Protocol enhanced this EVM environment to support `async` operations, enabling it to wait for and react to multi-chain events. This set up makes it very easy to test your offchain orchestration state with foundry.
+SOCKET Protocol enhanced this EVM environment to support `async` operations, enabling it to wait for and react to chain-abstracted events. This set up makes it very easy to test your offchain orchestration state with foundry.
 :::
 
 ```bash
@@ -85,7 +85,7 @@ Always include the `--skip-simulation` flag when deploying to EVMx as shown abov
 
 ## Set up fees to pay for your App transactions
 
-SOCKET Protocol uses a prepaid fee model where you deposit funds to cover all aspects of multi-chain execution, including:
+SOCKET Protocol uses a prepaid fee model where you deposit funds to cover all aspects of chain-abstracted execution, including:
 
 - Gas costs for transaction execution on destination chains
 - Transmitter service fees for relaying messages between chains
@@ -94,7 +94,7 @@ SOCKET Protocol uses a prepaid fee model where you deposit funds to cover all as
 ### How the fee system works
 
 - Fees are deposited into a `FeesPlug` contract on a specific chain configured in the `AppGateway` contract
-- These funds are drawn from when cross-chain messages are processed
+- These funds are drawn from when chain-abstracted calls are processed
 - The fees are distributed between [Transmitters](/transmitters) (who relay transactions) and the SOCKET Protocol infrastructure
 - Unused fees remain in the `FeesPlug` contract balance for your application gateway future transactions
 
@@ -165,7 +165,7 @@ The deployment process follows these steps:
 9. **Callback Execution**: This triggers the callback in the `AppGateway`, which:
    - Stores the deployed contract address
    - Deploys a Forwarder contract (an EVMx representation of the onchain deployed contract)
-   - Sets up the Forwarder to handle future multi-chain calls
+   - Sets up the Forwarder to handle future chain-abstracted calls
 
 :::note Note
 The Fast Switchboard used here is just one example of a simplified [Switchboard](/switchboards) implementation that allows a trusted [Watcher](/watchers) to attest that a given [Transmitter](/transmitters) is authorized to execute a specific payload. Switchboards can be customized to handle various verification methods and proof systems depending on your security requirements.
