@@ -3,7 +3,7 @@ id: architecture
 title: Architecture
 ---
 
-SOCKET is a protocol, not a blockchain. It enables developers to build chain-abstracted applications using a combination of offchain agents and onchain contracts. This setup allows for flexible, efficient, and customizable cross-chain interactions.
+SOCKET is a protocol, not a blockchain. It enables developers to build chain-abstracted applications using a combination of offchain agents and onchain contracts. This setup allows for flexible, efficient, and customizable chain-abstracted interactions.
 
 Developers can leverage **Application Gateway (AppGateway)**, which operate on an EVMx to handle logic related to onchain contract interactions. These contracts function as hubs for user interactions, managing pre-execution checks, auctions, or other logic before onchain execution.
 
@@ -49,7 +49,7 @@ Using the diagram above as a visual aid, here’s how the protocol functions:
 
 ## Expanding Across Networks
 
-SOCKET is designed for easy multi-chain expansion. Extending to additional networks simply involves deploying smart contracts permissionlessly and configuring a watcher to monitor the new chain. This allows AppGateways to facilitate seamless cross-chain contract interactions.
+SOCKET is designed for easy chain-abstracted expansion. Extending to additional networks simply involves deploying smart contracts permissionlessly and configuring a watcher to monitor the new chain. This allows AppGateways to facilitate seamless chain-abstracted contract interactions.
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
     <img src="/img/multichain-architecture.svg" alt="multichain architecture diagram" style={{ width: '90%' }} />

@@ -5,7 +5,7 @@ title: Read onchain from EVMx
 
 EVMx allows you to read state from contracts deployed on blockchains. This chain-abstracted applications that need to access or verify onchain data before executing transactions to asynchronisely read the data before performing any other required operation.
 
-## The challenge of multi-chain reads
+## The challenge of chain-abstracted reads
 
 When working with multiple blockchains, reading data presents a unique challenge: data cannot be read synchronously across chains. Instead, EVMx uses a promise-based pattern to handle asynchronous data retrieval.
 
@@ -110,7 +110,7 @@ This function cancels the remaining operations in the transaction queue associat
 - Always validate data before performing critical operations
 - Implement proper error handling for read failures
 
-By following these patterns, you can safely and efficiently read data from onchain contracts before executing cross-chain transactions.
+By following these patterns, you can safely and efficiently read data from onchain contracts before executing chain-abstracted transactions.
 
 :::info
 [See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/read).

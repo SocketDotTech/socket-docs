@@ -124,7 +124,7 @@ The callback function `checkBalance`:
    - `returnData`: The actual data returned from the source chain (balance). This data is automatically returned by the Watcher.
 
 ## Example Use Case
-Consider a cross-chain token bridge transaction where the user's balance must be validated before tokens are transferred. Here's how it works:
+Consider a chain-abstracted token bridge transaction where the user's balance must be validated before tokens are transferred. Here's how it works:
 
 1. **Initiate the transfer**: The `transfer` function creates a promise to check the user's balance.
 2. **Set up a promise callback**: The `then` method sets a callback to handle the balance check.

@@ -66,7 +66,7 @@ The process involves:
 ## Best practices
 
 - **Chain-Specific Logic**: Consider the specific requirements of each blockchain you're interacting with
-- **Error Handling**: Implement proper error handling for cross-chain operations
+- **Error Handling**: Implement proper error handling for chain-abstracted operations
 - **Gas Optimization**: Be mindful of gas costs across different chains
 - **Transaction Sequencing**: Carefully plan the order of operations when making multiple calls
 

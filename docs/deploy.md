@@ -83,7 +83,7 @@ function deployContracts(uint32 chainSlug_) external async {
 ```
 It calls the inherited `_deploy` function and uses the `async` modifier for interacting with underlying chains.
 
-The `IsPlug` enum determines whether a contract will be connected to SOCKET's multi-chain infrastructure:
+The `IsPlug` enum determines whether a contract will be connected to SOCKET's chain-abstracted infrastructure:
 
 - `IsPlug.YES`: Contract will be registered as a SOCKET plug, enabling direct communication with SOCKET's infrastructure. Use this for contracts that need to interact directly with SOCKET (e.g., SuperToken contracts).
 

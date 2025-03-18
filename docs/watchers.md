@@ -15,7 +15,7 @@ Watchers act as a bridge between the user and the blockchain, enabling developer
     <img src="/img/watchers.svg" alt="watcher diagram" style={{ width: '80%' }} />
 </div>
 
-Today, when users interact with your application, they typically do so directly onchain, facing issues like high gas fees, complex bridging, and multi-chain interactions. **Watchers** help streamline this process by handling some of the logic offchain, improving performance and user experience.
+Today, when users interact with your application, they typically do so directly onchain, facing issues like high gas fees, complex bridging, and cross-chain interactions. **Watchers** help streamline this process by handling some of the logic offchain, improving performance and user experience.
 
 ### Key Role of Watchers
 

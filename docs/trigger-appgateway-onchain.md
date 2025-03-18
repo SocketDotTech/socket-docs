@@ -5,7 +5,7 @@ title: Trigger AppGateway from onchain
 
 ## Trigger AppGateway from Onchain Contracts
 
-This approach enables onchain contracts to communicate directly with your AppGateway on EVMx. It allows contracts deployed on blockchains to send data to EVMx, update information, and initiate cross-chain actions.
+This approach enables onchain contracts to communicate directly with your AppGateway on EVMx. It allows contracts deployed on blockchains to send data to EVMx, update information, and initiate chain-abstracted actions.
 
 This pattern is particularly valuable for applications that need to:
 - Maintain consistent state across multiple blockchains
@@ -66,7 +66,7 @@ Parameters for `_callAppGateway`:
 - First parameter: Your encoded data that will be sent to the AppGateway
 - Second parameter: Reserved for additional execution information (currently use `bytes32(0)`)
 
-The function returns a transaction identifier that can be used to track the cross-chain message.
+The function returns a transaction identifier that can be used to track the chain-abstracted call.
 
 :::info
 [See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/trigger-appgateway-onchain).
