@@ -22,22 +22,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "getting-started",
-          label: "Getting Started",
+          id: "usecases",
+          label: "Usecases",
         },
       ],
     },
     {
       type: "category",
-      label: "Usecases",
-      collapsible: false,
-      collapsed: false,
+      label: "Example Usecases",
+      collapsed: true,
       items: [
-        {
-          type: "doc",
-          id: "usecases",
-          label: "Key Use Cases",
-        },
         {
           type: "doc",
           id: "magicspend",
@@ -46,16 +40,20 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "eip7683",
-          label: "Multi-chain intents on SOCKET",
+          label: "Chain-abstracted intents",
         },
       ],
     },
     {
       type: "category",
       label: "Building on SOCKET",
-      collapsible: false,
-      collapsed: false,
+      collapsed: true,
       items: [
+        {
+          type: "doc",
+          id: "getting-started",
+          label: "Getting Started",
+        },
         {
           type: "doc",
           id: "writing-apps",
@@ -111,8 +109,7 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "Learn about SOCKET",
-      collapsible: false,
-      collapsed: false,
+      collapsed: true,
       items: [
         {
           type: "doc",

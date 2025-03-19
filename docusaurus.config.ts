@@ -88,7 +88,7 @@ const config: Config = {
     announcementBar: {
       id: "alpha-release",
       content:
-        "<b>🚧 SOCKET dev release is live. It is under active development and has known issues. 🚧</b>",
+        "<b>🚧 The SOCKET dev release is now live and actively evolving, so some concepts may change. 🚧</b>",
       backgroundColor: "rgb(69, 219, 156)",
       isCloseable: true,
     },

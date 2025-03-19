@@ -24,8 +24,8 @@ SOCKET uses these `forwarder` contracts that are automatically deployed alongsid
 When your `AppGateway` contract is deployed, the constructor can automatically create a forwarder for your onchain contract. Here's the relevant code from the constructor:
 
 ```solidity
-IAddressResolver(addressResolver).deployForwarderContract(
-    address(this),        // The address of the current deploying contract
+IAddressResolver(addressResolver).getOrDeployForwarderContract(
+    address(this),        // The address of the current AppGateway contract
     onchainAddress,       // The address of the onchain contract (e.g. token)
     chainSlug             // The chain identifier for the target chain
 );

@@ -117,7 +117,7 @@ code {
 }
 
 .menu__list-item-collapsible > .menu__link {
-  pointer-events: none; /* Disable hover and click interaction on categories */
+  /*pointer-events: none; /* Disable hover and click interaction on categories */
   font-weight: bold !important;
   background-color: transparent !important; /* Ensure no background color on hover */
   color: inherit !important; /* Make sure color does not change */
