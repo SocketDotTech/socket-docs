@@ -23,13 +23,13 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "usecases",
-          label: "Key Use Cases",
+          label: "Usecases",
         },
       ],
     },
     {
       type: "category",
-      label: "Usecases",
+      label: "Example Usecases",
       collapsed: true,
       items: [
         {
