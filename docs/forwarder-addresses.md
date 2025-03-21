@@ -19,7 +19,7 @@ SOCKET uses these `forwarder` contracts that are automatically deployed alongsid
 
 ## Creating and Accessing Forwarder Addresses
 
-### Uploading an onchain contract to use on the EVMx contract
+### Uploading an onchain contract to use on an AppGateway on EVMx
 
 [↘ See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/blob/master/src/forwarder-on-evmx/UploadAppGateway.sol).
 
