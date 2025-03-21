@@ -75,6 +75,11 @@ const sidebars: SidebarsConfig = {
           label: "Trigger AppGateway from onchain",
         },
         {
+          type: "link",
+          label: "Upload onchain contracts to EVMx",
+          href: "/forwarder-addresses#uploading-an-onchain-contract-to-use-on-the-evmx-contract",
+        },
+        {
           type: "doc",
           id: "schedule",
           label: "Schedule EVMx execution",
