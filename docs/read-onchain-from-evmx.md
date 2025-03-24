@@ -153,5 +153,13 @@ By following these patterns, you can safely and efficiently read data from oncha
 
     Please confirm you are
     - Passing the forwarder contract address and not the onchain contract address. See [key components for onchain reads](/read-onchain-from-evmx#key-components)
-    - Setting the expected overrides to read
+    - Setting the expected overrides to read. See [Promise-based reading pattern](/read-onchain-from-evmx#promise-based-reading-pattern).
+</details>
+
+<details>
+   <summary>Not being able to read onchain values via EVMx - `can't change state in a static call`</summary>
+
+    Please confirm you are setting a promise to read the value after requesting an onchain read. See [key components for onchain reads](/read-onchain-from-evmx#key-components)
+
+    Remember you cannot directly perform actions when reading values as calls are asynchronous. For instance, this means that `require(ICounter(forwarder).value() == 0)` is not possible. You will need to confirm the read value is zero on the promise handling. See [Promise-based reading pattern](/read-onchain-from-evmx#promise-based-reading-pattern).
 </details>
