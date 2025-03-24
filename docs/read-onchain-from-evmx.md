@@ -56,6 +56,14 @@ function checkBalance(bytes memory data, bytes memory returnData) external onlyP
 
 ## Key components
 
+### Async Modifier
+
+The `async` modifier signals that this function will perform operations that interact with blockchains.
+
+### Forwarder Address
+
+Instead of calling the contract directly, you call a forwarder address that routes your call to the correct contract on the target blockchain.
+
 ### Read mode
 
 - `_setOverrides(Read.ON)` signals the start of a read operation
@@ -115,3 +123,33 @@ By following these patterns, you can safely and efficiently read data from oncha
 :::info
 [See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/read).
 :::
+
+## Common errors
+
+<details>
+   <summary>I cannot see transactions for my new AppGateway on the EVMx explorer</summary>
+
+    Please confirm you have updated the `APP_GATEWAY` variable on the `.env` file.
+
+    If you have exported your `.env` file, please confirm that the variable is up to date on your environment.
+</details>
+
+<details>
+   <summary>Deploying onchain contracts is reverting with `0x8d53e553` - `InsufficientFees()`</summary>
+
+    Please confirm you have deposited enough to pay for fees.
+    - See how to [Deposit fees](/getting-started#deposit-fees).
+    - [Check your AppGateway fee balance](/getting-started#check-your-appgateway-fee-balance).
+</details>
+
+<details>
+   <summary>Calling onchain contracts via EVMx is reverting with `0xb9521e1a` - `AsyncModifierNotUsed()`</summary>
+
+    Please confirm the function you're calling has the `async` modifier as it is expected to wait for a promise since it is either reading or writing information onchain. See [key components for onchain calls](/read-onchain-from-evmx#key-components).
+</details>
+
+<details>
+   <summary>Calling onchain contracts via EVMx is reverting with generic EVM error</summary>
+
+    Please confirm you are passing the forwarder contract address and not the onchain contract address. See [key components for onchain calls](/read-onchain-from-evmx#key-components).
+</details>
