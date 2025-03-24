@@ -127,6 +127,18 @@ By following these patterns, you can safely and efficiently read data from oncha
 ## Common errors
 
 <details>
+   <summary>Seeing `Failed to estimate EIP1559 fees` when running EVMx scripts or cast commands</summary>
+
+    Please ensure you have `--legacy` flag when running the commands.
+</details>
+
+<details>
+   <summary>Seeing `Failed to estimate gas for tx` when running EVMx scripts or cast commands</summary>
+
+    Please ensure you have ` --with-gas-price 0` flag when running scripts and ` --gas-price 0` flag when running commands.
+</details>
+
+<details>
    <summary>I cannot see transactions for my new AppGateway on the EVMx explorer</summary>
 
     Please confirm you have updated the `APP_GATEWAY` variable on the `.env` file.
