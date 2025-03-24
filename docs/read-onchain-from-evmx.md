@@ -143,13 +143,15 @@ By following these patterns, you can safely and efficiently read data from oncha
 </details>
 
 <details>
-   <summary>Calling onchain contracts via EVMx is reverting with `0xb9521e1a` - `AsyncModifierNotUsed()`</summary>
+   <summary>Reading onchain contracts via EVMx is reverting with `0xb9521e1a` - `AsyncModifierNotUsed()`</summary>
 
-    Please confirm the function you're calling has the `async` modifier as it is expected to wait for a promise since it is either reading or writing information onchain. See [key components for onchain calls](/read-onchain-from-evmx#key-components).
+    Please confirm the function you're calling has the `async` modifier as it is expected to wait for a promise since it is either reading or writing information onchain. See [key components for onchain reads](/read-onchain-from-evmx#key-components).
 </details>
 
 <details>
-   <summary>Calling onchain contracts via EVMx is reverting with generic EVM error</summary>
+   <summary>Reading onchain contracts via EVMx is reverting with generic EVM error</summary>
 
-    Please confirm you are passing the forwarder contract address and not the onchain contract address. See [key components for onchain calls](/read-onchain-from-evmx#key-components).
+    Please confirm you are
+    - Passing the forwarder contract address and not the onchain contract address. See [key components for onchain reads](/read-onchain-from-evmx#key-components)
+    - Setting the expected overrides to read
 </details>
