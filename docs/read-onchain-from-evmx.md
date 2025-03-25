@@ -56,6 +56,14 @@ function checkBalance(bytes memory data, bytes memory returnData) external onlyP
 
 ## Key components
 
+### Async Modifier
+
+The `async` modifier signals that this function will perform operations that interact with blockchains.
+
+### Forwarder Address
+
+Instead of calling the contract directly, you call a forwarder address that routes your call to the correct contract on the target blockchain.
+
 ### Read mode
 
 - `_setOverrides(Read.ON)` signals the start of a read operation
@@ -115,3 +123,55 @@ By following these patterns, you can safely and efficiently read data from oncha
 :::info
 [See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/read).
 :::
+
+## Common errors
+
+<details>
+   <summary>Seeing `Failed to estimate EIP1559 fees` when running EVMx scripts or cast commands</summary>
+
+    Please ensure you have `--legacy` flag when running the commands.
+</details>
+
+<details>
+   <summary>Seeing `Failed to estimate gas for tx` when running EVMx scripts or cast commands</summary>
+
+    Please ensure you have ` --with-gas-price 0` flag when running scripts and ` --gas-price 0` flag when running commands.
+</details>
+
+<details>
+   <summary>I cannot see transactions for my new AppGateway on the EVMx explorer</summary>
+
+    Please confirm you have updated the `APP_GATEWAY` variable on the `.env` file.
+
+    If you have exported your `.env` file, please confirm that the variable is up to date on your environment.
+</details>
+
+<details>
+   <summary>Deploying onchain contracts is reverting with `0x8d53e553` - `InsufficientFees()`</summary>
+
+    Please confirm you have deposited enough to pay for fees.
+    - See how to [Deposit fees](/getting-started#deposit-fees).
+    - [Check your AppGateway fee balance](/getting-started#check-your-appgateway-fee-balance).
+</details>
+
+<details>
+   <summary>Reading onchain contracts via EVMx is reverting with `0xb9521e1a` - `AsyncModifierNotUsed()`</summary>
+
+    Please confirm the function you're calling has the `async` modifier as it is expected to wait for a promise since it is either reading or writing information onchain. See [key components for onchain reads](/read-onchain-from-evmx#key-components).
+</details>
+
+<details>
+   <summary>Reading onchain contracts via EVMx is reverting with generic EVM error</summary>
+
+    Please confirm you are
+    - Passing the forwarder contract address and not the onchain contract address. See [key components for onchain reads](/read-onchain-from-evmx#key-components)
+    - Setting the expected overrides to read. See [Promise-based reading pattern](/read-onchain-from-evmx#promise-based-reading-pattern).
+</details>
+
+<details>
+   <summary>Not being able to read onchain values via EVMx - `can't change state in a static call`</summary>
+
+    Please confirm you are setting a promise to read the value after requesting an onchain read. See [key components for onchain reads](/read-onchain-from-evmx#key-components)
+
+    Remember you cannot directly perform actions when reading values as calls are asynchronous. For instance, this means that `require(ICounter(forwarder).value() == 0)` is not possible. You will need to confirm the read value is zero on the promise handling. See [Promise-based reading pattern](/read-onchain-from-evmx#promise-based-reading-pattern).
+</details>

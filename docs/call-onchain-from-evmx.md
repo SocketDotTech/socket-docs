@@ -23,7 +23,7 @@ function increaseOnchain(uint256 amount, address forwarder) external async {
 
 ### Key components
 
-- **Async Modifier**: The `async` modifier signals that this function will perform operations that interact with other blockchains.
+- **Async Modifier**: The `async` modifier signals that this function will perform operations that interact with blockchains.
 - **Forwarder Address**: Instead of calling the contract directly, you call a forwarder address that routes your call to the correct contract on the target blockchain.
 
 [↘ See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/write).
@@ -75,3 +75,45 @@ By following these patterns, you can create powerful chain-abstracted applicatio
 :::info
 [See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/write).
 :::
+
+## Common errors
+
+<details>
+   <summary>Seeing `Failed to estimate EIP1559 fees` when running EVMx scripts or cast commands</summary>
+
+    Please ensure you have `--legacy` flag when running the commands.
+</details>
+
+<details>
+   <summary>Seeing `Failed to estimate gas for tx` when running EVMx scripts or cast commands</summary>
+
+    Please ensure you have ` --with-gas-price 0` flag when running scripts and ` --gas-price 0` flag when running commands.
+</details>
+
+<details>
+   <summary>I cannot see transactions for my new AppGateway on the EVMx explorer</summary>
+
+    Please confirm you have updated the `APP_GATEWAY` variable on the `.env` file.
+
+    If you have exported your `.env` file, please confirm that the variable is up to date on your environment.
+</details>
+
+<details>
+   <summary>Deploying onchain contracts is reverting with `0x8d53e553` - `InsufficientFees()`</summary>
+
+    Please confirm you have deposited enough to pay for fees.
+    - See how to [Deposit fees](/getting-started#deposit-fees).
+    - [Check your AppGateway fee balance](/getting-started#check-your-appgateway-fee-balance).
+</details>
+
+<details>
+   <summary>Calling onchain contracts via EVMx is reverting with `0xb9521e1a` - `AsyncModifierNotUsed()`</summary>
+
+    Please confirm the function you're calling has the `async` modifier as it is expected to wait for a promise since it is either reading or writing information onchain. See [key components for onchain calls](/call-onchain-from-evmx#key-components).
+</details>
+
+<details>
+   <summary>Calling onchain contracts via EVMx is reverting with generic EVM error</summary>
+
+    Please confirm you are passing the forwarder contract address and not the onchain contract address. See [key components for onchain calls](/call-onchain-from-evmx#key-components).
+</details>
