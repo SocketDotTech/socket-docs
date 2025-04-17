@@ -9,16 +9,16 @@ Setting up fees is essential for your app to interact with both the EVMx and sup
 
 ### Configure fee data
 
-Set up the `FeesData` structure for your app:
+Set up the `Fees` structure for your app:
 
 ```solidity
-struct FeesData {
+struct Fees {
     uint32 feePoolChain;
     address feePoolToken;
     uint256 maxFees;
 }
 
-FeesData feesData = FeesData({
+Fees fees = Fees({
     feePoolChain: <CHAINSLUG>,
     feePoolToken: <TOKEN_ADDRESS>,
     maxFees: <MAX_FEE_PER_TRANSACTION>
@@ -36,25 +36,22 @@ User must have deposited at least this amount to the contract before initiating 
 Set the fee configuration in your contracts:
 
 ```solidity
-AppGateway(appGatewayAddress).setFees(feesData);
+AppGateway(appGatewayAddress).setFees(fees);
 ```
 
 or set them in the `constructor` of the `AppGateway`.
-```solidity
-_setFeesData(feesData_);
-```
 
-The FeesData structure is designed to manage fee-related parameters for transactions in a dual-execution environment (EVMx and onchain). Here's how it's implemented:
+The Fees structure is designed to manage fee-related parameters for transactions in a dual-execution environment (EVMx and onchain). Here's how it's implemented:
 
 ```solidity
-FeesData memory feesData = FeesData({
+Fees memory fees = Fees({
     feePoolChain: 421614,      // Chain ID where fees are collected
     feePoolToken: ETH_ADDRESS, // Token used for fee payments (ETH in this case)
     maxFees: 0.001 ether       // Maximum fee amount allowed and minimum required deposit
 });
 ```
 
-#### `FeesData` key components
+#### `Fees` key components
 
 1. `feePoolChain`
     Specifies the blockchain network ID where fees are collected and managed. In this case, it's set to `421614`, which is Arbitrum Sepolia's chain ID.
@@ -80,12 +77,12 @@ FeesData memory feesData = FeesData({
 - Provides fee limits for user protection
 
 #### Implementation context
-The `FeesData` structure is passed to the `SomeAppGateway` contract ensuring consistent fee handling across the entire system, whether transactions are processed offchain or onchain:
+The `Fees` structure is passed to the `SomeAppGateway` contract ensuring consistent fee handling across the entire system, whether transactions are processed offchain or onchain:
 
 ```solidity
 SomeAppGateway gateway = new SomeAppGateway(
     addressResolver,
-    feesData,
+    fees,
     owner
 );
 ```
