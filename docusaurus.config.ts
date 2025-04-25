@@ -1,7 +1,10 @@
-// import { themes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 import { themes } from "prism-react-renderer";
+import type * as Plugin from "@docusaurus/types/src/plugin";
+import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
+
+import { customApiMdGenerator } from "./src/template/customMdGenerators";
 
 const config: Config = {
   title: "SOCKET Docs",
@@ -38,7 +41,7 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           // editUrl: "https://github.com/SocketDotTech/docs",
           // docLayoutComponent: "@theme/DocPage",
-          // docItemComponent: "@theme/ApiItem", // add @theme/ApiItem here
+          docItemComponent: "@theme/ApiItem", // add @theme/ApiItem here
         },
         blog: false,
         theme: {
@@ -194,8 +197,81 @@ const config: Config = {
         content: "https://docs.socket.tech/assets/metaImg.png",
       },
     ],
-  },
-  plugins: [["docusaurus-lunr-search", { languages: ["en"] }]],
+    languageTabs: [
+      {
+        highlight: "bash",
+        language: "curl",
+        codeSampleLanguage: "Shell",
+        logoClass: "bash",
+        options: {
+          longFormat: false,
+          followRedirect: true,
+          trimRequestBody: true,
+        },
+        variant: "cURL",
+        variants: ["curl"],
+      },
+      {
+        highlight: "javascript",
+        language: "nodejs",
+        codeSampleLanguage: "JavaScript",
+        logoClass: "nodejs",
+        options: {
+          ES6_enabled: true,
+          followRedirect: true,
+          trimRequestBody: true,
+        },
+        variant: "native",
+        variants: ["axios", "native"],
+      },
+      {
+        highlight: "go",
+        language: "go",
+        codeSampleLanguage: "Go",
+        logoClass: "go",
+        options: {
+          followRedirect: true,
+          trimRequestBody: true,
+        },
+        variant: "native",
+        variants: ["native"],
+      },
+      {
+        highlight: "python",
+        language: "python",
+        codeSampleLanguage: "Python",
+        logoClass: "python",
+        options: {
+          followRedirect: true,
+          trimRequestBody: true,
+        },
+        variant: "requests",
+        variants: ["requests", "http.client"],
+      },
+    ],
+  } satisfies Preset.ThemeConfig,
+  plugins: [
+    [
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api",
+        docsPluginId: "classic", // e.g. "classic" or the plugin-content-docs id
+        config: {
+          socket: {
+            specPath: "swagger.json", // path or URL to the OpenAPI spec
+            outputDir: "docs/api-reference", // output directory for generated *.mdx and sidebar.js files
+            version: "1.0.0", // Current version
+            label: "v1.0.0", // Current version label
+            markdownGenerators: {
+              createApiPageMD: customApiMdGenerator, // Custom generator to store the example fields
+            },
+          } satisfies OpenApiPlugin.Options,
+        } satisfies Plugin.PluginOptions,
+      },
+    ],
+    ["docusaurus-lunr-search", { languages: ["en"] }],
+  ],
+  themes: ["docusaurus-theme-openapi-docs"],
 };
 
 export default async function createConfig() {

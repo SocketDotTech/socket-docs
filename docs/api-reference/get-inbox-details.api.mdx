@@ -1,0 +1,71 @@
+---
+id: get-inbox-details
+title: "Get trigger AppGateway details"
+description: "Retrieves details for inbox transactions"
+sidebar_label: "Get trigger AppGateway details"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV9tu2zgQ/RVhnnYBNSF1t9/SNJs1sJegTp6CYEGRI4utbiUp14Ghf19Qsmv5kmy77mP0YkjkDM/MmUPPrEGg5ko2RtYVTOEjGiVxidoRaJgstJPVypFVWq8co1ilGbc7NbhQN6iYfZkJmMICzczu+jCYgQsNU6xEg0rD9HENFSsRpmBWvzOdgwvSHvelRfUMLij80kqFAqZGteiC5jmWDKZrMM+NNdNGyWoBLuCKlU1hP5EVDxKRBh6hdJKxzGepiAIax5SmPCEoaOCHIiRRQCmmgmTZhAcem4RpJDglsR9C5x6Ef78L0cmZzh1TOwPG7smi1E1dadQWmEeI/dm3n7eco9ZZWzjbzeACryuDlbHbWdMUkvdpu/ykrc36ONg6/YTc2BQqm2QjhxO1YabVx0npdshGi0wpZlMrDZb6LOd1dZ0zWd0PzJ3awVlR2Co4tWRN50W7GK3KyuAClV1u9ld2dg17Lmom/hs4a5pbZvAre/5OP+M1xcpTMXedCzcr5K3laVvRP4DklVRpWbZFz//8NTqXqMx8eD8FrxsJYcfdBjMKOCLtZ6hlxzOQFSEkihCRZyIJsjTxacY4CwmhhArkLI1pkLKJSDJCvYj6ZP/JYK80Ao9GNNiWA5BV5CGNMjoRgmcpyVKf+D4RIVKfCBZkURr7Igx8D/YYHteCjfg7sY2dDKGd89DzzIMzj/fOtCch7JRxfjYIvKClY7VYxqIswCTGJOExjxiN/XgSRgHGoRcGUZD6fpzGxEu9NEpY7PkipiFJoiiiSeiFsb1sjwUG89mfD39c3c/+/uuf+cP19c18DocaA7CaMtL0fy2/1apkxqB4zwzPXxHc2N32Bn58E+SbIEfPmyD/ryCfBuEFpzqt90w4tmtEbX5eh4VK1epU17l/9o3d5pSoNVsgHNwNGx8wq5askGLcNfctJYzumd5Rf710LpRo8nrTSveMG0vBZd972zSiWm576VYVMIXcmEZPLy9ZI9/hsly9E7is0Fzomn9Gc2GQ50fQ5/2ac6dqU/O6cD70Js7V3cyZ9wf0ja6ssrpPwwbnodXV3ezIs3UxzAoGlY23WjhfpcmdQ2MbiORoRwQb0GBNL8hFX5lNrU3JetY2E8MtGscouVigcq6+1eh2PjnEsd7Vwo8MMxvCDa7MZVMwWVksfZrXGyYeYWDiyYW81sZ+WK9TpvFBFV1nPw+DguVHSM3Swo4zGSs0vgLxl4+byedX5+XZ4wV4n/F5PFAtWdFiL5wn+6KkhQDTx6fOhRyZQNVjG6yuOMfGjKyOZGO9fCvJ25t76Lp/Ae4PTH8=
+sidebar_class_name: "get api-method"
+info_path: api-reference/socket-protocol-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get trigger AppGateway details"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/inbox"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Retrieves details for inbox transactions
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"txHash","in":"query","required":true,"schema":{"type":"string","example":"0xc48db420119faf3abd6417711bc80ed1435d506411ebd0ff9c42a95b6dc10735"},"description":"Transaction hash to query","example":"0xc48db420119faf3abd6417711bc80ed1435d506411ebd0ff9c42a95b6dc10735"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful response","content":{"application/json":{"schema":{"type":"object","properties":{"status":{"type":"string"},"response":{"type":"array","items":{"type":"object","properties":{"status":{"type":"string"},"onChainTxHash":{"type":"string"},"callId":{"type":"string"},"chainSlug":{"type":"integer"},"plug":{"type":"string"},"payload":{"type":"object","properties":{"appGateway":{"type":"string"},"payload":{"type":"string"},"params":{"type":"string"}}},"ExecutionDetails":{"type":"object","properties":{"appGatewayTxHash":{"type":"string"},"simulationStatus":{"type":"string"},"revertString":{"type":"string"}}}},"example":{"status":"Executed","onChainTxHash":"0xc48db420119faf3abd6417711bc80ed1435d506411ebd0ff9c42a95b6dc10735","callId":"0x00066eeecfd84fb831faca500101decab714ba9d8f012613000000000000000f","chainSlug":421614,"plug":"0x62e16f19ddcfb0fb30330d5e130da4f6b73d5432","payload":{"appGateway":"0xcfd84fb831faca500101decab714ba9d8f012613","payload":"0x0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000005","params":"0x0000000000000000000000000000000000000000000000000000000000000000"},"ExecutionDetails":{"appGatewayTxHash":"0xc6f4e87e88c7c6a17379564e7525464b337b702b2b68a723d71508666185257e","simulationStatus":"SIMULATION_SUCCESS","revertString":""}},"title":"FormattedBatch"}}}},"example":{"status":"SUCCESS","response":[{"status":"Executed","onChainTxHash":"0xc48db420119faf3abd6417711bc80ed1435d506411ebd0ff9c42a95b6dc10735","callId":"0x00066eeecfd84fb831faca500101decab714ba9d8f012613000000000000000f","chainSlug":421614,"plug":"0x62e16f19ddcfb0fb30330d5e130da4f6b73d5432","payload":{"appGateway":"0xcfd84fb831faca500101decab714ba9d8f012613","payload":"0x0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000005","params":"0x0000000000000000000000000000000000000000000000000000000000000000"},"ExecutionDetails":{"appGatewayTxHash":"0xc6f4e87e88c7c6a17379564e7525464b337b702b2b68a723d71508666185257e","simulationStatus":"SIMULATION_SUCCESS","revertString":""}}]}}}},"400":{"description":"Bad request","content":{"application/json":{"schema":{"type":"object","properties":{"error":{"type":"string","description":"Error message"}},"example":{"error":"Invalid transaction hash"},"title":"Error"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      
