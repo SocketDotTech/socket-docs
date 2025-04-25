@@ -40,13 +40,12 @@ export function customApiMdGenerator({
     `import Heading from "@theme/Heading";\n\n`,
     createHeading(title),
     createMethodEndpoint(method, path),
-    servers && servers.length ? createServersTable(servers) : undefined,
     infoPath && createAuthorization(infoPath),
     frontMatter.show_extensions ? createVendorExtensions(extensions) : undefined,
     createDeprecationNotice({ deprecated, description: deprecatedDescription }),
     createDescription(description),
     requestBody || parameters ? createRequestHeader("Request") : undefined,
-    createParamsDetails({ parameters }), // CUSTOM VERSION OF THIS FUNCTION FOR BUNGEE
+    createParamsDetails({ parameters }), // CUSTOM VERSION OF THIS FUNCTION FOR SOCKET
     createRequestBodyDetails({
       title: "Body",
       body: requestBody,

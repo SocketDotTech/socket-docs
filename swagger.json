@@ -3,6 +3,9 @@ info:
   title: Socket Protocol API
   description: API for interacting with Socket Protocol services
   version: 1.0.0
+servers:
+  - url: https://api-evmx-devnet.socket.tech
+    description: Socket Protocol Devnet API Server
 paths:
   /getDetailsByTxHash:
     get:
