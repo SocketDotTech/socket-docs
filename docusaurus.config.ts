@@ -41,7 +41,7 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           // editUrl: "https://github.com/SocketDotTech/docs",
           // docLayoutComponent: "@theme/DocPage",
-          // docItemComponent: "@theme/ApiItem", // add @theme/ApiItem here
+          docItemComponent: "@theme/ApiItem", // add @theme/ApiItem here
         },
         blog: false,
         theme: {
@@ -249,7 +249,7 @@ const config: Config = {
         variants: ["requests", "http.client"],
       },
     ],
-  },
+  } satisfies Preset.ThemeConfig,
   plugins: [
     [
       "docusaurus-plugin-openapi-docs",
