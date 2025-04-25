@@ -9,7 +9,7 @@ servers:
 paths:
   /getDetailsByTxHash:
     get:
-      summary: Get transaction details by transaction hash
+      summary: Get EVMx transaction details
       description: Retrieves detailed information about payloads associated with a transaction hash
       operationId: getDetailsByTxHash
       parameters:
@@ -77,7 +77,7 @@ paths:
 
   /payload:
     get:
-      summary: Get payload details
+      summary: Get payload ID details
       description: Retrieves details for a specific payload by ID
       operationId: getPayloadDetails
       parameters:
@@ -152,51 +152,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /getRequestDetails:
-    get:
-      summary: Get request details
-      description: Retrieves details for a specific request by count
-      operationId: getRequestDetails
-      parameters:
-        - name: requestCount
-          in: query
-          required: true
-          schema:
-            type: string
-            example: "260"
-          description: Request count to query
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  response:
-                    $ref: '#/components/schemas/Request'
-              example: {
-                "status": "SUCCESS",
-                "response": {
-                  "requestCount": 260,
-                  "submitOrderTxHash": "0xaf92e0f81c6d384b39c04401abdf7d07bc2b784434facec8658dc5c06f65f76e",
-                  "status": "COMPLETED",
-                  "createdAt": "2025-04-25T09:10:54.067Z",
-                  "updatedAt": "2025-04-25T09:11:21.028Z"
-                }
-              }
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-
   /timeout:
     get:
-      summary: Get timeout details
+      summary: Get timeout transaction details
       description: Retrieves timeout details based on timeoutId, txHash, or target
       operationId: getTimeoutDetails
       parameters:
