@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { ErrorMessage } from "@hookform/error-message";
 import FormSelect from "@theme/ApiExplorer/FormSelect";
@@ -22,24 +22,42 @@ export default function ParamSelectFormItem({ param }: ParamProps) {
 
   const options = param.schema?.enum ?? [];
 
+  // Set the example value as the default when component mounts
+  useEffect(() => {
+    if (
+      param.value === undefined &&
+      param.schema?.example &&
+      options.includes(param.schema.example)
+    ) {
+      dispatch(
+        setParam({
+          ...param,
+          value: String(param.schema.example),
+        })
+      );
+    }
+  }, [param, dispatch, options]);
+
   return (
     <>
       <Controller
         control={control}
         rules={{ required: param.required ? "This field is required" : false }}
         name="paramSelect"
-        render={({ field: { onChange, name } }) => (
+        defaultValue={param.value || param.schema?.example || "---"}
+        render={({ field }) => (
           <FormSelect
             options={["---", ...(options as string[])]}
+            value={field.value}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               const val = e.target.value;
+              field.onChange(val); // Let RHF handle it
               dispatch(
                 setParam({
                   ...param,
                   value: val === "---" ? undefined : val,
                 })
               );
-              onChange(val);
             }}
           />
         )}

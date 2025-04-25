@@ -88,10 +88,39 @@ function Request({ item }: { item: ApiItem }) {
 
   const methods = useForm({ shouldFocusError: false });
 
+  function updateParamsWithFormData<T extends { name: string; value?: any }>(
+    params: T[],
+    formData: Record<string, any>
+  ): T[] {
+    return params.map((param) => ({
+      ...param,
+      value: formData[param.name] ?? param.value,
+    }));
+  }
+
   const onSubmit = async (data) => {
     dispatch(setResponse("Fetching..."));
+
     try {
       await delay(1200);
+
+      const updatedQueryParams = updateParamsWithFormData(queryParams, data);
+      const updatedPathParams = updateParamsWithFormData(pathParams, data);
+      const updatedHeaderParams = updateParamsWithFormData(headerParams, data);
+      const updatedCookieParams = updateParamsWithFormData(cookieParams, data);
+
+      const postmanRequest = buildPostmanRequest(postman, {
+        queryParams: updatedQueryParams,
+        pathParams: updatedPathParams,
+        cookieParams: updatedCookieParams,
+        contentType,
+        accept,
+        headerParams: updatedHeaderParams,
+        body,
+        server,
+        auth,
+      });
+
       const res = await makeRequest(postmanRequest, proxy, body);
       dispatch(setResponse(await res.text()));
       dispatch(setCode(res.status));
@@ -109,13 +138,15 @@ function Request({ item }: { item: ApiItem }) {
   const showRequestBody = contentType !== undefined;
   const showRequestButton = item.servers && !hideSendButton;
   const showAuth = authSelected !== undefined;
-  const showParams = allParams.length > 0;
+  const showParams = true; // This is actually needed to enable the request button for some reason
+  const showActualParams = allParams.length > 0;
   const requestBodyRequired = item.requestBody?.required;
 
   if (
     !showAcceptOptions &&
     !showAuth &&
     !showParams &&
+    !showActualParams &&
     !showRequestBody &&
     !showServerOptions
   ) {
@@ -200,7 +231,8 @@ function Request({ item }: { item: ApiItem }) {
               <Authorization />
             </details>
           )}
-          {showParams && (
+          {showParams}
+          {showActualParams && (
             <details
               open={
                 expandParams || Object.keys(methods.formState.errors).length
@@ -266,9 +298,11 @@ function Request({ item }: { item: ApiItem }) {
             </details>
           )}
           {showRequestButton && item.method !== "event" && (
-            <button className="openapi-explorer__request-btn" type="submit">
-              Send API Request
-            </button>
+            <div style={{ textAlign: 'center', width: '100%' }}>
+              <button className="openapi-explorer__request-btn" type="submit">
+                Send API Request
+              </button>
+            </div>
           )}
         </div>
       </form>

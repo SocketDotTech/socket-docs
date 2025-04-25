@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { ErrorMessage } from "@hookform/error-message";
 import FormSelect from "@theme/ApiExplorer/FormSelect";
@@ -16,29 +16,33 @@ export default function ParamBooleanFormItem({ param }: ParamProps) {
   const {
     control,
     formState: { errors },
+    setValue,
   } = useFormContext();
 
   const showErrorMessage = errors?.paramBoolean;
+
+  // Set the example value only once
+  useEffect(() => {
+    if (param.schema?.example !== undefined) {
+      setValue("paramBoolean", String(param.schema.example));
+    }
+  }, [param.schema?.example, setValue]);
 
   return (
     <>
       <Controller
         control={control}
-        rules={{ required: param.required ? "This field is required" : false }}
         name="paramBoolean"
-        render={({ field: { onChange, name } }) => (
+        defaultValue={param.schema?.example !== undefined ? String(param.schema.example) : "---"}
+        render={({ field }) => (
           <FormSelect
-            name={name}
+            name={field.name}
             options={["---", "true", "false"]}
+            value={field.value}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               const val = e.target.value;
-              dispatch(
-                setParam({
-                  ...param,
-                  value: val === "---" ? undefined : val,
-                })
-              );
-              onChange(val);
+              field.onChange(val);
+              dispatch(setParam({ ...param, value: val === "---" ? undefined : val }));
             }}
           />
         )}
