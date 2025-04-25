@@ -1,0 +1,74 @@
+---
+id: get-timeout-details
+title: "Get timeout details"
+description: "Retrieves timeout details based on timeoutId, txHash, or target"
+sidebar_label: "Get timeout details"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV01zozgQ/StUn0kiY8DgW3bsmvVlJzt2LptKTQmpsTUDiJGE1ykX/31KgOMvnN3Mem/DhQJ1v+5WP7W6t8BRMyVKI2QBY/iMRglco3aMyFFWxuFoqMi0k1CN3JHFbmHGXcdsfqd65TpSOYaqJRpwQZaoqEWbcRjDEs2ilZ+0OOBCSRXN0aDSMH7aQkFzhDG0WOCCsH58r1C9gAsKv1dCIYdxSjONLmi2wpzCeAvmpbR62ihRLKF2TyJZKFpoyuyXs6J65Rjp7FBxQ/Mys9pk40UxEjpgzE8T3yMpYXxECGXDyI8DzhgfBnTgh6MgxBEjYZCMKEkHEQ8DGodxwKF29zHstuaKYXRpmE0uBUCax0sw4TQa+illMaN+EoWUc9/3SDRkgzAgaeTHI+QsIYePx8KjAHZZvJb3DZ5DOVeo9aUIUhYFHmGEROmAxgkJ4ihOyWg0ZGQwCKJhHMcBG8Q+1M/WGV3KQqO25j1C7OvY6LxiDLVOq8zZCYMLTBYGC2PFaVlmgjUkvfuqrc72PCSZfEVmt6JUltJGtBa1oabSvaG/GtsvUqWojVYYzPU/gwt+ICMKg0tUFnnPqz67XdL6lkr6kknar4YbZJXBe9Nvs1vmvesuFFWW0cQm0KgKaxeE/oxaZms8tJZImSEt+uTf3kgLtGgrwplEH5jIq6xJ6Pwt2DUqM2+//w2qVGIpiktu1C4whfR0i17hUqlyamAMnBq8sSm0KlXJ36dSH5yVliFhFB5R4ho1YM+i95zHA4IB2SSUUhKmQ/LfnvCnFSOSBEOPwRG3ByM/CEajMPCOOW2zfcza9s+Ol3A/mUwnXxafvvz5OH2cwhktO/Ez5sEfn+CUbK3sMZ+ucfccURA84gU3xL/xggWJx4PReOjdenHwFxzR7rJYU2lMU5S7awfq+oSAr9szf/zwYTqfw2Hde/pF0F8E/T8J+tzy0e+79n+j3LGdCmpzveselZKqr1Qf255aMSdHrenyrGZ3GDAr1jQT3DEnnenhuWuAmlNXu5CjWcmui26obGxW7rqTBS5oVOtdG12pDMawMqbU47s7WoobXOebG47rAs2tluwbmluDbHXm/LxZcx6UNJLJzJk0Ks79w8yZNwaavksUqWw2ovP0VOv+YXaGbCFSqRzbNigbcbF0/hZm5Zwq20AEQzsd2IBa7cEtuSVNFyO1yWmTt65P/YjmdEA5Nb7dU+AKU02XfoMbc1dmVBTNXW63fNvl5WlX8eDZhZXUxv7abq2BR5XVtf3dNr82W1xo22rsW+qLvr81x/R69Q1fDsepNc0qK9S0+e8w2zt3vGXwYPb5WZsXp4W37O5StDf6bD+UaHu5p+fahRVSjqrZ+VbrnjEsD7XOioRFeT2AH6cLqOsfGSXWog==
+sidebar_class_name: "get api-method"
+info_path: api-reference/socket-protocol-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get timeout details"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/timeout"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+| URL | Description |
+| ---- | ----- |
+| https://api-evmx-devnet.socket.tech | Socket Protocol Devnet API Server |
+    
+
+Retrieves timeout details based on timeoutId, txHash, or target
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"txHash","in":"query","required":false,"schema":{"type":"string"},"description":"Transaction hash to query","example":null},{"name":"timeoutId","in":"query","required":false,"schema":{"type":"string"},"description":"Timeout ID to query","example":null},{"name":"target","in":"query","required":false,"schema":{"type":"string"},"description":"Target address to query","example":null}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Successful response","content":{"application/json":{"schema":{"type":"object","properties":{"status":{"type":"string"},"response":{"type":"array","items":{"type":"object","properties":{"id":{"type":"integer"},"timeoutId":{"type":"string"},"target":{"type":"string"},"payload":{"type":"string"},"executeAt":{"type":"integer"},"executedAt":{"type":"integer","nullable":true},"isResolved":{"type":"boolean","nullable":true},"status":{"type":"string"},"resolveTxHash":{"type":"string","nullable":true},"simulationStatus":{"type":"string"},"revertString":{"type":"string","nullable":true},"originTxHash":{"type":"string"},"createdAt":{"type":"string","format":"date-time"},"updatedAt":{"type":"string","format":"date-time"}},"example":{"id":686,"timeoutId":"0x0000002bebda834fac9ca4b86add442083c1650f8497edcb00000000000002c6","target":"0xfc8520c008f1a9b05989f0773c0115839995c194","payload":"0xbaaa06f3000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000680b532c","executeAt":1745577652,"executedAt":null,"isResolved":null,"status":"ADDED_TO_QUEUE","resolveTxHash":null,"simulationStatus":"NO","revertString":null,"originTxHash":"0x289e0a1cc4fb420f0cd700ac38495dccd35a146756e7c065b7a0f18d65a9695d","createdAt":"2025-04-25T09:17:32.295Z","updatedAt":"2025-04-25T09:17:32.295Z"},"title":"Timeout"}}}},"example":{"status":"SUCCESS","response":[{"id":686,"timeoutId":"0x0000002bebda834fac9ca4b86add442083c1650f8497edcb00000000000002c6","target":"0xfc8520c008f1a9b05989f0773c0115839995c194","payload":"0xbaaa06f3000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000680b532c","executeAt":1745577652,"executedAt":null,"isResolved":null,"status":"ADDED_TO_QUEUE","resolveTxHash":null,"simulationStatus":"NO","revertString":null,"originTxHash":"0x289e0a1cc4fb420f0cd700ac38495dccd35a146756e7c065b7a0f18d65a9695d","createdAt":"2025-04-25T09:17:32.295Z","updatedAt":"2025-04-25T09:17:32.295Z"}]}}}},"400":{"description":"Bad request","content":{"application/json":{"schema":{"type":"object","properties":{"error":{"type":"string","description":"Error message"}},"example":{"error":"Invalid transaction hash"},"title":"Error"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      
