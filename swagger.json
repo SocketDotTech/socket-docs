@@ -15,8 +15,8 @@ paths:
           required: true
           schema:
             type: string
+            example: "0xaf92e0f81c6d384b39c04401abdf7d07bc2b784434facec8658dc5c06f65f76e"
           description: Transaction hash to query
-          example: "0xaf92e0f81c6d384b39c04401abdf7d07bc2b784434facec8658dc5c06f65f76e"
       responses:
         '200':
           description: Successful response
@@ -83,8 +83,8 @@ paths:
           required: true
           schema:
             type: string
+            example: "0xe878de8efff3688aaa2da0aecde6442e31e494621a1461355069b9b7b12b8c8b"
           description: ID of the payload to query
-          example: "0xe878de8efff3688aaa2da0aecde6442e31e494621a1461355069b9b7b12b8c8b"
       responses:
         '200':
           description: Successful response
@@ -160,8 +160,8 @@ paths:
           required: true
           schema:
             type: string
+            example: "260"
           description: Request count to query
-          example: "260"
       responses:
         '200':
           description: Successful response
@@ -202,22 +202,22 @@ paths:
           required: false
           schema:
             type: string
+            example: "0x289e0a1cc4fb420f0cd700ac38495dccd35a146756e7c065b7a0f18d65a9695d"
           description: Transaction hash to query
-          example: "0x289e0a1cc4fb420f0cd700ac38495dccd35a146756e7c065b7a0f18d65a9695d"
         - name: timeoutId
           in: query
           required: false
           schema:
             type: string
+            example: "0x0000002bebda834fac9ca4b86add442083c1650f8497edcb00000000000002c6"
           description: Timeout ID to query
-          example: "0x0000002bebda834fac9ca4b86add442083c1650f8497edcb00000000000002c6"
         - name: target
           in: query
           required: false
           schema:
             type: string
+            example: "0xfc8520c008f1a9b05989f0773c0115839995c194"
           description: Target address to query
-          example: "0xfc8520c008f1a9b05989f0773c0115839995c194"
       responses:
         '200':
           description: Successful response
@@ -262,7 +262,7 @@ paths:
 
   /inbox:
     get:
-      summary: Get inbox details
+      summary: Get trigger AppGateway details
       description: Retrieves details for inbox transactions
       operationId: getInboxDetails
       parameters:
@@ -271,8 +271,8 @@ paths:
           required: true
           schema:
             type: string
+            example: "0xc48db420119faf3abd6417711bc80ed1435d506411ebd0ff9c42a95b6dc10735"
           description: Transaction hash to query
-          example: "0xc48db420119faf3abd6417711bc80ed1435d506411ebd0ff9c42a95b6dc10735"
       responses:
         '200':
           description: Successful response
