@@ -197,6 +197,58 @@ const config: Config = {
         content: "https://docs.socket.tech/assets/metaImg.png",
       },
     ],
+    languageTabs: [
+      {
+        highlight: "bash",
+        language: "curl",
+        codeSampleLanguage: "Shell",
+        logoClass: "bash",
+        options: {
+          longFormat: false,
+          followRedirect: true,
+          trimRequestBody: true,
+        },
+        variant: "cURL",
+        variants: ["curl"],
+      },
+      {
+        highlight: "javascript",
+        language: "nodejs",
+        codeSampleLanguage: "JavaScript",
+        logoClass: "nodejs",
+        options: {
+          ES6_enabled: true,
+          followRedirect: true,
+          trimRequestBody: true,
+        },
+        variant: "native",
+        variants: ["axios", "native"],
+      },
+      {
+        highlight: "go",
+        language: "go",
+        codeSampleLanguage: "Go",
+        logoClass: "go",
+        options: {
+          followRedirect: true,
+          trimRequestBody: true,
+        },
+        variant: "native",
+        variants: ["native"],
+      },
+      {
+        highlight: "python",
+        language: "python",
+        codeSampleLanguage: "Python",
+        logoClass: "python",
+        options: {
+          followRedirect: true,
+          trimRequestBody: true,
+        },
+        variant: "requests",
+        variants: ["requests", "http.client"],
+      },
+    ],
   },
   plugins: [
     [
