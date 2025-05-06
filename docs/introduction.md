@@ -54,7 +54,7 @@ Ready to start building with SOCKET?
         <h3>Use Cases</h3>
       </div>
       <div class="card__body">
-        <p>Explore more about the usecases SOCKET enables</p>
+        <p>Explore more about the usecases</p>
       </div>
       <div class="card__footer">
         <a class="button button--secondary button--block" href="/usecases">Learn More</a>
