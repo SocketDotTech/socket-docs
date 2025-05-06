@@ -13,12 +13,12 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "introduction",
-          label: "What is SOCKET Protocol?",
+          label: "Introduction",
         },
         {
           type: "doc",
           id: "architecture",
-          label: "Learn how SOCKET works",
+          label: "Protocol Overview",
         },
         {
           type: "doc",
@@ -29,25 +29,8 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Example Usecases",
-      collapsed: true,
-      items: [
-        {
-          type: "doc",
-          id: "magicspend",
-          label: "MagicSpend on SOCKET",
-        },
-        {
-          type: "doc",
-          id: "eip7683",
-          label: "Chain-abstracted intents",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Building on SOCKET",
-      collapsed: true,
+      collapsed: false,
       items: [
         {
           type: "doc",
@@ -119,8 +102,8 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Learn about SOCKET",
-      collapsed: true,
+      label: "Concepts",
+      collapsed: false,
       items: [
         {
           type: "doc",
@@ -148,16 +131,44 @@ const sidebars: SidebarsConfig = {
           label: "Watchers",
         },
         {
-          type: "link",
-          href: "https://media.socket.tech/SocketProtocol_v1.pdf",
-          label: "Whitepaper",
+          type: "doc",
+          id: "glossary",
+          label: "Glossary",
         },
       ],
     },
     {
-      type: "link",
-      href: "https://sockettech.notion.site/SOCKET-Brand-Kit-184818fd285880b3b974e2e957cd70bd",
-      label: "Brand Assets",
+      type: "category", 
+      label: "Tools",
+      collapsed: false,
+      items: [
+        {
+          type: "doc",
+          id: "api",
+          label: "API",
+        },
+        {
+          type: "doc",
+          id: "evmx",
+          label: "EVMx",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Resources",
+      items: [
+        {
+          type: "link",
+          label: "Whitepaper",
+          href: "https://media.socket.tech/SocketProtocol_v1.pdf",
+        },
+        {
+          type: "link",
+          label: "Brand Assets",
+          href: "https://sockettech.notion.site/SOCKET-Brand-Kit-184818fd285880b3b974e2e957cd70bd",
+        },
+      ],
     },
   ],
 };

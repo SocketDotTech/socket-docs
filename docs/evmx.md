@@ -3,6 +3,10 @@ id: evmx
 title: EVMx Details
 ---
 
+# What is EVMx?
+
+EVMx is an EVM environment with chain-abstraction capabilities, to enable solidity developers to be able to write gateway's in solidity. EVMx is run by a Watcher participating in the SOCKET Protocol.
+
 # EVMx Details
 
 HTTPS RPC: `https://rpc-evmx-devnet.socket.tech/`

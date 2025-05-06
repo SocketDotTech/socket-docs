@@ -96,12 +96,38 @@ const config: Config = {
       isCloseable: true,
     },
     navbar: {
-      title: "SOCKET",
+      title: "SOCKET Protocol",
       logo: {
         alt: "SOCKET Logo",
         src: "img/socketLogo.png",
       },
       items: [
+        {
+          label: 'Overview',
+          position: 'left',
+          to: '/introduction',
+        },
+        {
+          label: 'Build Abstracted',
+          position: 'left',
+          to: '/getting-started',
+        },
+        {
+          label: 'Concepts',
+          position: 'left',
+          to: '/forwarder-addresses',
+        },
+        {
+          label: 'Tools',
+          position: 'left',
+          to: '/api',
+        },
+        {
+          label: 'Resources',
+          position: 'left',
+          to: '/resources',
+        },
+        // Keep existing right-side items
         {
           type: 'search',
           position: 'right',
@@ -120,7 +146,83 @@ const config: Config = {
     },
     footer: {
       style: "dark",
-      copyright: `Copyright © ${new Date().getFullYear()} SOCKET`,
+      links: [
+        {
+          title: 'Product',
+          items: [
+            {
+              label: 'Documentation',
+              to: '/introduction',
+            },
+            {
+              label: 'Whitepaper',
+              href: 'https://media.socket.tech/SocketProtocol_v1.pdf',
+            },
+            {
+              label: 'Brand Assets',
+              href: 'https://sockettech.notion.site/SOCKET-Brand-Kit-184818fd285880b3b974e2e957cd70bd',
+            },
+          ],
+        },
+        {
+          title: 'Developers',
+          items: [
+            {
+              label: 'Getting Started',
+              to: '/getting-started',
+            },
+            {
+              label: 'API Reference',
+              to: '/api',
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/SocketDotTech/socket-protocol',
+            },
+          ],
+        },
+        {
+          title: 'Community',
+          items: [
+            {
+              label: 'Discord',
+              href: 'https://discord.gg/KMHEEMw3xU',
+            },
+            {
+              label: 'Twitter',
+              href: 'https://twitter.com/socketprotocol',
+            },
+            {
+              label: 'Blog',
+              href: 'https://socket.tech/blog',
+            },
+          ],
+        },
+        {
+          title: 'More',
+          items: [
+            {
+              label: 'Website',
+              href: 'https://socket.tech',
+            },
+            {
+              label: 'Terms of Service',
+              href: 'https://socket.tech/terms',
+            },
+            {
+              label: 'Privacy Policy',
+              href: 'https://socket.tech/privacy',
+            },
+          ],
+        },
+      ],
+      logo: {
+        alt: 'SOCKET Logo',
+        src: 'img/socketLogo.png',
+        href: 'https://socket.tech',
+        width: 160,
+      },
+      copyright: `Copyright © ${new Date().getFullYear()} SOCKET. All rights reserved.`,
     },
     colorMode: {
       defaultMode: "dark",
