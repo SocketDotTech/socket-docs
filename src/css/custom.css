@@ -8,126 +8,201 @@
  @tailwind components;
  @tailwind utilities; */
 
-/* You can override the default Infima variables here. */
-:root {
-  --ifm-navbar-background-color: #0a0d17;
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
 
-  --ifm-color-primary: #ffffff;
-  --ifm-color-primary-dark: #3345ae;
-  --ifm-color-primary-darker: #3d36a4;
-  --ifm-color-primary-darkest: #2a2593;
-  --ifm-color-primary-light: #503392;
-  --ifm-color-primary-lighter: #355d99;
-  --ifm-color-primary-lightest: #78a08a;
-  /* --ifm-bg-color-purple: rgba(134, 51, 242, 0.1); */
-  /* --ifm-code-font-size: 95%; */
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+:root, [data-theme='dark'] {
+  --ifm-background-color: #000000;
+  --ifm-background-surface-color: #14171f;
+  
+  /* Primary brand colors */
+  --ifm-color-primary: #00FB6E;
+  --ifm-color-primary-dark: #00E563;
+  --ifm-color-primary-darker: #00CC58;
+  --ifm-color-primary-darkest: #00B34D;
+  --ifm-color-primary-light: #1AFF7F;
+  --ifm-color-primary-lighter: #3DFF93;
+  --ifm-color-primary-lightest: #66FFA8;
 
-  --text-secondary: rgba(102, 112, 133, 1);
-
-  --bg-primary: #0a0d17;
-
-  --stroke-primary: rgba(103, 17, 215, 1);
-
-  --bg-global: #0a0d17;
-
-  --bg-update-button: #f2f2f2;
+  /* Secondary brand color */
+  --ifm-color-secondary: #000AFF;
+  
+  /* Text colors */
+  --ifm-font-color-base: #FFFFFF;
+  --ifm-heading-color: #FFFFFF;
+  
+  /* Code blocks */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
+  --ifm-code-background: #14171f;
+  
+  /* Cards and containers */
+  --ifm-card-background-color: #14171f;
+  
+  /* Links */
+  --ifm-link-color: #00FB6E;
+  --ifm-link-hover-color: #3DFF93;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme="dark"] {
-  --ifm-navbar-background-color: #14171f;
-
-  --ifm-color-primary: #2fd07b;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-
-  --docusaurus-highlighted-code-line-bg: rgba(248, 27, 27, 0.3);
-
-  --text-secondary: rgba(208, 213, 221, 1);
-
-  /* --bg-primary: rgba(233, 225, 225, 0.1); */
-  /* --bg-secondary: #e2dbdb10; */
-
-  --bg-global: #0a0d17;
-
-  --stroke-primary: rgba(193, 147, 253, 1);
-
-  --bg-update-button: #272729;
+/* Modern card styling */
+.card {
+  background: linear-gradient(145deg, #14171f, #0a0d17);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
-.footer {
-  --ifm-footer-background-color: #14171f;
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 251, 110, 0.15);
+  border-color: rgba(0, 251, 110, 0.2);
 }
 
-.hero {
-  --ifm-hero-background-color: #0a0d17;
-}
-
-html[data-theme="dark"] {
-  --ifm-background-color: #0a0d17;
-}
-
+/* Button styling */
 .button.button--secondary {
-  background: linear-gradient(#0a0d17, #0a0d17) padding-box,
-    linear-gradient(to right, #45a2ff, #2fd07b) border-box;
-  border-radius: 2rem;
-  border: 3px solid transparent;
-  color: #d0d5dd;
+  background: transparent;
+  color: #00FB6E;
+  border: 2px solid #00FB6E;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
 }
 
 .button.button--secondary:hover {
-  background: linear-gradient(#0a0d17, #0a0d17) padding-box,
-    linear-gradient(to left, #45a2ff, #2fd07b) border-box;
-  border-radius: 2rem;
-  border: 3px solid transparent;
-  color: #d0d5dd;
-  background-color: #14171f;
+  background: linear-gradient(135deg, #00FB6E, #000AFF);
+  border-color: transparent;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 251, 110, 0.3);
 }
 
-@media screen and (min-width: 1400px) {
-  article {
-    padding-right: 15%;
+/* Navbar styling */
+.navbar {
+  padding: 0.5rem 2rem;
+  height: 65px;
+}
+
+.navbar__items {
+  gap: 2rem;  /* Increased gap between items */
+}
+
+.navbar__link {
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+/* Add hover effect */
+.navbar__link:hover {
+  color: var(--ifm-color-primary);
+}
+
+/* Active link styling */
+.navbar__link--active {
+  color: var(--ifm-color-primary);
+}
+
+/* Mobile menu adjustments */
+@media (max-width: 996px) {
+  .navbar-sidebar {
+    background: var(--ifm-background-surface-color);
+  }
+  
+  .navbar-sidebar__items {
+    padding: 1rem;
+  }
+
+  .navbar-sidebar__item {
+    padding: 0.5rem 0;
   }
 }
 
-code {
-  color: #0eb0c1;
+/* Footer Styling */
+.footer {
+  padding: 4rem 2rem;
+  background: var(--ifm-background-surface-color);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.navbar__search {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
+.footer__link-item {
+  color: var(--ifm-color-gray-300);
+  transition: color 0.2s;
 }
 
-.navbar__search-input {
-  width: 100%;
+.footer__link-item:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
 }
 
-/* Ensure that categories do not act like links */
-.menu__list-item-collapsible:hover {
-  background-color: transparent !important; /* Ensure no background color on hover */
+.footer__links {
+  margin-bottom: 3rem;
 }
 
-.menu__list-item-collapsible > .menu__link {
-  /*pointer-events: none; /* Disable hover and click interaction on categories */
-  font-weight: bold !important;
-  background-color: transparent !important; /* Ensure no background color on hover */
-  color: inherit !important; /* Make sure color does not change */
+.footer__title {
+  color: var(--ifm-color-gray-100);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
-.menu__list-item-collapsible .menu__link {
-  font-size: 0.95rem;
-  margin-top: 10px;
+.footer__logo {
+  margin-bottom: 1rem;
+  max-width: 160px;
 }
 
-.menu__list > .theme-doc-sidebar-item-link-level-2 .menu__link {
-  font-size: 0.95rem;
+.footer__copyright {
+  color: var(--ifm-color-gray-400);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* Footer responsive adjustments */
+@media (max-width: 996px) {
+  .footer {
+    padding: 3rem 1rem;
+  }
+  
+  .footer__col {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Footer link columns */
+.footer__links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2rem;
+}
+
+/* Footer bottom section */
+.footer__bottom {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Remove sidebar divider */
+.main-wrapper > div {
+  border-right: none !important;
+}
+
+/* Remove sidebar right border */
+aside.theme-doc-sidebar-container {
+  border-right: none !important;
+  border-inline-end: none !important;
+}
+
+/* Remove thin line between sidebar and content */
+.theme-doc-sidebar-container {
+  border-right: none !important;
+  border-inline-end: none !important;
 }

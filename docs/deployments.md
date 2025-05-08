@@ -1,8 +1,9 @@
 ---
-id: evmx
-title: EVMx Details
+id: deployments 
+title: Protocol Deployment Details
 ---
 
+Below you can find deployment information for SOCKET protocol on all supported networks
 # What is EVMx?
 
 EVMx is an EVM environment with chain-abstraction capabilities, to enable solidity developers to be able to write gateway's in solidity. EVMx is run by a Watcher participating in the SOCKET Protocol.

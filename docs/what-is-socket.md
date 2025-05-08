@@ -1,6 +1,6 @@
 ---
 id: architecture
-title: Architecture
+title: What is SOCKET? 
 ---
 
 SOCKET is a protocol, not a blockchain. It enables developers to build chain-abstracted applications using a combination of offchain agents and onchain contracts. This setup allows for flexible, efficient, and customizable chain-abstracted interactions.
