@@ -18,7 +18,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "architecture",
-          label: "Protocol Overview",
+          label: "Protocol overview",
         },
         {
           type: "doc",
@@ -35,7 +35,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "doc",
           id: "getting-started",
-          label: "Getting Started",
+          label: "Getting started",
         },
         {
           type: "doc",
@@ -127,10 +127,10 @@ const sidebars: SidebarsConfig = {
       ],
     },
     {
-      type: "category", 
+      type: "category",
       label: "Tools",
-      link: {type: 'doc', id: 'tools'},
-      collapsed: false,
+      link: { type: 'doc', id: 'tools' },
+      collapsed: true,
       items: [
         {
           type: "category",
@@ -148,19 +148,19 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "Resources",
-      collapsed: false,
+      collapsed: true,
       items: [
         {
           type: "doc",
           id: "deployments",
           label: "Deployments",
         },
+        {
+          type: "link",
+          label: "Brand Assets",
+          href: "https://www.figma.com/file/qwHGtazqA8qLGGj6TYpBu3/SOCKET-Brand-Assets",
+        },
       ],
-    },
-    {
-      type: "link",
-      label: "Brand Assets",
-      href: "https://www.figma.com/file/qwHGtazqA8qLGGj6TYpBu3/SOCKET-Brand-Assets",
     },
   ],
 };
