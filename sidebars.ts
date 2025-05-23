@@ -146,21 +146,9 @@ const sidebars: SidebarsConfig = {
       ],
     },
     {
-      type: "category",
-      label: "Resources",
-      collapsed: true,
-      items: [
-        {
-          type: "link",
-          label: "EVMx Information",
-          href: "/evmx",
-        },
-        {
-          type: "link",
-          label: "Brand Assets",
-          href: "https://www.figma.com/file/qwHGtazqA8qLGGj6TYpBu3/SOCKET-Brand-Assets",
-        },
-      ],
+      type: "link",
+      label: "Brand Assets",
+      href: "https://www.figma.com/file/qwHGtazqA8qLGGj6TYpBu3/SOCKET-Brand-Assets",
     },
   ],
 };
