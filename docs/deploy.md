@@ -184,11 +184,11 @@ contract SomeContractAppGateway is AppGatewayBase {
 
     constructor(
         address addressResolver_,
-        FeesData memory feesData_,
+        uint256 fees_,
         string calldata name_,
         string calldata symbol_,
         uint8 decimals_
-    ) AppGatewayBase(addressResolver_, feesData_) {
+    ) AppGatewayBase(addressResolver_, fees_) {
         (...)
         creationCodeWithArgs[someOtherRelevantName] = type(SomeOtherContract).creationCode;
     }
