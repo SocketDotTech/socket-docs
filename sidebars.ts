@@ -151,9 +151,9 @@ const sidebars: SidebarsConfig = {
       collapsed: true,
       items: [
         {
-          type: "doc",
-          id: "deployments",
-          label: "Deployments",
+          type: "link",
+          label: "EVMx Information",
+          href: "/evmx",
         },
         {
           type: "link",
