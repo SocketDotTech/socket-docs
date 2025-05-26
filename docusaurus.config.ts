@@ -122,11 +122,6 @@ const config: Config = {
           position: 'left',
           to: '/tools',
         },
-        {
-          label: 'Resources',
-          position: 'left',
-          to: '/deployments',
-        },
         // Keep existing right-side items
         {
           type: 'search',

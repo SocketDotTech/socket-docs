@@ -41,8 +41,8 @@ You can automate this approval in your AppGateway's `initialize` function:
 bytes32 public yourContractId = _createContractId("your-onchain-contract");
 
 function initialize(uint32 chainSlug_) public override {
-    // Allow the onchain contract to communicate with this AppGateway
-    setValidPlug(chainSlug_, yourContractId, true);
+    address onchainAddress = getOnChainAddress(yourContractId, chainSlug_);
+    watcherPrecompileConfig().setIsValidPlug(chainSlug_, onchainAddress, true);
 }
 ```
 
@@ -53,20 +53,13 @@ The `setValidPlug` function takes three parameters:
 
 ### Triggering AppGateway from an onchain contract
 
-Once your onchain contract inherits from `PlugBase` and is approved by the AppGateway, you can implement a function to send data to the AppGateway:
+Once your onchain contract inherits from `PlugBase` and is approved by the AppGateway, you can implement a function to call your AppGateway as you would call any other same chain contract:
 
 ```solidity
-function triggerAppGateway(YourDataType payload_) external returns (bytes32) {
-    // Encode your data and send it to the AppGateway
-    return _callAppGateway(abi.encode(payload_), bytes32(0));
+function increaseOnGateway(YourDataType payload_) external returns (bytes32) {
+    return IYourAppGatewayInterface(address(socket__)).yourAppGatewayFunction(payload_);
 }
 ```
-
-Parameters for `_callAppGateway`:
-- First parameter: Your encoded data that will be sent to the AppGateway
-- Second parameter: Reserved for additional execution information (currently use `bytes32(0)`)
-
-The function returns a transaction identifier that can be used to track the chain-abstracted call.
 
 :::info
 [See a reference implementation of this functionality here](https://github.com/SocketDotTech/socket-test-app/tree/master/src/trigger-appgateway-onchain).

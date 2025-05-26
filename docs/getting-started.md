@@ -93,22 +93,23 @@ SOCKET Protocol uses a prepaid fee model where you deposit funds to cover all as
 
 ### How the fee system works
 
-- Fees are deposited into a `FeesPlug` contract on a specific chain configured in the `AppGateway` contract
-- These funds are drawn from when chain-abstracted calls are processed
-- The fees are distributed between [Transmitters](/transmitters) (who relay transactions) and the SOCKET Protocol infrastructure
-- Unused fees remain in the `FeesPlug` contract balance for your application gateway future transactions
+* Fees are deposited into a `FeesPlug` contract on any supported chain.
+* These funds are credited on EVMx and can be used to pay fees or perform transactions.
+* When chain-abstracted calls are processed, the necessary amount is drawn from these funds.
+* The collected fees are distributed between [Transmitters](/transmitters) (who relay the transactions) and the SOCKET Protocol infrastructure.
+* Any unused fees remain in the `FeesPlug` contract and are available for your application gateway's future transactions.
 
 ### Deposit fees
 
-In this example, we'll deposit 0.001 arbsepETH fees on **Arbitrum Sepolia** `FeesPlug` contract as configured in `script/deployEVMxCounterApp.s.sol`:
-
-:::tip
-Ensure your wallet has at least **0.001 Arbitrum Sepolia ETH**. You can get testnet ETH from the [Arbitrum Sepolia faucet](https://www.alchemy.com/faucets/arbitrum-sepolia).
-:::
+In this example, we'll deposit 100 TestUSDC for fees on **Arbitrum Sepolia** `FeesPlug` contract as configured in `script/helpers/PayFeesInArbitrumTestUSDC.s.sol`:
 
 ```bash
 forge script script/helpers/PayFeesInArbitrumTestUSDC.s.sol --broadcast --skip-simulation
 ```
+
+:::tip
+Ensure your wallet has enough **Arbitrum Sepolia ETH** to mint and transfer TestUSDC. You can get testnet ETH from the [Arbitrum Sepolia faucet](https://www.alchemy.com/faucets/arbitrum-sepolia).
+:::
 
 ### Check your AppGateway fee balance
 
@@ -121,9 +122,8 @@ forge script script/helpers/AppGatewayFeeBalance.s.sol
 :::note Fee flexibility
 You have options for how to pay fees:
 
-- **Multiple tokens**: Pay using various tokens on supported chains
 - **Multiple chains**: Deposit to any chain with a `FeesPlug` contract
-- **Direct deposits**: Call the `deposit()` function directly on any `FeesPlug` contract
+- **Direct deposits**: Call the `depositToFeeAndNative()` function directly on any `FeesPlug` contract
 
 See the [EVMx](/evmx) page for available `FeesPlug` addresses and [fee documentation](/fees) for more details.
 :::
