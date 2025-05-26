@@ -3,35 +3,49 @@ id: fees
 title: Pay for your onchain transactions
 ---
 
-Setting up fees is essential for your app to interact with both the EVMx and supported blockchains. There is only one type of fees you need to manage: onchain transaction sponsorship
+Setting up fees is essential for your app to interact with both EVMx and supported blockchains. You need to manage one fee parameter that handles two payment scenarios: EVMx execution costs and onchain transaction sponsorship.
 
-## Onchain Transaction Sponsorship
+:::info
+TestUSDC is currently the only supported token for converting into EVMx credits. See available TestUSDC contract address per chain [here](https://github.com/SocketDotTech/socket-protocol/blob/master/deployments/stage_addresses.json).
+:::
 
-### Configure fee data
+## How the fee system works
 
-Set up the `Fees` structure for your app:
+The fee system uses a single `fees` parameter that serves dual purposes:
+- **Minimum deposit requirement**: Users must deposit at least this amount before initiating transactions
+- **Maximum fee limit**: Sets an upper bound on transaction costs to protect users from excessive charges
+
+When users deposit tokens, they are converted to credits on EVMx and allocated for both native transactions and onchain fees.
+
+## Configure fee amount
+
+Set up the fee amount for your app:
 
 ```solidity
-struct Fees {
-    uint32 feePoolChain;
-    address feePoolToken;
-    uint256 maxFees;
-}
-
-Fees fees = Fees({
-    feePoolChain: <CHAINSLUG>,
-    feePoolToken: <TOKEN_ADDRESS>,
-    maxFees: <MAX_FEE_PER_TRANSACTION>
-});
+uint256 fees = 10 ether; // Both minimum required deposit and maximum fee limit
 ```
 
-The `maxFees` parameter serves a dual purpose:
-- It represents the minimum amount of fees that must be available in the contract to process the transaction
-- It also represents the maximum amount the user is willing to pay for this transaction to be included in a batch
+### Fee parameter details
 
-User must have deposited at least this amount to the contract before initiating the transaction, which ensures the transmitter (entity processing batches) is guaranteed compensation for including this transaction.
+The `fees` value controls:
 
-### Apply fee configuration
+1. **Minimum Required Balance**: Users must deposit at least this amount to ensure transmitters are compensated for including transactions in batches.
+
+2. **Maximum Fee Protection**: Acts as an upper limit for transaction costs. Users only pay the actual cost if it's less than this amount.
+
+### Usage across transaction types
+
+**EVMx Transactions**
+- Manages fees for offchain computational processing
+- Ensures sufficient user balance for computational costs
+- Provides predictable fee structure for offchain operations
+
+**Onchain Transactions**
+- Controls standard blockchain transaction fees
+- Manages gas costs for contract interactions
+- Provides fee limits for user protection
+
+## Apply fee configuration
 
 Set the fee configuration in your contracts:
 
@@ -39,70 +53,61 @@ Set the fee configuration in your contracts:
 AppGateway(appGatewayAddress).setFees(fees);
 ```
 
-or set them in the `constructor` of the `AppGateway`.
-
-The Fees structure is designed to manage fee-related parameters for transactions in a dual-execution environment (EVMx and onchain). Here's how it's implemented:
+Alternatively, set fees in the `AppGateway` constructor:
 
 ```solidity
-Fees memory fees = Fees({
-    feePoolChain: 421614,      // Chain ID where fees are collected
-    feePoolToken: ETH_ADDRESS, // Token used for fee payments (ETH in this case)
-    maxFees: 0.001 ether       // Maximum fee amount allowed and minimum required deposit
-});
+SomeAppGateway gateway = new SomeAppGateway(addressResolver, fees, owner);
 ```
 
-#### `Fees` key components
+## Deposit tokens to pay for transactions
 
-1. `feePoolChain`
-    Specifies the blockchain network ID where fees are collected and managed. In this case, it's set to `421614`, which is Arbitrum Sepolia's chain ID.
+### Understanding deposits and credits
 
-2. `feePoolToken`
-    Defines which token is used for fee payments. Here it's set to `ETH_ADDRESS`, meaning Ethereum is used as the payment token.
+When you deposit tokens using the `FeesPlug` contract, they're stored in a vault and converted to credits on EVMx.
 
-3. `maxFees`
-    Sets an upper limit for transaction fees, preventing excessive charges. In this example, it's set to `0.001 ETH`.
-    The user must have deposited at least this amount, ensuring the transmitter gets compensated for including this transaction in a batch.
-    If the actual cost is less than this amount, the user only pays what's needed.
+**Example using `depositToFeeAndNative`:**
+- Deposit: 100 TestUSDC → 100 credits
+- Allocation: 10 credits for native EVMx transactions, 90 credits for onchain fees
 
-#### Dual purpose usage
+**Example using `depositToFee`:**
+- All deposited tokens are allocated exclusively for onchain fees
 
-**EVMx Transactions**
-- Acts as a fee configuration for processing offchain computations
-- Ensures users have enough balance to cover computational costs
-- Provides a predictable fee structure for offchain operations
+### Deposit methods
 
-**Onchain Transactions**
-- Sets parameters for standard blockchain transaction fees
-- Manages gas costs for contract interactions
-- Provides fee limits for user protection
-
-#### Implementation context
-The `Fees` structure is passed to the `SomeAppGateway` contract ensuring consistent fee handling across the entire system, whether transactions are processed offchain or onchain:
-
-```solidity
-SomeAppGateway gateway = new SomeAppGateway(
-    addressResolver,
-    fees,
-    owner
-);
-```
-
-### Deposit sponsorship tokens to pay for transactions
-
-First, deposit testnet ETH to the `FeesPlug` contract on your chosen chain:
-
+**Method 1: Deposit for both Fees and Native transactions**
 ```bash
-cast send <CHOSEN_CHAIN_FEES_PLUG> "deposit(address,address,uint256)" \
-    0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE \
+cast send <CHOSEN_CHAIN_FEES_PLUG> "depositToFeeAndNative(address,address,uint256)" \
+    <TOKEN_ADDRESS> \
     $APP_GATEWAY \
     <AMOUNT> \
-    --value <AMOUNT> \
-    --rpc-url $SEPOLIA_RPC \
+    --rpc-url $RPC_URL \
     --private-key $PRIVATE_KEY
 ```
 
-You may also call or adapt the [existing `PayFeesInArbitrumETH` script](https://github.com/SocketDotTech/socket-protocol/blob/master/script/helpers/PayFeesInArbitrumETH.s.sol) in SOCKET Protocol repository. You may also check your AppGateway total fee balance with [`AppGatewayFeeBalance` script](https://github.com/SocketDotTech/socket-protocol/blob/master/script/helpers/AppGatewayFeeBalance.s.sol).
+**Method 2: Deposit for Fees only**
+```bash
+cast send <CHOSEN_CHAIN_FEES_PLUG> "depositToFee(address,address,uint256)" \
+    <TOKEN_ADDRESS> \
+    $APP_GATEWAY \
+    <AMOUNT> \
+    --rpc-url $RPC_URL \
+    --private-key $PRIVATE_KEY
+```
 
-:::info
-Currently only testnet ETH is supported. Support for additional tokens is coming soon.
+### Cross-chain deposits
+
+You can deposit tokens from multiple chains (Arbitrum, Base, Optimism, etc.) to the same AppGateway:
+
+- **Deposits**: Tokens are stored in individual `FeesPlug` contracts on each chain
+- **Credits**: A global fees manager tracks balances across all chains and converts them to EVMx credits
+- **Withdrawals**: You can withdraw from any chain with sufficient token balance, regardless of the original deposit location
+
+:::warning
+**Cross-Chain Withdrawal Notice**: The current implementation allows withdrawing from any chain with available balance, which could potentially be misused. This will be refined in future versions.
 :::
+
+## Additional resources
+
+- Use the existing [`PayFeesInArbitrumUSDC` script](https://github.com/SocketDotTech/socket-protocol/blob/master/script/helpers/PayFeesInArbitrumUSDC.s.sol) from the SOCKET Protocol repository
+- Check your AppGateway total fee balance with the [`AppGatewayFeeBalance` script](https://github.com/SocketDotTech/socket-protocol/blob/master/script/helpers/AppGatewayFeeBalance.s.sol)
+- Review the [`FeesPlug.sol`](https://github.com/SocketDotTech/socket-protocol/blob/master/contracts/evmx/payload-delivery/FeesPlug.sol#L18) contract implementation for more details
