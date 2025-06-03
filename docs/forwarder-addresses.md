@@ -26,18 +26,16 @@ SOCKET uses these `forwarder` contracts that are automatically deployed alongsid
 When your `AppGateway` contract is deployed, the constructor can automatically create a forwarder for your onchain contract. If you need to upload an onchain contract to the EVMx you can call the following from the `AppGateway`:
 
 ```solidity
-addressResolver__.getOrDeployForwarderContract(
-    address(this),        // The address of the current AppGateway contract
+asyncDeployer__().getOrDeployForwarderContract(
     onchainAddress,       // The address of the onchain contract (e.g. token)
     chainSlug             // The chain identifier for the target chain
 );
 ```
 
-- `address(this)` — Refers to the current `AppGateway` contract.
-- `onchainTokenAddress` — The address of the onchain contract (such as a token or other smart contract) that needs a forwarder.
+- `onchainAddress` — The address of the onchain contract (such as a token or other smart contract) that needs a forwarder.
 - `chainSlug` — A unique identifier for the target blockchain (e.g., 1 - Ethereum, 8453 - Base, etc).
 
-This call ensures that a forwarder contract is deployed and linked to the specified `(chainSlug, onchainTokenAddress)` pair.
+This call ensures that a forwarder contract is deployed and linked to the specified `(chainSlug, onchainAddress)` pair.
 
 ### Accessing Forwarder Addresses
 
@@ -50,7 +48,7 @@ address forwarderAddress = forwarderAddresses[contractId][chainSlug];
 This mapping allows you to retrieve the forwarder address for any contract and chain combination. For example:
 
 ```solidity
-address someContractForwarder = forwarderAddresses[superContractId][chainSlug];
+address someContractForwarder = forwarderAddresses[someContractId][chainSlug];
 ```
 
 :::info

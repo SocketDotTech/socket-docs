@@ -99,7 +99,7 @@ SOCKET Protocol uses a prepaid fee model where you deposit funds to cover all as
 * The collected fees are distributed between [Transmitters](/transmitters) (who relay the transactions) and the SOCKET Protocol infrastructure.
 * Any unused fees remain in the `FeesPlug` contract and are available for your application gateway's future transactions.
 
-### Deposit fees
+### Deposit funds
 
 In this example, we'll deposit 100 TestUSDC for fees on **Arbitrum Sepolia** `FeesPlug` contract as configured in `script/helpers/PayFeesInArbitrumTestUSDC.s.sol`:
 

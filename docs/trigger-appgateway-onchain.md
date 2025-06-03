@@ -35,21 +35,20 @@ Inheriting from `PlugBase` is the first step in creating a secure communication 
 
 For security reasons, your AppGateway must explicitly authorize which onchain contracts can send it messages. This is done through the `setValidPlug` function, which marks a specific onchain contract as a valid communication source.
 
-You can automate this approval in your AppGateway's `initialize` function:
+You can automate this approval in your AppGateway's `initializeOnChain` function:
 
 ```solidity
 bytes32 public yourContractId = _createContractId("your-onchain-contract");
 
-function initialize(uint32 chainSlug_) public override {
-    address onchainAddress = getOnChainAddress(yourContractId, chainSlug_);
-    watcherPrecompileConfig().setIsValidPlug(chainSlug_, onchainAddress, true);
+function initializeOnChain(uint32 chainSlug_) public override {
+    _setValidPlug(true, chainSlug_, onchainToEVMx);
 }
 ```
 
 The `setValidPlug` function takes three parameters:
+- `true`: Sets the contract as an authorized communication source
 - `chainSlug_`: The chain identifier where your onchain contract is deployed
 - `yourContractId`: A unique identifier for your onchain contract
-- `true`: Sets the contract as an authorized communication source
 
 ### Triggering AppGateway from an onchain contract
 

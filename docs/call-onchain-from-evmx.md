@@ -11,13 +11,13 @@ EVMx allows you to call smart contracts deployed on other blockchains in a way t
 
 To call a function on an onchain contract from EVMx, you use a special `forwarder` address that represents the onchain contract within the EVMx environment. The call syntax is similar to regular Solidity contract calls, with the addition of the `async` modifier.
 
-Here's a simple example of a value increase function where the onchain call does not return any values:
+Here's a simple example where the onchain call returns value to be handled by a promise:
 
 ```solidity
-function increaseOnchain(uint256 amount, address forwarder) external async {
+function callSomethingOnchainAndReadTheValue(uint256 amount, address forwarder) external async {
     ISomeContract(forwarder).increase(amount);
     // (optional) Promise-based pattern to handle asynchronous data retrieval
-    IPromise(forwarder).then(this.someFunction.selector, abi.encode(someDataToShareWithPromise));
+    then(this.someFunction.selector, abi.encode(someDataToShareWithPromise));
 }
 ```
 
@@ -35,15 +35,15 @@ One powerful feature of EVMx is the ability to make sequential batch calls to mu
 Consider this chain-abstracted value update example:
 
 ```solidity
-function transfer(uint256 amount, address forwarderChainA, address forwarderChainB) external async {
-    // First burn tokens on the source chain
+function batchOnchainCalls(uint256 amount, address forwarderChainA, address forwarderChainB) external async {
+    // First call some contract on chain A
     ISomeContract(forwarderChainA).increase(amount);
     // (optional) Promise-based pattern to handle asynchronous data retrieval
-    IPromise(forwarderChainA).then(this.someFunction.selector, abi.encode(someDataToShareWithPromise));
-    // Then mint tokens on the destination chain
+    then(this.someFunction1.selector, abi.encode(someDataToShareWithPromise));
+    // Then call some contract on chain B
     ISomeContract(forwarderChainB).decrease(amount);
     // (optional) Promise-based pattern to handle asynchronous data retrieval
-    IPromise(forwarderChainB).then(this.someFunction.selector, abi.encode(someDataToShareWithPromise));
+    then(this.someFunction2.selector, abi.encode(someDataToShareWithPromise));
 }
 ```
 
@@ -93,7 +93,7 @@ By following these patterns, you can create powerful chain-abstracted applicatio
 <details>
    <summary>I cannot see transactions for my new AppGateway on the EVMx explorer</summary>
 
-    Please confirm you have updated the `APP_GATEWAY` variable on the `.env` file.
+    If you are running the forge scripts in the starter-kit. Please confirm you have updated the `APP_GATEWAY` variable on the `.env` file.
 
     If you have exported your `.env` file, please confirm that the variable is up to date on your environment.
 </details>
@@ -102,7 +102,7 @@ By following these patterns, you can create powerful chain-abstracted applicatio
    <summary>Deploying onchain contracts is reverting with `0x8d53e553` - `InsufficientFees()`</summary>
 
     Please confirm you have deposited enough to pay for fees.
-    - See how to [Deposit fees](/getting-started#deposit-fees).
+    - See how to [Deposit funds](/getting-started#deposit-funds).
     - [Check your AppGateway fee balance](/getting-started#check-your-appgateway-fee-balance).
 </details>
 
