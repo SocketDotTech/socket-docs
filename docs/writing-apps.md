@@ -33,7 +33,7 @@ The System consists of 2 main components.
 ### Onchain contract bytecode stored in the AppGateway Contract
 The AppGateway Contract has two key pieces of code to ensure that onchain deployments are replicable `SomeContract`'s `creationCode` with constructor parameters is stored in a mapping. This stored code is used for deploying the token to the underlying chains and written in the `constructor`.
 ```solidity
-creationCodeWithArgs[someRelevantName] = abi.encodePacked(
+creationCodeWithArgs[someContractId] = abi.encodePacked(
     type(OnChainContractType).creationCode,
     abi.encode(
         params_.static_,
@@ -46,7 +46,7 @@ creationCodeWithArgs[someRelevantName] = abi.encodePacked(
 
 Using  `bytes32` variable is use a unique identifier for the SuperToken contract generated using the `_createContractId` function. This identifier allows us to fetch `creationCode`, `onchain addresses` and `forwarder addresses` from maps in `AppGatewayBase`. See [here](/forwarder-addresses) to know more about [forwarder addresses](/forwarder-addresses).
 ```solidity
-bytes32 public someRelevantName = _createContractId("someRelevantName");
+bytes32 public someContractId = _createContractId("someContractId");
 ```
 
 While this example handles a single contract, you can extend it to manage multiple contracts by storing their creation codes.
@@ -60,7 +60,7 @@ The `deployContracts` function takes a `chainSlug` as an argument that specifies
 
 ```solidity
 function deployContracts(uint32 chainSlug_) external async {
-    _deploy(someRelevantName, chainSlug_, IsPlug.YES);
+    _deploy(someContractId, chainSlug_, IsPlug.YES);
 }
 ```
 
