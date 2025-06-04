@@ -48,14 +48,14 @@ SOCKET provides flexible transaction configuration through the `_setOverrides` h
           ISuperToken(chain2Forwarder).balanceOf(msg.sender);
 
           // Set up promise callbacks
-          IPromise(chain1Forwarder).then(this.chainOperation.selector, abi.encode(1, asyncId));
-          IPromise(chain2Forwarder).then(this.chainOperation.selector, abi.encode(2, asyncId));
+          then(this.chainOperation.selector, abi.encode(1));
+          then(this.chainOperation.selector, abi.encode(2));
 
           // Consecutive reads on the same chain need to be handled as first come first serve
           ISuperToken(chain3Forwarder).balanceOf(msg.sender);
-          IPromise(chain3Forwarder).then(this.chainOperation.selector, abi.encode(3, asyncId));
+          then(this.chainOperation.selector, abi.encode(3));
           ISuperToken(chain3Forwarder).balanceOf(msg.sender);
-          IPromise(chain3Forwarder).then(this.chainOperation.selector, abi.encode(3, asyncId));
+          then(this.chainOperation.selector, abi.encode(3));
 
           // Return to write mode for subsequent operations
           _setOverrides(Read.OFF);
@@ -87,7 +87,7 @@ contract SuperTokenAppGateway is AppGatewayBase, Ownable {
         _setOverrides(Read.ON);
         // Request to forwarder and deploys immutable promise contract and stores it
         ISuperToken(srcForwarder).balanceOf(msg.sender);
-        IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount, asyncId));
+        then(this.checkBalance.selector, abi.encode(amount, asyncId));
         _setOverrides(Read.OFF);
 
         ISuperToken(srcForwarder).burn(msg.sender, amount);
@@ -96,11 +96,11 @@ contract SuperTokenAppGateway is AppGatewayBase, Ownable {
 }
 ```
 
-### Handling a Promise - the `.then` method
-When a promise is created, it can be resolved or rejected asynchronously. Use the `.then()` method to handle the successful resolution of a promise and a callback function to process the returned data.
+### Handling a Promise - the `then` method
+When a promise is created, it can be resolved or rejected asynchronously. Use the `then()` method to handle the successful resolution of a promise and a callback function to process the returned data.
 
 ```solidity
-IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount, asyncId));
+then(this.checkBalance.selector, abi.encode(amount, asyncId));
 ```
 
 ### Callback Example
@@ -108,19 +108,18 @@ The callback function `checkBalance` processes the returned data, ensuring the u
 
 ```solidity
 function checkBalance(bytes memory data, bytes memory returnData) external onlyPromises {
-    (uint256 amount, bytes32 asyncId) = abi.decode(data, (uint256, bytes32));
+   uint256 amount = abi.decode(data, (uint256));
 
     uint256 balance = abi.decode(returnData, (uint256));
     if (balance < amount) {
-        _revertTx(asyncId);
-        return;
+        revert InsufficientBalance(amount, balance);
     }
 }
 ```
 The callback function `checkBalance`:
  - Uses the `onlyPromises` modifier to ensure it's only called by the promises system
  - Takes two parameters:
-   - `data`: The encoded data from the original function (amount and asyncId)
+   - `data`: The encoded data from the original function (amount)
    - `returnData`: The actual data returned from the source chain (balance). This data is automatically returned by the Watcher.
 
 ## Example Use Case
@@ -132,14 +131,14 @@ Consider a chain-abstracted token bridge transaction where the user's balance mu
 
 ```solidity
 contract SuperTokenAppGateway is AppGatewayBase, Ownable {
+    error InsufficientBalance(uint256 required, uint256 available);
     (...)
     function checkBalance(bytes memory data, bytes memory returnData) external onlyPromises {
-        (uint256 amount, bytes32 asyncId) = abi.decode(data, (uint256, bytes32));
+       uint256 amount = abi.decode(data, (uint256));
 
         uint256 balance = abi.decode(returnData, (uint256));
         if (balance < amount) {
-            _revertTx(asyncId);
-            return;
+            revert InsufficientBalance(amount, balance);
         }
     }
 
@@ -149,12 +148,12 @@ contract SuperTokenAppGateway is AppGatewayBase, Ownable {
         returns (bytes32 asyncId)
     {
         // Check user balance on src chain
-        _readCallOn();
+        _setOverrides(Read.ON);
         // Request to forwarder and deploys immutable promise contract and stores it
         ISuperToken(srcForwarder).balanceOf(msg.sender);
-        IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount, asyncId));
+        then(this.checkBalance.selector, abi.encode(amount));
 
-        _readCallOff();
+        _setOverrides(Read.OFF);
 
         ISuperToken(srcForwarder).burn(msg.sender, amount);
         ISuperToken(dstForwarder).mint(msg.sender, amount);

@@ -60,7 +60,7 @@ const sidebars: SidebarsConfig = {
         {
           type: "link",
           label: "Upload onchain contracts to EVMx",
-          href: "/forwarder-addresses#uploading-an-onchain-contract-to-use-on-the-evmx-contract",
+          href: "/forwarder-addresses#uploading-an-onchain-contract-to-use-on-an-appgateway-on-evmx",
         },
         {
           type: "doc",

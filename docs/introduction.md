@@ -107,10 +107,10 @@ Ready to start building with SOCKET?
 
 ## Understand Core Concepts and Architecture
 - [What is SOCKET?](/architecture): Understand what SOCKET fundamentally solves and why it exists
-- [Protocol Overview](/architecture#socket-protocol-components): Understand how app-gateway and your application smart-contracts work together
-- [What are Switchboards?](/architecture#switchboards): Understand how switchboards enable modular security enabling developers to always have control and access to best security
-- [What are Watchers?](/architecture#watchers): Understand what role Watchers play in SOCKET
-- [What are Transmitters?](/architecture#transmitters): Understand how transmitters enable app-gateways to interact with any smart-contract on any network
+- [Protocol Overview](/architecture): Understand how app-gateway and your application smart-contracts work together
+- [What are Switchboards?](/switchboards): Understand how switchboards enable modular security enabling developers to always have control and access to best security
+- [What are Watchers?](/watchers): Understand what role Watchers play in SOCKET
+- [What are Transmitters?](/transmitters): Understand how transmitters enable app-gateways to interact with any smart-contract on any network
 - [What is EVMx?](/evmx): Understand what special properties an app-gateway on EVMx can get
 
 ## Key Concepts

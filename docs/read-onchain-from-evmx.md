@@ -32,7 +32,7 @@ function transfer(uint256 amount, address srcForwarder, address dstForwarder)
     // Request balance from source chain
     ISomeContract(srcForwarder).balanceOf(msg.sender);
     // Set up callback with necessary data
-    IPromise(srcForwarder).then(this.checkBalance.selector, abi.encode(amount));
+    then(this.checkBalance.selector, abi.encode(amount));
     // Disable read mode
     _setOverrides(Read.OFF);
     // These operations will only execute if the balance check passes
@@ -141,7 +141,7 @@ By following these patterns, you can safely and efficiently read data from oncha
 <details>
    <summary>I cannot see transactions for my new AppGateway on the EVMx explorer</summary>
 
-    Please confirm you have updated the `APP_GATEWAY` variable on the `.env` file.
+    If you are running the forge scripts in the starter-kit. Please confirm you have updated the `APP_GATEWAY` variable on the `.env` file.
 
     If you have exported your `.env` file, please confirm that the variable is up to date on your environment.
 </details>
@@ -150,7 +150,7 @@ By following these patterns, you can safely and efficiently read data from oncha
    <summary>Deploying onchain contracts is reverting with `0x8d53e553` - `InsufficientFees()`</summary>
 
     Please confirm you have deposited enough to pay for fees.
-    - See how to [Deposit fees](/getting-started#deposit-fees).
+    - See how to [Deposit funds](/getting-started#deposit-funds).
     - [Check your AppGateway fee balance](/getting-started#check-your-appgateway-fee-balance).
 </details>
 
