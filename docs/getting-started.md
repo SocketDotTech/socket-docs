@@ -61,6 +61,51 @@ vi .env
 Add your private key to the `.env` file.
 <!-- TODO: explain the priviliges of that wallet? right now there dont seem to be any cause owner restrictions dont seem to exist -->
 
+## Set up credits to pay for your App transactions
+
+SOCKET Protocol uses a prepaid fee model where you deposit funds to cover all aspects of chain-abstracted execution, including:
+
+- Gas costs for transaction execution on destination chains
+- Transmitter service fees for relaying messages between chains
+- Infrastructure costs for the SOCKET Protocol network
+
+### How the fee system works
+
+* Credits are deposited into a `FeesPlug` contract on any supported chain.
+* These funds are credited on EVMx and can be used to pay fees or perform transactions.
+* When chain-abstracted calls are processed, the necessary amount is drawn from these funds.
+* The collected fees are distributed between [Transmitters](/transmitters) (who relay the transactions) and the SOCKET Protocol infrastructure.
+* Any unused credits remain in the `FeesPlug` contract and are available for your application gateway's future transactions.
+
+### Deposit funds
+
+In this example, we'll deposit 1 Arbitrum USDC as credits on **Arbitrum** `FeesPlug` contract as configured in `script/helpers/DepositCreditAndNative.s.sol`:
+
+```bash
+forge script script/helpers/DepositCreditAndNative.s.sol --broadcast --skip-simulation
+```
+
+:::tip
+Ensure your wallet has at least **1 Arbitrum USDC** to deposit to `FeesPlug` and *Arbitrum ETH* to transfer it to the contract.
+:::
+
+### Check your account credit balance
+
+Verify your available credits at any time by running:
+
+```bash
+forge script script/helpers/CheckAvailableCredits.s.sol
+```
+
+:::note Fee flexibility
+You have options for how to pay credits:
+
+- **Multiple chains**: Deposit to any chain with a `FeesPlug` contract
+- **Direct deposits**: Call the `depositCreditAndNative` function directly on any `FeesPlug` contract
+
+See the [EVMx](/evmx) page for available `FeesPlug` addresses and [fee documentation](/fees) for more details.
+:::
+
 ## Deploy the AppGateway contract on EVMx
 
 The command below deploys the `CounterAppGateway` contracts on EVMx. The application gateway contract in this example coordinates how the `Counter` instances on each chain are deployed and how they can be interacted with from a single interface.
@@ -83,58 +128,16 @@ After successful deployment, locate the `CounterAppGateway` address in the scrip
 Always include the `--skip-simulation` flag when deploying to EVMx as shown above. Without it, Foundry may incorrectly estimate gas costs, as EVMx's execution model differs from standard EVM chains.
 :::
 
-## Set up fees to pay for your App transactions
-
-SOCKET Protocol uses a prepaid fee model where you deposit funds to cover all aspects of chain-abstracted execution, including:
-
-- Gas costs for transaction execution on destination chains
-- Transmitter service fees for relaying messages between chains
-- Infrastructure costs for the SOCKET Protocol network
-
-### How the fee system works
-
-* Fees are deposited into a `FeesPlug` contract on any supported chain.
-* These funds are credited on EVMx and can be used to pay fees or perform transactions.
-* When chain-abstracted calls are processed, the necessary amount is drawn from these funds.
-* The collected fees are distributed between [Transmitters](/transmitters) (who relay the transactions) and the SOCKET Protocol infrastructure.
-* Any unused fees remain in the `FeesPlug` contract and are available for your application gateway's future transactions.
-
-### Deposit funds
-
-In this example, we'll deposit 100 TestUSDC for fees on **Arbitrum Sepolia** `FeesPlug` contract as configured in `script/helpers/PayFeesInArbitrumTestUSDC.s.sol`:
-
-```bash
-forge script script/helpers/PayFeesInArbitrumTestUSDC.s.sol --broadcast --skip-simulation
-```
-
-:::tip
-Ensure your wallet has enough **Arbitrum Sepolia ETH** to mint and transfer TestUSDC. You can get testnet ETH from the [Arbitrum Sepolia faucet](https://www.alchemy.com/faucets/arbitrum-sepolia).
-:::
-
-### Check your AppGateway fee balance
-
-Verify your available fees at any time by running:
-
-```bash
-forge script script/helpers/AppGatewayFeeBalance.s.sol
-```
-
-:::note Fee flexibility
-You have options for how to pay fees:
-
-- **Multiple chains**: Deposit to any chain with a `FeesPlug` contract
-- **Direct deposits**: Call the `depositToFeeAndNative()` function directly on any `FeesPlug` contract
-
-See the [EVMx](/evmx) page for available `FeesPlug` addresses and [fee documentation](/fees) for more details.
-:::
-
 ## Deploy onchain contracts
 
-Now that we have our AppGateway deployed on EVMx and fees deposited, we'll deploy the actual `Counter` instances on multiple EVM chains:
+Now that we have our AppGateway deployed on EVMx and credits deposited, we'll deploy the actual `Counter` instances on multiple EVM chains:
 
 - **Base Sepolia**
 - **Arbitrum Sepolia**
 - **Optimism Sepolia**
+- **Base**
+- **Arbitrum**
+- **Optimism**
 
 This single command deploys and initializes `Counter` contracts across all target chains:
 
@@ -215,9 +218,9 @@ You can also query each Counter contract directly on its respective chain to ver
 
 ### Withdraw your AppGateway Fee balance
 
-    ```bash
-    forge script script/counter/WithdrawFeesArbitrumFeesPlug.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
-    ```
+```bash
+forge script script/helpers/WithdrawCreditsArbitrumFeesPlug.s.sol --broadcast --skip-simulation --legacy --with-gas-price 0
+```
 
 ## Conclusion
 
