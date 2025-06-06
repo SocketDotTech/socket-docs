@@ -113,6 +113,12 @@ By following these patterns, you can create powerful chain-abstracted applicatio
 </details>
 
 <details>
+   <summary>`EvmError: StateChangeDuringStaticCall` when attempting to read</summary>
+
+   Please ensure your interfaces have modifiers stripped. See [Interface modifications](/read-onchain-from-evmx#interface-modifications) for more information.
+</details>
+
+<details>
    <summary>Calling onchain contracts via EVMx is reverting with generic EVM error</summary>
 
     Please confirm you are passing the forwarder contract address and not the onchain contract address. See [key components for onchain calls](/call-onchain-from-evmx#key-components).

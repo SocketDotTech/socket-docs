@@ -169,6 +169,12 @@ By following these patterns, you can safely and efficiently read data from oncha
 </details>
 
 <details>
+   <summary>`EvmError: StateChangeDuringStaticCall` when attempting to read</summary>
+
+   Please ensure your interfaces have modifiers stripped. See [Interface modifications](/read-onchain-from-evmx#interface-modifications) for more information.
+</details>
+
+<details>
    <summary>Not being able to read onchain values via EVMx - `can't change state in a static call`</summary>
 
     Please confirm you are setting a promise to read the value after requesting an onchain read. See [key components for onchain reads](/read-onchain-from-evmx#key-components)
