@@ -95,6 +95,12 @@ export const chainDetails = {
     blockExplorerUrl: "https://goerli-optimism.etherscan.io",
     logoURI: "https://movricons.s3.ap-south-1.amazonaws.com/Optimism.svg",
   },
+  480: {
+    chainSlug: 480,
+    chainName: "World Chain",
+    blockExplorerUrl: "https://worldscan.org/",
+    logoURI: "",
+  },
   647: {
     chainSlug: 647,
     chainName: "Stavanger testnet",
@@ -140,6 +146,12 @@ export const chainDetails = {
     chainSlug: 1868,
     chainName: "Soneium",
     blockExplorerUrl: "https://soneium.blockscout.com/",
+    logoURI: "",
+  },
+  1923: {
+    chainSlug: 1923,
+    chainName: "Swell",
+    blockExplorerUrl: "https://explorer.swellnetwork.io/",
     logoURI: "",
   },
   2999: {
@@ -272,6 +284,12 @@ export const chainDetails = {
     blockExplorerUrl: "https://blastscan.io",
     logoURI: "",
   },
+  98866: {
+    chainSlug: 98866,
+    chainName: "Plume",
+    blockExplorerUrl: "https://explorer.plume.org/",
+    logoURI: "",
+  },
   412346: {
     chainSlug: 412346,
     chainName: "Kinto Devnet",
@@ -306,6 +324,12 @@ export const chainDetails = {
     chainSlug: 543210,
     chainName: "Zero",
     blockExplorerUrl: "https://explorer.zero.network/",
+    logoURI: "",
+  },
+  747474: {
+    chainSlug: 747474,
+    chainName: "Katana",
+    blockExplorerUrl: "https://explorer.katanarpc.com",
     logoURI: "",
   },
   777777: {
