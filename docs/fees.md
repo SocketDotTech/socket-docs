@@ -3,16 +3,16 @@ id: fees
 title: Pay for your onchain transactions
 ---
 
-Setting up fees is essential for your app to interact with both EVMx and supported blockchains. You need to manage one fee parameter that handles two payment scenarios: EVMx execution costs and onchain transaction sponsorship.
+Setting up credits is essential for your app to interact with both EVMx and supported blockchains. You need to manage one parameter that handles two payment scenarios: EVMx execution costs and onchain transaction sponsorship.
 
 :::info
-TestUSDC is currently the only supported token for converting into EVMx credits. See available TestUSDC contract address per chain [here](https://github.com/SocketDotTech/socket-protocol/blob/master/deployments/stage_addresses.json).
+USDC is currently the only supported token to deposit and be converted into EVMx credits.
 :::
 
-## How the fee system works
+## How the credits system works
 
-The fee system uses a single `fees` parameter that serves dual purposes:
-- **Minimum deposit requirement**: Users must deposit at least this amount before initiating transactions
+The credits system uses a single `fees` parameter that serves dual purposes:
+- **Minimum deposit requirement**: Users must deposit at least this amount before initiating transactions with that AppGateway
 - **Maximum fee limit**: Sets an upper bound on transaction costs to protect users from excessive charges
 
 When users deposit tokens, they are converted to credits on EVMx and allocated for both native transactions and onchain fees.
@@ -50,46 +50,59 @@ The `fees` value controls:
 Set the fee configuration in your contracts:
 
 ```solidity
-AppGateway(appGatewayAddress).setFees(fees);
+AppGateway(appGatewayAddress).setMaxFees(fees);
 ```
 
 Alternatively, set fees in the `AppGateway` constructor:
 
 ```solidity
-SomeAppGateway gateway = new SomeAppGateway(addressResolver, fees, owner);
+SomeAppGateway gateway = new SomeAppGateway(addressResolver, fees);
+
+(...)
+
+constructor(address addressResolver_, uint256 fees_) {
+    _initializeAppGateway(addressResolver_);
+    _setMaxFees(fees_);
+}
 ```
 
 ## Deposit tokens to pay for transactions
 
-### Understanding deposits and credits
+### Deposit methods
 
 When you deposit tokens using the `FeesPlug` contract, they're stored in a vault and converted to credits on EVMx.
-
-**Example using `depositToFeeAndNative`:**
-- Deposit: 100 TestUSDC → 100 credits
-- Allocation: 10 credits for native EVMx transactions, 90 credits for onchain fees
-
-**Example using `depositToFee`:**
-- All deposited tokens are allocated exclusively for onchain fees
-
-### Deposit methods
 
 **Method 1: Deposit for both Fees and Native transactions**
 ```bash
 cast send <CHOSEN_CHAIN_FEES_PLUG> "depositToFeeAndNative(address,address,uint256)" \
     <TOKEN_ADDRESS> \
-    $APP_GATEWAY \
+    $WALLET_ADDRESS \
     <AMOUNT> \
     --rpc-url $RPC_URL \
     --private-key $PRIVATE_KEY
 ```
 
+Example using `depositToFeeAndNative`:
+- Deposit: 10 USDC → 10 credits
+- Allocation: 1 credits for native EVMx transactions, 9 credits for onchain fees
+
 **Method 2: Deposit for Fees only**
 ```bash
 cast send <CHOSEN_CHAIN_FEES_PLUG> "depositToFee(address,address,uint256)" \
     <TOKEN_ADDRESS> \
-    $APP_GATEWAY \
+    $WALLET_ADDRESS \
     <AMOUNT> \
+    --rpc-url $RPC_URL \
+    --private-key $PRIVATE_KEY
+```
+
+Example using `depositToFee`:
+- All deposited tokens are allocated exclusively for onchain fees
+
+### Spend approval for an AppGateway
+```bash
+cast send $FEES_MANAGER "approveAppGateways((address,bool)[])" \
+    "[($APP_GATEWAY,true)]" \
     --rpc-url $RPC_URL \
     --private-key $PRIVATE_KEY
 ```
