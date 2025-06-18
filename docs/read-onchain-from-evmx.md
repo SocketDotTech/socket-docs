@@ -151,7 +151,7 @@ By following these patterns, you can safely and efficiently read data from oncha
 
     Please confirm you have deposited enough to pay for fees.
     - See how to [Deposit funds](/getting-started#deposit-funds).
-    - [Check your AppGateway fee balance](/getting-started#check-your-appgateway-fee-balance).
+    - [Check your AppGateway fee balance](/getting-started#check-your-account-credit-balance).
 </details>
 
 <details>

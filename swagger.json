@@ -221,11 +221,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /inbox:
+  /trigger:
     get:
       summary: Get trigger AppGateway details
-      description: Retrieves details for inbox transactions
-      operationId: getInboxDetails
+      description: Retrieves details for trigger transactions
+      operationId: getTriggerDetails
       parameters:
         - name: txHash
           in: query
@@ -673,7 +673,7 @@ components:
         createdAt: "2025-04-25T09:17:32.295Z"
         updatedAt: "2025-04-25T09:17:32.295Z"
 
-    InboxStatus:
+    TriggerStatus:
       type: string
       enum: [NotTried, AddedToQueue, ExecutionFailing, Executing, Executed]
 

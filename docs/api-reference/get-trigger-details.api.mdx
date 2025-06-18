@@ -1,7 +1,7 @@
 ---
-id: get-inbox-details
+id: get-trigger-details
 title: "Get trigger AppGateway details"
-description: "Retrieves details for inbox transactions"
+description: "Retrieves details for trigger transactions"
 sidebar_label: "Get trigger AppGateway details"
 hide_title: true
 hide_table_of_contents: true
@@ -28,15 +28,15 @@ import Heading from "@theme/Heading";
 
 <MethodEndpoint
   method={"get"}
-  path={"/inbox"}
+  path={"/trigger"}
   context={"endpoint"}
 >
-  
+
 </MethodEndpoint>
 
 
 
-Retrieves details for inbox transactions
+Retrieves details for trigger transactions
 
 <Heading
   id={"request"}
@@ -49,14 +49,14 @@ Retrieves details for inbox transactions
 <ParamsDetails
   parameters={[{"name":"txHash","in":"query","required":true,"schema":{"type":"string","example":"0xc48db420119faf3abd6417711bc80ed1435d506411ebd0ff9c42a95b6dc10735"},"description":"Transaction hash to query","example":"0xc48db420119faf3abd6417711bc80ed1435d506411ebd0ff9c42a95b6dc10735"}]}
 >
-  
+
 </ParamsDetails>
 
 <RequestSchema
   title={"Body"}
   body={undefined}
 >
-  
+
 </RequestSchema>
 
 <StatusCodes
@@ -64,8 +64,8 @@ Retrieves details for inbox transactions
   label={undefined}
   responses={{"200":{"description":"Successful response","content":{"application/json":{"schema":{"type":"object","properties":{"status":{"type":"string"},"response":{"type":"array","items":{"type":"object","properties":{"status":{"type":"string"},"onChainTxHash":{"type":"string"},"callId":{"type":"string"},"chainSlug":{"type":"integer"},"plug":{"type":"string"},"payload":{"type":"object","properties":{"appGateway":{"type":"string"},"payload":{"type":"string"},"params":{"type":"string"}}},"ExecutionDetails":{"type":"object","properties":{"appGatewayTxHash":{"type":"string"},"simulationStatus":{"type":"string"},"revertString":{"type":"string"}}}},"example":{"status":"Executed","onChainTxHash":"0xc48db420119faf3abd6417711bc80ed1435d506411ebd0ff9c42a95b6dc10735","callId":"0x00066eeecfd84fb831faca500101decab714ba9d8f012613000000000000000f","chainSlug":421614,"plug":"0x62e16f19ddcfb0fb30330d5e130da4f6b73d5432","payload":{"appGateway":"0xcfd84fb831faca500101decab714ba9d8f012613","payload":"0x0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000005","params":"0x0000000000000000000000000000000000000000000000000000000000000000"},"ExecutionDetails":{"appGatewayTxHash":"0xc6f4e87e88c7c6a17379564e7525464b337b702b2b68a723d71508666185257e","simulationStatus":"SIMULATION_SUCCESS","revertString":""}},"title":"FormattedBatch"}}}},"example":{"status":"SUCCESS","response":[{"status":"Executed","onChainTxHash":"0xc48db420119faf3abd6417711bc80ed1435d506411ebd0ff9c42a95b6dc10735","callId":"0x00066eeecfd84fb831faca500101decab714ba9d8f012613000000000000000f","chainSlug":421614,"plug":"0x62e16f19ddcfb0fb30330d5e130da4f6b73d5432","payload":{"appGateway":"0xcfd84fb831faca500101decab714ba9d8f012613","payload":"0x0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000005","params":"0x0000000000000000000000000000000000000000000000000000000000000000"},"ExecutionDetails":{"appGatewayTxHash":"0xc6f4e87e88c7c6a17379564e7525464b337b702b2b68a723d71508666185257e","simulationStatus":"SIMULATION_SUCCESS","revertString":""}}]}}}},"400":{"description":"Bad request","content":{"application/json":{"schema":{"type":"object","properties":{"error":{"type":"string","description":"Error message"}},"example":{"error":"Invalid transaction hash"},"title":"Error"}}}}}}
 >
-  
+
 </StatusCodes>
 
 
-      
+
